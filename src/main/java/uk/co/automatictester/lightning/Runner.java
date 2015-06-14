@@ -8,14 +8,14 @@ public class Runner {
     public static void main(String[] args) {
 
         CmdLineParams params = new CmdLineParams();
-        JCommander jcomm = new JCommander(params, args);
+        new JCommander(params, args);
 
         if (!params.skipSchemaValidation()) {
             XMLSchemaValidator.validate(params.getXmlFile());
         }
 
         TestSet.load(params.getXmlFile());
-        TransactionSet.load();
+        TransactionData.load(params.getCsvFile());
         TestSet.execute();
         TestSet.reportResults();
 
