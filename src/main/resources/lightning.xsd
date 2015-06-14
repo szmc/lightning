@@ -1,0 +1,21 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://github.com/automatictester/lightning"
+           xmlns="https://github.com/automatictester/lightning"
+           elementFormDefault="qualified">
+    <xs:element name="testSet">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="maxAvgRespTimeTest" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="testName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="transactionName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="maxAvgRespTime" type="xs:long" minOccurs="1" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
