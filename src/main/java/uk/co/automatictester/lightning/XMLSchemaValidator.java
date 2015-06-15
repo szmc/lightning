@@ -14,16 +14,16 @@ import static javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI;
 
 public class XMLSchemaValidator {
 
-    public static void validate(String xml) {
+    public static void validate(String xmlFile) {
         try {
             SchemaFactory factory = SchemaFactory.newInstance(W3C_XML_SCHEMA_NS_URI);
             Schema schema = factory.newSchema(new File("src/main/resources/lightning.xsd"));
             Validator validator = schema.newValidator();
-            validator.validate(new StreamSource(new File(xml)));
+            validator.validate(new StreamSource(new File(xmlFile)));
         } catch (SAXException e) {
-            throw new ParameterException("XML file is not valid: " + e.getMessage());
+            throw new ParameterException("XML file " + xmlFile + " is not valid: " + e.getMessage());
         } catch (IOException e) {
-            throw new ParameterException("Error accessing " + xml + " for schema validation");
+            throw new ParameterException("Error accessing " + xmlFile + " for schema validation: " + e.getMessage());
         }
     }
 }

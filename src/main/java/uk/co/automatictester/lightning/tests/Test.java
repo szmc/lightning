@@ -1,4 +1,6 @@
-package uk.co.automatictester.lightning;
+package uk.co.automatictester.lightning.tests;
+
+import uk.co.automatictester.lightning.JMeterTransactions;
 
 public abstract class Test {
 
@@ -10,5 +12,5 @@ public abstract class Test {
         this.description = description;
     }
 
-    public abstract void execute();
+    public abstract void execute(JMeterTransactions originalJMeterTransactions);
 }

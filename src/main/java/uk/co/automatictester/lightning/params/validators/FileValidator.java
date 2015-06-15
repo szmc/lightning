@@ -5,7 +5,7 @@ import com.beust.jcommander.ParameterException;
 
 import java.io.File;
 
-public class XmlParamValidator implements IParameterValidator {
+public class FileValidator implements IParameterValidator {
 
     public void validate(String name, String value) throws ParameterException {
         File f = new File(value);

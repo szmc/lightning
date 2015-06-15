@@ -1,6 +1,6 @@
 package uk.co.automatictester.lightning.tests;
 
-import uk.co.automatictester.lightning.Test;
+import uk.co.automatictester.lightning.JMeterTransactions;
 
 public class RespTimeNotIncreasingTest extends Test {
 
@@ -12,7 +12,7 @@ public class RespTimeNotIncreasingTest extends Test {
     }
 
     // TODO implement
-    public void execute() {
+    public void execute(JMeterTransactions originalJMeterTransactions) {
         System.out.println("name : " + name);
         System.out.println("description : " + description);
         System.out.println("transactionName : " + transactionName);

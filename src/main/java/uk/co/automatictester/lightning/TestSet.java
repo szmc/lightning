@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import uk.co.automatictester.lightning.tests.MaxAvgRespTimeTest;
+import uk.co.automatictester.lightning.tests.Test;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -46,14 +47,14 @@ public class TestSet {
         }
     }
 
-    public static void execute() {
+    public static void execute(JMeterTransactions originalJMeterTransactions) {
         for (Test test : tests) {
-            test.execute();
+            test.execute(originalJMeterTransactions);
         }
     }
 
     // TODO CI-friendly exit code and logging framework output
-    public static int reportResults() {
+    public static int reportTestSetResult() {
         return 0;
     }
 

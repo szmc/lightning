@@ -1,7 +1,6 @@
 package uk.co.automatictester.lightning.tests;
 
-import uk.co.automatictester.lightning.Test;
-import uk.co.automatictester.lightning.TransactionData;
+import uk.co.automatictester.lightning.JMeterTransactions;
 
 import java.util.List;
 
@@ -16,19 +15,18 @@ public class MaxAvgRespTimeTest extends Test {
         this.maxAvgRespTime = maxAvgRespTime;
     }
 
-    // TODO implement
-    public void execute() {
+    // TODO: implement verification, reporting etc
+    public void execute(JMeterTransactions originalJMeterTransactions) {
         System.out.println("name : " + name);
         System.out.println("description : " + description);
         System.out.println("transactionName : " + transactionName);
         System.out.println("maxAvgRespTime : " + maxAvgRespTime);
 
-        List<List<String>> transactions = TransactionData.getTransactions();
+        JMeterTransactions transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
         long totalRespTime = 0;
 
-        // TODO: implement label filtering
         for (List<String> transaction : transactions) {
-            String elapsed = transaction.get(TransactionData.columns.get("elapsed"));
+            String elapsed = transaction.get(1);
             totalRespTime += Long.parseLong(elapsed);
         }
 
