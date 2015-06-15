@@ -24,8 +24,8 @@ public class JMeterCSVFileReader {
                 ArrayList<String> currentTransaction = new ArrayList<>();
                 String labelValue = jmeterTransaction[labelIndex];
                 String elapsedValue = jmeterTransaction[elapsedIndex];
-                currentTransaction.add(labelValue);
-                currentTransaction.add(elapsedValue);
+                currentTransaction.add(labelValue);     // 0
+                currentTransaction.add(elapsedValue);   // 1
                 jmeterTransactions.add(currentTransaction);
             }
         } catch (IOException e) {

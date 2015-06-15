@@ -7,14 +7,14 @@
         <testName>Test #1</testName>
         <description>Verify average login times are not longer than specified</description>
         <transactionName>Login</transactionName>
-        <maxAvgRespTime>2000</maxAvgRespTime>
+        <maxAvgRespTime>4000</maxAvgRespTime>
     </maxAvgRespTimeTest>
 
     <maxAvgRespTimeTest>
         <testName>Test #2</testName>
         <description>Verify average search times are not longer than specified</description>
         <transactionName>Search</transactionName>
-        <maxAvgRespTime>1000</maxAvgRespTime>
+        <maxAvgRespTime>12000</maxAvgRespTime>
     </maxAvgRespTimeTest>
 
 </testSet>
