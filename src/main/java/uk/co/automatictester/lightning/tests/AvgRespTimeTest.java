@@ -4,7 +4,7 @@ import uk.co.automatictester.lightning.JMeterTransactions;
 
 import java.util.List;
 
-public class MaxAvgRespTimeTest extends Test {
+public class AvgRespTimeTest extends Test {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Average response time <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Average response time = %s";
@@ -12,7 +12,7 @@ public class MaxAvgRespTimeTest extends Test {
     private final String transactionName;
     private final long maxAvgRespTime;
 
-    public MaxAvgRespTimeTest(String name, String description, String transactionName, long maxAvgRespTime) {
+    public AvgRespTimeTest(String name, String description, String transactionName, long maxAvgRespTime) {
         super(name, description);
         this.transactionName = transactionName;
         this.maxAvgRespTime = maxAvgRespTime;

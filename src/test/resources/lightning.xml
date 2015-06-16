@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://github.com/automatictester/lightning lightning.xsd">
 
-    <maxAvgRespTimeTest>
+    <avgRespTimeTest>
         <testName>Test #1</testName>
-        <description>Verify average login times are not longer than specified</description>
+        <description>Verify average login times</description>
         <transactionName>Login</transactionName>
         <maxAvgRespTime>4000</maxAvgRespTime>
-    </maxAvgRespTimeTest>
+    </avgRespTimeTest>
 
-    <maxAvgRespTimeTest>
+    <respTimeStdDevTest>
         <testName>Test #2</testName>
-        <description>Verify average search times are not longer than specified</description>
+        <description>Verify standard deviation</description>
         <transactionName>Search</transactionName>
-        <maxAvgRespTime>12000</maxAvgRespTime>
-    </maxAvgRespTimeTest>
+        <maxRespTimeStdDev>500</maxRespTimeStdDev>
+    </respTimeStdDevTest>
 
 </testSet>

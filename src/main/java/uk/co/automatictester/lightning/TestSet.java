@@ -4,7 +4,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import uk.co.automatictester.lightning.tests.MaxAvgRespTimeTest;
+import uk.co.automatictester.lightning.tests.AvgRespTimeTest;
+import uk.co.automatictester.lightning.tests.RespTimeStdDevTest;
 import uk.co.automatictester.lightning.tests.Test;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -27,9 +28,9 @@ public class TestSet {
             Document xmlDoc = db.parse(new File(xmlFile));
             xmlDoc.getDocumentElement().normalize();
 
-            NodeList maxAvgRespTimeTestNodes = xmlDoc.getElementsByTagName("maxAvgRespTimeTest");
-            for (int i = 0; i < maxAvgRespTimeTestNodes.getLength(); i++) {
-                Element maxAvgRespTimeTestElement = (Element) maxAvgRespTimeTestNodes.item(i);
+            NodeList avgRespTimeTestNodes = xmlDoc.getElementsByTagName("avgRespTimeTest");
+            for (int i = 0; i < avgRespTimeTestNodes.getLength(); i++) {
+                Element maxAvgRespTimeTestElement = (Element) avgRespTimeTestNodes.item(i);
                 String name = maxAvgRespTimeTestElement.getElementsByTagName("testName").item(0).getTextContent();
                 String description = "";
                 if (maxAvgRespTimeTestElement.getElementsByTagName("description").item(0) != null) {
@@ -38,9 +39,25 @@ public class TestSet {
                 String transactionName = maxAvgRespTimeTestElement.getElementsByTagName("transactionName").item(0).getTextContent();
                 long maxAvgRespTime = Long.parseLong(maxAvgRespTimeTestElement.getElementsByTagName("maxAvgRespTime").item(0).getTextContent());
 
-                MaxAvgRespTimeTest maxAvgRespTimeTest = new MaxAvgRespTimeTest(name, description, transactionName, maxAvgRespTime);
-                tests.add(maxAvgRespTimeTest);
+                AvgRespTimeTest avgRespTimeTest = new AvgRespTimeTest(name, description, transactionName, maxAvgRespTime);
+                tests.add(avgRespTimeTest);
             }
+
+            NodeList respTimeStdDevTestNodes = xmlDoc.getElementsByTagName("respTimeStdDevTest");
+            for (int i = 0; i < respTimeStdDevTestNodes.getLength(); i++) {
+                Element respTimeStdDevTestElement = (Element) respTimeStdDevTestNodes.item(i);
+                String name = respTimeStdDevTestElement.getElementsByTagName("testName").item(0).getTextContent();
+                String description = "";
+                if (respTimeStdDevTestElement.getElementsByTagName("description").item(0) != null) {
+                    description = respTimeStdDevTestElement.getElementsByTagName("description").item(0).getTextContent();
+                }
+                String transactionName = respTimeStdDevTestElement.getElementsByTagName("transactionName").item(0).getTextContent();
+                long maxRespTimeStdDevTime = Long.parseLong(respTimeStdDevTestElement.getElementsByTagName("maxRespTimeStdDev").item(0).getTextContent());
+
+                RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest(name, description, transactionName, maxRespTimeStdDevTime);
+                tests.add(respTimeStdDevTest);
+            }
+
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.getMessage();
         }
