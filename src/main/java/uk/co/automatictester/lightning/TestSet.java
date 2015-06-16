@@ -30,12 +30,11 @@ public class TestSet {
             NodeList maxAvgRespTimeTestNodes = xmlDoc.getElementsByTagName("maxAvgRespTimeTest");
             for (int i = 0; i < maxAvgRespTimeTestNodes.getLength(); i++) {
                 Element maxAvgRespTimeTestElement = (Element) maxAvgRespTimeTestNodes.item(i);
-
-                //TODO handle missing description
-                //TODO handle empty elements
-
                 String name = maxAvgRespTimeTestElement.getElementsByTagName("testName").item(0).getTextContent();
-                String description = maxAvgRespTimeTestElement.getElementsByTagName("description").item(0).getTextContent();
+                String description = "";
+                if (maxAvgRespTimeTestElement.getElementsByTagName("description").item(0) != null) {
+                    description = maxAvgRespTimeTestElement.getElementsByTagName("description").item(0).getTextContent();
+                }
                 String transactionName = maxAvgRespTimeTestElement.getElementsByTagName("transactionName").item(0).getTextContent();
                 long maxAvgRespTime = Long.parseLong(maxAvgRespTimeTestElement.getElementsByTagName("maxAvgRespTime").item(0).getTextContent());
 

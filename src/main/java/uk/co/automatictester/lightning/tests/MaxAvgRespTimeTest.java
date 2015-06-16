@@ -30,12 +30,12 @@ public class MaxAvgRespTimeTest extends Test {
 
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxAvgRespTime);
         actualResult = String.format(ACTUAL_RESULT_MESSAGE, avgRespTime);
-        failed = (avgRespTime <= maxAvgRespTime) ? false : true;
+        failed = (avgRespTime > maxAvgRespTime);
     }
 
     public void reportResults() {
         System.out.println("Test name:        " + name);
-        System.out.println("Test description: " + description);
+        if (!description.isEmpty()) System.out.println("Test description: " + description);
         System.out.println("Expected result:  " + expectedResult);
         System.out.println("Actual result:    " + actualResult);
         System.out.println("Test result:      " + ((failed) ? "FAILED" : "Pass") + System.lineSeparator());

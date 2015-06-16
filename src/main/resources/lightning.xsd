@@ -2,20 +2,28 @@
            targetNamespace="https://github.com/automatictester/lightning"
            xmlns="https://github.com/automatictester/lightning"
            elementFormDefault="qualified">
+
+    <xs:simpleType name="nonEmptyString">
+    <xs:restriction base="xs:string">
+        <xs:pattern value=".*[^\s].*"/>
+    </xs:restriction>
+    </xs:simpleType>
+
     <xs:element name="testSet">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="maxAvgRespTimeTest" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="testName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="testName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
                             <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="transactionName" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                            <xs:element name="maxAvgRespTime" type="xs:long" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="transactionName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="maxAvgRespTime" type="xs:positiveInteger" minOccurs="1" maxOccurs="1"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
 </xs:schema>
