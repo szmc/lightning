@@ -14,7 +14,7 @@ public class Runner {
         TestSet.load(params.getXmlFile());
         JMeterTransactions originalJMeterTransactions = JMeterCSVFileReader.read(params.getCSVFile());
         TestSet.execute(originalJMeterTransactions);
-        TestSet.reportTestSetResult();
+        System.exit(TestSet.reportTestSetResult());
     }
 
 }

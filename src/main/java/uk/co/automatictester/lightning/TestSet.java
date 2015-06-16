@@ -18,9 +18,9 @@ import java.util.List;
 public class TestSet {
 
     private static List<Test> tests = new ArrayList<Test>();
+    private static int failureCount = 0;
 
     public static void load(String xmlFile) {
-
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -49,13 +49,21 @@ public class TestSet {
     public static void execute(JMeterTransactions originalJMeterTransactions) {
         for (Test test : tests) {
             test.execute(originalJMeterTransactions);
-            test.reportResults();
+            failureCount += test.reportResults();
         }
     }
 
-    // TODO CI-friendly exit code and logging framework output
     public static int reportTestSetResult() {
-        return 0;
+        int testCount = tests.size();
+        int passCount = testCount - failureCount;
+
+        System.out.println("============= EXECUTION SUMMARY =============");
+        System.out.println("Tests executed:   " + testCount);
+        System.out.println("Tests passed:     " + passCount);
+        System.out.println("Tests failed:     " + failureCount);
+        System.out.println("Test set status:  " + ((failureCount != 0 ) ? "FAIL" : "Pass") + System.lineSeparator());
+
+        return failureCount;
     }
 
 }

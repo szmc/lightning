@@ -17,5 +17,5 @@ public abstract class Test {
 
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
 
-    public abstract void reportResults();
+    public abstract int reportResults();
 }

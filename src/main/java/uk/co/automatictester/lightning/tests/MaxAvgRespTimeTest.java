@@ -33,11 +33,12 @@ public class MaxAvgRespTimeTest extends Test {
         failed = (avgRespTime > maxAvgRespTime);
     }
 
-    public void reportResults() {
+    public int reportResults() {
         System.out.println("Test name:        " + name);
         if (!description.isEmpty()) System.out.println("Test description: " + description);
         System.out.println("Expected result:  " + expectedResult);
         System.out.println("Actual result:    " + actualResult);
-        System.out.println("Test result:      " + ((failed) ? "FAILED" : "Pass") + System.lineSeparator());
+        System.out.println("Test result:      " + ((failed) ? "FAIL" : "Pass") + System.lineSeparator());
+        return (failed) ? 1 : 0;
     }
 }
