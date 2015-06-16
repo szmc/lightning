@@ -2,7 +2,7 @@ package uk.co.automatictester.lightning.tests;
 
 import uk.co.automatictester.lightning.JMeterTransactions;
 
-public class RespTimeNotIncreasingTest extends Test {
+public abstract class RespTimeNotIncreasingTest extends Test {
 
     private String transactionName;
 

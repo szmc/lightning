@@ -1,14 +1,16 @@
 package uk.co.automatictester.lightning.tests;
 
 import uk.co.automatictester.lightning.JMeterTransactions;
-import uk.co.automatictester.lightning.TestResult;
 
 import java.util.List;
 
 public class MaxAvgRespTimeTest extends Test {
 
-    private String transactionName;
-    private long maxAvgRespTime;
+    private static final String EXPECTED_RESULT_MESSAGE = "Average response time <= %s";
+    private static final String ACTUAL_RESULT_MESSAGE = "Average response time = %s";
+
+    private final String transactionName;
+    private final long maxAvgRespTime;
 
     public MaxAvgRespTimeTest(String name, String description, String transactionName, long maxAvgRespTime) {
         super(name, description);
@@ -26,10 +28,16 @@ public class MaxAvgRespTimeTest extends Test {
         }
         long avgRespTime = totalRespTime / transactions.size();
 
-        String expectedResult = "Average response time <= " + maxAvgRespTime;
-        String actualResult = "Average response time  = " + avgRespTime;
-        boolean failed = (avgRespTime <= maxAvgRespTime) ? false : true;
-        TestResult result = new TestResult(name, description, expectedResult, actualResult, failed);
-        result.report();
+        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxAvgRespTime);
+        actualResult = String.format(ACTUAL_RESULT_MESSAGE, avgRespTime);
+        failed = (avgRespTime <= maxAvgRespTime) ? false : true;
+    }
+
+    public void reportResults() {
+        System.out.println("Test name:        " + name);
+        System.out.println("Test description: " + description);
+        System.out.println("Expected result:  " + expectedResult);
+        System.out.println("Actual result:    " + actualResult);
+        System.out.println("Test result:      " + ((failed) ? "FAILED" : "Pass") + System.lineSeparator());
     }
 }

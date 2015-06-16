@@ -50,6 +50,7 @@ public class TestSet {
     public static void execute(JMeterTransactions originalJMeterTransactions) {
         for (Test test : tests) {
             test.execute(originalJMeterTransactions);
+            test.reportResults();
         }
     }
 

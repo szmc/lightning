@@ -6,6 +6,9 @@ public abstract class Test {
 
     protected String name;
     protected String description;
+    protected String expectedResult;
+    protected String actualResult;
+    protected boolean failed;
 
     protected Test(String name, String description) {
         this.name = name;
@@ -13,4 +16,6 @@ public abstract class Test {
     }
 
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
+
+    public abstract void reportResults();
 }
