@@ -17,4 +17,11 @@
         <maxRespTimeStdDev>500</maxRespTimeStdDev>
     </respTimeStdDevTest>
 
+    <passedTransactionsTest>
+        <testName>Test #3</testName>
+        <description>Verify number of passed tests</description>
+        <transactionName>Login</transactionName>
+        <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
+    </passedTransactionsTest>
+
 </testSet>

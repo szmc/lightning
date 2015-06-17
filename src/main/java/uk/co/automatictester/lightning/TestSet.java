@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import uk.co.automatictester.lightning.tests.AvgRespTimeTest;
+import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
 import uk.co.automatictester.lightning.tests.RespTimeStdDevTest;
 import uk.co.automatictester.lightning.tests.Test;
 
@@ -56,6 +57,21 @@ public class TestSet {
 
                 RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest(name, description, transactionName, maxRespTimeStdDevTime);
                 tests.add(respTimeStdDevTest);
+            }
+
+            NodeList passedTransactionsTestNodes = xmlDoc.getElementsByTagName("passedTransactionsTest");
+            for (int i = 0; i < passedTransactionsTestNodes.getLength(); i++) {
+                Element passedTransactionsElement = (Element) passedTransactionsTestNodes.item(i);
+                String name = passedTransactionsElement.getElementsByTagName("testName").item(0).getTextContent();
+                String description = "";
+                if (passedTransactionsElement.getElementsByTagName("description").item(0) != null) {
+                    description = passedTransactionsElement.getElementsByTagName("description").item(0).getTextContent();
+                }
+                String transactionName = passedTransactionsElement.getElementsByTagName("transactionName").item(0).getTextContent();
+                int allowedNumberOfFailedTransactions = Integer.parseInt(passedTransactionsElement.getElementsByTagName("allowedNumberOfFailedTransactions").item(0).getTextContent());
+
+                PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest(name, description, transactionName, allowedNumberOfFailedTransactions);
+                tests.add(passedTransactionsTest);
             }
 
         } catch (ParserConfigurationException | SAXException | IOException e) {

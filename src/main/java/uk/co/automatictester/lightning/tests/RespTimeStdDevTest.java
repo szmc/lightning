@@ -11,12 +11,10 @@ public class RespTimeStdDevTest extends Test {
     private static final String EXPECTED_RESULT_MESSAGE = "Average standard deviance time <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Average standard deviance time = %s";
 
-    private String transactionName;
     private long maxRespTimeStdDev;
 
     public RespTimeStdDevTest(String name, String description, String transactionName, long maxRespTimeStdDev) {
-        super(name, description);
-        this.transactionName = transactionName;
+        super(name, description, transactionName);
         this.maxRespTimeStdDev = maxRespTimeStdDev;
     }
 
@@ -35,14 +33,5 @@ public class RespTimeStdDevTest extends Test {
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxRespTimeStdDev);
         actualResult = String.format(ACTUAL_RESULT_MESSAGE, roundedActualRespTimeStdDev);
         failed = (roundedActualRespTimeStdDev > maxRespTimeStdDev);
-    }
-
-    public int reportResults() {
-        System.out.println("Test name:        " + name);
-        if (!description.isEmpty()) System.out.println("Test description: " + description);
-        System.out.println("Expected result:  " + expectedResult);
-        System.out.println("Actual result:    " + actualResult);
-        System.out.println("Test result:      " + ((failed) ? "FAIL" : "Pass") + System.lineSeparator());
-        return (failed) ? 1 : 0;
     }
 }
