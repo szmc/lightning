@@ -20,10 +20,8 @@ public class XMLSchemaValidator {
             Schema schema = factory.newSchema(new File("src/main/resources/lightning.xsd"));
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlFile)));
-        } catch (SAXException e) {
+        } catch (SAXException | IOException e) {
             throw new ParameterException("XML file " + xmlFile + " is not valid: " + e.getMessage());
-        } catch (IOException e) {
-            throw new ParameterException("Error accessing " + xmlFile + " for schema validation: " + e.getMessage());
         }
     }
 }

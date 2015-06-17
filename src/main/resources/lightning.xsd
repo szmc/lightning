@@ -13,7 +13,7 @@
         <xs:complexType>
             <xs:sequence>
 
-                <xs:element name="avgRespTimeTest" maxOccurs="unbounded">
+                <xs:element name="avgRespTimeTest" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="testName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
@@ -24,7 +24,7 @@
                     </xs:complexType>
                 </xs:element>
 
-                <xs:element name="respTimeStdDevTest" maxOccurs="unbounded">
+                <xs:element name="respTimeStdDevTest" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="testName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>

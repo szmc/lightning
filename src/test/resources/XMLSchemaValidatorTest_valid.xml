@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testSet xmlns="https://github.com/automatictester/lightning"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://github.com/automatictester/lightning lightning.xsd">
+
+    <avgRespTimeTest>
+        <testName>Test #1</testName>
+        <transactionName>Login</transactionName>
+        <maxAvgRespTime>200</maxAvgRespTime>
+    </avgRespTimeTest>
+
+</testSet>
