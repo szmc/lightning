@@ -82,7 +82,8 @@ public class TestSet {
     public static void execute(JMeterTransactions originalJMeterTransactions) {
         for (Test test : tests) {
             test.execute(originalJMeterTransactions);
-            failureCount += test.reportResults();
+            if (test.isFailed()) failureCount++;
+            System.out.println(test.getReport());
         }
     }
 

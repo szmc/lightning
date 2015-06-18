@@ -19,13 +19,18 @@ public abstract class Test {
 
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
 
-    public int reportResults() {
-        System.out.println("Test name:        " + name);
-        if (!description.isEmpty()) System.out.println("Test description: " + description);
-        System.out.println("Transaction name: " + transactionName);
-        System.out.println("Expected result:  " + expectedResult);
-        System.out.println("Actual result:    " + actualResult);
-        System.out.println("Test result:      " + ((failed) ? "FAIL" : "Pass") + System.lineSeparator());
-        return (failed) ? 1 : 0;
+    public String getReport() {
+        String ls = System.lineSeparator();
+        String report = "Test name:        " + name + ls;
+        if (!description.isEmpty()) report += "Test description: " + description + ls;
+        report += "Transaction name: " + transactionName + ls;
+        report += "Expected result:  " + expectedResult + ls;
+        report += "Actual result:    " + actualResult + ls;
+        report += "Test result:      " + ((failed) ? "FAIL" : "Pass") + ls;
+        return report;
+    }
+
+    public boolean isFailed() {
+        return failed;
     }
 }
