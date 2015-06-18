@@ -10,7 +10,7 @@ public class FileValidator implements IParameterValidator {
     public void validate(String name, String value) throws ParameterException {
         File f = new File(value);
         if (!f.canRead()) {
-            throw new ParameterException("Parameter " + name + " should be readable file");
+            throw new ParameterException("Error reading file: " + value);
         }
     }
 }

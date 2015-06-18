@@ -1,6 +1,5 @@
 package uk.co.automatictester.lightning;
 
-import com.beust.jcommander.ParameterException;
 import org.xml.sax.SAXException;
 
 import javax.xml.transform.stream.StreamSource;
@@ -21,9 +20,9 @@ public class XMLSchemaValidator {
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlFile)));
         } catch (SAXException e) {
-            throw new ParameterException("XML file " + xmlFile + " is valid: " + e.getMessage());
+            throw new RuntimeException("XML file " + xmlFile + " is not valid: " + e.getMessage());
         } catch (IOException e) {
-            throw new ParameterException("Error accessing " + xmlFile + " for schema validation: " + e.getMessage());
+            throw new RuntimeException("Error accessing " + xmlFile + " for schema validation: " + e.getMessage());
         }
     }
 }
