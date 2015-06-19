@@ -58,7 +58,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>uk.co.automatictester.lightning.Runner</mainClass>
+                            <mainClass>uk.co.automatictester.lightning.TestRunner</mainClass>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>${project.build.finalName}.lib/</classpathPrefix>
                         </manifest>

@@ -27,73 +27,89 @@ public class TestSet {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document xmlDoc = db.parse(new File(xmlFile));
-            xmlDoc.getDocumentElement().normalize();
-            NodeList avgRespTimeTestNodes = xmlDoc.getElementsByTagName("avgRespTimeTest");
+            Document doc = db.parse(new File(xmlFile));
+            doc.getDocumentElement().normalize();
 
-            for (int i = 0; i < avgRespTimeTestNodes.getLength(); i++) {
-                Element avgRespTimeTestElement = (Element) avgRespTimeTestNodes.item(i);
-
-                String name = getTestName(avgRespTimeTestElement);
-                String description = getTestDescription(avgRespTimeTestElement);
-                String transactionName = getTransactionName(avgRespTimeTestElement);
-                long maxAvgRespTime = Long.parseLong(getElementByTagName(avgRespTimeTestElement, "maxAvgRespTime"));
-
-                AvgRespTimeTest avgRespTimeTest = new AvgRespTimeTest(name, description, transactionName, maxAvgRespTime);
-                tests.add(avgRespTimeTest);
-            }
-
-            NodeList respTimeStdDevTestNodes = xmlDoc.getElementsByTagName("respTimeStdDevTest");
-            for (int i = 0; i < respTimeStdDevTestNodes.getLength(); i++) {
-                Element respTimeStdDevTestElement = (Element) respTimeStdDevTestNodes.item(i);
-
-                String name = getTestName(respTimeStdDevTestElement);
-                String description = getTestDescription(respTimeStdDevTestElement);
-                String transactionName = getTransactionName(respTimeStdDevTestElement);
-                long maxRespTimeStdDevTime = Long.parseLong(getElementByTagName(respTimeStdDevTestElement, "maxRespTimeStdDev"));
-
-                RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest(name, description, transactionName, maxRespTimeStdDevTime);
-                tests.add(respTimeStdDevTest);
-            }
-
-            NodeList passedTransactionsTestNodes = xmlDoc.getElementsByTagName("passedTransactionsTest");
-            for (int i = 0; i < passedTransactionsTestNodes.getLength(); i++) {
-                Element passedTransactionsElement = (Element) passedTransactionsTestNodes.item(i);
-
-                String name = getTestName(passedTransactionsElement);
-                String description = getTestDescription(passedTransactionsElement);
-                String transactionName = getTransactionName(passedTransactionsElement);
-
-                int allowedNumberOfFailedTransactions = Integer.parseInt(getElementByTagName(passedTransactionsElement, "allowedNumberOfFailedTransactions"));
-
-                PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest(name, description, transactionName, allowedNumberOfFailedTransactions);
-                tests.add(passedTransactionsTest);
-            }
+            addAvgRespTimeTests(doc);
+            addRespTimeStdDevTestNodes(doc);
+            addPassedTransactionsTestNodes(doc);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void execute(JMeterTransactions originalJMeterTransactions) {
-        for (Test test : tests) {
-            test.execute(originalJMeterTransactions);
-            if (test.isFailed()) failureCount++;
-            System.out.println(test.getReport());
-        }
-    }
-
-    public static int reportTestSetResult() {
+    public static String getTestSetExecutionReport() {
+        String ls = System.lineSeparator();
         int testCount = tests.size();
         int passCount = testCount - failureCount;
 
-        System.out.println("============= EXECUTION SUMMARY =============");
-        System.out.println("Tests executed:   " + testCount);
-        System.out.println("Tests passed:     " + passCount);
-        System.out.println("Tests failed:     " + failureCount);
-        System.out.println("Test set status:  " + ((failureCount != 0) ? "FAIL" : "Pass") + System.lineSeparator());
+        String executionReport = "============= EXECUTION SUMMARY =============" + ls;
+        executionReport += "Tests executed:   " + testCount + ls;
+        executionReport += "Tests passed:     " + passCount + ls;
+        executionReport += "Tests failed:     " + failureCount + ls;
+        executionReport += "Test set status:  " + getTestSetStatus() + ls;
 
+        return executionReport;
+    }
+
+    public static int getFailureCount() {
         return failureCount;
+    }
+
+    public static List<Test> getTests() {
+        return tests;
+    }
+
+    private static void addPassedTransactionsTestNodes(Document xmlDoc) {
+        NodeList passedTransactionsTestNodes = xmlDoc.getElementsByTagName("passedTransactionsTest");
+        for (int i = 0; i < passedTransactionsTestNodes.getLength(); i++) {
+            Element passedTransactionsElement = (Element) passedTransactionsTestNodes.item(i);
+
+            String name = getTestName(passedTransactionsElement);
+            String description = getTestDescription(passedTransactionsElement);
+            String transactionName = getTransactionName(passedTransactionsElement);
+
+            int allowedNumberOfFailedTransactions = Integer.parseInt(getElementByTagName(passedTransactionsElement, "allowedNumberOfFailedTransactions"));
+
+            PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest(name, description, transactionName, allowedNumberOfFailedTransactions);
+            tests.add(passedTransactionsTest);
+        }
+
+    }
+
+    private static void addRespTimeStdDevTestNodes(Document xmlDoc) {
+        NodeList respTimeStdDevTestNodes = xmlDoc.getElementsByTagName("respTimeStdDevTest");
+        for (int i = 0; i < respTimeStdDevTestNodes.getLength(); i++) {
+            Element respTimeStdDevTestElement = (Element) respTimeStdDevTestNodes.item(i);
+
+            String name = getTestName(respTimeStdDevTestElement);
+            String description = getTestDescription(respTimeStdDevTestElement);
+            String transactionName = getTransactionName(respTimeStdDevTestElement);
+            long maxRespTimeStdDevTime = Long.parseLong(getElementByTagName(respTimeStdDevTestElement, "maxRespTimeStdDev"));
+
+            RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest(name, description, transactionName, maxRespTimeStdDevTime);
+            tests.add(respTimeStdDevTest);
+        }
+    }
+
+    private static void addAvgRespTimeTests(Document xmlDoc) {
+        NodeList avgRespTimeTestNodes = xmlDoc.getElementsByTagName("avgRespTimeTest");
+        for (int i = 0; i < avgRespTimeTestNodes.getLength(); i++) {
+            Element avgRespTimeTestElement = (Element) avgRespTimeTestNodes.item(i);
+
+            String name = getTestName(avgRespTimeTestElement);
+            String description = getTestDescription(avgRespTimeTestElement);
+            String transactionName = getTransactionName(avgRespTimeTestElement);
+            long maxAvgRespTime = Long.parseLong(getElementByTagName(avgRespTimeTestElement, "maxAvgRespTime"));
+
+            AvgRespTimeTest avgRespTimeTest = new AvgRespTimeTest(name, description, transactionName, maxAvgRespTime);
+            tests.add(avgRespTimeTest);
+        }
+    }
+
+    private static String getTestSetStatus() {
+        return ((failureCount != 0) ? "FAIL" : "Pass");
     }
 
     private static String getTestName(Element xmlElement) {
