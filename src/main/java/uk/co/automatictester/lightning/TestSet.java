@@ -2,6 +2,7 @@ package uk.co.automatictester.lightning;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import uk.co.automatictester.lightning.tests.AvgRespTimeTest;
@@ -28,17 +29,15 @@ public class TestSet {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document xmlDoc = db.parse(new File(xmlFile));
             xmlDoc.getDocumentElement().normalize();
-
             NodeList avgRespTimeTestNodes = xmlDoc.getElementsByTagName("avgRespTimeTest");
+
             for (int i = 0; i < avgRespTimeTestNodes.getLength(); i++) {
-                Element maxAvgRespTimeTestElement = (Element) avgRespTimeTestNodes.item(i);
-                String name = maxAvgRespTimeTestElement.getElementsByTagName("testName").item(0).getTextContent();
-                String description = "";
-                if (maxAvgRespTimeTestElement.getElementsByTagName("description").item(0) != null) {
-                    description = maxAvgRespTimeTestElement.getElementsByTagName("description").item(0).getTextContent();
-                }
-                String transactionName = maxAvgRespTimeTestElement.getElementsByTagName("transactionName").item(0).getTextContent();
-                long maxAvgRespTime = Long.parseLong(maxAvgRespTimeTestElement.getElementsByTagName("maxAvgRespTime").item(0).getTextContent());
+                Element avgRespTimeTestElement = (Element) avgRespTimeTestNodes.item(i);
+
+                String name = getTestName(avgRespTimeTestElement);
+                String description = getTestDescription(avgRespTimeTestElement);
+                String transactionName = getTransactionName(avgRespTimeTestElement);
+                long maxAvgRespTime = Long.parseLong(getElementByTagName(avgRespTimeTestElement, "maxAvgRespTime"));
 
                 AvgRespTimeTest avgRespTimeTest = new AvgRespTimeTest(name, description, transactionName, maxAvgRespTime);
                 tests.add(avgRespTimeTest);
@@ -47,13 +46,11 @@ public class TestSet {
             NodeList respTimeStdDevTestNodes = xmlDoc.getElementsByTagName("respTimeStdDevTest");
             for (int i = 0; i < respTimeStdDevTestNodes.getLength(); i++) {
                 Element respTimeStdDevTestElement = (Element) respTimeStdDevTestNodes.item(i);
-                String name = respTimeStdDevTestElement.getElementsByTagName("testName").item(0).getTextContent();
-                String description = "";
-                if (respTimeStdDevTestElement.getElementsByTagName("description").item(0) != null) {
-                    description = respTimeStdDevTestElement.getElementsByTagName("description").item(0).getTextContent();
-                }
-                String transactionName = respTimeStdDevTestElement.getElementsByTagName("transactionName").item(0).getTextContent();
-                long maxRespTimeStdDevTime = Long.parseLong(respTimeStdDevTestElement.getElementsByTagName("maxRespTimeStdDev").item(0).getTextContent());
+
+                String name = getTestName(respTimeStdDevTestElement);
+                String description = getTestDescription(respTimeStdDevTestElement);
+                String transactionName = getTransactionName(respTimeStdDevTestElement);
+                long maxRespTimeStdDevTime = Long.parseLong(getElementByTagName(respTimeStdDevTestElement, "maxRespTimeStdDev"));
 
                 RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest(name, description, transactionName, maxRespTimeStdDevTime);
                 tests.add(respTimeStdDevTest);
@@ -62,20 +59,19 @@ public class TestSet {
             NodeList passedTransactionsTestNodes = xmlDoc.getElementsByTagName("passedTransactionsTest");
             for (int i = 0; i < passedTransactionsTestNodes.getLength(); i++) {
                 Element passedTransactionsElement = (Element) passedTransactionsTestNodes.item(i);
-                String name = passedTransactionsElement.getElementsByTagName("testName").item(0).getTextContent();
-                String description = "";
-                if (passedTransactionsElement.getElementsByTagName("description").item(0) != null) {
-                    description = passedTransactionsElement.getElementsByTagName("description").item(0).getTextContent();
-                }
-                String transactionName = passedTransactionsElement.getElementsByTagName("transactionName").item(0).getTextContent();
-                int allowedNumberOfFailedTransactions = Integer.parseInt(passedTransactionsElement.getElementsByTagName("allowedNumberOfFailedTransactions").item(0).getTextContent());
+
+                String name = getTestName(passedTransactionsElement);
+                String description = getTestDescription(passedTransactionsElement);
+                String transactionName = getTransactionName(passedTransactionsElement);
+
+                int allowedNumberOfFailedTransactions = Integer.parseInt(getElementByTagName(passedTransactionsElement, "allowedNumberOfFailedTransactions"));
 
                 PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest(name, description, transactionName, allowedNumberOfFailedTransactions);
                 tests.add(passedTransactionsTest);
             }
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.getMessage();
+            e.printStackTrace();
         }
     }
 
@@ -95,9 +91,26 @@ public class TestSet {
         System.out.println("Tests executed:   " + testCount);
         System.out.println("Tests passed:     " + passCount);
         System.out.println("Tests failed:     " + failureCount);
-        System.out.println("Test set status:  " + ((failureCount != 0 ) ? "FAIL" : "Pass") + System.lineSeparator());
+        System.out.println("Test set status:  " + ((failureCount != 0) ? "FAIL" : "Pass") + System.lineSeparator());
 
         return failureCount;
+    }
+
+    private static String getTestName(Element xmlElement) {
+        return xmlElement.getElementsByTagName("testName").item(0).getTextContent();
+    }
+
+    private static String getTransactionName(Element xmlElement) {
+        return xmlElement.getElementsByTagName("transactionName").item(0).getTextContent();
+    }
+
+    private static String getTestDescription(Element xmlElement) {
+        Node descriptionElement = xmlElement.getElementsByTagName("description").item(0);
+        return (descriptionElement != null) ? descriptionElement.getTextContent() : "";
+    }
+
+    private static String getElementByTagName(Element xmlElement, String tagName) {
+        return xmlElement.getElementsByTagName(tagName).item(0).getTextContent();
     }
 
 }
