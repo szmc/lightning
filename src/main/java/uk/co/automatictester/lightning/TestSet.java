@@ -39,15 +39,23 @@ public class TestSet {
         }
     }
 
+    public static void execute(JMeterTransactions originalJMeterTransactions) {
+        for(Test test : getTests()) {
+            test.execute(originalJMeterTransactions);
+            if (test.isFailed()) failureCount++;
+            System.out.println(test.getReport());
+        }
+    }
+
     public static String getTestSetExecutionReport() {
         String ls = System.lineSeparator();
-        int testCount = tests.size();
-        int passCount = testCount - failureCount;
+        int testCount = getTests().size();
+        int passCount = testCount - getFailureCount();
 
         String executionReport = "============= EXECUTION SUMMARY =============" + ls;
         executionReport += "Tests executed:   " + testCount + ls;
         executionReport += "Tests passed:     " + passCount + ls;
-        executionReport += "Tests failed:     " + failureCount + ls;
+        executionReport += "Tests failed:     " + getFailureCount() + ls;
         executionReport += "Test set status:  " + getTestSetStatus() + ls;
 
         return executionReport;

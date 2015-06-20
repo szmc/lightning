@@ -6,8 +6,6 @@ import uk.co.automatictester.lightning.tests.Test;
 
 public class TestRunner {
 
-    private static int failureCount = 0;
-
     public static void main(String[] args) {
         CmdLineParams params = new CmdLineParams();
         new JCommander(params, args);
@@ -16,11 +14,7 @@ public class TestRunner {
         }
         TestSet.load(params.getXmlFile());
         JMeterTransactions originalJMeterTransactions = JMeterCSVFileReader.read(params.getCSVFile());
-        for(Test test : TestSet.getTests()) {
-            test.execute(originalJMeterTransactions);
-            if (test.isFailed()) failureCount++;
-            System.out.println(test.getReport());
-        }
+        TestSet.execute(originalJMeterTransactions);
         System.out.println(TestSet.getTestSetExecutionReport());
         System.exit(TestSet.getFailureCount());
     }
