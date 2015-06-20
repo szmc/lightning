@@ -20,9 +20,9 @@ public class XMLSchemaValidator {
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlFile)));
         } catch (SAXException e) {
-            throw new RuntimeException("XML file " + xmlFile + " is not valid: " + e.getMessage());
+            e.printStackTrace();
         } catch (IOException e) {
-            throw new RuntimeException("Error accessing " + xmlFile + " for schema validation: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

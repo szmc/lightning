@@ -9,12 +9,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class JMeterCSVFileReaderTest {
 
-    private static final String NONEXISTENT_FILE = "src/test/resources/nonexistent.csv";
-    private static final String FILE_WITH_MISSING_COLUMN = "src/test/resources/JMeterCSVFileReaderTestWithMissingColumn.csv";
+    private static final String FILE_WITH_MISSING_COLUMN = "src/test/resources/csv/JMeterCSVFileReaderTestWithMissingColumn.csv";
 
     @Test
     public void testReadCheckTransactionData() {
-        JMeterTransactions txns = JMeterCSVFileReader.read("src/test/resources/JMeterCSVFileReaderTest.csv");
+        JMeterTransactions txns = JMeterCSVFileReader.read("src/test/resources/csv/ValidJMeterCSVFile.csv");
 
         List<String> txn1 = txns.get(0);
         assertThat(txn1.get(0), is("Login"));
@@ -26,11 +25,6 @@ public class JMeterCSVFileReaderTest {
         assertThat(txn2.get(1), is("11221"));
         assertThat(txn2.get(2), is("true"));
 
-    }
-
-    @Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "Error reading CSV file: " + NONEXISTENT_FILE + ".*")
-    public void testReadNonexistentFile() {
-        JMeterCSVFileReader.read(NONEXISTENT_FILE);
     }
 
     @Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "Column not found: label")

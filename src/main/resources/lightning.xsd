@@ -4,9 +4,9 @@
            elementFormDefault="qualified">
 
     <xs:simpleType name="nonEmptyString">
-    <xs:restriction base="xs:string">
-        <xs:pattern value=".*[^\s].*"/>
-    </xs:restriction>
+        <xs:restriction base="xs:string">
+            <xs:pattern value=".*[^\s].*"/>
+        </xs:restriction>
     </xs:simpleType>
 
     <xs:element name="testSet">
@@ -41,7 +41,8 @@
                             <xs:element name="testName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
                             <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
                             <xs:element name="transactionName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
-                            <xs:element name="allowedNumberOfFailedTransactions" type="xs:nonNegativeInteger" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="allowedNumberOfFailedTransactions" type="xs:nonNegativeInteger"
+                                        minOccurs="1" maxOccurs="1"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

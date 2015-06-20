@@ -1,12 +1,12 @@
 package uk.co.automatictester.lightning.tests;
 
-import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.JMeterTransactions;
 
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 
 public class AvgRespTimeTestTest {
 

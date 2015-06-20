@@ -32,7 +32,7 @@ public class JMeterCSVFileReader {
                 jmeterTransactions.add(currentTransaction);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading CSV file: " + e.getMessage());
+            e.printStackTrace();
         }
         return jmeterTransactions;
     }

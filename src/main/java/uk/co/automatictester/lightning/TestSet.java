@@ -20,10 +20,11 @@ import java.util.List;
 
 public class TestSet {
 
-    private static List<Test> tests = new ArrayList<Test>();
-    private static int failureCount = 0;
+    private List<Test> tests = new ArrayList<Test>();
+    private int failureCount = 0;
+    private String testSetExecutionReport = "";
 
-    public static void load(String xmlFile) {
+    public void load(String xmlFile) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -39,37 +40,41 @@ public class TestSet {
         }
     }
 
-    public static void execute(JMeterTransactions originalJMeterTransactions) {
-        for(Test test : getTests()) {
+    public void execute(JMeterTransactions originalJMeterTransactions) {
+        for (Test test : getTests()) {
             test.execute(originalJMeterTransactions);
             if (test.isFailed()) failureCount++;
-            System.out.println(test.getReport());
+            testSetExecutionReport += test.getReport();
         }
     }
 
-    public static String getTestSetExecutionReport() {
+    public String getTestSetExecutionReport() {
+        return testSetExecutionReport;
+    }
+
+    public String getTestSetExecutionSummaryReport() {
         String ls = System.lineSeparator();
         int testCount = getTests().size();
         int passCount = testCount - getFailureCount();
 
-        String executionReport = "============= EXECUTION SUMMARY =============" + ls;
-        executionReport += "Tests executed:   " + testCount + ls;
-        executionReport += "Tests passed:     " + passCount + ls;
-        executionReport += "Tests failed:     " + getFailureCount() + ls;
-        executionReport += "Test set status:  " + getTestSetStatus() + ls;
+        String executionReport = "============= EXECUTION SUMMARY =============" + ls
+                + "Tests executed:   " + testCount + ls
+                + "Tests passed:     " + passCount + ls
+                + "Tests failed:     " + getFailureCount() + ls
+                + "Test set status:  " + getTestSetStatus() + ls;
 
         return executionReport;
     }
 
-    public static int getFailureCount() {
+    public int getFailureCount() {
         return failureCount;
     }
 
-    public static List<Test> getTests() {
+    public List<Test> getTests() {
         return tests;
     }
 
-    private static void addPassedTransactionsTestNodes(Document xmlDoc) {
+    private void addPassedTransactionsTestNodes(Document xmlDoc) {
         NodeList passedTransactionsTestNodes = xmlDoc.getElementsByTagName("passedTransactionsTest");
         for (int i = 0; i < passedTransactionsTestNodes.getLength(); i++) {
             Element passedTransactionsElement = (Element) passedTransactionsTestNodes.item(i);
@@ -86,7 +91,7 @@ public class TestSet {
 
     }
 
-    private static void addRespTimeStdDevTestNodes(Document xmlDoc) {
+    private void addRespTimeStdDevTestNodes(Document xmlDoc) {
         NodeList respTimeStdDevTestNodes = xmlDoc.getElementsByTagName("respTimeStdDevTest");
         for (int i = 0; i < respTimeStdDevTestNodes.getLength(); i++) {
             Element respTimeStdDevTestElement = (Element) respTimeStdDevTestNodes.item(i);
@@ -101,7 +106,7 @@ public class TestSet {
         }
     }
 
-    private static void addAvgRespTimeTests(Document xmlDoc) {
+    private void addAvgRespTimeTests(Document xmlDoc) {
         NodeList avgRespTimeTestNodes = xmlDoc.getElementsByTagName("avgRespTimeTest");
         for (int i = 0; i < avgRespTimeTestNodes.getLength(); i++) {
             Element avgRespTimeTestElement = (Element) avgRespTimeTestNodes.item(i);
@@ -116,24 +121,24 @@ public class TestSet {
         }
     }
 
-    private static String getTestSetStatus() {
+    private String getTestSetStatus() {
         return ((failureCount != 0) ? "FAIL" : "Pass");
     }
 
-    private static String getTestName(Element xmlElement) {
+    private String getTestName(Element xmlElement) {
         return xmlElement.getElementsByTagName("testName").item(0).getTextContent();
     }
 
-    private static String getTransactionName(Element xmlElement) {
+    private String getTransactionName(Element xmlElement) {
         return xmlElement.getElementsByTagName("transactionName").item(0).getTextContent();
     }
 
-    private static String getTestDescription(Element xmlElement) {
+    private String getTestDescription(Element xmlElement) {
         Node descriptionElement = xmlElement.getElementsByTagName("description").item(0);
         return (descriptionElement != null) ? descriptionElement.getTextContent() : "";
     }
 
-    private static String getElementByTagName(Element xmlElement, String tagName) {
+    private String getElementByTagName(Element xmlElement, String tagName) {
         return xmlElement.getElementsByTagName(tagName).item(0).getTextContent();
     }
 

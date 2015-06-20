@@ -15,22 +15,40 @@ public abstract class Test {
         this.name = name;
         this.description = description;
         this.transactionName = transactionName;
+        this.expectedResult = "";
+        this.actualResult = "";
+        this.failed = false;
     }
 
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
 
     public String getReport() {
         String ls = System.lineSeparator();
-        String report = "Test name:        " + name + ls;
-        if (!description.isEmpty()) report += "Test description: " + description + ls;
-        report += "Transaction name: " + transactionName + ls;
-        report += "Expected result:  " + expectedResult + ls;
-        report += "Actual result:    " + actualResult + ls;
-        report += "Test result:      " + ((failed) ? "FAIL" : "Pass") + ls;
+        String desc = (!description.isEmpty()) ? ("Test description: " + description + ls) : "";
+        String report = "Test name:        " + name + ls
+                + desc
+                + "Transaction name: " + transactionName + ls
+                + "Expected result:  " + expectedResult + ls
+                + "Actual result:    " + actualResult + ls
+                + "Test result:      " + ((failed) ? "FAIL" : "Pass") + ls + ls;
         return report;
     }
 
     public boolean isFailed() {
         return failed;
+    }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof Test) {
+            Test test = (Test) obj;
+            return name.equals(test.name) &&
+                    description.equals(test.description) &&
+                    transactionName.equals(test.transactionName) &&
+                    expectedResult.equals(test.expectedResult) &&
+                    actualResult.equals(test.actualResult) &&
+                    failed == test.failed;
+        } else {
+            return false;
+        }
     }
 }
