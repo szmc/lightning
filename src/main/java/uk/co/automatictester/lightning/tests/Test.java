@@ -4,9 +4,9 @@ import uk.co.automatictester.lightning.JMeterTransactions;
 
 public abstract class Test {
 
-    protected String name;
-    protected String description;
-    protected String transactionName;
+    protected final String name;
+    protected final String description;
+    protected final String transactionName;
     protected String expectedResult;
     protected String actualResult;
     protected boolean failed;
@@ -25,13 +25,12 @@ public abstract class Test {
     public String getReport() {
         String ls = System.lineSeparator();
         String desc = (!description.isEmpty()) ? ("Test description: " + description + ls) : "";
-        String report = "Test name:        " + name + ls
+        return "Test name:        " + name + ls
                 + desc
                 + "Transaction name: " + transactionName + ls
                 + "Expected result:  " + expectedResult + ls
                 + "Actual result:    " + actualResult + ls
                 + "Test result:      " + ((failed) ? "FAIL" : "Pass") + ls + ls;
-        return report;
     }
 
     public boolean isFailed() {

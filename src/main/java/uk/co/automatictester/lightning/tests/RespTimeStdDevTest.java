@@ -11,7 +11,7 @@ public class RespTimeStdDevTest extends Test {
     private static final String EXPECTED_RESULT_MESSAGE = "Average standard deviance time <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Average standard deviance time = %s";
 
-    private long maxRespTimeStdDev;
+    private final long maxRespTimeStdDev;
 
     public RespTimeStdDevTest(String name, String description, String transactionName, long maxRespTimeStdDev) {
         super(name, description, transactionName);

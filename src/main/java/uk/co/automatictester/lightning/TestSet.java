@@ -20,7 +20,7 @@ import java.util.List;
 
 public class TestSet {
 
-    private List<Test> tests = new ArrayList<Test>();
+    private List<Test> tests = new ArrayList<>();
     private int failureCount = 0;
     private String testSetExecutionReport = "";
 
@@ -57,13 +57,11 @@ public class TestSet {
         int testCount = getTests().size();
         int passCount = testCount - getFailureCount();
 
-        String executionReport = "============= EXECUTION SUMMARY =============" + ls
+        return "============= EXECUTION SUMMARY =============" + ls
                 + "Tests executed:   " + testCount + ls
                 + "Tests passed:     " + passCount + ls
                 + "Tests failed:     " + getFailureCount() + ls
                 + "Test set status:  " + getTestSetStatus() + ls;
-
-        return executionReport;
     }
 
     public int getFailureCount() {

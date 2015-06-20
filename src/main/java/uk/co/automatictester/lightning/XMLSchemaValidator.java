@@ -19,9 +19,7 @@ public class XMLSchemaValidator {
             Schema schema = factory.newSchema(new File("src/main/resources/lightning.xsd"));
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlFile)));
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (SAXException | IOException e) {
             e.printStackTrace();
         }
     }

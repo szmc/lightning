@@ -13,9 +13,9 @@ public class JMeterTransactionsTest {
     public void testExcludeLabelsOtherThan() {
         JMeterTransactions txns = new JMeterTransactions();
 
-        ArrayList<String> txn1 = new ArrayList<String>();
-        ArrayList<String> txn2 = new ArrayList<String>();
-        ArrayList<String> txn3 = new ArrayList<String>();
+        ArrayList<String> txn1 = new ArrayList<>();
+        ArrayList<String> txn2 = new ArrayList<>();
+        ArrayList<String> txn3 = new ArrayList<>();
 
         txn1.add("Login");
         txn1.add("1200");
