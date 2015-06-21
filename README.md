@@ -2,7 +2,7 @@
 
 ## Current version
 
-Current version: 0.1.0
+Current version: [0.1.0](https://github.com/automatictester/lightning/releases/download/0.1.0/lightning-0.1.0.jar)
 
 Goal of this version: provide initial functionality, accompanied by unit/integration tests and readme
 
@@ -23,14 +23,6 @@ There are tools which can help you run JMeter tests as part of CI build, and too
 ## Design assumptions
 
 - JMeter result files produced in CI environment should be small enought to be processed by Lightning and stored in memory without hacks
-
-## How to start
-
-1. Clone the repo
-2. Checkout proper branch
-3. Build project with `mvn package`
-
-The goal is to make Lightning available in Maven Central soon.
 
 ## Usage example
 
@@ -126,6 +118,8 @@ Here is what you can expect in next version:
 - code cleanup and refactoring
 
 ## Info for contributors
+
+Build project with `mvn mvn clean compile assembly:single`.
 
 To implement new test type:
 
