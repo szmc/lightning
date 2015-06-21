@@ -119,7 +119,7 @@ Here is what you can expect in next version:
 
 ## Info for contributors
 
-Build project with `mvn mvn clean compile assembly:single`.
+Build project with `mvn clean compile assembly:single`.
 
 To implement new test type:
 
