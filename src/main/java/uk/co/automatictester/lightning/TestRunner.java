@@ -17,7 +17,7 @@ public class TestRunner {
         new JCommander(params, args);
 
         if (!params.skipSchemaValidation()) {
-            XMLSchemaValidator.validate(params.getXmlFile());
+            new XMLSchemaValidator().validate(params.getXmlFile());
         }
 
         TestSet testSet = new TestSet();

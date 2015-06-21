@@ -1,7 +1,9 @@
 package uk.co.automatictester.lightning;
 
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -13,10 +15,11 @@ import static javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI;
 
 public class XMLSchemaValidator {
 
-    public static void validate(String xmlFile) {
+    public void validate(String xmlFile) {
         try {
             SchemaFactory factory = SchemaFactory.newInstance(W3C_XML_SCHEMA_NS_URI);
-            Schema schema = factory.newSchema(new File("src/main/resources/lightning.xsd"));
+            SAXSource xsdFile = new SAXSource(new InputSource(this.getClass().getResourceAsStream("/lightning.xsd")));
+            Schema schema = factory.newSchema(xsdFile);
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlFile)));
         } catch (SAXException | IOException e) {

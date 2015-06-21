@@ -6,6 +6,6 @@ public class XMLSchemaValidatorTest {
 
     @Test
     public void testValidateValidXML() {
-        XMLSchemaValidator.validate("src/test/resources/xml/XMLSchemaValidatorTest_valid.xml");
+        new XMLSchemaValidator().validate("src/test/resources/xml/XMLSchemaValidatorTest_valid.xml");
     }
 }
