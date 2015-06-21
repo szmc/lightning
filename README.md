@@ -2,7 +2,7 @@
 
 ## Current version
 
-Current version is: 0.1.0
+Current version: 0.1.0
 
 Goal of this version: provide initial functionality, accompanied by unit/integration tests and readme
 
