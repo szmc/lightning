@@ -49,6 +49,6 @@ public class JMeterCSVFileReader {
                 return i;
             }
         }
-        throw new RuntimeException("Column not found: " + searchedColumnName);
+        throw new RuntimeException(String.format("Column name '%s' not found in first row of CSV file", searchedColumnName));
     }
 }

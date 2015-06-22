@@ -27,7 +27,7 @@ public class JMeterCSVFileReaderTest {
 
     }
 
-    @Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "Column not found: label")
+    @Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "Column name 'label' not found in first row of CSV file")
     public void testReadFileWithMissingColumn() {
         JMeterCSVFileReader.read(FILE_WITH_MISSING_COLUMN);
     }
