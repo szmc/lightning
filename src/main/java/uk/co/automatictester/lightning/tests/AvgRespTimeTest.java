@@ -33,4 +33,19 @@ public class AvgRespTimeTest extends Test {
         actualResult = String.format(ACTUAL_RESULT_MESSAGE, roundedAvgRespTime);
         failed = (roundedAvgRespTime > maxAvgRespTime);
     }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof AvgRespTimeTest) {
+            AvgRespTimeTest test = (AvgRespTimeTest) obj;
+            return name.equals(test.name) &&
+                    description.equals(test.description) &&
+                    transactionName.equals(test.transactionName) &&
+                    expectedResult.equals(test.expectedResult) &&
+                    actualResult.equals(test.actualResult) &&
+                    failed == test.failed &&
+                    maxAvgRespTime == test.maxAvgRespTime;
+        } else {
+            return false;
+        }
+    }
 }

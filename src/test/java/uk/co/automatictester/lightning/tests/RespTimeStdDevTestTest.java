@@ -6,7 +6,8 @@ import uk.co.automatictester.lightning.JMeterTransactions;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.core.Is.is;
 
 public class RespTimeStdDevTestTest {
 
@@ -74,5 +75,19 @@ public class RespTimeStdDevTestTest {
         assertThat(testReport, containsString("Expected result:  Average standard deviance time <= 0"));
         assertThat(testReport, containsString("Actual result:    Average standard deviance time = 1.0"));
         assertThat(testReport, containsString("Test result:      FAIL"));
+    }
+
+    @Test
+    public void testIsEqual() {
+        RespTimeStdDevTest test1 = new RespTimeStdDevTest("test a", "description", "transaction x", 1);
+        RespTimeStdDevTest test2 = new RespTimeStdDevTest("test a", "description", "transaction x", 1);
+        assertThat(test1, is(equalTo(test2)));
+    }
+
+    @Test
+    public void testIsNotEqual() {
+        RespTimeStdDevTest test1 = new RespTimeStdDevTest("test a", "description", "transaction x", 1);
+        RespTimeStdDevTest test2 = new RespTimeStdDevTest("test a", "description", "transaction x", 0);
+        assertThat(test1, is(not(equalTo(test2))));
     }
 }

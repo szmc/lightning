@@ -15,8 +15,8 @@ public class TestSetTest {
     @Test
     public void testLoadValidFile() {
         AvgRespTimeTest avgRespTimeTestTest = new AvgRespTimeTest("Test #1", "Verify average login times", "Login", 4000);
-        PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest("Test #2", "Verify standard deviation", "Search", 500);
-        RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest("Test #3", "Verify number of passed tests", "Login", 0);
+        RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest("Test #2", "Verify standard deviation", "Search", 500);
+        PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest("Test #3", "Verify number of passed tests", "Login", 0);
 
         TestSet testSet = new TestSet();
         testSet.load("src/test/resources/xml/TestSetTest.xml");

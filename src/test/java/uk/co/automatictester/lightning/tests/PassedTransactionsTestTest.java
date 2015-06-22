@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.core.Is.is;
 
 public class PassedTransactionsTestTest {
 
@@ -50,5 +53,19 @@ public class PassedTransactionsTestTest {
         assertThat(testReport, containsString("Expected result:  Number of failed transactions <= 0"));
         assertThat(testReport, containsString("Actual result:    Number of failed transactions = 1"));
         assertThat(testReport, containsString("Test result:      FAIL"));
+    }
+
+    @Test
+    public void testIsEqual() {
+        PassedTransactionsTest test1 = new PassedTransactionsTest("test a", "description", "transaction x", 1);
+        PassedTransactionsTest test2 = new PassedTransactionsTest("test a", "description", "transaction x", 1);
+        assertThat(test1, is(equalTo(test2)));
+    }
+
+    @Test
+    public void testIsNotEqual() {
+        PassedTransactionsTest test1 = new PassedTransactionsTest("test a", "description", "transaction x", 1);
+        PassedTransactionsTest test2 = new PassedTransactionsTest("test a", "description", "transaction x", 0);
+        assertThat(test1, is(not(equalTo(test2))));
     }
 }
