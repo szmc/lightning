@@ -11,6 +11,7 @@ public class JMeterTransactions extends ArrayList<ArrayList<String>> {
                 transactions.add(transaction);
             }
         }
+        if (transactions.size() == 0) throw new RuntimeException(String.format("No transactions with label equal to '%s' found in CSV file", label));
         return transactions;
     }
 

@@ -9,6 +9,16 @@ import static org.hamcrest.Matchers.is;
 
 public class JMeterTransactionsTest {
 
+    @Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "No transactions with label equal to 'nonexistent' found in CSV file")
+    public void testNoTransactionsWithExpectedLabel() {
+        ArrayList<String> txn = new ArrayList<>();
+        txn.add("Login");
+        txn.add("1200");
+        JMeterTransactions txns = new JMeterTransactions();
+        txns.add(txn);
+        txns.excludeLabelsOtherThan("nonexistent");
+    }
+
     @Test
     public void testExcludeLabelsOtherThan() {
         JMeterTransactions txns = new JMeterTransactions();
