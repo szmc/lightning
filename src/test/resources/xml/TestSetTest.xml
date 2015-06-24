@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testSet xmlns="https://github.com/automatictester/lightning"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="https://github.com/automatictester/lightning lightning.xsd">
+         xsi:schemaLocation="https://github.com/automatictester/lightning https://github.com/automatictester/lightning/releases/download/0.1.0/lightning-0.1.0.xsd">
 
     <avgRespTimeTest>
         <testName>Test #1</testName>
