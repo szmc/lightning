@@ -16,23 +16,29 @@ public class RespTimeStdDevTest extends Test {
     public RespTimeStdDevTest(String name, String description, String transactionName, long maxRespTimeStdDev) {
         super(name, description, transactionName);
         this.maxRespTimeStdDev = maxRespTimeStdDev;
+        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxRespTimeStdDev);
     }
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
-        JMeterTransactions transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
+        try {
+            JMeterTransactions transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
 
-        DescriptiveStatistics ds = new DescriptiveStatistics();
-        for (List<String> transaction : transactions) {
-            String elapsed = transaction.get(1);
-            ds.addValue(Double.parseDouble(elapsed));
+            DescriptiveStatistics ds = new DescriptiveStatistics();
+            for (List<String> transaction : transactions) {
+                String elapsed = transaction.get(1);
+                ds.addValue(Double.parseDouble(elapsed));
+            }
+            double actualRespTimeStdDev = ds.getStandardDeviation();
+            DecimalFormat df = new DecimalFormat("#.##");
+            double roundedActualRespTimeStdDev = Double.valueOf(df.format(actualRespTimeStdDev));
+
+            actualResult = String.format(ACTUAL_RESULT_MESSAGE, roundedActualRespTimeStdDev);
+            passed = !(roundedActualRespTimeStdDev > maxRespTimeStdDev);
+            failed = (roundedActualRespTimeStdDev > maxRespTimeStdDev);
+        } catch (Exception e) {
+            error = true;
+            actualResult = e.getMessage();
         }
-        double actualRespTimeStdDev = ds.getStandardDeviation();
-        DecimalFormat df = new DecimalFormat("#.##");
-        double roundedActualRespTimeStdDev = Double.valueOf(df.format(actualRespTimeStdDev));
-
-        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxRespTimeStdDev);
-        actualResult = String.format(ACTUAL_RESULT_MESSAGE, roundedActualRespTimeStdDev);
-        failed = (roundedActualRespTimeStdDev > maxRespTimeStdDev);
     }
 
     public boolean equals(Object obj) {

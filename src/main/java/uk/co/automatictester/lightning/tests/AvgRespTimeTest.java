@@ -15,23 +15,29 @@ public class AvgRespTimeTest extends Test {
     public AvgRespTimeTest(String name, String description, String transactionName, long maxAvgRespTime) {
         super(name, description, transactionName);
         this.maxAvgRespTime = maxAvgRespTime;
+        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxAvgRespTime);
     }
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
-        JMeterTransactions transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
+        try {
+            JMeterTransactions transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
 
-        double totalRespTime = 0;
-        for (List<String> transaction : transactions) {
-            String elapsed = transaction.get(1);
-            totalRespTime += Long.parseLong(elapsed);
+            double totalRespTime = 0;
+            for (List<String> transaction : transactions) {
+                String elapsed = transaction.get(1);
+                totalRespTime += Long.parseLong(elapsed);
+            }
+            double avgRespTime = totalRespTime / transactions.size();
+            DecimalFormat df = new DecimalFormat("#.##");
+            double roundedAvgRespTime = Double.valueOf(df.format(avgRespTime));
+
+            actualResult = String.format(ACTUAL_RESULT_MESSAGE, roundedAvgRespTime);
+            passed = !(roundedAvgRespTime > maxAvgRespTime);
+            failed = (roundedAvgRespTime > maxAvgRespTime);
+        } catch (Exception e) {
+            error = true;
+            actualResult = e.getMessage();
         }
-        double avgRespTime = totalRespTime / transactions.size();
-        DecimalFormat df = new DecimalFormat("#.##");
-        double roundedAvgRespTime = Double.valueOf(df.format(avgRespTime));
-
-        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxAvgRespTime);
-        actualResult = String.format(ACTUAL_RESULT_MESSAGE, roundedAvgRespTime);
-        failed = (roundedAvgRespTime > maxAvgRespTime);
     }
 
     public boolean equals(Object obj) {

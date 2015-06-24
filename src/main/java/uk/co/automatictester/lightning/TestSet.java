@@ -21,7 +21,9 @@ import java.util.List;
 public class TestSet {
 
     private List<Test> tests = new ArrayList<>();
+    private int passCount = 0;
     private int failureCount = 0;
+    private int errorCount = 0;
     private String testSetExecutionReport = "";
 
     public void load(String xmlFile) {
@@ -43,7 +45,9 @@ public class TestSet {
     public void execute(JMeterTransactions originalJMeterTransactions) {
         for (Test test : getTests()) {
             test.execute(originalJMeterTransactions);
+            if (test.isPassed()) passCount++;
             if (test.isFailed()) failureCount++;
+            if (test.isError()) errorCount++;
             testSetExecutionReport += test.getReport();
         }
     }
@@ -55,17 +59,25 @@ public class TestSet {
     public String getTestSetExecutionSummaryReport() {
         String ls = System.lineSeparator();
         int testCount = getTests().size();
-        int passCount = testCount - getFailureCount();
 
         return "============= EXECUTION SUMMARY =============" + ls
-                + "Tests executed:   " + testCount + ls
-                + "Tests passed:     " + passCount + ls
-                + "Tests failed:     " + getFailureCount() + ls
-                + "Test set status:  " + getTestSetStatus() + ls;
+                + "Tests executed:    " + testCount + ls
+                + "Tests passed:      " + getPassCount() + ls
+                + "Tests failed:      " + getFailureCount() + ls
+                + "Tests with errors: " + getErrorCount() + ls
+                + "Test set status:   " + getTestSetStatus() + ls;
+    }
+
+    public int getPassCount() {
+        return passCount;
     }
 
     public int getFailureCount() {
         return failureCount;
+    }
+
+    public int getErrorCount() {
+        return errorCount;
     }
 
     public List<Test> getTests() {
@@ -120,7 +132,7 @@ public class TestSet {
     }
 
     private String getTestSetStatus() {
-        return ((failureCount != 0) ? "FAIL" : "Pass");
+        return (((failureCount != 0) || (getErrorCount() != 0)) ? "FAIL" : "Pass");
     }
 
     private String getTestName(Element xmlElement) {

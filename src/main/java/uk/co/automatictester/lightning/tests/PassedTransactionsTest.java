@@ -14,20 +14,26 @@ public class PassedTransactionsTest extends Test {
     public PassedTransactionsTest(String name, String description, String transactionName, long allowedNumberOfFailedTransactions) {
         super(name, description, transactionName);
         this.allowedNumberOfFailedTransactions = allowedNumberOfFailedTransactions;
+        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, allowedNumberOfFailedTransactions);
     }
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
-        JMeterTransactions transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
+        try {
+            JMeterTransactions transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
 
-        int failureCount = 0;
-        for (List<String> transaction : transactions) {
-            String success = transaction.get(2);
-            if (!Boolean.parseBoolean(success)) failureCount++;
+            int failureCount = 0;
+            for (List<String> transaction : transactions) {
+                String success = transaction.get(2);
+                if (!Boolean.parseBoolean(success)) failureCount++;
+            }
+
+            actualResult = String.format(ACTUAL_RESULT_MESSAGE, failureCount);
+            passed = !(failureCount > allowedNumberOfFailedTransactions);
+            failed = (failureCount > allowedNumberOfFailedTransactions);
+        } catch (Exception e) {
+            error = true;
+            actualResult = e.getMessage();
         }
-
-        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, allowedNumberOfFailedTransactions);
-        actualResult = String.format(ACTUAL_RESULT_MESSAGE, failureCount);
-        failed = (failureCount > allowedNumberOfFailedTransactions);
     }
 
     public boolean equals(Object obj) {

@@ -38,10 +38,11 @@ public class TestSetTest {
 
         String ls = System.lineSeparator();
         String summaryReport = "============= EXECUTION SUMMARY =============" + ls +
-                "Tests executed:   3" + ls +
-                "Tests passed:     3" + ls +
-                "Tests failed:     0" + ls +
-                "Test set status:  Pass" + ls;
+                "Tests executed:    3" + ls +
+                "Tests passed:      3" + ls +
+                "Tests failed:      0" + ls +
+                "Tests with errors: 0" + ls +
+                "Test set status:   Pass" + ls;
 
         assertThat(testSetExecReport, containsString(summaryReport));
     }

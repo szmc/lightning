@@ -46,10 +46,11 @@ public class TestRunnerIT {
                 ls +
                 ls +
                 "============= EXECUTION SUMMARY =============" + ls +
-                "Tests executed:   3" + ls +
-                "Tests passed:     3" + ls +
-                "Tests failed:     0" + ls +
-                "Test set status:  Pass";
+                "Tests executed:    3" + ls +
+                "Tests passed:      3" + ls +
+                "Tests failed:      0" + ls +
+                "Tests with errors: 0" + ls +
+                "Test set status:   Pass";
 
 
         String[] cmdLineParams = new String[]{"-xml=src/test/resources/xml/TestSetTest.xml", "-csv=src/test/resources/csv/TestSetTest.csv"};
