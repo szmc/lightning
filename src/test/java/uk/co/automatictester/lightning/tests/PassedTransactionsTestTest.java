@@ -3,30 +3,25 @@ package uk.co.automatictester.lightning.tests;
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.JMeterTransactions;
 
-import java.util.ArrayList;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
+import static uk.co.automatictester.lightning.data.TestData.LOGIN_1200_FAILURE;
+import static uk.co.automatictester.lightning.data.TestData.LOGIN_1200_SUCCESS;
 
 public class PassedTransactionsTestTest {
 
     @Test
     public void testExecutePass() {
-        ArrayList<String> txn1 = new ArrayList<>();
-        txn1.add(0, "transaction x");
-        txn1.add(1, "1200");
-        txn1.add(2, "true");
-
         JMeterTransactions txns = new JMeterTransactions();
-        txns.add(txn1);
+        txns.add(LOGIN_1200_SUCCESS);
 
-        PassedTransactionsTest test = new PassedTransactionsTest("test a", "description", "transaction x", 0);
+        PassedTransactionsTest test = new PassedTransactionsTest("test a", "description", "Login", 0);
         test.execute(txns);
         String testReport = test.getReport();
 
         assertThat(testReport, containsString("Test name:        test a"));
-        assertThat(testReport, containsString("Transaction name: transaction x"));
+        assertThat(testReport, containsString("Transaction name: Login"));
         assertThat(testReport, containsString("Expected result:  Number of failed transactions <= 0"));
         assertThat(testReport, containsString("Actual result:    Number of failed transactions = 0"));
         assertThat(testReport, containsString("Test result:      Pass"));
@@ -34,20 +29,15 @@ public class PassedTransactionsTestTest {
 
     @Test
     public void testExecuteFail() {
-        ArrayList<String> txn1 = new ArrayList<>();
-        txn1.add(0, "transaction x");
-        txn1.add(1, "1200");
-        txn1.add(2, "false");
-
         JMeterTransactions txns = new JMeterTransactions();
-        txns.add(txn1);
+        txns.add(LOGIN_1200_FAILURE);
 
-        PassedTransactionsTest test = new PassedTransactionsTest("test a", "description", "transaction x", 0);
+        PassedTransactionsTest test = new PassedTransactionsTest("test a", "description", "Login", 0);
         test.execute(txns);
         String testReport = test.getReport();
 
         assertThat(testReport, containsString("Test name:        test a"));
-        assertThat(testReport, containsString("Transaction name: transaction x"));
+        assertThat(testReport, containsString("Transaction name: Login"));
         assertThat(testReport, containsString("Expected result:  Number of failed transactions <= 0"));
         assertThat(testReport, containsString("Actual result:    Number of failed transactions = 1"));
         assertThat(testReport, containsString("Test result:      FAIL"));

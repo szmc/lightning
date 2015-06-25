@@ -7,16 +7,16 @@ public class BooleanValidatorTest {
 
     @Test
     public void testValidateTrue() {
-        new BooleanValidator().validate("var", "true");
+        new BooleanValidator().validate("-skipSchemaValidation", "true");
     }
 
     @Test
     public void testValidateFalse() {
-        new BooleanValidator().validate("var", "false");
+        new BooleanValidator().validate("-skipSchemaValidation", "false");
     }
 
-    @Test(expectedExceptions = ParameterException.class, expectedExceptionsMessageRegExp = "Parameter var should be boolean \\(true or false\\)")
+    @Test(expectedExceptions = ParameterException.class, expectedExceptionsMessageRegExp = "Parameter '-skipSchemaValidation' should be boolean \\(true or false\\)")
     public void testValidateOther() {
-        new BooleanValidator().validate("var", "True");
+        new BooleanValidator().validate("-skipSchemaValidation", "True");
     }
 }

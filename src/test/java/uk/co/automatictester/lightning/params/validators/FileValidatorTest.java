@@ -3,17 +3,17 @@ package uk.co.automatictester.lightning.params.validators;
 import com.beust.jcommander.ParameterException;
 import org.testng.annotations.Test;
 
-public class FileValidatorTest {
+import static uk.co.automatictester.lightning.data.TestData.*;
 
-    private static final String NONEXISTENT_FILE = "src/test/resources/csv/nonexistent.csv";
+public class FileValidatorTest {
 
     @Test
     public void testValidateExisting() {
-        new FileValidator().validate("-csv", "src/test/resources/csv/FileValidatorTest.csv");
+        new FileValidator().validate("-csv", EXISTING_CSV_FILE);
     }
 
-    @Test(expectedExceptions = ParameterException.class, expectedExceptionsMessageRegExp = "Error reading file: " + NONEXISTENT_FILE)
+    @Test(expectedExceptions = ParameterException.class, expectedExceptionsMessageRegExp = "Error reading file: " + NONEXISTENT_CSV_FILE)
     public void testValidateNonexistent() {
-        new FileValidator().validate("-csv", NONEXISTENT_FILE);
+        new FileValidator().validate("-csv", NONEXISTENT_CSV_FILE);
     }
 }

@@ -1,47 +1,36 @@
 package uk.co.automatictester.lightning;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static uk.co.automatictester.lightning.data.TestData.*;
 
 public class JMeterTransactionsTest {
 
-    @Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "No transactions with label equal to 'nonexistent' found in CSV file")
-    public void testNoTransactionsWithExpectedLabel() {
-        ArrayList<String> txn = new ArrayList<>();
-        txn.add("Login");
-        txn.add("1200");
-        JMeterTransactions txns = new JMeterTransactions();
-        txns.add(txn);
-        txns.excludeLabelsOtherThan("nonexistent");
+    private static JMeterTransactions JMETER_TRANSACTIONS = new JMeterTransactions();
+
+    @BeforeMethod
+    public void setupData() {
+        JMETER_TRANSACTIONS.clear();
+        JMETER_TRANSACTIONS.add(LOGIN_1200_SUCCESS);
+        JMETER_TRANSACTIONS.add(LOGIN_1000_SUCCESS);
+        JMETER_TRANSACTIONS.add(SEARCH_800_SUCCESS);
     }
 
     @Test
-    public void testExcludeLabelsOtherThan() {
-        JMeterTransactions txns = new JMeterTransactions();
+    public void verifyNumberOfTransactions() {
+        assertThat(JMETER_TRANSACTIONS.size(), is(3));
+    }
 
-        ArrayList<String> txn1 = new ArrayList<>();
-        ArrayList<String> txn2 = new ArrayList<>();
-        ArrayList<String> txn3 = new ArrayList<>();
+    @Test
+    public void verifyExcludeLabelsOtherThanMethod() {
+        assertThat(JMETER_TRANSACTIONS.excludeLabelsOtherThan(EXISTING_LABEL).size(), is(2));
+    }
 
-        txn1.add("Login");
-        txn1.add("1200");
-
-        txn2.add("Login");
-        txn2.add("1000");
-
-        txn3.add("Search");
-        txn3.add("800");
-
-        txns.add(txn1);
-        txns.add(txn2);
-        txns.add(txn3);
-        assertThat(txns.size(), is(3));
-
-        JMeterTransactions filteredTxns = txns.excludeLabelsOtherThan("Login");
-        assertThat(filteredTxns.size(), is(2));
+    @Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "No transactions with label equal to '" + NONEXISTENT_LABEL + "' found in CSV file")
+    public void verifyExcludeLabelsOtherThanMethodRuntimeException() {
+        JMETER_TRANSACTIONS.excludeLabelsOtherThan(NONEXISTENT_LABEL);
     }
 }

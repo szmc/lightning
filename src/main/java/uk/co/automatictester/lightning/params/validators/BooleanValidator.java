@@ -7,7 +7,7 @@ public class BooleanValidator implements IParameterValidator {
 
     public void validate(String name, String value) throws ParameterException {
         if (!("true".equals(value) || "false".equals(value))) {
-            throw new ParameterException("Parameter " + name + " should be boolean (true or false)");
+            throw new ParameterException(String.format("Parameter '%s' should be boolean (true or false)", name));
         }
     }
 }
