@@ -1,5 +1,7 @@
 package uk.co.automatictester.lightning.data;
 
+import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,6 +29,10 @@ public class TestData {
 
     public static final ArrayList<String> SEARCH_11221_SUCCESS = new ArrayList<>(Arrays.asList("Search","11221","true"));
     public static final ArrayList<String> SEARCH_800_SUCCESS = new ArrayList<>(Arrays.asList("Search","800","true"));
+
+    // Tests
+    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_A = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 1);
+    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_B = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
 
     // Other
     public static final String NONEXISTENT_LABEL = "nonexistent";

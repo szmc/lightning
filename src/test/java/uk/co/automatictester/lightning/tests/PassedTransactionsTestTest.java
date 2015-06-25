@@ -6,8 +6,7 @@ import uk.co.automatictester.lightning.JMeterTransactions;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
-import static uk.co.automatictester.lightning.data.TestData.LOGIN_1200_FAILURE;
-import static uk.co.automatictester.lightning.data.TestData.LOGIN_1200_SUCCESS;
+import static uk.co.automatictester.lightning.data.TestData.*;
 
 public class PassedTransactionsTestTest {
 
@@ -45,15 +44,11 @@ public class PassedTransactionsTestTest {
 
     @Test
     public void testIsEqual() {
-        PassedTransactionsTest test1 = new PassedTransactionsTest("test a", "description", "transaction x", 1);
-        PassedTransactionsTest test2 = new PassedTransactionsTest("test a", "description", "transaction x", 1);
-        assertThat(test1, is(equalTo(test2)));
+        assertThat(PASSED_TRANSACTIONS_TEST_A, is(equalTo(PASSED_TRANSACTIONS_TEST_A)));
     }
 
     @Test
     public void testIsNotEqual() {
-        PassedTransactionsTest test1 = new PassedTransactionsTest("test a", "description", "transaction x", 1);
-        PassedTransactionsTest test2 = new PassedTransactionsTest("test a", "description", "transaction x", 0);
-        assertThat(test1, is(not(equalTo(test2))));
+        assertThat(PASSED_TRANSACTIONS_TEST_A, is(not(equalTo(PASSED_TRANSACTIONS_TEST_B))));
     }
 }
