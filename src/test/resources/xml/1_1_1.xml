@@ -3,6 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://github.com/automatictester/lightning https://github.com/automatictester/lightning/releases/download/0.1.0/lightning-0.1.0.xsd">
 
+    <!-- expected result: 1 pass, 1 fail, 1 error -->
+
     <avgRespTimeTest>
         <testName>Test #1</testName>
         <description>Verify average login times</description>

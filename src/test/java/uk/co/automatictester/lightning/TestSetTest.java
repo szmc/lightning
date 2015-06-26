@@ -7,8 +7,8 @@ import uk.co.automatictester.lightning.tests.RespTimeStdDevTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static uk.co.automatictester.lightning.data.TestData.TEST_SET_XML_FILE;
-import static uk.co.automatictester.lightning.data.TestData.VALID_CSV_FILE;
+import static uk.co.automatictester.lightning.data.TestData.CSV_2_TRANSACTIONS;
+import static uk.co.automatictester.lightning.data.TestData.TEST_SET_3_0_0;
 
 public class TestSetTest {
 
@@ -19,7 +19,7 @@ public class TestSetTest {
         PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest("Test #3", "Verify number of passed tests", "Login", 0);
 
         TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_XML_FILE);
+        testSet.load(TEST_SET_3_0_0);
 
         assertThat(testSet.getTests(), hasSize(3));
         assertThat(testSet.getTests(), hasItem(avgRespTimeTestTest));
@@ -29,10 +29,10 @@ public class TestSetTest {
 
     @Test
     public void verifyExecuteMethod() {
-        JMeterTransactions jmeterTranactions = new JMeterCSVFileReader().read(VALID_CSV_FILE);
+        JMeterTransactions jmeterTranactions = new JMeterCSVFileReader().read(CSV_2_TRANSACTIONS);
 
         TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_XML_FILE);
+        testSet.load(TEST_SET_3_0_0);
         testSet.execute(jmeterTranactions);
 
         assertThat(testSet.getPassCount(), is(3));

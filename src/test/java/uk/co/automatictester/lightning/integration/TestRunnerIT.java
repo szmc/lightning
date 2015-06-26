@@ -10,9 +10,7 @@ import java.io.PrintStream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static uk.co.automatictester.lightning.data.TestData.TEST_SET_1_1_1;
-import static uk.co.automatictester.lightning.data.TestData.TEST_SET_CSV_FILE;
-import static uk.co.automatictester.lightning.data.TestData.TEST_SET_XML_FILE;
+import static uk.co.automatictester.lightning.data.TestData.*;
 
 public class TestRunnerIT {
 
@@ -51,7 +49,7 @@ public class TestRunnerIT {
                 + "Test set status:   Pass");
 
 
-        String[] cmdLineParams = new String[]{"-xml=" + TEST_SET_XML_FILE, "-csv=" + TEST_SET_CSV_FILE};
+        String[] cmdLineParams = new String[]{"-xml=" + TEST_SET_3_0_0, "-csv=" + CSV_10_TRANSACTIONS};
         TestRunner.runTests(cmdLineParams);
 
         assertThat(outContent.toString(), containsString(expectedOutput));
@@ -85,7 +83,7 @@ public class TestRunnerIT {
                 + "Test set status:   FAIL%n%n");
 
 
-        String[] cmdLineParams = new String[]{"-xml=" + TEST_SET_1_1_1, "-csv=" + TEST_SET_CSV_FILE};
+        String[] cmdLineParams = new String[]{"-xml=" + TEST_SET_1_1_1, "-csv=" + CSV_10_TRANSACTIONS};
         TestRunner.runTests(cmdLineParams);
 
         assertThat(outContent.toString(), containsString(expectedOutput));
