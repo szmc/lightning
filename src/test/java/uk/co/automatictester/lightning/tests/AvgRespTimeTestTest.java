@@ -6,7 +6,8 @@ import uk.co.automatictester.lightning.JMeterTransactions;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.core.Is.is;
 
 public class AvgRespTimeTestTest {
 
@@ -75,6 +76,19 @@ public class AvgRespTimeTestTest {
         assertThat(testReport, containsString("Expected result:  Average response time <= 1000"));
         assertThat(testReport, containsString("Actual result:    Average response time = 1100.0"));
         assertThat(testReport, containsString("Test result:      FAIL"));
+    }
 
+    @Test
+    public void testIsEqual() {
+        AvgRespTimeTest test1 = new AvgRespTimeTest("test a", "description", "transaction x", 1000);
+        AvgRespTimeTest test2 = new AvgRespTimeTest("test a", "description", "transaction x", 1000);
+        assertThat(test1, is(equalTo(test2)));
+    }
+
+    @Test
+    public void testIsNotEqual() {
+        AvgRespTimeTest test1 = new AvgRespTimeTest("test a", "description", "transaction x", 1000);
+        AvgRespTimeTest test2 = new AvgRespTimeTest("test a", "description", "transaction x", 100);
+        assertThat(test1, is(not(equalTo(test2))));
     }
 }

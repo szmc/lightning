@@ -29,4 +29,19 @@ public class PassedTransactionsTest extends Test {
         actualResult = String.format(ACTUAL_RESULT_MESSAGE, failureCount);
         failed = (failureCount > allowedNumberOfFailedTransactions);
     }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof PassedTransactionsTest) {
+            PassedTransactionsTest test = (PassedTransactionsTest) obj;
+            return name.equals(test.name) &&
+                    description.equals(test.description) &&
+                    transactionName.equals(test.transactionName) &&
+                    expectedResult.equals(test.expectedResult) &&
+                    actualResult.equals(test.actualResult) &&
+                    failed == test.failed &&
+                    allowedNumberOfFailedTransactions == test.allowedNumberOfFailedTransactions;
+        } else {
+            return false;
+        }
+    }
 }

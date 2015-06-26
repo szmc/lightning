@@ -27,14 +27,14 @@ public class TestRunnerIT {
                 "Test description: Verify average login times" + ls +
                 "Transaction name: Login" + ls +
                 "Expected result:  Average response time <= 4000" + ls +
-                "Actual result:    Average response time = 3514.0" + ls +
+                "Actual result:    Average response time = 3583.2" + ls +
                 "Test result:      Pass" + ls +
                 ls +
                 "Test name:        Test #2" + ls +
                 "Test description: Verify standard deviation" + ls +
                 "Transaction name: Search" + ls +
                 "Expected result:  Average standard deviance time <= 500" + ls +
-                "Actual result:    Average standard deviance time = 0.0" + ls +
+                "Actual result:    Average standard deviance time = 279.07" + ls +
                 "Test result:      Pass" + ls +
                 ls +
                 "Test name:        Test #3" + ls +
@@ -52,7 +52,7 @@ public class TestRunnerIT {
                 "Test set status:  Pass";
 
 
-        String[] cmdLineParams = new String[]{"-xml=src/test/resources/xml/TestSetTest.xml", "-csv=src/test/resources/csv/ValidJMeterCSVFile.csv"};
+        String[] cmdLineParams = new String[]{"-xml=src/test/resources/xml/TestSetTest.xml", "-csv=src/test/resources/csv/TestSetTest.csv"};
         TestRunner.runTests(cmdLineParams);
 
         assertThat(outContent.toString(), containsString(expectedOutput));

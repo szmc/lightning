@@ -34,4 +34,19 @@ public class RespTimeStdDevTest extends Test {
         actualResult = String.format(ACTUAL_RESULT_MESSAGE, roundedActualRespTimeStdDev);
         failed = (roundedActualRespTimeStdDev > maxRespTimeStdDev);
     }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof RespTimeStdDevTest) {
+            RespTimeStdDevTest test = (RespTimeStdDevTest) obj;
+            return name.equals(test.name) &&
+                    description.equals(test.description) &&
+                    transactionName.equals(test.transactionName) &&
+                    expectedResult.equals(test.expectedResult) &&
+                    actualResult.equals(test.actualResult) &&
+                    failed == test.failed &&
+                    maxRespTimeStdDev == test.maxRespTimeStdDev;
+        } else {
+            return false;
+        }
+    }
 }
