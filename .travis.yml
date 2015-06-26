@@ -1,4 +1,5 @@
 language: java
-script: mvn verify
-jdk:
-  - openjdk7
+jdk: openjdk7
+script:
+ - mvn verify
+ - mvn clean compile assembly:single
