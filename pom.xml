@@ -42,6 +42,7 @@
 
         <plugins>
 
+            <!-- set java version -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -52,6 +53,7 @@
                 </configuration>
             </plugin>
 
+            <!-- generate single jar with all dependencies -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
@@ -71,6 +73,7 @@
                 </configuration>
             </plugin>
 
+            <!-- run unit tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -82,6 +85,7 @@
                 </configuration>
             </plugin>
 
+            <!-- run integration tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -105,6 +109,7 @@
                 </configuration>
             </plugin>
 
+            <!-- report unit test coverage -->
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
@@ -113,7 +118,6 @@
                     <serviceJobId>${env.TRAVIS_JOB_ID}</serviceJobId>
                 </configuration>
             </plugin>
-
 
             <plugin>
                 <groupId>org.jacoco</groupId>

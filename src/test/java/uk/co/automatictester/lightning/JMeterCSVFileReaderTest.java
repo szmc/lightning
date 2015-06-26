@@ -10,13 +10,13 @@ public class JMeterCSVFileReaderTest {
 
     @Test
     public void verifyReadMethod() {
-        JMeterTransactions jmeterTransactions = JMeterCSVFileReader.read(VALID_CSV_FILE);
+        JMeterTransactions jmeterTransactions = new JMeterCSVFileReader().read(VALID_CSV_FILE);
         assertThat(jmeterTransactions, hasItem(LOGIN_3514_SUCCESS));
         assertThat(jmeterTransactions, hasItem(SEARCH_11221_SUCCESS));
     }
 
     @Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "Column name '" + MISSING_COLUMN_NAME + "' not found in first row of CSV file")
     public void verifyReadMethodRuntimeException() {
-        JMeterCSVFileReader.read(CSV_FILE_WITH_MISSING_LABEL_COLUMN);
+        new JMeterCSVFileReader().read(CSV_FILE_WITH_MISSING_LABEL_COLUMN);
     }
 }

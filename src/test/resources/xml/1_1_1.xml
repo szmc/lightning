@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testSet xmlns="https://github.com/automatictester/lightning"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://github.com/automatictester/lightning https://github.com/automatictester/lightning/releases/download/0.1.0/lightning-0.1.0.xsd">
+
+    <avgRespTimeTest>
+        <testName>Test #1</testName>
+        <description>Verify average login times</description>
+        <transactionName>Login</transactionName>
+        <maxAvgRespTime>1</maxAvgRespTime>
+    </avgRespTimeTest>
+
+    <respTimeStdDevTest>
+        <testName>Test #2</testName>
+        <description>Verify standard deviation</description>
+        <transactionName>Search</transactionName>
+        <maxRespTimeStdDev>500</maxRespTimeStdDev>
+    </respTimeStdDevTest>
+
+    <passedTransactionsTest>
+        <testName>Test #3</testName>
+        <description>Verify number of passed tests</description>
+        <transactionName>Logi</transactionName>
+        <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
+    </passedTransactionsTest>
+
+</testSet>

@@ -57,15 +57,12 @@ public class TestSet {
     }
 
     public String getTestSetExecutionSummaryReport() {
-        String ls = System.lineSeparator();
-        int testCount = getTests().size();
-
-        return "============= EXECUTION SUMMARY =============" + ls
-                + "Tests executed:    " + testCount + ls
-                + "Tests passed:      " + getPassCount() + ls
-                + "Tests failed:      " + getFailCount() + ls
-                + "Tests with errors: " + getErrorCount() + ls
-                + "Test set status:   " + getTestSetStatus() + ls;
+        return String.format("============= EXECUTION SUMMARY =============%n"
+                + "Tests executed:    %s%n"
+                + "Tests passed:      %s%n"
+                + "Tests failed:      %s%n"
+                + "Tests with errors: %s%n"
+                + "Test set status:   %s%n", getTests().size(), getPassCount(), getFailCount(), getErrorCount(), getTestSetStatus());
     }
 
     public int getPassCount() {

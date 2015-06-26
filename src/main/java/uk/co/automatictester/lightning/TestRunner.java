@@ -23,13 +23,13 @@ public class TestRunner {
         TestSet testSet = new TestSet();
         testSet.load(params.getXmlFile());
 
-        JMeterTransactions originalJMeterTransactions = JMeterCSVFileReader.read(params.getCSVFile());
+        JMeterTransactions originalJMeterTransactions = new JMeterCSVFileReader().read(params.getCSVFile());
         testSet.execute(originalJMeterTransactions);
 
         System.out.println(testSet.getTestSetExecutionReport());
         System.out.println(testSet.getTestSetExecutionSummaryReport());
 
-        exitCode = testSet.getFailCount();
+        exitCode = testSet.getFailCount() + testSet.getErrorCount();
     }
 
     private static void setExitCode() {

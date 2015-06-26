@@ -29,7 +29,7 @@ public class TestSetTest {
 
     @Test
     public void verifyExecuteMethod() {
-        JMeterTransactions jmeterTranactions = JMeterCSVFileReader.read(VALID_CSV_FILE);
+        JMeterTransactions jmeterTranactions = new JMeterCSVFileReader().read(VALID_CSV_FILE);
 
         TestSet testSet = new TestSet();
         testSet.load(TEST_SET_XML_FILE);
