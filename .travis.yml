@@ -3,3 +3,6 @@ jdk: openjdk7
 script:
  - mvn verify
  - mvn clean compile assembly:single
+cache:
+  directories:
+  - $HOME/.m2
