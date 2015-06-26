@@ -1,4 +1,6 @@
-# Lightning
+## Lightning
+
+[![Build status](https://api.travis-ci.org/automatictester/lightning.svg)](https://travis-ci.org/automatictester/lightning.svg?branch=master)
 
 ## Current version
 
