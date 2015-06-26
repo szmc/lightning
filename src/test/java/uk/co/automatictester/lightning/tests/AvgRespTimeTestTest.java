@@ -3,92 +3,53 @@ package uk.co.automatictester.lightning.tests;
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.JMeterTransactions;
 
-import java.util.ArrayList;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
+import static uk.co.automatictester.lightning.data.TestData.*;
 
 public class AvgRespTimeTestTest {
 
     @Test
     public void testExecutePass() {
-        ArrayList<String> txn1 = new ArrayList<>();
-        txn1.add(0, "transaction x");
-        txn1.add(1, "1200");
-        txn1.add(2, "true");
+        AvgRespTimeTest avgRespTimeBelow1000 = new AvgRespTimeTest("Test #1", "Verify response times", "Search", 1000);
+        JMeterTransactions jmeterTxns = new JMeterTransactions();
+        jmeterTxns.add(SEARCH_800_SUCCESS);
 
-        ArrayList<String> txn2 = new ArrayList<>();
-        txn2.add(0, "transaction x");
-        txn2.add(1, "800");
-        txn2.add(2, "true");
-
-        ArrayList<String> txn3 = new ArrayList<>();
-        txn3.add(0, "transaction y");
-        txn3.add(1, "1000");
-        txn3.add(2, "true");
-
-        JMeterTransactions txns = new JMeterTransactions();
-        txns.add(txn1);
-        txns.add(txn2);
-        txns.add(txn3);
-
-        AvgRespTimeTest test = new AvgRespTimeTest("test a", "description", "transaction x", 1000);
-        test.execute(txns);
-        String testReport = test.getReport();
-
-        assertThat(testReport, containsString("Test name:        test a"));
-        assertThat(testReport, containsString("Transaction name: transaction x"));
-        assertThat(testReport, containsString("Expected result:  Average response time <= 1000"));
-        assertThat(testReport, containsString("Actual result:    Average response time = 1000.0"));
+        avgRespTimeBelow1000.execute(jmeterTxns);
+        String testReport = avgRespTimeBelow1000.getReport();
         assertThat(testReport, containsString("Test result:      Pass"));
-
     }
 
     @Test
     public void testExecuteFail() {
-        ArrayList<String> txn1 = new ArrayList<>();
-        txn1.add(0, "transaction x");
-        txn1.add(1, "1200");
-        txn1.add(2, "true");
+        AvgRespTimeTest avgRespTimeBelow800 = new AvgRespTimeTest("Test #1", "Verify response times", "Search", 800);
+        JMeterTransactions jmeterTxns = new JMeterTransactions();
+        jmeterTxns.add(SEARCH_11221_SUCCESS);
 
-        ArrayList<String> txn2 = new ArrayList<>();
-        txn2.add(0, "transaction y");
-        txn2.add(1, "800");
-        txn2.add(2, "true");
-
-        ArrayList<String> txn3 = new ArrayList<>();
-        txn3.add(0, "transaction x");
-        txn3.add(1, "1000");
-        txn3.add(2, "true");
-
-        JMeterTransactions txns = new JMeterTransactions();
-        txns.add(txn1);
-        txns.add(txn2);
-        txns.add(txn3);
-
-        AvgRespTimeTest test = new AvgRespTimeTest("test a", "description", "transaction x", 1000);
-        test.execute(txns);
-        String testReport = test.getReport();
-
-        assertThat(testReport, containsString("Test name:        test a"));
-        assertThat(testReport, containsString("Transaction name: transaction x"));
-        assertThat(testReport, containsString("Expected result:  Average response time <= 1000"));
-        assertThat(testReport, containsString("Actual result:    Average response time = 1100.0"));
+        avgRespTimeBelow800.execute(jmeterTxns);
+        String testReport = avgRespTimeBelow800.getReport();
         assertThat(testReport, containsString("Test result:      FAIL"));
     }
 
     @Test
-    public void testIsEqual() {
-        AvgRespTimeTest test1 = new AvgRespTimeTest("test a", "description", "transaction x", 1000);
-        AvgRespTimeTest test2 = new AvgRespTimeTest("test a", "description", "transaction x", 1000);
-        assertThat(test1, is(equalTo(test2)));
+    public void testExecuteError() {
+        AvgRespTimeTest avgRespTimeBelow800 = new AvgRespTimeTest("Test #1", "Verify response times", NONEXISTENT_LABEL, 800);
+        JMeterTransactions jmeterTxns = new JMeterTransactions();
+        jmeterTxns.add(SEARCH_11221_SUCCESS);
+
+        avgRespTimeBelow800.execute(jmeterTxns);
+        String testReport = avgRespTimeBelow800.getReport();
+        assertThat(testReport, containsString("Test result:      ERROR"));
     }
 
     @Test
-    public void testIsNotEqual() {
-        AvgRespTimeTest test1 = new AvgRespTimeTest("test a", "description", "transaction x", 1000);
-        AvgRespTimeTest test2 = new AvgRespTimeTest("test a", "description", "transaction x", 100);
-        assertThat(test1, is(not(equalTo(test2))));
+    public void verifyIsEqual() {
+        assertThat(AVG_RESP_TIME_TEST_A, is(equalTo(AVG_RESP_TIME_TEST_A)));
+    }
+
+    @Test
+    public void verifyIsNotEqual() {
+        assertThat(AVG_RESP_TIME_TEST_A, is(not(equalTo(AVG_RESP_TIME_TEST_B))));
     }
 }

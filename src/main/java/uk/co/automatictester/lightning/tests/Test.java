@@ -27,9 +27,8 @@ public abstract class Test {
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
 
     public String getReport() {
-        String ls = System.lineSeparator();
-        String desc = (!description.isEmpty()) ? ("Test description: " + description + ls) : "";
-        String testResult = "";
+        String desc = (!description.isEmpty()) ? (String.format("Test description: %s%n", description)) : "";
+        String testResult;
 
         if (error) {
             testResult = "ERROR";
@@ -39,12 +38,18 @@ public abstract class Test {
             testResult = "Pass";
         }
 
-        return "Test name:        " + name + ls
-                + desc
-                + "Transaction name: " + transactionName + ls
-                + "Expected result:  " + expectedResult + ls
-                + "Actual result:    " + actualResult + ls
-                + "Test result:      " + testResult + ls + ls;
+        return String.format("Test name:        %s%n" +
+                        "%s" +
+                        "Transaction name: %s%n" +
+                        "Expected result:  %s%n" +
+                        "Actual result:    %s%n" +
+                        "Test result:      %s%n%n",
+                name,
+                desc,
+                transactionName,
+                expectedResult,
+                actualResult,
+                testResult);
     }
 
     public boolean isPassed() {

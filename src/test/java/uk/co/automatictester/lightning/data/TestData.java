@@ -1,6 +1,9 @@
 package uk.co.automatictester.lightning.data;
 
+import uk.co.automatictester.lightning.JMeterTransactions;
+import uk.co.automatictester.lightning.tests.AvgRespTimeTest;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
+import uk.co.automatictester.lightning.tests.RespTimeStdDevTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,10 +32,17 @@ public class TestData {
 
     public static final ArrayList<String> SEARCH_11221_SUCCESS = new ArrayList<>(Arrays.asList("Search","11221","true"));
     public static final ArrayList<String> SEARCH_800_SUCCESS = new ArrayList<>(Arrays.asList("Search","800","true"));
+    public static final ArrayList<String> SEARCH_1_SUCCESS = new ArrayList<>(Arrays.asList("Search","1","true"));
+    public static final ArrayList<String> SEARCH_2_SUCCESS = new ArrayList<>(Arrays.asList("Search","2","true"));
+    public static final ArrayList<String> SEARCH_3_SUCCESS = new ArrayList<>(Arrays.asList("Search","3","true"));
 
     // Tests
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_A = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 1);
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_B = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
+    public static final AvgRespTimeTest AVG_RESP_TIME_TEST_A = new AvgRespTimeTest("Test #1", "Verify average response times", "Search", 1000);
+    public static final AvgRespTimeTest AVG_RESP_TIME_TEST_B = new AvgRespTimeTest("Test #1", "Verify average response times", "Search", 100);
+    public static final RespTimeStdDevTest RESP_TIME_STD_DEV_TEST_A = new RespTimeStdDevTest("Test #1", "Verify standard deviation", "Login", 1);
+    public static final RespTimeStdDevTest RESP_TIME_STD_DEV_TEST_B = new RespTimeStdDevTest("Test #1", "Verify standard deviation", "Login", 0);
 
     // Other
     public static final String NONEXISTENT_LABEL = "nonexistent";
