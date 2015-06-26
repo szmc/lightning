@@ -4,39 +4,40 @@ import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.JMeterTransactions;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 import static uk.co.automatictester.lightning.data.TestData.*;
 
 public class AvgRespTimeTestTest {
 
     @Test
-    public void testExecutePass() {
+    public void verifyExecutePass() {
         AvgRespTimeTest test = new AvgRespTimeTest("Test #1", "Verify response times", "Search", 1000);
-        JMeterTransactions jmeterTxns = new JMeterTransactions();
-        jmeterTxns.add(SEARCH_800_SUCCESS);
+        JMeterTransactions jmeterTranactions = new JMeterTransactions();
+        jmeterTranactions.add(SEARCH_800_SUCCESS);
 
-        test.execute(jmeterTxns);
+        test.execute(jmeterTranactions);
         assertThat(test.isPassed(), is(equalTo(true)));
     }
 
     @Test
-    public void testExecuteFail() {
+    public void verifyExecuteFail() {
         AvgRespTimeTest test = new AvgRespTimeTest("Test #1", "Verify response times", "Search", 800);
-        JMeterTransactions jmeterTxns = new JMeterTransactions();
-        jmeterTxns.add(SEARCH_11221_SUCCESS);
+        JMeterTransactions jmeterTranactions = new JMeterTransactions();
+        jmeterTranactions.add(SEARCH_11221_SUCCESS);
 
-        test.execute(jmeterTxns);
+        test.execute(jmeterTranactions);
         assertThat(test.isFailed(), is(equalTo(true)));
     }
 
     @Test
-    public void testExecuteError() {
+    public void verifyExecuteError() {
         AvgRespTimeTest test = new AvgRespTimeTest("Test #1", "Verify response times", NONEXISTENT_LABEL, 800);
-        JMeterTransactions jmeterTxns = new JMeterTransactions();
-        jmeterTxns.add(SEARCH_11221_SUCCESS);
+        JMeterTransactions jmeterTranactions = new JMeterTransactions();
+        jmeterTranactions.add(SEARCH_11221_SUCCESS);
 
-        test.execute(jmeterTxns);
+        test.execute(jmeterTranactions);
         assertThat(test.isError(), is(equalTo(true)));
     }
 

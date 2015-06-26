@@ -23,7 +23,7 @@ public class XMLSchemaValidator {
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlFile)));
         } catch (SAXException | IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

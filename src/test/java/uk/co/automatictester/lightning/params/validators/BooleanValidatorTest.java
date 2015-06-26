@@ -8,17 +8,17 @@ public class BooleanValidatorTest {
     private static final String SKIP_SCHEMA_VALIDATION = "-skipSchemaValidation";
 
     @Test
-    public void testValidateTrue() {
+    public void verifyValidateTrue() {
         new BooleanValidator().validate(SKIP_SCHEMA_VALIDATION, "true");
     }
 
     @Test
-    public void testValidateFalse() {
+    public void verifyValidateFalse() {
         new BooleanValidator().validate(SKIP_SCHEMA_VALIDATION, "false");
     }
 
     @Test(expectedExceptions = ParameterException.class, expectedExceptionsMessageRegExp = "Parameter '" + SKIP_SCHEMA_VALIDATION + "' should be boolean \\(true or false\\)")
-    public void testValidateOther() {
+    public void verifyValidateOther() {
         new BooleanValidator().validate(SKIP_SCHEMA_VALIDATION, "True");
     }
 }

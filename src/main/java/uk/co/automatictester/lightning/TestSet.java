@@ -63,7 +63,7 @@ public class TestSet {
         return "============= EXECUTION SUMMARY =============" + ls
                 + "Tests executed:    " + testCount + ls
                 + "Tests passed:      " + getPassCount() + ls
-                + "Tests failed:      " + getFailureCount() + ls
+                + "Tests failed:      " + getFailCount() + ls
                 + "Tests with errors: " + getErrorCount() + ls
                 + "Test set status:   " + getTestSetStatus() + ls;
     }
@@ -72,7 +72,7 @@ public class TestSet {
         return passCount;
     }
 
-    public int getFailureCount() {
+    public int getFailCount() {
         return failureCount;
     }
 

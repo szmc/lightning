@@ -4,14 +4,15 @@ import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.JMeterTransactions;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 import static uk.co.automatictester.lightning.data.TestData.*;
 
 public class RespTimeStdDevTestTest {
 
     @Test
-    public void testExecutePass() {
+    public void verifyExecutePass() {
         RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify response times", "Search", 1);
         JMeterTransactions jmeterTxns = new JMeterTransactions();
         jmeterTxns.add(SEARCH_1_SUCCESS);
@@ -19,12 +20,11 @@ public class RespTimeStdDevTestTest {
         jmeterTxns.add(SEARCH_3_SUCCESS);
 
         test.execute(jmeterTxns);
-        String testReport = test.getReport();
-        assertThat(testReport, containsString("Test result:      Pass"));
+        assertThat(test.isPassed(), is(equalTo(true)));
     }
 
     @Test
-    public void testExecuteFail() {
+    public void verifyExecuteFail() {
         RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify response times", "Search", 0);
         JMeterTransactions jmeterTxns = new JMeterTransactions();
         jmeterTxns.add(SEARCH_1_SUCCESS);
@@ -32,28 +32,26 @@ public class RespTimeStdDevTestTest {
         jmeterTxns.add(SEARCH_3_SUCCESS);
 
         test.execute(jmeterTxns);
-        String testReport = test.getReport();
-        assertThat(testReport, containsString("Test result:      FAIL"));
+        assertThat(test.isFailed(), is(equalTo(true)));
     }
 
     @Test
-    public void testExecuteError() {
+    public void verifyExecuteError() {
         RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", NONEXISTENT_LABEL, 8);
         JMeterTransactions jmeterTxns = new JMeterTransactions();
         jmeterTxns.add(SEARCH_11221_SUCCESS);
 
         test.execute(jmeterTxns);
-        String testReport = test.getReport();
-        assertThat(testReport, containsString("Test result:      ERROR"));
+        assertThat(test.isError(), is(equalTo(true)));
     }
 
     @Test
-    public void testIsEqual() {
+    public void verifyIsEqual() {
         assertThat(RESP_TIME_STD_DEV_TEST_A, is(equalTo(RESP_TIME_STD_DEV_TEST_A)));
     }
 
     @Test
-    public void testIsNotEqual() {
+    public void verifyIsNotEqual() {
         assertThat(RESP_TIME_STD_DEV_TEST_A, is(not(equalTo(RESP_TIME_STD_DEV_TEST_B))));
     }
 }

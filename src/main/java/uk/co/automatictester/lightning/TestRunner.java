@@ -29,7 +29,7 @@ public class TestRunner {
         System.out.println(testSet.getTestSetExecutionReport());
         System.out.println(testSet.getTestSetExecutionSummaryReport());
 
-        exitCode = testSet.getFailureCount();
+        exitCode = testSet.getFailCount();
     }
 
     private static void setExitCode() {
