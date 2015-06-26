@@ -12,35 +12,32 @@ public class AvgRespTimeTestTest {
 
     @Test
     public void testExecutePass() {
-        AvgRespTimeTest avgRespTimeBelow1000 = new AvgRespTimeTest("Test #1", "Verify response times", "Search", 1000);
+        AvgRespTimeTest test = new AvgRespTimeTest("Test #1", "Verify response times", "Search", 1000);
         JMeterTransactions jmeterTxns = new JMeterTransactions();
         jmeterTxns.add(SEARCH_800_SUCCESS);
 
-        avgRespTimeBelow1000.execute(jmeterTxns);
-        String testReport = avgRespTimeBelow1000.getReport();
-        assertThat(testReport, containsString("Test result:      Pass"));
+        test.execute(jmeterTxns);
+        assertThat(test.isPassed(), is(equalTo(true)));
     }
 
     @Test
     public void testExecuteFail() {
-        AvgRespTimeTest avgRespTimeBelow800 = new AvgRespTimeTest("Test #1", "Verify response times", "Search", 800);
+        AvgRespTimeTest test = new AvgRespTimeTest("Test #1", "Verify response times", "Search", 800);
         JMeterTransactions jmeterTxns = new JMeterTransactions();
         jmeterTxns.add(SEARCH_11221_SUCCESS);
 
-        avgRespTimeBelow800.execute(jmeterTxns);
-        String testReport = avgRespTimeBelow800.getReport();
-        assertThat(testReport, containsString("Test result:      FAIL"));
+        test.execute(jmeterTxns);
+        assertThat(test.isFailed(), is(equalTo(true)));
     }
 
     @Test
     public void testExecuteError() {
-        AvgRespTimeTest avgRespTimeBelow800 = new AvgRespTimeTest("Test #1", "Verify response times", NONEXISTENT_LABEL, 800);
+        AvgRespTimeTest test = new AvgRespTimeTest("Test #1", "Verify response times", NONEXISTENT_LABEL, 800);
         JMeterTransactions jmeterTxns = new JMeterTransactions();
         jmeterTxns.add(SEARCH_11221_SUCCESS);
 
-        avgRespTimeBelow800.execute(jmeterTxns);
-        String testReport = avgRespTimeBelow800.getReport();
-        assertThat(testReport, containsString("Test result:      ERROR"));
+        test.execute(jmeterTxns);
+        assertThat(test.isError(), is(equalTo(true)));
     }
 
     @Test
