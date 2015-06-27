@@ -49,6 +49,5 @@ public class TestData {
     // Other
     public static final String NONEXISTENT_LABEL = "nonexistent";
     public static final String EXISTING_LABEL = "Login";
-    public static final String MISSING_COLUMN_NAME = "label";
 
 }

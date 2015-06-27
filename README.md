@@ -5,9 +5,7 @@
 
 ## Current version
 
-Current version: [0.1.0](https://github.com/automatictester/lightning/releases/download/0.1.0/lightning-0.1.0.jar)
-
-Goal of this version: provide initial functionality, accompanied by unit/integration tests and readme
+Current version: [0.2.0](https://github.com/automatictester/lightning/releases/download/0.2.0/lightning-0.2.0.jar)
 
 ## Introduction
 
@@ -38,7 +36,7 @@ Currently there are 3 test types implemented. Example of each of them is include
 <?xml version="1.0" encoding="UTF-8"?>
 <testSet xmlns="https://github.com/automatictester/lightning"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="https://github.com/automatictester/lightning lightning.xsd">
+         xsi:schemaLocation="https://github.com/automatictester/lightning https://github.com/automatictester/lightning/releases/download/0.2.0/lightning-0.2.0.xsd">
     <avgRespTimeTest>
         <testName>Test #1</testName>
         <description>Verify average login times</description>
@@ -81,6 +79,10 @@ To run Lightning:
 `java -jar lightning-<version>.jar -xml=path/to/xml/file -csv=path/to/csv/file`
 
 ## FAQ
+
+Q: Which Java version is required to run Lightning?
+
+A: Java 7.
 
 Q: Does Lightning support JMeter results in XML format?
 

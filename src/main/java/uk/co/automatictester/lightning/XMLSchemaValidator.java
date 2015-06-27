@@ -19,7 +19,7 @@ public class XMLSchemaValidator {
     public void validate(String xmlFile) {
         try {
             SchemaFactory factory = SchemaFactory.newInstance(W3C_XML_SCHEMA_NS_URI);
-            SAXSource xsdFile = new SAXSource(new InputSource(this.getClass().getResourceAsStream("/lightning-0.1.0.xsd")));
+            SAXSource xsdFile = new SAXSource(new InputSource(this.getClass().getResourceAsStream("/lightning-0.2.0.xsd")));
             Schema schema = factory.newSchema(xsdFile);
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlFile)));
