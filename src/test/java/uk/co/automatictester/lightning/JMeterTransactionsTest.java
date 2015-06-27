@@ -2,6 +2,7 @@ package uk.co.automatictester.lightning;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import uk.co.automatictester.lightning.exceptions.CSVFileNonexistentLabelException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -29,8 +30,8 @@ public class JMeterTransactionsTest {
         assertThat(JMETER_TRANSACTIONS.excludeLabelsOtherThan(EXISTING_LABEL).size(), is(2));
     }
 
-    @Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "No transactions with label equal to '" + NONEXISTENT_LABEL + "' found in CSV file")
-    public void verifyExcludeLabelsOtherThanMethodRuntimeException() {
+    @Test(expectedExceptions = CSVFileNonexistentLabelException.class)
+    public void verifyExcludeLabelsOtherThanMethodException() {
         JMETER_TRANSACTIONS.excludeLabelsOtherThan(NONEXISTENT_LABEL);
     }
 }

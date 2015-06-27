@@ -1,5 +1,7 @@
 package uk.co.automatictester.lightning;
 
+import uk.co.automatictester.lightning.exceptions.CSVFileNonexistentLabelException;
+
 import java.util.ArrayList;
 
 public class JMeterTransactions extends ArrayList<ArrayList<String>> {
@@ -12,7 +14,7 @@ public class JMeterTransactions extends ArrayList<ArrayList<String>> {
             }
         }
         if (transactions.size() == 0)
-            throw new RuntimeException(String.format("No transactions with label equal to '%s' found in CSV file", label));
+            throw new CSVFileNonexistentLabelException(label);
         return transactions;
     }
 

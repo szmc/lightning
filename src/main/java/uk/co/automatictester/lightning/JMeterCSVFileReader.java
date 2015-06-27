@@ -1,6 +1,8 @@
 package uk.co.automatictester.lightning;
 
 import com.opencsv.CSVReader;
+import uk.co.automatictester.lightning.exceptions.CSVFileIOException;
+import uk.co.automatictester.lightning.exceptions.CSVFileMissingColumnNameException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -32,7 +34,7 @@ public class JMeterCSVFileReader {
                 jmeterTransactions.add(currentTransaction);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new CSVFileIOException(e.getMessage());
         }
         return jmeterTransactions;
     }
@@ -49,6 +51,6 @@ public class JMeterCSVFileReader {
                 return i;
             }
         }
-        throw new RuntimeException(String.format("Column name '%s' not found in first row of CSV file", searchedColumnName));
+        throw new CSVFileMissingColumnNameException(searchedColumnName);
     }
 }

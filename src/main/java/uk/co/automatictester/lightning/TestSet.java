@@ -5,6 +5,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import uk.co.automatictester.lightning.exceptions.XMLFileLoadingException;
+import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
 import uk.co.automatictester.lightning.tests.AvgRespTimeTest;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
 import uk.co.automatictester.lightning.tests.RespTimeStdDevTest;
@@ -38,7 +40,9 @@ public class TestSet {
             addPassedTransactionsTestNodes(doc);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
+            throw new XMLFileLoadingException(e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new XMLFileNumberFormatException(e.getMessage());
         }
     }
 

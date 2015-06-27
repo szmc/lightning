@@ -1,9 +1,10 @@
 package uk.co.automatictester.lightning;
 
 import org.testng.annotations.Test;
+import uk.co.automatictester.lightning.exceptions.XMLFileValidationException;
 
 import static uk.co.automatictester.lightning.data.TestData.TEST_SET_3_0_0;
-import static uk.co.automatictester.lightning.data.TestData.TEST_SET_INVALID;
+import static uk.co.automatictester.lightning.data.TestData.TEST_SET_NOT_VALID;
 
 public class XMLSchemaValidatorTest {
 
@@ -13,8 +14,8 @@ public class XMLSchemaValidatorTest {
         );
     }
 
-    @Test(expectedExceptions = RuntimeException.class)
+    @Test(expectedExceptions = XMLFileValidationException.class)
     public void verifyValidateInvalidXML() {
-        new XMLSchemaValidator().validate(TEST_SET_INVALID);
+        new XMLSchemaValidator().validate(TEST_SET_NOT_VALID);
     }
 }

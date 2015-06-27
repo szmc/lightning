@@ -6,7 +6,7 @@
     <avgRespTimeTest>
         <testName>Test #1</testName>
         <transactionName>Login</transactionName>
-        <maxAvgRespTime></maxAvgRespTime>
+        <maxAvgRespTime>rev</maxAvgRespTime>
     </avgRespTimeTest>
 
 </testSet>

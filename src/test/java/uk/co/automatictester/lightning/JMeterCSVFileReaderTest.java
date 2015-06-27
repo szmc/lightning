@@ -1,6 +1,8 @@
 package uk.co.automatictester.lightning;
 
 import org.testng.annotations.Test;
+import uk.co.automatictester.lightning.exceptions.CSVFileIOException;
+import uk.co.automatictester.lightning.exceptions.CSVFileMissingColumnNameException;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,8 +17,13 @@ public class JMeterCSVFileReaderTest {
         assertThat(jmeterTransactions, hasItem(SEARCH_11221_SUCCESS));
     }
 
-    @Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "Column name '" + MISSING_COLUMN_NAME + "' not found in first row of CSV file")
-    public void verifyReadMethodRuntimeException() {
+    @Test(expectedExceptions = CSVFileMissingColumnNameException.class)
+    public void verifyReadMethodMissingColumnNameException() {
         new JMeterCSVFileReader().read(CSV_MISSING_LABEL_COLUMN);
+    }
+
+    @Test(expectedExceptions = CSVFileIOException.class)
+    public void verifyReadMethodIOException() {
+        new JMeterCSVFileReader().read(CSV_NONEXISTENT);
     }
 }

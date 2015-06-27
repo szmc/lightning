@@ -2,6 +2,7 @@ package uk.co.automatictester.lightning;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import uk.co.automatictester.lightning.exceptions.XMLFileValidationException;
 
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
@@ -23,7 +24,7 @@ public class XMLSchemaValidator {
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlFile)));
         } catch (SAXException | IOException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new XMLFileValidationException(e.getMessage());
         }
     }
 }
