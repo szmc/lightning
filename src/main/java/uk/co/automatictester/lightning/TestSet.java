@@ -7,10 +7,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import uk.co.automatictester.lightning.exceptions.XMLFileLoadingException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
-import uk.co.automatictester.lightning.tests.AvgRespTimeTest;
-import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
-import uk.co.automatictester.lightning.tests.RespTimeStdDevTest;
-import uk.co.automatictester.lightning.tests.Test;
+import uk.co.automatictester.lightning.tests.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -35,9 +32,10 @@ public class TestSet {
             Document doc = db.parse(new File(xmlFile));
             doc.getDocumentElement().normalize();
 
-            addAvgRespTimeTests(doc);
+            addRespTimeAvgTests(doc);
             addRespTimeStdDevTestNodes(doc);
             addPassedTransactionsTestNodes(doc);
+            addRespTimeNthPercTests(doc);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             throw new XMLFileLoadingException(e.getMessage());
@@ -117,7 +115,7 @@ public class TestSet {
         }
     }
 
-    private void addAvgRespTimeTests(Document xmlDoc) {
+    private void addRespTimeAvgTests(Document xmlDoc) {
         NodeList avgRespTimeTestNodes = xmlDoc.getElementsByTagName("avgRespTimeTest");
         for (int i = 0; i < avgRespTimeTestNodes.getLength(); i++) {
             Element avgRespTimeTestElement = (Element) avgRespTimeTestNodes.item(i);
@@ -127,8 +125,24 @@ public class TestSet {
             String transactionName = getTransactionName(avgRespTimeTestElement);
             long maxAvgRespTime = Long.parseLong(getElementByTagName(avgRespTimeTestElement, "maxAvgRespTime"));
 
-            AvgRespTimeTest avgRespTimeTest = new AvgRespTimeTest(name, description, transactionName, maxAvgRespTime);
-            tests.add(avgRespTimeTest);
+            RespTimeAvgTest respTimeAvgTest = new RespTimeAvgTest(name, description, transactionName, maxAvgRespTime);
+            tests.add(respTimeAvgTest);
+        }
+    }
+
+    private void addRespTimeNthPercTests(Document xmlDoc) {
+        NodeList respTimeNthPercTestNodes = xmlDoc.getElementsByTagName("nthPercRespTimeTest");
+        for (int i = 0; i < respTimeNthPercTestNodes.getLength(); i++) {
+            Element respTimeNthPercTestElement = (Element) respTimeNthPercTestNodes.item(i);
+
+            String name = getTestName(respTimeNthPercTestElement);
+            String description = getTestDescription(respTimeNthPercTestElement);
+            String transactionName = getTransactionName(respTimeNthPercTestElement);
+            int percentile = Integer.parseInt(getElementByTagName(respTimeNthPercTestElement, "percentile"));
+            double maxRespTime = Double.parseDouble(getElementByTagName(respTimeNthPercTestElement, "maxRespTime"));
+
+            RespTimeNthPercentileTest respTimeAvgTest = new RespTimeNthPercentileTest(name, description, transactionName, percentile, maxRespTime);
+            tests.add(respTimeAvgTest);
         }
     }
 

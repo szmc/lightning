@@ -129,8 +129,8 @@ Build project with `mvn clean compile assembly:single`.
 To implement new test type:
 
 1. (Optional) If you need to access additional column from CSV file which is not currently in use by Lightning, update *JMeterCSVFileReader*
-2. Implement new Test which extends *Test*
+2. Implement new test class which extends *Test*
 3. Include new test type in *lightning.xsd*
 4. Implement processing of your new test in *TestSet*
-5. Always add or update the tests. Ensure all unit and integration tests pass with `mvn verify` before opening a pull request. `mvn test` is not enough, this will not pick up integration tests
+5. Always add or update the tests. Ensure all unit and integration tests pass with `mvn integration-test` before opening a pull request. `mvn test` is not enough, this will not pick up integration tests
 

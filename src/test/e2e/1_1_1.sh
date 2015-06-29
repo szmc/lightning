@@ -10,6 +10,6 @@ if [ $OUT -eq 2 ];then
     echo "Exit code as expected - test passed"
     exit 0
 else
-    echo "Unexpected exit code - test passed"
+    echo "Unexpected exit code - test failed"
     exit 1
 fi

@@ -5,14 +5,14 @@ import uk.co.automatictester.lightning.JMeterTransactions;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class AvgRespTimeTest extends Test {
+public class RespTimeAvgTest extends Test {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Average response time <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Average response time = %s";
 
     private final long maxAvgRespTime;
 
-    public AvgRespTimeTest(String name, String description, String transactionName, long maxAvgRespTime) {
+    public RespTimeAvgTest(String name, String description, String transactionName, long maxAvgRespTime) {
         super(name, description, transactionName);
         this.maxAvgRespTime = maxAvgRespTime;
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxAvgRespTime);
@@ -41,8 +41,8 @@ public class AvgRespTimeTest extends Test {
     }
 
     public boolean equals(Object obj) {
-        if (obj instanceof AvgRespTimeTest) {
-            AvgRespTimeTest test = (AvgRespTimeTest) obj;
+        if (obj instanceof RespTimeAvgTest) {
+            RespTimeAvgTest test = (RespTimeAvgTest) obj;
             return name.equals(test.name) &&
                     description.equals(test.description) &&
                     transactionName.equals(test.transactionName) &&

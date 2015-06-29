@@ -6,6 +6,6 @@ cache:
 script:
  - mvn -DTRAVIS_JOB_ID=$TRAVIS_JOB_ID verify jacoco:report coveralls:report
  - mvn clean compile assembly:single
- - ./src/test/e2e/3_0_0.sh
+ - ./src/test/e2e/4_0_0.sh
  - ./src/test/e2e/1_1_1.sh
  - ls -l target/lightning*

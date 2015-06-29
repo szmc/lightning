@@ -9,11 +9,11 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 import static uk.co.automatictester.lightning.data.TestData.*;
 
-public class AvgRespTimeTestTest {
+public class RespTimeAvgTestTest {
 
     @Test
     public void verifyExecutePass() {
-        AvgRespTimeTest test = new AvgRespTimeTest("Test #1", "Verify response times", "Search", 1000);
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", "Search", 1000);
         JMeterTransactions jmeterTranactions = new JMeterTransactions();
         jmeterTranactions.add(SEARCH_800_SUCCESS);
 
@@ -23,7 +23,7 @@ public class AvgRespTimeTestTest {
 
     @Test
     public void verifyExecuteFail() {
-        AvgRespTimeTest test = new AvgRespTimeTest("Test #1", "Verify response times", "Search", 800);
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", "Search", 800);
         JMeterTransactions jmeterTranactions = new JMeterTransactions();
         jmeterTranactions.add(SEARCH_11221_SUCCESS);
 
@@ -33,7 +33,7 @@ public class AvgRespTimeTestTest {
 
     @Test
     public void verifyExecuteError() {
-        AvgRespTimeTest test = new AvgRespTimeTest("Test #1", "Verify response times", NONEXISTENT_LABEL, 800);
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", NONEXISTENT_LABEL, 800);
         JMeterTransactions jmeterTranactions = new JMeterTransactions();
         jmeterTranactions.add(SEARCH_11221_SUCCESS);
 

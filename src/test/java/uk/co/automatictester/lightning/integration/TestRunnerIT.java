@@ -22,7 +22,7 @@ public class TestRunnerIT {
     }
 
     @Test(groups = "INTEGRATION")
-    public void verifyRunTests_300() {
+    public void verifyRunTests_400() {
         String expectedOutput = String.format("Test name:        Test #1%n"
                 + "Test description: Verify average login times%n"
                 + "Transaction name: Login%n"
@@ -40,16 +40,22 @@ public class TestRunnerIT {
                 + "Transaction name: Login%n"
                 + "Expected result:  Number of failed transactions <= 0%n"
                 + "Actual result:    Number of failed transactions = 0%n"
+                + "Test result:      Pass%n%n"
+                + "Test name:        Test #4%n"
+                + "Test description: Verify nth percentile%n"
+                + "Transaction name: Search%n"
+                + "Expected result:  80th percentile of transactions have response time <= 11244.2%n"
+                + "Actual result:    80th percentile of transactions have response time = 11244.2%n"
                 + "Test result:      Pass%n%n%n"
                 + "============= EXECUTION SUMMARY =============%n"
-                + "Tests executed:    3%n"
-                + "Tests passed:      3%n"
+                + "Tests executed:    4%n"
+                + "Tests passed:      4%n"
                 + "Tests failed:      0%n"
                 + "Tests with errors: 0%n"
                 + "Test set status:   Pass");
 
 
-        String[] cmdLineParams = new String[]{"-xml=" + TEST_SET_3_0_0, "-csv=" + CSV_10_TRANSACTIONS};
+        String[] cmdLineParams = new String[]{"-xml=" + TEST_SET_4_0_0, "-csv=" + CSV_10_TRANSACTIONS};
         TestRunner.runTests(cmdLineParams);
 
         assertThat(outContent.toString(), containsString(expectedOutput));

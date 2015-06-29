@@ -1,0 +1,73 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://github.com/automatictester/lightning"
+           xmlns="https://github.com/automatictester/lightning"
+           elementFormDefault="qualified">
+
+    <xs:simpleType name="nonEmptyString">
+        <xs:restriction base="xs:string">
+            <xs:pattern value=".*[^\s].*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="percentile">
+        <xs:restriction base="xs:integer">
+            <xs:minExclusive value="0"/>
+            <xs:maxInclusive value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="testSet">
+        <xs:complexType>
+            <xs:sequence>
+
+                <xs:element name="avgRespTimeTest" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="testName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="transactionName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="maxAvgRespTime" type="xs:positiveInteger" minOccurs="1" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="respTimeStdDevTest" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="testName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="transactionName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="maxRespTimeStdDev" type="xs:positiveInteger" minOccurs="1" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="passedTransactionsTest" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="testName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="transactionName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="allowedNumberOfFailedTransactions" type="xs:nonNegativeInteger"
+                                        minOccurs="1" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="nthPercRespTimeTest" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="testName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="transactionName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="percentile" type="percentile" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="maxRespTime" type="xs:double" minOccurs="1" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
