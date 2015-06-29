@@ -118,19 +118,38 @@ To raise an issue, go to [issues](https://github.com/automatictester/lightning/i
 
 ## Roadmap
 
-Here is what you can expect in next version:
-- some of the feature requests listed in [issues](https://github.com/automatictester/lightning/issues) section to be implemented
-- code cleanup and refactoring
+In next release (0.3.0) following features **will** be made available:
+
+- response time nth percentile test (already in master)
+
+Also some of the features listed in [issues](https://github.com/automatictester/lightning/issues) **may** be made available.
 
 ## Info for contributors
 
-Build project with `mvn clean compile assembly:single`.
+### Basic info
 
-To implement new test type:
+To build project: `mvn clean compile assembly:single`
 
-1. (Optional) If you need to access additional column from CSV file which is not currently in use by Lightning, update *JMeterCSVFileReader*
-2. Implement new test class which extends *Test*
-3. Include new test type in *lightning.xsd*
-4. Implement processing of your new test in *TestSet*
-5. Always add or update the tests. Ensure all unit and integration tests pass with `mvn integration-test` before opening a pull request. `mvn test` is not enough, this will not pick up integration tests
+To run unit tests: `mvn test`
 
+To run unit + integration tests: `mvn integration-test`
+
+### How to implement new test type
+
+- (Optional) If you need to access additional column from CSV file which is not currently in use by Lightning, update **JMeterCSVFileReader**
+- Implement new test class which extends **Test**
+- Include new test type in **lightning.xsd**
+- Implement processing of your new test in **TestSet**
+- Add or update the tests, if needed
+- Ensure all unit and integration tests pass with `mvn integration-test`
+
+### Test approach
+
+Current test approach is as follows:
+
+- Cover with unit tests everything except (a) console output and (b) exit codes
+- Cover console output with Java integration tests **uk.co.automatictester.lightning.integration**
+- Cover exit codes with end-to-end shell scripts **src/test/e2e**
+- All test categories are executed as part of automatic Travis CI builds
+
+However, I'm not 100% happy with Java integration tests - they may end up as end-to-end shell scripts as well.
