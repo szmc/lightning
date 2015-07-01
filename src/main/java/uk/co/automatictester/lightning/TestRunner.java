@@ -13,6 +13,7 @@ public class TestRunner {
     }
 
     public static void runTests(String[] args) {
+        long testSetExecStart = System.currentTimeMillis();
         CmdLineParams params = new CmdLineParams();
         new JCommander(params, args);
 
@@ -28,6 +29,10 @@ public class TestRunner {
 
         System.out.println(testSet.getTestSetExecutionReport());
         System.out.println(testSet.getTestSetExecutionSummaryReport());
+
+        long testSetExecEnd = System.currentTimeMillis();
+        long testExecTime = testSetExecEnd - testSetExecStart;
+        System.out.println(String.format("Execution time:    %dms", testExecTime));
 
         exitCode = testSet.getFailCount() + testSet.getErrorCount();
     }

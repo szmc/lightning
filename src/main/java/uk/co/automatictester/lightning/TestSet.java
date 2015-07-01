@@ -64,7 +64,7 @@ public class TestSet {
                 + "Tests passed:      %s%n"
                 + "Tests failed:      %s%n"
                 + "Tests with errors: %s%n"
-                + "Test set status:   %s%n", getTests().size(), getPassCount(), getFailCount(), getErrorCount(), getTestSetStatus());
+                + "Test set status:   %s", getTests().size(), getPassCount(), getFailCount(), getErrorCount(), getTestSetStatus());
     }
 
     public int getPassCount() {

@@ -9,7 +9,7 @@ java \
     -jar target/lightning*.jar \
     -xml src/test/resources/xml/4_0_0.xml \
     -csv src/test/resources/csv/10_transactions.csv \
-    > $ACTUAL_RESULT
+    | grep -v "Execution time:" > $ACTUAL_RESULT
 
 DIFF_OUTPUT=`diff $EXPECTED_RESULT $ACTUAL_RESULT`
 OUT=$?
