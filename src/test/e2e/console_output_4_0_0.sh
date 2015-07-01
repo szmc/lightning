@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p src/test/resources/results/actual/
+
 EXPECTED_RESULT="src/test/resources/results/expected/4_0_0.txt"
 ACTUAL_RESULT="src/test/resources/results/actual/4_0_0.txt"
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p src/test/resources/results/actual/
+
 java \
     -jar target/lightning*.jar \
     -xml src/test/resources/xml/4_0_0.xml \

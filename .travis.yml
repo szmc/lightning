@@ -10,5 +10,4 @@ script:
  - ./src/test/e2e/console_output_4_0_0.sh
  - ./src/test/e2e/exit_code_1_1_1.sh
  - ./src/test/e2e/console_output_1_1_1.sh
- - find . -name "1_1_1.txt"
  - ls -l target/lightning*
