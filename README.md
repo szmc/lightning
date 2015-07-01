@@ -132,8 +132,6 @@ To build project: `mvn clean compile assembly:single`
 
 To run unit tests: `mvn test`
 
-To run unit + integration tests: `mvn integration-test`
-
 ### How to implement new test type
 
 - (Optional) If you need to access additional column from CSV file which is not currently in use by Lightning, update **JMeterCSVFileReader**
@@ -141,15 +139,12 @@ To run unit + integration tests: `mvn integration-test`
 - Include new test type in **lightning.xsd**
 - Implement processing of your new test in **TestSet**
 - Add or update the tests, if needed
-- Ensure all unit and integration tests pass with `mvn integration-test`
+- Ensure all unit tests pass with `mvn test`
 
 ### Test approach
 
 Current test approach is as follows:
 
 - Cover with unit tests everything except (a) console output and (b) exit codes
-- Cover console output with Java integration tests **uk.co.automatictester.lightning.integration**
-- Cover exit codes with end-to-end shell scripts **src/test/e2e**
+- Cover console output and exit codes with end-to-end shell scripts **src/test/e2e**
 - All test categories are executed as part of automatic Travis CI builds
-
-However, I'm not 100% happy with Java integration tests - they may end up as end-to-end shell scripts as well.
