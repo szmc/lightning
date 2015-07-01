@@ -1,6 +1,6 @@
 ## Lightning
 
-[![Build status](https://api.travis-ci.org/automatictester/lightning.svg)](https://travis-ci.org/automatictester/lightning)
+[![Build status](https://api.travis-ci.org/automatictester/lightning.svg?branch=master)](https://travis-ci.org/automatictester/lightning)
 [![Coverage Status](https://coveralls.io/repos/automatictester/lightning/badge.svg?branch=master)](https://coveralls.io/r/automatictester/lightning?branch=master)
 
 ## Current version
