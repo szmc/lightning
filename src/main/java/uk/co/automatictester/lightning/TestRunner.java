@@ -6,16 +6,18 @@ import uk.co.automatictester.lightning.params.CmdLineParams;
 public class TestRunner {
 
     private static int exitCode;
+    private static JCommander jc;
+    private static CmdLineParams params;
 
     public static void main(String[] args) {
-        runTests(args);
+        parseParams(args);
+        printHelpAndExitIfRequested();
+        runTests();
         setExitCode();
     }
 
-    public static void runTests(String[] args) {
+    private static void runTests() {
         long testSetExecStart = System.currentTimeMillis();
-        CmdLineParams params = new CmdLineParams();
-        new JCommander(params, args);
 
         if (!params.skipSchemaValidation()) {
             new XMLSchemaValidator().validate(params.getXmlFile());
@@ -35,6 +37,19 @@ public class TestRunner {
         System.out.println(String.format("Execution time:    %dms", testExecTime));
 
         exitCode = testSet.getFailCount() + testSet.getErrorCount();
+    }
+
+    private static void parseParams(String[] args) {
+        params = new CmdLineParams();
+        jc = new JCommander(params, args);
+    }
+
+    private static void printHelpAndExitIfRequested() {
+        if (params.isHelp()) {
+            jc.setProgramName("java -jar lightning-<version_number>.jar");
+            jc.usage();
+            System.exit(-1);
+        }
     }
 
     private static void setExitCode() {

@@ -1,0 +1,9 @@
+Usage: java -jar lightning-<version_number>.jar [options]
+  Options:
+  * -csv
+       JMeter CSV result file
+    -skipSchemaValidation
+       Skip XML schema validation
+  * -xml
+       Lightning XML config file
+
