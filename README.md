@@ -121,32 +121,7 @@ To raise an issue, go to [issues](https://github.com/automatictester/lightning/i
 In next release (0.3.0) following features **will** be made available:
 
 - Response time nth percentile test (already in master)
-- Get console help with `-h` or `--help` switch - #1
-- Include test execution time in console output - #11
+- Get console help with `-h` or `--help` switch - [#1](https://github.com/automatictester/lightning/issues/1)
+- Include test execution time in console output - [#11](https://github.com/automatictester/lightning/issues/11)
 
 Also some of the features listed in [issues](https://github.com/automatictester/lightning/issues) **may** be made available.
-
-## Info for contributors
-
-### Basic info
-
-To build project: `mvn clean compile assembly:single`
-
-To run unit tests: `mvn test`
-
-### How to implement new test type
-
-- (Optional) If you need to access additional column from CSV file which is not currently in use by Lightning, update **JMeterCSVFileReader**
-- Implement new test class which extends **Test**
-- Include new test type in **lightning.xsd**
-- Implement processing of your new test in **TestSet**
-- Add or update the tests, if needed
-- Ensure all unit tests pass with `mvn test`
-
-### Test approach
-
-Current test approach is as follows:
-
-- Cover with unit tests everything except (a) console output and (b) exit codes
-- Cover console output and exit codes with end-to-end shell scripts **src/test/e2e**
-- All test categories are executed as part of automatic Travis CI builds
