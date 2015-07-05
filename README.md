@@ -28,7 +28,7 @@ There are tools which can help you run JMeter tests as part of CI build, and too
 ## Usage example
 
 Lightning requires 2 sources of input data: XML config file and JMeter CSV output. XML file contains definition of tests, which will be executed to determine if execution should be marked as passed or failed, based on analysis of JMeter CSV output.
-Currently there are 3 test types implemented. Example of each of them is included below.
+Types of tests which you can define in Lightning XML file are described on [Wiki](https://github.com/automatictester/lightning/wiki/Test-Types)
  
 - Lightning XML config file, e.g.:
 
@@ -120,7 +120,9 @@ To raise an issue, go to [issues](https://github.com/automatictester/lightning/i
 
 In next release (0.3.0) following features **will** be made available:
 
-- response time nth percentile test (already in master)
+- Response time nth percentile test (already in master)
+- Get console help with `-h` or `--help` switch - #1
+- Include test execution time in console output - #11
 
 Also some of the features listed in [issues](https://github.com/automatictester/lightning/issues) **may** be made available.
 
