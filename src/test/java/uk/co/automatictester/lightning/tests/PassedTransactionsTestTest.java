@@ -79,6 +79,11 @@ public class PassedTransactionsTestTest {
     }
 
     @Test
+    public void verifyIsNotEqualOtherTestType() {
+        assertThat((uk.co.automatictester.lightning.tests.Test) PASSED_TRANSACTIONS_TEST_A, is(not(equalTo((uk.co.automatictester.lightning.tests.Test) RESP_TIME_PERC_TEST_A))));
+    }
+
+    @Test
     public void verifyIsNotEqualNoTransactionName() {
         assertThat(PASSED_TRANSACTIONS_TEST_B, is(not(equalTo(PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME))));
     }
