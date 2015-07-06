@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://github.com/automatictester/lightning https://github.com/automatictester/lightning/releases/download/0.3.0/lightning-0.3.0.xsd">
 
-    <!-- expected result: 4 pass, 0 fail, 0 error -->
+    <!-- expected result: 5 pass, 0 fail, 0 error -->
 
     <avgRespTimeTest>
         <testName>Test #1</testName>
@@ -26,8 +26,14 @@
         <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
     </passedTransactionsTest>
 
-    <nthPercRespTimeTest>
+    <passedTransactionsTest>
         <testName>Test #4</testName>
+        <description>Verify number of passed tests</description>
+        <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
+    </passedTransactionsTest>
+
+    <nthPercRespTimeTest>
+        <testName>Test #5</testName>
         <description>Verify nth percentile</description>
         <transactionName>Search</transactionName>
         <percentile>80</percentile>

@@ -23,9 +23,9 @@ public class TestSetTest {
         PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest("Test #3", "Verify number of passed tests", "Login", 0);
 
         TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_4_0_0);
+        testSet.load(TEST_SET_5_0_0);
 
-        assertThat(testSet.getTests(), hasSize(4));
+        assertThat(testSet.getTests(), hasSize(5));
         assertThat(testSet.getTests(), hasItem(respTimeTestAvgTest));
         assertThat(testSet.getTests(), hasItem(passedTransactionsTest));
         assertThat(testSet.getTests(), hasItem(respTimeStdDevTest));
@@ -54,10 +54,10 @@ public class TestSetTest {
         JMeterTransactions jmeterTranactions = new JMeterCSVFileReader().read(CSV_2_TRANSACTIONS);
 
         TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_4_0_0);
+        testSet.load(TEST_SET_5_0_0);
         testSet.execute(jmeterTranactions);
 
-        assertThat(testSet.getPassCount(), is(4));
+        assertThat(testSet.getPassCount(), is(5));
         assertThat(testSet.getFailCount(), is(0));
         assertThat(testSet.getErrorCount(), is(0));
     }

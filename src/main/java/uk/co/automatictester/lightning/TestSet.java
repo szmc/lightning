@@ -155,7 +155,11 @@ public class TestSet {
     }
 
     private String getTransactionName(Element xmlElement) {
-        return xmlElement.getElementsByTagName("transactionName").item(0).getTextContent();
+        if (xmlElement.getElementsByTagName("transactionName").getLength() != 0) {
+            return xmlElement.getElementsByTagName("transactionName").item(0).getTextContent();
+        } else {
+            return null;
+        }
     }
 
     private String getTestDescription(Element xmlElement) {

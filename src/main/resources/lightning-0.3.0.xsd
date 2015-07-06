@@ -18,7 +18,7 @@
 
     <xs:element name="testSet">
         <xs:complexType>
-            <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
 
                 <xs:element name="avgRespTimeTest" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
@@ -47,7 +47,7 @@
                         <xs:sequence>
                             <xs:element name="testName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
                             <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="transactionName" type="nonEmptyString" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="transactionName" type="nonEmptyString" minOccurs="0" maxOccurs="1"/>
                             <xs:element name="allowedNumberOfFailedTransactions" type="xs:nonNegativeInteger"
                                         minOccurs="1" maxOccurs="1"/>
                         </xs:sequence>
@@ -66,7 +66,7 @@
                     </xs:complexType>
                 </xs:element>
 
-            </xs:sequence>
+            </xs:choice>
         </xs:complexType>
     </xs:element>
 

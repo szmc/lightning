@@ -19,7 +19,12 @@ public class PassedTransactionsTest extends Test {
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
         try {
-            JMeterTransactions transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
+            JMeterTransactions transactions = null;
+            if (transactionName != null) {
+                transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
+            } else {
+                transactions = originalJMeterTransactions;
+            }
 
             int failureCount = 0;
             for (List<String> transaction : transactions) {

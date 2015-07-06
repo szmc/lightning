@@ -28,6 +28,7 @@ public abstract class Test {
 
     public String getReport() {
         String desc = (!description.isEmpty()) ? (String.format("Test description: %s%n", description)) : "";
+        String transName = (transactionName != null) ? (String.format("Transaction name: %s%n", transactionName)) : "";
         String testResult;
 
         if (error) {
@@ -40,13 +41,13 @@ public abstract class Test {
 
         return String.format("Test name:        %s%n" +
                         "%s" +
-                        "Transaction name: %s%n" +
+                        "%s" +
                         "Expected result:  %s%n" +
                         "Actual result:    %s%n" +
                         "Test result:      %s%n%n",
                 name,
                 desc,
-                transactionName,
+                transName,
                 expectedResult,
                 actualResult,
                 testResult);
