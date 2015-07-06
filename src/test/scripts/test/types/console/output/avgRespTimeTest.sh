@@ -2,12 +2,12 @@
 
 mkdir -p src/test/resources/results/actual/
 
-EXPECTED_RESULT="src/test/resources/results/expected/5_0_0.txt"
-ACTUAL_RESULT="src/test/resources/results/actual/5_0_0.txt"
+EXPECTED_RESULT="src/test/resources/results/expected/avgRespTimeTest.txt"
+ACTUAL_RESULT="src/test/resources/results/actual/avgRespTimeTest.txt"
 
 java \
     -jar target/lightning*.jar \
-    -xml src/test/resources/xml/5_0_0.xml \
+    -xml src/test/resources/xml/avgRespTimeTest.xml \
     -csv src/test/resources/csv/10_transactions.csv \
     | grep -v "Execution time:" > $ACTUAL_RESULT
 

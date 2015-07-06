@@ -3,6 +3,7 @@ package uk.co.automatictester.lightning.tests;
 import uk.co.automatictester.lightning.JMeterTransactions;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PassedTransactionsTest extends Test {
 
@@ -46,7 +47,7 @@ public class PassedTransactionsTest extends Test {
             PassedTransactionsTest test = (PassedTransactionsTest) obj;
             return name.equals(test.name) &&
                     description.equals(test.description) &&
-                    transactionName.equals(test.transactionName) &&
+                    Objects.equals(transactionName, test.transactionName) &&
                     expectedResult.equals(test.expectedResult) &&
                     actualResult.equals(test.actualResult) &&
                     failed == test.failed &&

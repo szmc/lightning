@@ -9,21 +9,21 @@
         <testName>Test #1</testName>
         <description>Verify average login times</description>
         <transactionName>Login</transactionName>
-        <maxAvgRespTime>1</maxAvgRespTime>
+        <maxAvgRespTime>4000</maxAvgRespTime>
     </avgRespTimeTest>
 
-    <respTimeStdDevTest>
+    <avgRespTimeTest>
         <testName>Test #2</testName>
-        <description>Verify standard deviation</description>
-        <transactionName>Search</transactionName>
-        <maxRespTimeStdDev>500</maxRespTimeStdDev>
-    </respTimeStdDevTest>
+        <description>Verify average login times</description>
+        <transactionName>Login</transactionName>
+        <maxAvgRespTime>3000</maxAvgRespTime>
+    </avgRespTimeTest>
 
-    <passedTransactionsTest>
+    <avgRespTimeTest>
         <testName>Test #3</testName>
-        <description>Verify number of passed tests</description>
-        <transactionName>Logi</transactionName>
-        <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
-    </passedTransactionsTest>
+        <description>Verify average login times</description>
+        <transactionName>just wrong</transactionName>
+        <maxAvgRespTime>1</maxAvgRespTime>
+    </avgRespTimeTest>
 
 </testSet>

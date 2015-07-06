@@ -1,22 +1,22 @@
 Test name:        Test #1
 Test description: Verify average login times
 Transaction name: Login
-Expected result:  Average response time <= 1
+Expected result:  Average response time <= 4000
+Actual result:    Average response time = 3583.2
+Test result:      Pass
+
+Test name:        Test #2
+Test description: Verify average login times
+Transaction name: Login
+Expected result:  Average response time <= 3000
 Actual result:    Average response time = 3583.2
 Test result:      FAIL
 
-Test name:        Test #2
-Test description: Verify standard deviation
-Transaction name: Search
-Expected result:  Average standard deviance time <= 500
-Actual result:    Average standard deviance time = 279.07
-Test result:      Pass
-
 Test name:        Test #3
-Test description: Verify number of passed tests
-Transaction name: Logi
-Expected result:  Number of failed transactions <= 0
-Actual result:    No transactions with label equal to 'Logi' found in CSV file
+Test description: Verify average login times
+Transaction name: just wrong
+Expected result:  Average response time <= 1
+Actual result:    No transactions with label equal to 'just wrong' found in CSV file
 Test result:      ERROR
 
 

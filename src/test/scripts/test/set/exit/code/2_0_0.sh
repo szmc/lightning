@@ -4,9 +4,9 @@ mkdir -p src/test/resources/results/actual/
 
 java \
     -jar target/lightning*.jar \
-    -xml src/test/resources/xml/5_0_0.xml \
+    -xml src/test/resources/xml/2_0_0.xml \
     -csv src/test/resources/csv/10_transactions.csv \
-    > src/test/resources/results/actual/5_0_0.txt
+    > src/test/resources/results/actual/2_0_0.txt
 OUT=$?
 
 echo "EXIT CODE TEST"

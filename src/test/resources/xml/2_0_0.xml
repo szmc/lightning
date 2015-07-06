@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testSet xmlns="https://github.com/automatictester/lightning"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://github.com/automatictester/lightning https://github.com/automatictester/lightning/releases/download/0.3.0/lightning-0.3.0.xsd">
+
+    <!-- expected result: 2 pass, 0 fail, 0 error -->
+
+    <passedTransactionsTest>
+        <testName>Test #1</testName>
+        <description>Verify number of passed tests</description>
+        <transactionName>Login</transactionName>
+        <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
+    </passedTransactionsTest>
+
+    <passedTransactionsTest>
+        <testName>Test #2</testName>
+        <description>Verify number of passed tests</description>
+        <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
+    </passedTransactionsTest>
+
+</testSet>

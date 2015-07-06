@@ -69,7 +69,17 @@ public class PassedTransactionsTestTest {
     }
 
     @Test
+    public void verifyIsEqualNoTransactionName() {
+        assertThat(PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME, is(equalTo(PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME)));
+    }
+
+    @Test
     public void verifyIsNotEqual() {
         assertThat(PASSED_TRANSACTIONS_TEST_A, is(not(equalTo(PASSED_TRANSACTIONS_TEST_B))));
+    }
+
+    @Test
+    public void verifyIsNotEqualNoTransactionName() {
+        assertThat(PASSED_TRANSACTIONS_TEST_B, is(not(equalTo(PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME))));
     }
 }

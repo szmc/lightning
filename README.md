@@ -28,7 +28,7 @@ There are tools which can help you run JMeter tests as part of CI build, and too
 ## Usage example
 
 Lightning requires 2 sources of input data: XML config file and JMeter CSV output. XML file contains definition of tests, which will be executed to determine if execution should be marked as passed or failed, based on analysis of JMeter CSV output.
-Types of tests which you can define in Lightning XML file are described on [Wiki](https://github.com/automatictester/lightning/wiki/Test-Types)
+Types of tests which you can define in Lightning XML file are described on [wiki](https://github.com/automatictester/lightning/wiki/Test-Types).
  
 - Lightning XML config file, e.g.:
 
