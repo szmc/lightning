@@ -22,10 +22,32 @@ public class PassedTransactionsTestTest {
     }
 
     @Test
+    public void verifyExecuteMethodAllTransactionsPass() {
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", null, 0);
+        JMeterTransactions jmeterTranactions = new JMeterTransactions();
+        jmeterTranactions.add(LOGIN_1000_SUCCESS);
+        jmeterTranactions.add(SEARCH_800_SUCCESS);
+
+        test.execute(jmeterTranactions);
+        assertThat(test.isPassed(), is(equalTo(true)));
+    }
+
+    @Test
     public void verifyExecuteMethodFail() {
         PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
         JMeterTransactions jmeterTranactions = new JMeterTransactions();
         jmeterTranactions.add(LOGIN_1200_FAILURE);
+
+        test.execute(jmeterTranactions);
+        assertThat(test.isFailed(), is(equalTo(true)));
+    }
+
+    @Test
+    public void verifyExecuteMethodAllTransactionsFail() {
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", null, 0);
+        JMeterTransactions jmeterTranactions = new JMeterTransactions();
+        jmeterTranactions.add(LOGIN_1200_SUCCESS);
+        jmeterTranactions.add(SEARCH_800_FAILURE);
 
         test.execute(jmeterTranactions);
         assertThat(test.isFailed(), is(equalTo(true)));
