@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class IntToOrdConverterTest {
 
     @DataProvider(name = "testData")
-    public String[][] testData() {
+    private String[][] testData() {
         return new String[][]{
                 {"1", "1st"},
                 {"2", "2nd"},

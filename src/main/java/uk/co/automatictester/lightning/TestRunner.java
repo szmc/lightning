@@ -8,22 +8,24 @@ public class TestRunner {
     private static int exitCode;
     private static JCommander jc;
     private static CmdLineParams params;
+    private static TestSet testSet;
 
     public static void main(String[] args) {
         parseParams(args);
         printHelpAndExitIfRequested();
         runTests();
+        setTeamCityBuildStatusTextIfRequested();
         setExitCode();
     }
 
-    private static void runTests() {
+    public static void runTests() {
         long testSetExecStart = System.currentTimeMillis();
 
         if (!params.skipSchemaValidation()) {
             new XMLSchemaValidator().validate(params.getXmlFile());
         }
 
-        TestSet testSet = new TestSet();
+        testSet = new TestSet();
         testSet.load(params.getXmlFile());
 
         JMeterTransactions originalJMeterTransactions = new JMeterCSVFileReader().read(params.getCSVFile());
@@ -39,7 +41,7 @@ public class TestRunner {
         exitCode = testSet.getFailCount() + testSet.getErrorCount();
     }
 
-    private static void parseParams(String[] args) {
+    public static void parseParams(String[] args) {
         params = new CmdLineParams();
         jc = new JCommander(params, args);
     }
@@ -49,6 +51,16 @@ public class TestRunner {
             jc.setProgramName("java -jar lightning-<version_number>.jar");
             jc.usage();
             System.exit(-1);
+        }
+    }
+
+    public static void setTeamCityBuildStatusTextIfRequested() {
+        if (params.isCIEqualToTeamCity()) {
+            int executed = testSet.getTests().size();
+            int failed = testSet.getFailCount();
+            int ignored = testSet.getErrorCount();
+            System.out.println(System.lineSeparator() + "Set TeamCity build status text:");
+            System.out.println(String.format("##teamcity[buildStatus text='Tests executed: %s, failed: %s, ignored: %s']", executed, failed, ignored));
         }
     }
 

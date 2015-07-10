@@ -3,8 +3,8 @@ package uk.co.automatictester.lightning;
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.exceptions.XMLFileLoadingException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
-import uk.co.automatictester.lightning.tests.RespTimeAvgTest;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
+import uk.co.automatictester.lightning.tests.RespTimeAvgTest;
 import uk.co.automatictester.lightning.tests.RespTimeStdDevTest;
 
 import java.io.ByteArrayOutputStream;

@@ -1,7 +1,7 @@
 package uk.co.automatictester.lightning.data;
 
-import uk.co.automatictester.lightning.tests.RespTimeAvgTest;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
+import uk.co.automatictester.lightning.tests.RespTimeAvgTest;
 import uk.co.automatictester.lightning.tests.RespTimeNthPercentileTest;
 import uk.co.automatictester.lightning.tests.RespTimeStdDevTest;
 
