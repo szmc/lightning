@@ -2,6 +2,7 @@ package uk.co.automatictester.lightning;
 
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.exceptions.XMLFileLoadingException;
+import uk.co.automatictester.lightning.exceptions.XMLFileNoTestsException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
 
@@ -56,5 +57,11 @@ public class TestSetTest {
         assertThat(testSet.getPassCount(), is(2));
         assertThat(testSet.getFailCount(), is(0));
         assertThat(testSet.getErrorCount(), is(0));
+    }
+
+    @Test(expectedExceptions = XMLFileNoTestsException.class)
+    public void verifyLoadMethodExceptionThrownOnEmptyTestSet() {
+        TestSet testSet = new TestSet();
+        testSet.load(TEST_SET_0_0_0);
     }
 }

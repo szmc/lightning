@@ -18,6 +18,7 @@ public class TestData {
     // XML files
     public static final String TEST_SET_2_0_0 = XML_RESOURCES + "2_0_0.xml";
     public static final String TEST_SET_1_1_1 = XML_RESOURCES + "1_1_1.xml";
+    public static final String TEST_SET_0_0_0 = XML_RESOURCES + "0_0_0.xml";
     public static final String TEST_SET_NOT_VALID = XML_RESOURCES + "not_valid.xml";
     public static final String TEST_SET_NOT_WELL_FORMED = XML_RESOURCES + "not_well_formed.xml";
 

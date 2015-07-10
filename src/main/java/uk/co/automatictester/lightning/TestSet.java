@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import uk.co.automatictester.lightning.exceptions.XMLFileLoadingException;
+import uk.co.automatictester.lightning.exceptions.XMLFileNoTestsException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
 import uk.co.automatictester.lightning.tests.*;
 
@@ -41,6 +42,9 @@ public class TestSet {
             throw new XMLFileLoadingException(e.getMessage());
         } catch (NumberFormatException e) {
             throw new XMLFileNumberFormatException(e.getMessage());
+        }
+        if (tests.size() == 0) {
+            throw new XMLFileNoTestsException("No tests of expected type found in XML file");
         }
     }
 
