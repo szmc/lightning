@@ -125,6 +125,7 @@ In next release (0.3.0) following features **will** be made available:
 - [Feature] Include test execution time in console output - [#11](https://github.com/automatictester/lightning/issues/11)
 - [Feature] Add option to run PassedTransactionsTest against all transaction names - [wiki](https://github.com/automatictester/lightning/wiki/Test-Types#passed-transactions-test)
 - [Feature] Add enhanced TeamCity integration - [wiki](https://github.com/automatictester/lightning/wiki/Enhanced-TeamCity-Integration)
+- [Feature] Throw exception on empty test set  - [#18](https://github.com/automatictester/lightning/issues/18)
 - [BugFix] Fix problem with XML schema, which required tests to be defined in particular order
 
 Also some of the features listed in [issues](https://github.com/automatictester/lightning/issues) **may** be made available.
