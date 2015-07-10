@@ -3,12 +3,14 @@ package uk.co.automatictester.lightning.params.validators;
 import com.beust.jcommander.IParameterValidator;
 import com.beust.jcommander.ParameterException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CIServerValidator implements IParameterValidator {
 
-    private static Set<String> CI_SERVERS = new HashSet<>();
+    private static List<String> CI_SERVERS = new ArrayList<>();
 
     static {
         CI_SERVERS.add("jenkins");

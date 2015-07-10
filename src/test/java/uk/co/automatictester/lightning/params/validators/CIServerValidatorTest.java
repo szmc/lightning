@@ -23,7 +23,6 @@ public class CIServerValidatorTest {
         new CIServerValidator().validate(CI, ci.toLowerCase());
     }
 
-    //TODO: investigate Travis CI failures - works fine locally
     @Test(expectedExceptions = ParameterException.class, expectedExceptionsMessageRegExp = "CI server 'enkins' not in list: \\[jenkins, teamcity\\]")
     public void verifyValidateInvalid() {
         new CIServerValidator().validate(CI, "enkins");
