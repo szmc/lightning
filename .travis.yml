@@ -6,6 +6,7 @@ cache:
 script:
  - mvn -DTRAVIS_JOB_ID=$TRAVIS_JOB_ID test jacoco:report coveralls:report
  - mvn clean compile assembly:single
+after_success:
  - ./src/test/e2e/exit_code_4_0_0.sh
  - ./src/test/e2e/console_output_4_0_0.sh
  - ./src/test/e2e/exit_code_1_1_1.sh
