@@ -48,9 +48,15 @@ public class TestRunner {
 
     private static void printHelpAndExitIfRequested() {
         if (params.isHelp()) {
+            printHelpIfRequested();
+            System.exit(-1);
+        }
+    }
+
+    public static void printHelpIfRequested() {
+        if (params.isHelp()) {
             jc.setProgramName("java -jar lightning-<version_number>.jar");
             jc.usage();
-            System.exit(-1);
         }
     }
 

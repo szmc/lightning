@@ -12,5 +12,4 @@ after_success:
  - ./src/test/e2e/exit_code_1_1_1.sh
  - ./src/test/e2e/console_output_1_1_1.sh
  - ./src/test/e2e/exit_code_help.sh
- - ./src/test/e2e/console_output_help.sh
  - ls -l target/lightning*
