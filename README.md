@@ -120,10 +120,11 @@ To raise an issue, go to [issues](https://github.com/automatictester/lightning/i
 
 In next release (0.3.0) following features **will** be made available:
 
-- Add Response time nth percentile test
-- Get console help with `-h` or `--help` switch - [#1](https://github.com/automatictester/lightning/issues/1)
-- Include test execution time in console output - [#11](https://github.com/automatictester/lightning/issues/11)
-- Add option to run PassedTransactionsTest against all transaction names - [#4](https://github.com/automatictester/lightning/issues/4)
-- Fix problem with XML schema, which required tests to be defined in particular order
+- [Feature] Add Response time nth percentile test - [wiki](https://github.com/automatictester/lightning/wiki/Test-Types#n-th-percentile-response-time-test)
+- [Feature] Get console help with `-h` or `--help` switch - [#1](https://github.com/automatictester/lightning/issues/1)
+- [Feature] Include test execution time in console output - [#11](https://github.com/automatictester/lightning/issues/11)
+- [Feature] Add option to run PassedTransactionsTest against all transaction names - [wiki](https://github.com/automatictester/lightning/wiki/Test-Types#passed-transactions-test)
+- [Feature] Add enhanced TeamCity integration - [wiki](https://github.com/automatictester/lightning/wiki/Enhanced-TeamCity-Integration)
+- [BugFix] Fix problem with XML schema, which required tests to be defined in particular order
 
 Also some of the features listed in [issues](https://github.com/automatictester/lightning/issues) **may** be made available.
