@@ -1,0 +1,14 @@
+Test name:        Test #2
+Test description: Verify standard deviation
+Transaction name: Search
+Expected result:  Average standard deviance time <= 500
+Actual result:    Average standard deviance time = 279.07
+Test result:      Pass
+
+
+============= EXECUTION SUMMARY =============
+Tests executed:    1
+Tests passed:      1
+Tests failed:      0
+Tests with errors: 0
+Test set status:   Pass

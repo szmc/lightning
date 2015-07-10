@@ -22,10 +22,32 @@ public class PassedTransactionsTestTest {
     }
 
     @Test
+    public void verifyExecuteMethodAllTransactionsPass() {
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", null, 0);
+        JMeterTransactions jmeterTranactions = new JMeterTransactions();
+        jmeterTranactions.add(LOGIN_1000_SUCCESS);
+        jmeterTranactions.add(SEARCH_800_SUCCESS);
+
+        test.execute(jmeterTranactions);
+        assertThat(test.isPassed(), is(equalTo(true)));
+    }
+
+    @Test
     public void verifyExecuteMethodFail() {
         PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
         JMeterTransactions jmeterTranactions = new JMeterTransactions();
         jmeterTranactions.add(LOGIN_1200_FAILURE);
+
+        test.execute(jmeterTranactions);
+        assertThat(test.isFailed(), is(equalTo(true)));
+    }
+
+    @Test
+    public void verifyExecuteMethodAllTransactionsFail() {
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", null, 0);
+        JMeterTransactions jmeterTranactions = new JMeterTransactions();
+        jmeterTranactions.add(LOGIN_1200_SUCCESS);
+        jmeterTranactions.add(SEARCH_800_FAILURE);
 
         test.execute(jmeterTranactions);
         assertThat(test.isFailed(), is(equalTo(true)));
@@ -47,7 +69,22 @@ public class PassedTransactionsTestTest {
     }
 
     @Test
+    public void verifyIsEqualNoTransactionName() {
+        assertThat(PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME, is(equalTo(PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME)));
+    }
+
+    @Test
     public void verifyIsNotEqual() {
         assertThat(PASSED_TRANSACTIONS_TEST_A, is(not(equalTo(PASSED_TRANSACTIONS_TEST_B))));
+    }
+
+    @Test
+    public void verifyIsNotEqualOtherTestType() {
+        assertThat((uk.co.automatictester.lightning.tests.Test) PASSED_TRANSACTIONS_TEST_A, is(not(equalTo((uk.co.automatictester.lightning.tests.Test) RESP_TIME_PERC_TEST_A))));
+    }
+
+    @Test
+    public void verifyIsNotEqualNoTransactionName() {
+        assertThat(PASSED_TRANSACTIONS_TEST_B, is(not(equalTo(PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME))));
     }
 }

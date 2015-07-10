@@ -1,0 +1,20 @@
+Test name:        Test #1
+Test description: Verify number of passed tests
+Transaction name: Login
+Expected result:  Number of failed transactions <= 0
+Actual result:    Number of failed transactions = 0
+Test result:      Pass
+
+Test name:        Test #2
+Test description: Verify number of passed tests
+Expected result:  Number of failed transactions <= 0
+Actual result:    Number of failed transactions = 0
+Test result:      Pass
+
+
+============= EXECUTION SUMMARY =============
+Tests executed:    2
+Tests passed:      2
+Tests failed:      0
+Tests with errors: 0
+Test set status:   Pass

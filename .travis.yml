@@ -7,9 +7,13 @@ script:
  - mvn -DTRAVIS_JOB_ID=$TRAVIS_JOB_ID test jacoco:report coveralls:report
  - mvn clean compile assembly:single
 after_success:
- - ./src/test/e2e/exit_code_4_0_0.sh
- - ./src/test/e2e/console_output_4_0_0.sh
- - ./src/test/e2e/exit_code_1_1_1.sh
- - ./src/test/e2e/console_output_1_1_1.sh
- - ./src/test/e2e/exit_code_help.sh
+ - ./src/test/scripts/help/exit_code.sh
+ - ./src/test/scripts/test/set/console/output/1_1_1.sh
+ - ./src/test/scripts/test/set/console/output/2_0_0.sh
+ - ./src/test/scripts/test/set/exit/code/1_1_1.sh
+ - ./src/test/scripts/test/set/exit/code/2_0_0.sh
+ - ./src/test/scripts/test/types/console/output/avgRespTimeTest.sh
+ - ./src/test/scripts/test/types/console/output/nthPercRespTimeTest.sh
+ - ./src/test/scripts/test/types/console/output/passedTransactionsTest.sh
+ - ./src/test/scripts/test/types/console/output/respTimeStdDevTest.sh
  - ls -l target/lightning*

@@ -4,8 +4,6 @@ import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.exceptions.XMLFileLoadingException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
-import uk.co.automatictester.lightning.tests.RespTimeAvgTest;
-import uk.co.automatictester.lightning.tests.RespTimeStdDevTest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -18,17 +16,15 @@ public class TestSetTest {
 
     @Test
     public void verifyLoadMethod() {
-        RespTimeAvgTest respTimeTestAvgTest = new RespTimeAvgTest("Test #1", "Verify average login times", "Login", 4000);
-        RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest("Test #2", "Verify standard deviation", "Search", 500);
-        PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest("Test #3", "Verify number of passed tests", "Login", 0);
+        PassedTransactionsTest passedTransactionsTestA = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
+        PassedTransactionsTest passedTransactionsTestB = new PassedTransactionsTest("Test #2", "Verify number of passed tests", null, 0);
 
         TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_4_0_0);
+        testSet.load(TEST_SET_2_0_0);
 
-        assertThat(testSet.getTests(), hasSize(4));
-        assertThat(testSet.getTests(), hasItem(respTimeTestAvgTest));
-        assertThat(testSet.getTests(), hasItem(passedTransactionsTest));
-        assertThat(testSet.getTests(), hasItem(respTimeStdDevTest));
+        assertThat(testSet.getTests(), hasSize(2));
+        assertThat(testSet.getTests(), hasItem(passedTransactionsTestA));
+        assertThat(testSet.getTests(), hasItem(passedTransactionsTestB));
     }
 
     @Test(expectedExceptions = XMLFileLoadingException.class)
@@ -54,10 +50,10 @@ public class TestSetTest {
         JMeterTransactions jmeterTranactions = new JMeterCSVFileReader().read(CSV_2_TRANSACTIONS);
 
         TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_4_0_0);
+        testSet.load(TEST_SET_2_0_0);
         testSet.execute(jmeterTranactions);
 
-        assertThat(testSet.getPassCount(), is(4));
+        assertThat(testSet.getPassCount(), is(2));
         assertThat(testSet.getFailCount(), is(0));
         assertThat(testSet.getErrorCount(), is(0));
     }

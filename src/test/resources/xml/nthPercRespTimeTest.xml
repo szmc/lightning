@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testSet xmlns="https://github.com/automatictester/lightning"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://github.com/automatictester/lightning https://github.com/automatictester/lightning/releases/download/0.3.0/lightning-0.3.0.xsd">
+
+    <nthPercRespTimeTest>
+        <testName>Test #4</testName>
+        <description>Verify nth percentile</description>
+        <transactionName>Search</transactionName>
+        <percentile>80</percentile>
+        <maxRespTime>11244.2</maxRespTime>
+    </nthPercRespTimeTest>
+
+</testSet>

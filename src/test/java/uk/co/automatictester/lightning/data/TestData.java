@@ -16,7 +16,7 @@ public class TestData {
     private static final String CSV_RESOURCES = RESOURCES + "csv/";
 
     // XML files
-    public static final String TEST_SET_4_0_0 = XML_RESOURCES + "4_0_0.xml";
+    public static final String TEST_SET_2_0_0 = XML_RESOURCES + "2_0_0.xml";
     public static final String TEST_SET_1_1_1 = XML_RESOURCES + "1_1_1.xml";
     public static final String TEST_SET_NOT_VALID = XML_RESOURCES + "not_valid.xml";
     public static final String TEST_SET_NOT_WELL_FORMED = XML_RESOURCES + "not_well_formed.xml";
@@ -35,6 +35,7 @@ public class TestData {
 
     public static final ArrayList<String> SEARCH_11221_SUCCESS = new ArrayList<>(Arrays.asList("Search", "11221", "true"));
     public static final ArrayList<String> SEARCH_800_SUCCESS = new ArrayList<>(Arrays.asList("Search", "800", "true"));
+    public static final ArrayList<String> SEARCH_800_FAILURE = new ArrayList<>(Arrays.asList("Search", "800", "false"));
     public static final ArrayList<String> SEARCH_1_SUCCESS = new ArrayList<>(Arrays.asList("Search", "1", "true"));
     public static final ArrayList<String> SEARCH_2_SUCCESS = new ArrayList<>(Arrays.asList("Search", "2", "true"));
     public static final ArrayList<String> SEARCH_3_SUCCESS = new ArrayList<>(Arrays.asList("Search", "3", "true"));
@@ -49,6 +50,7 @@ public class TestData {
     // Tests
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_A = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 1);
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_B = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
+    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME = new PassedTransactionsTest("Test #1", "Verify number of passed tests", null, 0);
     public static final RespTimeAvgTest AVG_RESP_TIME_TEST_A = new RespTimeAvgTest("Test #1", "Verify average response times", "Search", 1000);
     public static final RespTimeAvgTest AVG_RESP_TIME_TEST_B = new RespTimeAvgTest("Test #1", "Verify average response times", "Search", 100);
     public static final RespTimeStdDevTest RESP_TIME_STD_DEV_TEST_A = new RespTimeStdDevTest("Test #1", "Verify standard deviation", "Login", 1);

@@ -28,7 +28,7 @@ There are tools which can help you run JMeter tests as part of CI build, and too
 ## Usage example
 
 Lightning requires 2 sources of input data: XML config file and JMeter CSV output. XML file contains definition of tests, which will be executed to determine if execution should be marked as passed or failed, based on analysis of JMeter CSV output.
-Currently there are 3 test types implemented. Example of each of them is included below.
+Types of tests which you can define in Lightning XML file are described on [wiki](https://github.com/automatictester/lightning/wiki/Test-Types).
  
 - Lightning XML config file, e.g.:
 
@@ -120,31 +120,10 @@ To raise an issue, go to [issues](https://github.com/automatictester/lightning/i
 
 In next release (0.3.0) following features **will** be made available:
 
-- response time nth percentile test (already in master)
+- Add Response time nth percentile test
+- Get console help with `-h` or `--help` switch - [#1](https://github.com/automatictester/lightning/issues/1)
+- Include test execution time in console output - [#11](https://github.com/automatictester/lightning/issues/11)
+- Add option to run PassedTransactionsTest against all transaction names - [#4](https://github.com/automatictester/lightning/issues/4)
+- Fix problem with XML schema, which required tests to be defined in particular order
 
 Also some of the features listed in [issues](https://github.com/automatictester/lightning/issues) **may** be made available.
-
-## Info for contributors
-
-### Basic info
-
-To build project: `mvn clean compile assembly:single`
-
-To run unit tests: `mvn test`
-
-### How to implement new test type
-
-- (Optional) If you need to access additional column from CSV file which is not currently in use by Lightning, update **JMeterCSVFileReader**
-- Implement new test class which extends **Test**
-- Include new test type in **lightning.xsd**
-- Implement processing of your new test in **TestSet**
-- Add or update the tests, if needed
-- Ensure all unit tests pass with `mvn test`
-
-### Test approach
-
-Current test approach is as follows:
-
-- Cover with unit tests everything except (a) console output and (b) exit codes
-- Cover console output and exit codes with end-to-end shell scripts **src/test/e2e**
-- All test categories are executed as part of automatic Travis CI builds

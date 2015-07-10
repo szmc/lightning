@@ -64,6 +64,11 @@ public class RespTimeNthPercentileTestTest {
     }
 
     @Test
+    public void verifyIsNotEqualOtherTestType() {
+        assertThat((uk.co.automatictester.lightning.tests.Test) RESP_TIME_PERC_TEST_A, is(not(equalTo((uk.co.automatictester.lightning.tests.Test) AVG_RESP_TIME_TEST_A))));
+    }
+
+    @Test
     public void verifyIsNotEqual() {
         assertThat(RESP_TIME_PERC_TEST_A, is(not(equalTo(RESP_TIME_PERC_TEST_B))));
     }
