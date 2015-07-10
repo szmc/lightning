@@ -3,3 +3,4 @@ target.lib
 .idea
 lightning.iml
 src/test/resources/results/actual/
+lightning-jenkins.properties

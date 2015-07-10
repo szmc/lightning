@@ -40,11 +40,11 @@ public class CmdLineParams {
         return help;
     }
 
-    public boolean isCIEqualToTeamCity() {
-        if (ci == null) {
+    public boolean isCIEqualTo(String ci) {
+        if (this.ci == null) {
             return false;
         } else {
-            return (ci.toLowerCase().equals("teamcity"));
+            return (this.ci.toLowerCase().equals(ci));
         }
     }
 
