@@ -5,7 +5,7 @@
 
 ## Current version
 
-Current version: [0.2.0](https://github.com/automatictester/lightning/releases/download/0.2.0/lightning-0.2.0.jar)
+Current version: [0.3.0](https://github.com/automatictester/lightning/releases/download/0.3.0/lightning-0.3.0.jar)
 
 ## Introduction
 
@@ -18,8 +18,10 @@ There are tools which can help you run JMeter tests as part of CI build, and too
 ## Philosophy
 
 - Keep technology stack as close to JMeter as possible
-- Be CI server- and OS- independent
+- Be continuous integration server-independent and operating system-independent: Lightning should not be designed to run in particular environment only, but can offer extra features in certain environments
 - Using Lightning shouldn't require coding skills, as JMeter doesn't require that neither
+- Release changes frequently
+- Do not provide bugfixes and support for old versions
 
 ## Design assumptions
 
@@ -36,25 +38,13 @@ Types of tests which you can define in Lightning XML file are described on [wiki
 <?xml version="1.0" encoding="UTF-8"?>
 <testSet xmlns="https://github.com/automatictester/lightning"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="https://github.com/automatictester/lightning https://github.com/automatictester/lightning/releases/download/0.2.0/lightning-0.2.0.xsd">
+         xsi:schemaLocation="https://github.com/automatictester/lightning https://github.com/automatictester/lightning/releases/download/0.3.0/lightning-0.3.0.xsd">
     <avgRespTimeTest>
         <testName>Test #1</testName>
         <description>Verify average login times</description>
         <transactionName>Login</transactionName>
         <maxAvgRespTime>4000</maxAvgRespTime>
     </avgRespTimeTest>
-    <respTimeStdDevTest>
-        <testName>Test #2</testName>
-        <description>Verify standard deviation</description>
-        <transactionName>Search</transactionName>
-        <maxRespTimeStdDev>500</maxRespTimeStdDev>
-    </respTimeStdDevTest>
-    <passedTransactionsTest>
-        <testName>Test #3</testName>
-        <description>Verify number of passed tests</description>
-        <transactionName>Login</transactionName>
-        <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
-    </passedTransactionsTest>
 </testSet>
 ```
 
@@ -118,15 +108,8 @@ To raise an issue, go to [issues](https://github.com/automatictester/lightning/i
 
 ## Roadmap
 
-In next release (0.3.0) following features **will** be made available:
+In next release (0.4.0) following features **will** be made available:
 
-- [Feature] Add Response time nth percentile test - [wiki](https://github.com/automatictester/lightning/wiki/Test-Types#n-th-percentile-response-time-test)
-- [Feature] Get console help with `-h` or `--help` switch - [#1](https://github.com/automatictester/lightning/issues/1)
-- [Feature] Include test execution time in console output - [#11](https://github.com/automatictester/lightning/issues/11)
-- [Feature] Add option to run PassedTransactionsTest against all transaction names - [wiki](https://github.com/automatictester/lightning/wiki/Test-Types#passed-transactions-test)
-- [Feature] Add enhanced TeamCity integration - [wiki](https://github.com/automatictester/lightning/wiki/Enhanced-TeamCity-Integration)
-- [Feature] Add enhanced Jenkins integration - [wiki](https://github.com/automatictester/lightning/wiki/Enhanced-Jenkins-Integration)
-- [Feature] Throw exception on empty test set  - [#18](https://github.com/automatictester/lightning/issues/18)
-- [BugFix] Fix problem with XML schema, which required tests to be defined in particular order
+- TBD
 
-Also some of the features listed in [issues](https://github.com/automatictester/lightning/issues) **may** be made available.
+Also some of the [issues](https://github.com/automatictester/lightning/issues) **may** be made available.
