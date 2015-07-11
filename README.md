@@ -9,7 +9,7 @@ Current version: [0.3.0](https://github.com/automatictester/lightning/releases/d
 
 ## Introduction
 
-Lightning's mission is to enable JMeter performance testing integration with Continuous Integration infrastructure. Lightning can instantly provide CI server with simple and meaningful information whether to pass or fail the build - with no human involvement needed. Check our [wiki](https://github.com/automatictester/lightning/wiki) for more information.
+Lightning's mission is to enable JMeter performance testing integration with Continuous Integration infrastructure. Lightning can instantly provide CI server with simple and meaningful information whether to pass or fail the build - with no human involvement needed. Check our [wiki pages](https://github.com/automatictester/lightning/wiki) for more information.
 
 ## Why Lightning?
 
@@ -33,4 +33,4 @@ Issues and feature requests should be raised [here](https://github.com/automatic
 
 ## Roadmap
 
-Check [milestones](https://github.com/automatictester/lightning/issues) to get an idea what can be implemented when.
+Check milestones assigned to [issues](https://github.com/automatictester/lightning/issues) to get an idea what can be implemented when.
