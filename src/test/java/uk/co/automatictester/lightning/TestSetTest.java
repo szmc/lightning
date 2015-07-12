@@ -40,12 +40,6 @@ public class TestSetTest {
         System.setErr(null);
     }
 
-    @Test(expectedExceptions = XMLFileNumberFormatException.class)
-    public void verifyLoadMethodNumbefFormatException() {
-        TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_NOT_VALID);
-    }
-
     @Test
     public void verifyExecuteMethod() {
         JMeterTransactions jmeterTranactions = new JMeterCSVFileReader().read(CSV_2_TRANSACTIONS);
