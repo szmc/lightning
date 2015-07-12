@@ -29,7 +29,7 @@ public class TestSetTest {
     }
 
     @Test(expectedExceptions = XMLFileLoadingException.class)
-    public void verifyLoadMethodLoadingException() {
+    public void verifyLoadMethodLoadingXMLFileLoadingException() {
         // suppress error output - coming NOT from own code
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setErr(new PrintStream(outContent));
@@ -38,6 +38,12 @@ public class TestSetTest {
         testSet.load(TEST_SET_NOT_WELL_FORMED);
 
         System.setErr(null);
+    }
+
+    @Test(expectedExceptions = XMLFileNumberFormatException.class)
+    public void verifyLoadMethodLoadingXMLFileNumberFormatException() {
+        TestSet testSet = new TestSet();
+        testSet.load(TEST_SET_XML_FILE_NUMBER_FORMAT_EXCEPTION);
     }
 
     @Test
