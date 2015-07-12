@@ -2,7 +2,6 @@ package uk.co.automatictester.lightning.params;
 
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
-import uk.co.automatictester.lightning.params.validators.BooleanValidator;
 import uk.co.automatictester.lightning.params.validators.CIServerValidator;
 import uk.co.automatictester.lightning.params.validators.FileValidator;
 
@@ -14,9 +13,6 @@ public class CmdLineParams {
 
     @Parameter(names = "-csv", description = "JMeter CSV result file", required = true, validateWith = FileValidator.class)
     private String csvFile;
-
-    @Parameter(names = "-skipSchemaValidation", description = "Skip XML schema validation", required = false, validateWith = BooleanValidator.class)
-    private String skipSchemaValidation;
 
     @Parameter(names = "-ci", description = "CI server (jenkins or teamcity)", required = false, validateWith = CIServerValidator.class)
     private String ci;
@@ -30,10 +26,6 @@ public class CmdLineParams {
 
     public String getCSVFile() {
         return csvFile;
-    }
-
-    public boolean skipSchemaValidation() {
-        return Boolean.parseBoolean(skipSchemaValidation);
     }
 
     public boolean isHelp() {

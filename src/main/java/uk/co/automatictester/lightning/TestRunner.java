@@ -28,10 +28,6 @@ public class TestRunner {
     public static void runTests() {
         long testSetExecStart = System.currentTimeMillis();
 
-        if (!params.skipSchemaValidation()) {
-            new XMLSchemaValidator().validate(params.getXmlFile());
-        }
-
         testSet = new TestSet();
         testSet.load(params.getXmlFile());
 

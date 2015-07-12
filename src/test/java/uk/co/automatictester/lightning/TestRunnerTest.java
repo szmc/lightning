@@ -21,8 +21,6 @@ public class TestRunnerTest extends ConsoleOutputTest {
                 "       CI server (jenkins or teamcity)%n" +
                 "  * -csv%n" +
                 "       JMeter CSV result file%n" +
-                "    -skipSchemaValidation%n" +
-                "       Skip XML schema validation%n" +
                 "  * -xml%n" +
                 "       Lightning XML config file");
 
@@ -40,8 +38,6 @@ public class TestRunnerTest extends ConsoleOutputTest {
                 "       CI server (jenkins or teamcity)%n" +
                 "  * -csv%n" +
                 "       JMeter CSV result file%n" +
-                "    -skipSchemaValidation%n" +
-                "       Skip XML schema validation%n" +
                 "  * -xml%n" +
                 "       Lightning XML config file");
 
