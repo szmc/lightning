@@ -2,10 +2,10 @@
 <testSet>
 
     <passedTransactionsTest>
-        <testName>Test #1</testName>
+        <testName></testName>
         <description>Verify number of passed tests</description>
         <transactionName>Login</transactionName>
-        <allowedNumberOfFailedTransactions>incorrect</allowedNumberOfFailedTransactions>
+        <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
     </passedTransactionsTest>
 
 </testSet>

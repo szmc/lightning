@@ -1,7 +1,8 @@
 package uk.co.automatictester.lightning;
 
 import org.testng.annotations.Test;
-import uk.co.automatictester.lightning.exceptions.XMLFileLoadingException;
+import uk.co.automatictester.lightning.exceptions.XMLFileException;
+import uk.co.automatictester.lightning.exceptions.XMLFileMissingElementValueException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNoTestsException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
@@ -28,7 +29,7 @@ public class TestSetTest {
         assertThat(testSet.getTests(), hasItem(passedTransactionsTestB));
     }
 
-    @Test(expectedExceptions = XMLFileLoadingException.class)
+    @Test(expectedExceptions = XMLFileException.class)
     public void verifyLoadMethodLoadingXMLFileLoadingException() {
         // suppress error output - coming NOT from own code
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -41,9 +42,21 @@ public class TestSetTest {
     }
 
     @Test(expectedExceptions = XMLFileNumberFormatException.class)
-    public void verifyLoadMethodLoadingXMLFileNumberFormatException() {
+    public void verifyLoadMethodThrowsXMLFileNumberFormatException() {
         TestSet testSet = new TestSet();
         testSet.load(TEST_SET_XML_FILE_NUMBER_FORMAT_EXCEPTION);
+    }
+
+    @Test(expectedExceptions = XMLFileMissingElementValueException.class)
+    public void verifyLoadMethodThrowsXMLFileMissingElementValueException_testName() {
+        TestSet testSet = new TestSet();
+        testSet.load(TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION_TEST_NAME);
+    }
+
+    @Test(expectedExceptions = XMLFileMissingElementValueException.class)
+    public void verifyLoadMethodThrowsXMLFileMissingElementValueException_allowedNumberOfFailedTransactions() {
+        TestSet testSet = new TestSet();
+        testSet.load(TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION_NUM_OF_FAILED_TRANSACTIONS);
     }
 
     @Test

@@ -5,7 +5,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import uk.co.automatictester.lightning.exceptions.XMLFileLoadingException;
+import uk.co.automatictester.lightning.exceptions.XMLFileException;
+import uk.co.automatictester.lightning.exceptions.XMLFileMissingElementValueException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNoTestsException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
 import uk.co.automatictester.lightning.tests.*;
@@ -39,10 +40,9 @@ public class TestSet {
             addRespTimeNthPercTests(doc);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            throw new XMLFileLoadingException(e.getMessage());
-        } catch (NumberFormatException e) {
-            throw new XMLFileNumberFormatException(e.getMessage());
+            throw new XMLFileException(e.getMessage());
         }
+
         if (tests.size() == 0) {
             throw new XMLFileNoTestsException("No tests of expected type found in XML file");
         }
@@ -96,7 +96,7 @@ public class TestSet {
             String description = getTestDescription(passedTransactionsElement);
             String transactionName = getTransactionName(passedTransactionsElement);
 
-            int allowedNumberOfFailedTransactions = Integer.parseInt(getElementByTagName(passedTransactionsElement, "allowedNumberOfFailedTransactions"));
+            int allowedNumberOfFailedTransactions = getIntegerValueFromElement(passedTransactionsElement, "allowedNumberOfFailedTransactions");
 
             PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest(name, description, transactionName, allowedNumberOfFailedTransactions);
             tests.add(passedTransactionsTest);
@@ -154,25 +154,47 @@ public class TestSet {
         return (((failureCount != 0) || (getErrorCount() != 0)) ? "FAIL" : "Pass");
     }
 
-    private String getTestName(Element xmlElement) {
-        return xmlElement.getElementsByTagName("testName").item(0).getTextContent();
+    private String getTestName(Element element) {
+        String testName = element.getElementsByTagName("testName").item(0).getTextContent();
+        if (testName.equals("")) {
+            String parentNodeName = element.getElementsByTagName("testName").item(0).getParentNode().getNodeName();
+            throw new XMLFileMissingElementValueException(String.format("Missing testName value for %s", parentNodeName));
+        } else {
+            return testName;
+        }
     }
 
-    private String getTransactionName(Element xmlElement) {
-        if (xmlElement.getElementsByTagName("transactionName").getLength() != 0) {
-            return xmlElement.getElementsByTagName("transactionName").item(0).getTextContent();
+    private String getTransactionName(Element element) {
+        if (element.getElementsByTagName("transactionName").getLength() != 0) {
+            return element.getElementsByTagName("transactionName").item(0).getTextContent();
         } else {
             return null;
         }
     }
 
-    private String getTestDescription(Element xmlElement) {
-        Node descriptionElement = xmlElement.getElementsByTagName("description").item(0);
+    private String getTestDescription(Element element) {
+        Node descriptionElement = element.getElementsByTagName("description").item(0);
         return (descriptionElement != null) ? descriptionElement.getTextContent() : "";
     }
 
-    private String getElementByTagName(Element xmlElement, String tagName) {
-        return xmlElement.getElementsByTagName(tagName).item(0).getTextContent();
+    private String getElementByTagName(Element element, String subElement) {
+        return element.getElementsByTagName(subElement).item(0).getTextContent();
+    }
+
+    private int getIntegerValueFromElement(Element element, String subElement) {
+        String elementValue = getElementByTagName(element, subElement);
+
+        if (elementValue.length() == 0) {
+            String parentNodeName = element.getNodeName();
+            throw new XMLFileMissingElementValueException(String.format("Missing %s value for %s", subElement, parentNodeName));
+        }
+
+        try {
+            return Integer.parseInt(elementValue);
+        } catch (NumberFormatException e) {
+            String parentNodeName = element.getNodeName();
+            throw new XMLFileNumberFormatException(String.format("Incorrect %s value for %s: %s", subElement, parentNodeName, elementValue));
+        }
     }
 
 }
