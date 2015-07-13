@@ -5,10 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import uk.co.automatictester.lightning.exceptions.XMLFileException;
-import uk.co.automatictester.lightning.exceptions.XMLFileMissingElementValueException;
-import uk.co.automatictester.lightning.exceptions.XMLFileNoTestsException;
-import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
+import uk.co.automatictester.lightning.exceptions.*;
 import uk.co.automatictester.lightning.tests.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -112,7 +109,7 @@ public class TestSet {
             String name = getTestName(respTimeStdDevTestElement);
             String description = getTestDescription(respTimeStdDevTestElement);
             String transactionName = getTransactionName(respTimeStdDevTestElement);
-            long maxRespTimeStdDevTime = Long.parseLong(getElementByTagName(respTimeStdDevTestElement, "maxRespTimeStdDev"));
+            long maxRespTimeStdDevTime = Long.parseLong(getSubElementValueByTagName(respTimeStdDevTestElement, "maxRespTimeStdDev"));
 
             RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest(name, description, transactionName, maxRespTimeStdDevTime);
             tests.add(respTimeStdDevTest);
@@ -127,7 +124,7 @@ public class TestSet {
             String name = getTestName(avgRespTimeTestElement);
             String description = getTestDescription(avgRespTimeTestElement);
             String transactionName = getTransactionName(avgRespTimeTestElement);
-            long maxAvgRespTime = Long.parseLong(getElementByTagName(avgRespTimeTestElement, "maxAvgRespTime"));
+            long maxAvgRespTime = Long.parseLong(getSubElementValueByTagName(avgRespTimeTestElement, "maxAvgRespTime"));
 
             RespTimeAvgTest respTimeAvgTest = new RespTimeAvgTest(name, description, transactionName, maxAvgRespTime);
             tests.add(respTimeAvgTest);
@@ -142,8 +139,8 @@ public class TestSet {
             String name = getTestName(respTimeNthPercTestElement);
             String description = getTestDescription(respTimeNthPercTestElement);
             String transactionName = getTransactionName(respTimeNthPercTestElement);
-            int percentile = Integer.parseInt(getElementByTagName(respTimeNthPercTestElement, "percentile"));
-            double maxRespTime = Double.parseDouble(getElementByTagName(respTimeNthPercTestElement, "maxRespTime"));
+            int percentile = Integer.parseInt(getSubElementValueByTagName(respTimeNthPercTestElement, "percentile"));
+            double maxRespTime = Double.parseDouble(getSubElementValueByTagName(respTimeNthPercTestElement, "maxRespTime"));
 
             RespTimeNthPercentileTest respTimeAvgTest = new RespTimeNthPercentileTest(name, description, transactionName, percentile, maxRespTime);
             tests.add(respTimeAvgTest);
@@ -154,14 +151,32 @@ public class TestSet {
         return (((failureCount != 0) || (getErrorCount() != 0)) ? "FAIL" : "Pass");
     }
 
-    private String getTestName(Element element) {
-        String testName = element.getElementsByTagName("testName").item(0).getTextContent();
-        if (testName.equals("")) {
-            String parentNodeName = element.getElementsByTagName("testName").item(0).getParentNode().getNodeName();
-            throw new XMLFileMissingElementValueException(String.format("Missing testName value for %s", parentNodeName));
+    private String getSubElementValueByTagName(Element element, String subElement) {
+        String elementValue = getNodeByTagName(element, subElement).getTextContent();
+        if (elementValue.length() == 0) {
+            String parentNodeName = element.getNodeName();
+            throw new XMLFileMissingElementValueException(String.format("Missing %s value for %s", subElement, parentNodeName));
         } else {
-            return testName;
+            return elementValue;
         }
+    }
+
+    private Node getNodeByTagName(Element element, String subElement) {
+        Node node = element.getElementsByTagName(subElement).item(0);
+        if (node == null) {
+            throw new XMLFileMissingElementException(String.format("Missing element %s for %s", subElement, element.getNodeName()));
+        } else {
+            return node;
+        }
+    }
+
+    private String getTestName(Element element) {
+        return getSubElementValueByTagName(element, "testName");
+    }
+
+    private String getTestDescription(Element element) {
+        Node descriptionElement = element.getElementsByTagName("description").item(0);
+        return (descriptionElement != null) ? descriptionElement.getTextContent() : "";
     }
 
     private String getTransactionName(Element element) {
@@ -172,22 +187,8 @@ public class TestSet {
         }
     }
 
-    private String getTestDescription(Element element) {
-        Node descriptionElement = element.getElementsByTagName("description").item(0);
-        return (descriptionElement != null) ? descriptionElement.getTextContent() : "";
-    }
-
-    private String getElementByTagName(Element element, String subElement) {
-        return element.getElementsByTagName(subElement).item(0).getTextContent();
-    }
-
     private int getIntegerValueFromElement(Element element, String subElement) {
-        String elementValue = getElementByTagName(element, subElement);
-
-        if (elementValue.length() == 0) {
-            String parentNodeName = element.getNodeName();
-            throw new XMLFileMissingElementValueException(String.format("Missing %s value for %s", subElement, parentNodeName));
-        }
+        String elementValue = getSubElementValueByTagName(element, subElement);
 
         try {
             return Integer.parseInt(elementValue);

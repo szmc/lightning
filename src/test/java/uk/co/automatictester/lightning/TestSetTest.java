@@ -1,10 +1,7 @@
 package uk.co.automatictester.lightning;
 
 import org.testng.annotations.Test;
-import uk.co.automatictester.lightning.exceptions.XMLFileException;
-import uk.co.automatictester.lightning.exceptions.XMLFileMissingElementValueException;
-import uk.co.automatictester.lightning.exceptions.XMLFileNoTestsException;
-import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
+import uk.co.automatictester.lightning.exceptions.*;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
 
 import java.io.ByteArrayOutputStream;
@@ -50,13 +47,13 @@ public class TestSetTest {
     @Test(expectedExceptions = XMLFileMissingElementValueException.class)
     public void verifyLoadMethodThrowsXMLFileMissingElementValueException_testName() {
         TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION_TEST_NAME);
+        testSet.load(TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION);
     }
 
-    @Test(expectedExceptions = XMLFileMissingElementValueException.class)
-    public void verifyLoadMethodThrowsXMLFileMissingElementValueException_allowedNumberOfFailedTransactions() {
+    @Test(expectedExceptions = XMLFileMissingElementException.class)
+    public void verifyLoadMethodThrowsXMLFileMissingElementException() {
         TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION_NUM_OF_FAILED_TRANSACTIONS);
+        testSet.load(TEST_SET_XML_FILE_MISSING_ELEMENT_EXCEPTION);
     }
 
     @Test

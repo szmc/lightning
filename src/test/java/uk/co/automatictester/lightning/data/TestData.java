@@ -21,8 +21,8 @@ public class TestData {
     public static final String TEST_SET_0_0_0 = XML_RESOURCES + "0_0_0.xml";
     public static final String TEST_SET_NOT_WELL_FORMED = XML_RESOURCES + "not_well_formed.xml";
     public static final String TEST_SET_XML_FILE_NUMBER_FORMAT_EXCEPTION = XML_RESOURCES + "XMLFileNumberFormatException.xml";
-    public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION_TEST_NAME = XML_RESOURCES + "XMLFileMissingElementValueException_testName.xml";
-    public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION_NUM_OF_FAILED_TRANSACTIONS = XML_RESOURCES + "XMLFileMissingElementValueException_allowedNumberOfFailedTransactions.xml";
+    public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementValueException.xml";
+    public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementException.xml";
 
     // CSV files
     public static final String CSV_MISSING_LABEL_COLUMN = CSV_RESOURCES + "missing_label_column.csv";
