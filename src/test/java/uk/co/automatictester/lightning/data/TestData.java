@@ -16,13 +16,14 @@ public class TestData {
     private static final String CSV_RESOURCES = RESOURCES + "csv/";
 
     // XML files
-    public static final String TEST_SET_2_0_0 = XML_RESOURCES + "2_0_0.xml";
+    public static final String TEST_SET_3_0_0 = XML_RESOURCES + "3_0_0.xml";
     public static final String TEST_SET_1_1_1 = XML_RESOURCES + "1_1_1.xml";
     public static final String TEST_SET_0_0_0 = XML_RESOURCES + "0_0_0.xml";
     public static final String TEST_SET_NOT_WELL_FORMED = XML_RESOURCES + "not_well_formed.xml";
     public static final String TEST_SET_XML_FILE_NUMBER_FORMAT_EXCEPTION = XML_RESOURCES + "XMLFileNumberFormatException.xml";
     public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementValueException.xml";
     public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementException.xml";
+    public static final String TEST_SET_XML_FILE_PERCENTILE_EXCEPTION = XML_RESOURCES + "XMLFilePercentileException.xml";
 
     // CSV files
     public static final String CSV_MISSING_LABEL_COLUMN = CSV_RESOURCES + "missing_label_column.csv";

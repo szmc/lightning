@@ -11,10 +11,17 @@ Expected result:  Number of failed transactions <= 0
 Actual result:    Number of failed transactions = 0
 Test result:      Pass
 
+Test name:        Test #3
+Test description: Verify nth percentile
+Transaction name: Search
+Expected result:  80th percentile of transactions have response time <= 11245.0
+Actual result:    80th percentile of transactions have response time = 11244.2
+Test result:      Pass
+
 
 ============= EXECUTION SUMMARY =============
-Tests executed:    2
-Tests passed:      2
+Tests executed:    3
+Tests passed:      3
 Tests failed:      0
 Tests with errors: 0
 Test set status:   Pass

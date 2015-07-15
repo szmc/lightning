@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testSet>
 
-    <!-- expected result: 2 pass, 0 fail, 0 error -->
-
     <passedTransactionsTest>
         <testName>Test #1</testName>
         <description>Verify number of passed tests</description>
@@ -15,5 +13,14 @@
         <description>Verify number of passed tests</description>
         <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
     </passedTransactionsTest>
+
+    <nthPercRespTimeTest>
+        <testName>Test #3</testName>
+        <description>Verify nth percentile</description>
+        <transactionName>Search</transactionName>
+        <percentile>80</percentile>
+        <maxRespTime>11245</maxRespTime>
+    </nthPercRespTimeTest>
+
 
 </testSet>

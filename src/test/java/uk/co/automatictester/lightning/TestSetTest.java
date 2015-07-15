@@ -3,6 +3,8 @@ package uk.co.automatictester.lightning;
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.exceptions.*;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
+import uk.co.automatictester.lightning.tests.RespTimeNthPercentileTest;
+import uk.co.automatictester.lightning.tests.RespTimeNthPercentileTestTest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -17,13 +19,15 @@ public class TestSetTest {
     public void verifyLoadMethod() {
         PassedTransactionsTest passedTransactionsTestA = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
         PassedTransactionsTest passedTransactionsTestB = new PassedTransactionsTest("Test #2", "Verify number of passed tests", null, 0);
+        RespTimeNthPercentileTest percentileTest = new RespTimeNthPercentileTest("Test #3", "Verify nth percentile", "Search", 80, 11245);
 
         TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_2_0_0);
+        testSet.load(TEST_SET_3_0_0);
 
-        assertThat(testSet.getTests(), hasSize(2));
+        assertThat(testSet.getTests(), hasSize(3));
         assertThat(testSet.getTests(), hasItem(passedTransactionsTestA));
         assertThat(testSet.getTests(), hasItem(passedTransactionsTestB));
+        assertThat(testSet.getTests(), hasItem(percentileTest));
     }
 
     @Test(expectedExceptions = XMLFileException.class)
@@ -56,15 +60,21 @@ public class TestSetTest {
         testSet.load(TEST_SET_XML_FILE_MISSING_ELEMENT_EXCEPTION);
     }
 
+    @Test(expectedExceptions = XMLFilePercentileException.class)
+    public void verifyLoadMethodThrowsXMLFilePercentileException() {
+        TestSet testSet = new TestSet();
+        testSet.load(TEST_SET_XML_FILE_PERCENTILE_EXCEPTION);
+    }
+
     @Test
     public void verifyExecuteMethod() {
         JMeterTransactions jmeterTranactions = new JMeterCSVFileReader().read(CSV_2_TRANSACTIONS);
 
         TestSet testSet = new TestSet();
-        testSet.load(TEST_SET_2_0_0);
+        testSet.load(TEST_SET_3_0_0);
         testSet.execute(jmeterTranactions);
 
-        assertThat(testSet.getPassCount(), is(2));
+        assertThat(testSet.getPassCount(), is(3));
         assertThat(testSet.getFailCount(), is(0));
         assertThat(testSet.getErrorCount(), is(0));
     }
