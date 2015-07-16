@@ -14,7 +14,7 @@ public class JMeterCSVFileReader {
     private int elapsedIndex;
     private int successIndex;
 
-    public JMeterTransactions read(String csvFile) {
+    public JMeterTransactions getTransactions(String csvFile) {
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         try {
             CSVReader reader = new CSVReader(new FileReader(csvFile));

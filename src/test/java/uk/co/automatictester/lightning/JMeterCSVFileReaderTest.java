@@ -12,18 +12,18 @@ public class JMeterCSVFileReaderTest {
 
     @Test
     public void verifyReadMethod() {
-        JMeterTransactions jmeterTransactions = new JMeterCSVFileReader().read(CSV_2_TRANSACTIONS);
+        JMeterTransactions jmeterTransactions = new JMeterCSVFileReader().getTransactions(CSV_2_TRANSACTIONS);
         assertThat(jmeterTransactions, hasItem(LOGIN_3514_SUCCESS));
         assertThat(jmeterTransactions, hasItem(SEARCH_11221_SUCCESS));
     }
 
     @Test(expectedExceptions = CSVFileMissingColumnNameException.class)
     public void verifyReadMethodMissingColumnNameException() {
-        new JMeterCSVFileReader().read(CSV_MISSING_LABEL_COLUMN);
+        new JMeterCSVFileReader().getTransactions(CSV_MISSING_LABEL_COLUMN);
     }
 
     @Test(expectedExceptions = CSVFileIOException.class)
     public void verifyReadMethodIOException() {
-        new JMeterCSVFileReader().read(CSV_NONEXISTENT);
+        new JMeterCSVFileReader().getTransactions(CSV_NONEXISTENT);
     }
 }

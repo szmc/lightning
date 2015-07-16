@@ -2,7 +2,7 @@ package uk.co.automatictester.lightning.tests;
 
 import uk.co.automatictester.lightning.JMeterTransactions;
 
-public abstract class Test {
+public abstract class LightningTest {
 
     protected final String name;
     protected final String description;
@@ -13,7 +13,7 @@ public abstract class Test {
     protected boolean failed;
     protected boolean error;
 
-    protected Test(String name, String description, String transactionName) {
+    protected LightningTest(String name, String description, String transactionName) {
         this.name = name;
         this.description = description;
         this.transactionName = transactionName;

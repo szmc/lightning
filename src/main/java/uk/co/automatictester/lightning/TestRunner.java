@@ -2,11 +2,13 @@ package uk.co.automatictester.lightning;
 
 import com.beust.jcommander.JCommander;
 import uk.co.automatictester.lightning.params.CmdLineParams;
+import uk.co.automatictester.lightning.tests.LightningTest;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Properties;
 
 public class TestRunner {
@@ -28,10 +30,11 @@ public class TestRunner {
     public static void runTests() {
         long testSetExecStart = System.currentTimeMillis();
 
-        testSet = new TestSet();
-        testSet.load(params.getXmlFile());
+        String xmlFile = params.getXmlFile();
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(xmlFile);
+        testSet = new TestSet(tests);
 
-        JMeterTransactions originalJMeterTransactions = new JMeterCSVFileReader().read(params.getCSVFile());
+        JMeterTransactions originalJMeterTransactions = new JMeterCSVFileReader().getTransactions(params.getCSVFile());
         testSet.execute(originalJMeterTransactions);
 
         System.out.println(testSet.getTestSetExecutionReport());

@@ -13,7 +13,7 @@ public class RespTimeStdDevTestTest {
 
     @Test
     public void verifyExecutePass() {
-        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify response times", "Search", 1);
+        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", "Search", 1);
         JMeterTransactions jmeterTxns = new JMeterTransactions();
         jmeterTxns.add(SEARCH_1_SUCCESS);
         jmeterTxns.add(SEARCH_2_SUCCESS);
@@ -25,7 +25,7 @@ public class RespTimeStdDevTestTest {
 
     @Test
     public void verifyExecuteFail() {
-        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify response times", "Search", 0);
+        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", "Search", 0);
         JMeterTransactions jmeterTxns = new JMeterTransactions();
         jmeterTxns.add(SEARCH_1_SUCCESS);
         jmeterTxns.add(SEARCH_2_SUCCESS);
@@ -52,7 +52,7 @@ public class RespTimeStdDevTestTest {
 
     @Test
     public void verifyIsNotEqualOtherTestType() {
-        assertThat((uk.co.automatictester.lightning.tests.Test) RESP_TIME_STD_DEV_TEST_A, is(not(equalTo((uk.co.automatictester.lightning.tests.Test) AVG_RESP_TIME_TEST_A))));
+        assertThat((LightningTest) RESP_TIME_STD_DEV_TEST_A, is(not(equalTo((LightningTest) AVG_RESP_TIME_TEST_A))));
     }
 
     @Test

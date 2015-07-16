@@ -5,7 +5,7 @@ import uk.co.automatictester.lightning.JMeterTransactions;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class RespTimeAvgTest extends Test {
+public class RespTimeAvgTest extends LightningTest {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Average response time <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Average response time = %s";

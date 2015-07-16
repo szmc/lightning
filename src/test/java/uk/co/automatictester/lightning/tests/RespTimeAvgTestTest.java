@@ -48,7 +48,7 @@ public class RespTimeAvgTestTest {
 
     @Test
     public void verifyIsNotEqualOtherTestType() {
-        assertThat((uk.co.automatictester.lightning.tests.Test) AVG_RESP_TIME_TEST_A, is(not(equalTo((uk.co.automatictester.lightning.tests.Test) RESP_TIME_PERC_TEST_A))));
+        assertThat((LightningTest) AVG_RESP_TIME_TEST_A, is(not(equalTo((LightningTest) RESP_TIME_PERC_TEST_A))));
     }
 
     @Test

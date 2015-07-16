@@ -7,7 +7,7 @@ import uk.co.automatictester.lightning.utils.IntToOrdConverter;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class RespTimeNthPercentileTest extends Test {
+public class RespTimeNthPercentileTest extends LightningTest {
 
     private static final String MESSAGE = "%s percentile of transactions have response time ";
     private static final String EXPECTED_RESULT_MESSAGE = MESSAGE + "<= %s";
@@ -20,7 +20,7 @@ public class RespTimeNthPercentileTest extends Test {
         super(name, description, transactionName);
         this.maxRespTime = maxRespTime;
         this.percentile = percentile;
-        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, IntToOrdConverter.convert(percentile), maxRespTime);
+        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, new IntToOrdConverter().convert(percentile), maxRespTime);
     }
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
@@ -36,7 +36,7 @@ public class RespTimeNthPercentileTest extends Test {
             DecimalFormat df = new DecimalFormat("#.##");
             double roundedActualRespTimePercentile = Double.valueOf(df.format(actualRespTimePercentile));
 
-            actualResult = String.format(ACTUAL_RESULT_MESSAGE, IntToOrdConverter.convert(percentile), roundedActualRespTimePercentile);
+            actualResult = String.format(ACTUAL_RESULT_MESSAGE, new IntToOrdConverter().convert(percentile), roundedActualRespTimePercentile);
             passed = !(roundedActualRespTimePercentile > maxRespTime);
             failed = (roundedActualRespTimePercentile > maxRespTime);
         } catch (Exception e) {

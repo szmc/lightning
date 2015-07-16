@@ -21,13 +21,8 @@ public class JMeterTransactionsTest {
     }
 
     @Test
-    public void verifyNumberOfTransactions() {
-        assertThat(JMETER_TRANSACTIONS.size(), is(3));
-    }
-
-    @Test
     public void verifyExcludeLabelsOtherThanMethod() {
-        assertThat(JMETER_TRANSACTIONS.excludeLabelsOtherThan(EXISTING_LABEL).size(), is(2));
+        assertThat(JMETER_TRANSACTIONS.excludeLabelsOtherThan(LOGIN_LABEL).size(), is(2));
     }
 
     @Test(expectedExceptions = CSVFileNonexistentLabelException.class)

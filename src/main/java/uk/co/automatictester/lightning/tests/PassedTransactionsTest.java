@@ -5,7 +5,7 @@ import uk.co.automatictester.lightning.JMeterTransactions;
 import java.util.List;
 import java.util.Objects;
 
-public class PassedTransactionsTest extends Test {
+public class PassedTransactionsTest extends LightningTest {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Number of failed transactions <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Number of failed transactions = %s";

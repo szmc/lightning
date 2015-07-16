@@ -6,7 +6,7 @@ import uk.co.automatictester.lightning.JMeterTransactions;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class RespTimeStdDevTest extends Test {
+public class RespTimeStdDevTest extends LightningTest {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Average standard deviance time <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Average standard deviance time = %s";
