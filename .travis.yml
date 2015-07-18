@@ -10,8 +10,4 @@ script:
  - ./src/test/scripts/test/set/console/output/3_0_0.sh
  - ./src/test/scripts/test/set/exit/code/1_1_1.sh
  - ./src/test/scripts/test/set/exit/code/3_0_0.sh
- - ./src/test/scripts/test/types/console/output/avgRespTimeTest.sh
- - ./src/test/scripts/test/types/console/output/nthPercRespTimeTest.sh
- - ./src/test/scripts/test/types/console/output/passedTransactionsTest.sh
- - ./src/test/scripts/test/types/console/output/respTimeStdDevTest.sh
  - ls -l target/lightning*

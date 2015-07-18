@@ -2,7 +2,7 @@ package uk.co.automatictester.lightning;
 
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.exceptions.*;
-import uk.co.automatictester.lightning.tests.LightningTest;
+import uk.co.automatictester.lightning.tests.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -16,7 +16,46 @@ import static uk.co.automatictester.lightning.data.TestData.*;
 public class LightningXMLFileReaderTest {
 
     @Test
-    public void verifyGetTestsMethod() {
+    public void verifyGetTestsMethodPercentileTest() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_PERCENTILE);
+        RespTimeNthPercentileTest test = new RespTimeNthPercentileTest("Test #4", "Verify nth percentile", "Search", 80, 11245);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
+
+    @Test
+    public void verifyGetTestsMethodStdDevTest() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_STD_DEV);
+        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #2", "Verify standard deviation", "Search", 500);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
+
+    @Test
+    public void verifyGetTestsMethodPassedTest() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_PASSED);
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #3", "Verify number of passed tests", "Login", 0);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
+
+    @Test
+    public void verifyGetTestsMethodAvgRespTime() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_AVG_RESP_TIME);
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify average login times", "Login", 4000);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
+
+
+
+
+    @Test
+    public void verifyGetTestsMethodThreeTestsOfTwoKinds() {
         List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_3_0_0);
 
         assertThat(tests, hasSize(3));
