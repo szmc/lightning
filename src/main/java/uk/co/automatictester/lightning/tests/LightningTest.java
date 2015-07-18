@@ -41,7 +41,7 @@ public abstract class LightningTest {
                         "%s" +
                         "Expected result:  %s%n" +
                         "Actual result:    %s%n" +
-                        "Test result:      %s%n%n",
+                        "Test result:      %s%n",
                 name,
                 desc,
                 transName,
