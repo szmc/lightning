@@ -1,6 +1,7 @@
 package uk.co.automatictester.lightning.tests;
 
 import uk.co.automatictester.lightning.JMeterTransactions;
+import uk.co.automatictester.lightning.TestResult;
 
 public abstract class LightningTest {
 
@@ -9,9 +10,7 @@ public abstract class LightningTest {
     protected final String transactionName;
     protected String expectedResult;
     protected String actualResult;
-    protected boolean passed;
-    protected boolean failed;
-    protected boolean error;
+    protected TestResult result;
 
     protected LightningTest(String name, String description, String transactionName) {
         this.name = name;
@@ -19,9 +18,7 @@ public abstract class LightningTest {
         this.transactionName = transactionName;
         this.expectedResult = "";
         this.actualResult = "";
-        this.passed = false;
-        this.failed = false;
-        this.error = false;
+        this.result = null;
     }
 
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
@@ -31,9 +28,9 @@ public abstract class LightningTest {
         String transName = (transactionName != null) ? (String.format("Transaction name: %s%n", transactionName)) : "";
         String testResult;
 
-        if (error) {
-            testResult = "ERROR";
-        } else if (failed) {
+        if (result == TestResult.IGNORED) {
+            testResult = "IGNORED";
+        } else if (result == TestResult.FAIL) {
             testResult = "FAIL";
         } else {
             testResult = "Pass";
@@ -53,15 +50,7 @@ public abstract class LightningTest {
                 testResult);
     }
 
-    public boolean isPassed() {
-        return passed;
-    }
-
-    public boolean isFailed() {
-        return failed;
-    }
-
-    public boolean isError() {
-        return error;
+    public TestResult getResult() {
+        return result;
     }
 }

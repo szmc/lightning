@@ -2,6 +2,7 @@ package uk.co.automatictester.lightning.tests;
 
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.JMeterTransactions;
+import uk.co.automatictester.lightning.TestResult;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -18,7 +19,7 @@ public class PassedTransactionsTestTest {
         jmeterTransactions.add(LOGIN_1000_SUCCESS);
 
         test.execute(jmeterTransactions);
-        assertThat(test.isPassed(), is(equalTo(true)));
+        assertThat(test.getResult(), is(equalTo(TestResult.PASS)));
     }
 
     @Test
@@ -29,7 +30,7 @@ public class PassedTransactionsTestTest {
         jmeterTransactions.add(SEARCH_800_SUCCESS);
 
         test.execute(jmeterTransactions);
-        assertThat(test.isPassed(), is(equalTo(true)));
+        assertThat(test.getResult(), is(equalTo(TestResult.PASS)));
     }
 
     @Test
@@ -39,7 +40,7 @@ public class PassedTransactionsTestTest {
         jmeterTransactions.add(LOGIN_1200_FAILURE);
 
         test.execute(jmeterTransactions);
-        assertThat(test.isFailed(), is(equalTo(true)));
+        assertThat(test.getResult(), is(equalTo(TestResult.FAIL)));
     }
 
     @Test
@@ -50,7 +51,7 @@ public class PassedTransactionsTestTest {
         jmeterTransactions.add(SEARCH_800_FAILURE);
 
         test.execute(jmeterTransactions);
-        assertThat(test.isFailed(), is(equalTo(true)));
+        assertThat(test.getResult(), is(equalTo(TestResult.FAIL)));
     }
 
     @Test
@@ -60,7 +61,7 @@ public class PassedTransactionsTestTest {
         jmeterTransactions.add(LOGIN_1200_FAILURE);
 
         test.execute(jmeterTransactions);
-        assertThat(test.isError(), is(equalTo(true)));
+        assertThat(test.getResult(), is(equalTo(TestResult.IGNORED)));
     }
 
     @Test

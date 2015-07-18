@@ -19,7 +19,7 @@ public class TeamCityReporterTest extends ConsoleOutputTest {
         TestSet testSet = mock(TestSet.class);
         when(testSet.getTestCount()).thenReturn(6);
         when(testSet.getFailCount()).thenReturn(2);
-        when(testSet.getErrorCount()).thenReturn(1);
+        when(testSet.getIgnoreCount()).thenReturn(1);
 
         new TeamCityReporter().setTeamCityBuildStatusText(testSet);
         assertThat(out.toString(), equalTo(expectedOutput));

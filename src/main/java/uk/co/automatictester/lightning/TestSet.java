@@ -10,7 +10,7 @@ public class TestSet {
     private List<LightningTest> tests = new ArrayList<>();
     private int passCount = 0;
     private int failureCount = 0;
-    private int errorCount = 0;
+    private int ignoreCount = 0;
     private String testSetExecutionReport = "";
 
     public TestSet(List<LightningTest> tests) {
@@ -20,9 +20,9 @@ public class TestSet {
     public void execute(JMeterTransactions originalJMeterTransactions) {
         for (LightningTest test : getTests()) {
             test.execute(originalJMeterTransactions);
-            if (test.isPassed()) passCount++;
-            if (test.isFailed()) failureCount++;
-            if (test.isError()) errorCount++;
+            if (test.getResult() == TestResult.PASS) passCount++;
+            if (test.getResult() == TestResult.FAIL) failureCount++;
+            if (test.getResult() == TestResult.IGNORED) ignoreCount++;
             testSetExecutionReport += test.getReport();
         }
     }
@@ -37,7 +37,7 @@ public class TestSet {
                 + "Tests passed:      %s%n"
                 + "Tests failed:      %s%n"
                 + "Tests with errors: %s%n"
-                + "Test set status:   %s", getTests().size(), getPassCount(), getFailCount(), getErrorCount(), getTestSetStatus());
+                + "Test set status:   %s", getTests().size(), getPassCount(), getFailCount(), getIgnoreCount(), getTestSetStatus());
     }
 
     public int getTestCount() {
@@ -52,8 +52,8 @@ public class TestSet {
         return failureCount;
     }
 
-    public int getErrorCount() {
-        return errorCount;
+    public int getIgnoreCount() {
+        return ignoreCount;
     }
 
     public List<LightningTest> getTests() {
@@ -61,7 +61,7 @@ public class TestSet {
     }
 
     private String getTestSetStatus() {
-        return (((failureCount != 0) || (getErrorCount() != 0)) ? "FAIL" : "Pass");
+        return (((failureCount != 0) || (getIgnoreCount() != 0)) ? "FAIL" : "Pass");
     }
 
 }

@@ -1,6 +1,7 @@
 package uk.co.automatictester.lightning.tests;
 
 import uk.co.automatictester.lightning.JMeterTransactions;
+import uk.co.automatictester.lightning.TestResult;
 
 import java.util.List;
 import java.util.Objects;
@@ -34,10 +35,14 @@ public class PassedTransactionsTest extends LightningTest {
             }
 
             actualResult = String.format(ACTUAL_RESULT_MESSAGE, failureCount);
-            passed = !(failureCount > allowedNumberOfFailedTransactions);
-            failed = (failureCount > allowedNumberOfFailedTransactions);
+
+            if (failureCount > allowedNumberOfFailedTransactions) {
+                result = TestResult.FAIL;
+            } else {
+                result = TestResult.PASS;
+            }
         } catch (Exception e) {
-            error = true;
+            result = TestResult.IGNORED;
             actualResult = e.getMessage();
         }
     }
@@ -50,7 +55,7 @@ public class PassedTransactionsTest extends LightningTest {
                     Objects.equals(transactionName, test.transactionName) &&
                     expectedResult.equals(test.expectedResult) &&
                     actualResult.equals(test.actualResult) &&
-                    failed == test.failed &&
+                    result == test.result &&
                     allowedNumberOfFailedTransactions == test.allowedNumberOfFailedTransactions;
         } else {
             return false;

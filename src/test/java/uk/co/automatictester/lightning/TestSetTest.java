@@ -35,6 +35,6 @@ public class TestSetTest {
 
         assertThat(testSet.getPassCount(), is(3));
         assertThat(testSet.getFailCount(), is(0));
-        assertThat(testSet.getErrorCount(), is(0));
+        assertThat(testSet.getIgnoreCount(), is(0));
     }
 }

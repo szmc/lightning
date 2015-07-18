@@ -49,7 +49,7 @@ public class TestRunner {
         long testExecTime = testSetExecEnd - testSetExecStart;
         System.out.println(String.format("Execution time:    %dms", testExecTime));
 
-        exitCode = testSet.getFailCount() + testSet.getErrorCount();
+        exitCode = testSet.getFailCount() + testSet.getIgnoreCount();
     }
 
     private static void notifyCIServer() {

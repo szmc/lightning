@@ -2,6 +2,7 @@ package uk.co.automatictester.lightning.tests;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import uk.co.automatictester.lightning.JMeterTransactions;
+import uk.co.automatictester.lightning.TestResult;
 import uk.co.automatictester.lightning.utils.IntToOrdConverter;
 
 import java.text.DecimalFormat;
@@ -37,10 +38,14 @@ public class RespTimeNthPercentileTest extends LightningTest {
             double roundedActualRespTimePercentile = Double.valueOf(df.format(actualRespTimePercentile));
 
             actualResult = String.format(ACTUAL_RESULT_MESSAGE, new IntToOrdConverter().convert(percentile), roundedActualRespTimePercentile);
-            passed = !(roundedActualRespTimePercentile > maxRespTime);
-            failed = (roundedActualRespTimePercentile > maxRespTime);
+
+            if (roundedActualRespTimePercentile > maxRespTime) {
+                result = TestResult.FAIL;
+            } else {
+                result = TestResult.PASS;
+            }
         } catch (Exception e) {
-            error = true;
+            result = TestResult.IGNORED;
             actualResult = e.getMessage();
         }
     }
@@ -53,7 +58,7 @@ public class RespTimeNthPercentileTest extends LightningTest {
                     transactionName.equals(test.transactionName) &&
                     expectedResult.equals(test.expectedResult) &&
                     actualResult.equals(test.actualResult) &&
-                    failed == test.failed &&
+                    result == test.result &&
                     maxRespTime == test.maxRespTime &&
                     percentile == test.percentile;
         } else {

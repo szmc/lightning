@@ -1,6 +1,7 @@
 package uk.co.automatictester.lightning.tests;
 
 import uk.co.automatictester.lightning.JMeterTransactions;
+import uk.co.automatictester.lightning.TestResult;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -32,10 +33,14 @@ public class RespTimeAvgTest extends LightningTest {
             double roundedAvgRespTime = Double.valueOf(df.format(avgRespTime));
 
             actualResult = String.format(ACTUAL_RESULT_MESSAGE, roundedAvgRespTime);
-            passed = !(roundedAvgRespTime > maxAvgRespTime);
-            failed = (roundedAvgRespTime > maxAvgRespTime);
+
+            if (roundedAvgRespTime > maxAvgRespTime) {
+                result = TestResult.FAIL;
+            } else {
+                result = TestResult.PASS;
+            }
         } catch (Exception e) {
-            error = true;
+            result = TestResult.IGNORED;
             actualResult = e.getMessage();
         }
     }
@@ -48,7 +53,7 @@ public class RespTimeAvgTest extends LightningTest {
                     transactionName.equals(test.transactionName) &&
                     expectedResult.equals(test.expectedResult) &&
                     actualResult.equals(test.actualResult) &&
-                    failed == test.failed &&
+                    result == test.result &&
                     maxAvgRespTime == test.maxAvgRespTime;
         } else {
             return false;
