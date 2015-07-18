@@ -23,7 +23,7 @@ public abstract class LightningTest {
 
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
 
-    public String getReport() {
+    public void printExecutionReport() {
         String desc = (!description.isEmpty()) ? (String.format("Test description: %s%n", description)) : "";
         String transName = (transactionName != null) ? (String.format("Transaction name: %s%n", transactionName)) : "";
         String testResult;
@@ -36,7 +36,7 @@ public abstract class LightningTest {
             testResult = "Pass";
         }
 
-        return String.format("Test name:        %s%n" +
+        String executionReport = String.format("Test name:        %s%n" +
                         "%s" +
                         "%s" +
                         "Expected result:  %s%n" +
@@ -48,6 +48,8 @@ public abstract class LightningTest {
                 expectedResult,
                 actualResult,
                 testResult);
+
+        System.out.println(executionReport);
     }
 
     public TestResult getResult() {

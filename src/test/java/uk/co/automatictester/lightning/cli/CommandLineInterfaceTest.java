@@ -56,7 +56,9 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
                 "       Lightning XML config file");
 
         CommandLineInterface params = new CommandLineInterface(new String[]{"-h"});
+        configureStream();
         params.printHelp();
         assertThat(out.toString(), containsString(expectedOutput));
+        revertStream();
     }
 }

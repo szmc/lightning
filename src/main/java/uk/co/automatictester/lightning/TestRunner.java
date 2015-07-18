@@ -3,6 +3,7 @@ package uk.co.automatictester.lightning;
 import uk.co.automatictester.lightning.ci.JenkinsReporter;
 import uk.co.automatictester.lightning.ci.TeamCityReporter;
 import uk.co.automatictester.lightning.cli.CommandLineInterface;
+import uk.co.automatictester.lightning.reporters.TestSetReporter;
 import uk.co.automatictester.lightning.tests.LightningTest;
 
 import java.util.List;
@@ -42,8 +43,7 @@ public class TestRunner {
         JMeterTransactions originalJMeterTransactions = new JMeterCSVFileReader().getTransactions(params.getCSVFile());
         testSet.execute(originalJMeterTransactions);
 
-        System.out.println(testSet.getTestSetExecutionReport());
-        System.out.println(testSet.getTestSetExecutionSummaryReport());
+        new TestSetReporter(testSet).printTestSetExecutionSummaryReport();
 
         long testSetExecEnd = System.currentTimeMillis();
         long testExecTime = testSetExecEnd - testSetExecStart;

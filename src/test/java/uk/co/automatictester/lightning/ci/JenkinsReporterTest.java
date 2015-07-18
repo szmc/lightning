@@ -1,7 +1,6 @@
 package uk.co.automatictester.lightning.ci;
 
 import org.testng.annotations.Test;
-import uk.co.automatictester.lightning.ConsoleOutputTest;
 import uk.co.automatictester.lightning.TestSet;
 
 import java.io.File;
@@ -13,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class JenkinsReporterTest extends ConsoleOutputTest {
+public class JenkinsReporterTest {
 
     @Test
     public void testSetJenkinsBuildName() throws FileNotFoundException {

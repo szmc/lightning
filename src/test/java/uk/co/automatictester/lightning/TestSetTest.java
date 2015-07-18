@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.is;
 import static uk.co.automatictester.lightning.data.TestData.LOGIN_3514_SUCCESS;
 import static uk.co.automatictester.lightning.data.TestData.SEARCH_11221_SUCCESS;
 
-public class TestSetTest {
+public class TestSetTest extends ConsoleOutputTest {
 
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_A = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_B = new PassedTransactionsTest("Test #2", "Verify number of passed tests", null, 0);
@@ -31,7 +31,9 @@ public class TestSetTest {
         tests.add(RESP_TIME_PERC_TEST_3_0_0_C);
 
         TestSet testSet = new TestSet(tests);
+        configureStream();
         testSet.execute(transactions);
+        revertStream();
 
         assertThat(testSet.getPassCount(), is(3));
         assertThat(testSet.getFailCount(), is(0));

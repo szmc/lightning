@@ -21,7 +21,9 @@ public class TeamCityReporterTest extends ConsoleOutputTest {
         when(testSet.getFailCount()).thenReturn(2);
         when(testSet.getIgnoreCount()).thenReturn(1);
 
+        configureStream();
         new TeamCityReporter().setTeamCityBuildStatusText(testSet);
         assertThat(out.toString(), equalTo(expectedOutput));
+        revertStream();
     }
 }
