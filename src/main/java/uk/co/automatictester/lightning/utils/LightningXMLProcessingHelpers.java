@@ -7,7 +7,7 @@ import uk.co.automatictester.lightning.exceptions.XMLFileMissingElementValueExce
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
 import uk.co.automatictester.lightning.exceptions.XMLFilePercentileException;
 
-public abstract class XMLProcessingHelpers {
+public abstract class LightningXMLProcessingHelpers {
 
     protected String getSubElementValueByTagName(Element element, String subElement) {
         String elementValue = getNodeByTagName(element, subElement).getTextContent();
