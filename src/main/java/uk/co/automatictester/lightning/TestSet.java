@@ -1,5 +1,6 @@
 package uk.co.automatictester.lightning;
 
+import uk.co.automatictester.lightning.reporters.TestReporter;
 import uk.co.automatictester.lightning.tests.LightningTest;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class TestSet {
             } else if (test.getResult() == TestResult.IGNORED) {
                 ignoreCount++;
             }
-            test.printExecutionReport();
+            new TestReporter(test).printTestExecutionReport();
         }
     }
 

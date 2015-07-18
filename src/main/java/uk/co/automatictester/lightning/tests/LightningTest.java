@@ -23,33 +23,24 @@ public abstract class LightningTest {
 
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
 
-    public void printExecutionReport() {
-        String desc = (!description.isEmpty()) ? (String.format("Test description: %s%n", description)) : "";
-        String transName = (transactionName != null) ? (String.format("Transaction name: %s%n", transactionName)) : "";
-        String testResult;
+    public String getName() {
+        return name;
+    }
 
-        if (result == TestResult.IGNORED) {
-            testResult = "IGNORED";
-        } else if (result == TestResult.FAIL) {
-            testResult = "FAIL";
-        } else {
-            testResult = "Pass";
-        }
+    public String getDescription() {
+        return description;
+    }
 
-        String executionReport = String.format("Test name:        %s%n" +
-                        "%s" +
-                        "%s" +
-                        "Expected result:  %s%n" +
-                        "Actual result:    %s%n" +
-                        "Test result:      %s%n",
-                name,
-                desc,
-                transName,
-                expectedResult,
-                actualResult,
-                testResult);
+    public String getTransactionName() {
+        return transactionName;
+    }
 
-        System.out.println(executionReport);
+    public String getExpectedResult() {
+        return expectedResult;
+    }
+
+    public String getActualResult() {
+        return actualResult;
     }
 
     public TestResult getResult() {

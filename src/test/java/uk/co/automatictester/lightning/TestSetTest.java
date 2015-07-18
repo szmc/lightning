@@ -3,7 +3,7 @@ package uk.co.automatictester.lightning;
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.tests.LightningTest;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
-import uk.co.automatictester.lightning.tests.RespTimeNthPercentileTest;
+import uk.co.automatictester.lightning.tests.RespTimeAvgTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,28 +15,51 @@ import static uk.co.automatictester.lightning.data.TestData.SEARCH_11221_SUCCESS
 
 public class TestSetTest extends ConsoleOutputTest {
 
-    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_A = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
-    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_B = new PassedTransactionsTest("Test #2", "Verify number of passed tests", null, 0);
-    public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_3_0_0_C = new RespTimeNthPercentileTest("Test #3", "Verify nth percentile", "Search", 80, 11245);
-
     @Test
-    public void verifyExecuteMethod() {
+    public void verifyExecuteMethod_2_0_0() {
+        PassedTransactionsTest passedTransactionsTestA = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
+        PassedTransactionsTest passedTransactionsTestB = new PassedTransactionsTest("Test #2", "Verify number of passed tests", null, 0);
+
         JMeterTransactions transactions = new JMeterTransactions();
         transactions.add(LOGIN_3514_SUCCESS);
         transactions.add(SEARCH_11221_SUCCESS);
 
         List<LightningTest> tests = new ArrayList<>();
-        tests.add(PASSED_TRANSACTIONS_TEST_3_0_0_A);
-        tests.add(PASSED_TRANSACTIONS_TEST_3_0_0_B);
-        tests.add(RESP_TIME_PERC_TEST_3_0_0_C);
+        tests.add(passedTransactionsTestA);
+        tests.add(passedTransactionsTestB);
 
         TestSet testSet = new TestSet(tests);
         configureStream();
         testSet.execute(transactions);
         revertStream();
 
-        assertThat(testSet.getPassCount(), is(3));
+        assertThat(testSet.getPassCount(), is(2));
         assertThat(testSet.getFailCount(), is(0));
         assertThat(testSet.getIgnoreCount(), is(0));
+    }
+
+    @Test
+    public void verifyExecuteMethod_1_1_1() {
+        RespTimeAvgTest respTimeAvgTestA = new RespTimeAvgTest("Test #1", "", "Login", 4000);
+        RespTimeAvgTest respTimeAvgTestB = new RespTimeAvgTest("Test #2", "", "Search", 5000);
+        RespTimeAvgTest respTimeAvgTestC = new RespTimeAvgTest("Test #3", "", "Sear", 1000);
+
+        JMeterTransactions transactions = new JMeterTransactions();
+        transactions.add(LOGIN_3514_SUCCESS);
+        transactions.add(SEARCH_11221_SUCCESS);
+
+        List<LightningTest> tests = new ArrayList<>();
+        tests.add(respTimeAvgTestA);
+        tests.add(respTimeAvgTestB);
+        tests.add(respTimeAvgTestC);
+
+        TestSet testSet = new TestSet(tests);
+        configureStream();
+        testSet.execute(transactions);
+        revertStream();
+
+        assertThat(testSet.getPassCount(), is(1));
+        assertThat(testSet.getFailCount(), is(1));
+        assertThat(testSet.getIgnoreCount(), is(1));
     }
 }
