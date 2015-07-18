@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 public class TeamCityReporterTest extends ConsoleOutputTest {
 
     @Test
-    public void testSetTeamCityBuildStatus() {
+    public void testSetTeamCityBuildStatusText() {
         String expectedOutput = String.format("%nSet TeamCity build status text:%n" +
                 "##teamcity[buildStatus text='Tests executed: 6, failed: 2, ignored: 1']%n");
 

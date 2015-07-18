@@ -14,52 +14,52 @@ public class PassedTransactionsTestTest {
     @Test
     public void verifyExecuteMethodPass() {
         PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
-        JMeterTransactions jmeterTranactions = new JMeterTransactions();
-        jmeterTranactions.add(LOGIN_1000_SUCCESS);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1000_SUCCESS);
 
-        test.execute(jmeterTranactions);
+        test.execute(jmeterTransactions);
         assertThat(test.isPassed(), is(equalTo(true)));
     }
 
     @Test
     public void verifyExecuteMethodAllTransactionsPass() {
         PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", null, 0);
-        JMeterTransactions jmeterTranactions = new JMeterTransactions();
-        jmeterTranactions.add(LOGIN_1000_SUCCESS);
-        jmeterTranactions.add(SEARCH_800_SUCCESS);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1000_SUCCESS);
+        jmeterTransactions.add(SEARCH_800_SUCCESS);
 
-        test.execute(jmeterTranactions);
+        test.execute(jmeterTransactions);
         assertThat(test.isPassed(), is(equalTo(true)));
     }
 
     @Test
     public void verifyExecuteMethodFail() {
         PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
-        JMeterTransactions jmeterTranactions = new JMeterTransactions();
-        jmeterTranactions.add(LOGIN_1200_FAILURE);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1200_FAILURE);
 
-        test.execute(jmeterTranactions);
+        test.execute(jmeterTransactions);
         assertThat(test.isFailed(), is(equalTo(true)));
     }
 
     @Test
     public void verifyExecuteMethodAllTransactionsFail() {
         PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", null, 0);
-        JMeterTransactions jmeterTranactions = new JMeterTransactions();
-        jmeterTranactions.add(LOGIN_1200_SUCCESS);
-        jmeterTranactions.add(SEARCH_800_FAILURE);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1200_SUCCESS);
+        jmeterTransactions.add(SEARCH_800_FAILURE);
 
-        test.execute(jmeterTranactions);
+        test.execute(jmeterTransactions);
         assertThat(test.isFailed(), is(equalTo(true)));
     }
 
     @Test
     public void verifyExecuteMethodError() {
         PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", NONEXISTENT_LABEL, 0);
-        JMeterTransactions jmeterTranactions = new JMeterTransactions();
-        jmeterTranactions.add(LOGIN_1200_FAILURE);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1200_FAILURE);
 
-        test.execute(jmeterTranactions);
+        test.execute(jmeterTransactions);
         assertThat(test.isError(), is(equalTo(true)));
     }
 

@@ -2,20 +2,15 @@ package uk.co.automatictester.lightning;
 
 import uk.co.automatictester.lightning.ci.JenkinsReporter;
 import uk.co.automatictester.lightning.ci.TeamCityReporter;
-import uk.co.automatictester.lightning.params.CommandLineParameters;
+import uk.co.automatictester.lightning.cli.CommandLineInterface;
 import uk.co.automatictester.lightning.tests.LightningTest;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
-import java.util.Properties;
 
 public class TestRunner {
 
     private static int exitCode;
-    private static CommandLineParameters params;
+    private static CommandLineInterface params;
     private static TestSet testSet;
 
     public static void main(String[] args) {
@@ -27,7 +22,7 @@ public class TestRunner {
     }
 
     private static void parseParams(String[] args) {
-        params = new CommandLineParameters(args);
+        params = new CommandLineInterface(args);
     }
 
     private static void printHelpAndExitIfRequested() {
@@ -60,7 +55,7 @@ public class TestRunner {
     private static void notifyCIServer() {
         if (params.isCIEqualTo("teamcity")) {
             new TeamCityReporter().setTeamCityBuildStatusText(testSet);
-        } else if(params.isCIEqualTo("jenkins")) {
+        } else if (params.isCIEqualTo("jenkins")) {
             new JenkinsReporter().setJenkinsBuildName(testSet);
         }
     }

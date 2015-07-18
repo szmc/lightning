@@ -1,4 +1,4 @@
-package uk.co.automatictester.lightning.params.validators;
+package uk.co.automatictester.lightning.cli.validators;
 
 import com.beust.jcommander.ParameterException;
 import org.testng.annotations.DataProvider;

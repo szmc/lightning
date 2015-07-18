@@ -14,30 +14,30 @@ public class RespTimeAvgTestTest {
     @Test
     public void verifyExecutePass() {
         RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", "Search", 1000);
-        JMeterTransactions jmeterTranactions = new JMeterTransactions();
-        jmeterTranactions.add(SEARCH_800_SUCCESS);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_800_SUCCESS);
 
-        test.execute(jmeterTranactions);
+        test.execute(jmeterTransactions);
         assertThat(test.isPassed(), is(equalTo(true)));
     }
 
     @Test
     public void verifyExecuteFail() {
         RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", "Search", 800);
-        JMeterTransactions jmeterTranactions = new JMeterTransactions();
-        jmeterTranactions.add(SEARCH_11221_SUCCESS);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_11221_SUCCESS);
 
-        test.execute(jmeterTranactions);
+        test.execute(jmeterTransactions);
         assertThat(test.isFailed(), is(equalTo(true)));
     }
 
     @Test
     public void verifyExecuteError() {
         RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", NONEXISTENT_LABEL, 800);
-        JMeterTransactions jmeterTranactions = new JMeterTransactions();
-        jmeterTranactions.add(SEARCH_11221_SUCCESS);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_11221_SUCCESS);
 
-        test.execute(jmeterTranactions);
+        test.execute(jmeterTransactions);
         assertThat(test.isError(), is(equalTo(true)));
     }
 

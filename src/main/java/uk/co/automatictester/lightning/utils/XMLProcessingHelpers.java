@@ -7,7 +7,7 @@ import uk.co.automatictester.lightning.exceptions.XMLFileMissingElementValueExce
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
 import uk.co.automatictester.lightning.exceptions.XMLFilePercentileException;
 
-public class XMLProcessingHelpers {
+public abstract class XMLProcessingHelpers {
 
     protected String getSubElementValueByTagName(Element element, String subElement) {
         String elementValue = getNodeByTagName(element, subElement).getTextContent();
@@ -59,14 +59,11 @@ public class XMLProcessingHelpers {
     protected int getPercentile(Element element, String subElement) {
         int elementValue = getIntegerValueFromElement(element, subElement);
         String parentNodeName = element.getNodeName();
-        if (isPercentile(elementValue)) {
+        if (new Percentile().isPercentile(elementValue)) {
             return elementValue;
         } else {
             throw new XMLFilePercentileException(String.format("Incorrect %s value for %s: %s", subElement, parentNodeName, elementValue));
         }
     }
 
-    public boolean isPercentile(int percentile) {
-        return ((percentile > 0) && (percentile <= 100));
-    }
 }

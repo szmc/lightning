@@ -14,34 +14,34 @@ public class RespTimeStdDevTestTest {
     @Test
     public void verifyExecutePass() {
         RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", "Search", 1);
-        JMeterTransactions jmeterTxns = new JMeterTransactions();
-        jmeterTxns.add(SEARCH_1_SUCCESS);
-        jmeterTxns.add(SEARCH_2_SUCCESS);
-        jmeterTxns.add(SEARCH_3_SUCCESS);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_1_SUCCESS);
+        jmeterTransactions.add(SEARCH_2_SUCCESS);
+        jmeterTransactions.add(SEARCH_3_SUCCESS);
 
-        test.execute(jmeterTxns);
+        test.execute(jmeterTransactions);
         assertThat(test.isPassed(), is(equalTo(true)));
     }
 
     @Test
     public void verifyExecuteFail() {
         RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", "Search", 0);
-        JMeterTransactions jmeterTxns = new JMeterTransactions();
-        jmeterTxns.add(SEARCH_1_SUCCESS);
-        jmeterTxns.add(SEARCH_2_SUCCESS);
-        jmeterTxns.add(SEARCH_3_SUCCESS);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_1_SUCCESS);
+        jmeterTransactions.add(SEARCH_2_SUCCESS);
+        jmeterTransactions.add(SEARCH_3_SUCCESS);
 
-        test.execute(jmeterTxns);
+        test.execute(jmeterTransactions);
         assertThat(test.isFailed(), is(equalTo(true)));
     }
 
     @Test
     public void verifyExecuteError() {
         RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", NONEXISTENT_LABEL, 8);
-        JMeterTransactions jmeterTxns = new JMeterTransactions();
-        jmeterTxns.add(SEARCH_11221_SUCCESS);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_11221_SUCCESS);
 
-        test.execute(jmeterTxns);
+        test.execute(jmeterTransactions);
         assertThat(test.isError(), is(equalTo(true)));
     }
 

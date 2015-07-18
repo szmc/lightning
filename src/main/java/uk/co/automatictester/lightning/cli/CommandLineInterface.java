@@ -1,13 +1,13 @@
-package uk.co.automatictester.lightning.params;
+package uk.co.automatictester.lightning.cli;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
-import uk.co.automatictester.lightning.params.validators.CIServerValidator;
-import uk.co.automatictester.lightning.params.validators.FileValidator;
+import uk.co.automatictester.lightning.cli.validators.CIServerValidator;
+import uk.co.automatictester.lightning.cli.validators.FileValidator;
 
 @Parameters(separators = "=")
-public class CommandLineParameters {
+public class CommandLineInterface {
 
     @Parameter(names = "-xml", description = "Lightning XML config file", required = true, validateWith = FileValidator.class)
     private String xmlFile;
@@ -23,7 +23,7 @@ public class CommandLineParameters {
 
     private JCommander jc;
 
-    public CommandLineParameters(String[] args) {
+    public CommandLineInterface(String[] args) {
         jc = new JCommander(this, args);
     }
 
