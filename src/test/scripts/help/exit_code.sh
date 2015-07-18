@@ -10,7 +10,7 @@ java \
 OUT=$?
 
 echo "EXIT CODE TEST"
-if [ $OUT -eq 255 ];then
+if [ $OUT -eq 1 ];then
     echo "EXIT CODE = $OUT"
     echo "TEST PASSED"
     exit 0
