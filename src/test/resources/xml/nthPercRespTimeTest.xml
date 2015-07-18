@@ -6,7 +6,7 @@
         <description>Verify nth percentile</description>
         <transactionName>Search</transactionName>
         <percentile>80</percentile>
-        <maxRespTime>11244.2</maxRespTime>
+        <maxRespTime>11245</maxRespTime>
     </nthPercRespTimeTest>
 
 </testSet>
