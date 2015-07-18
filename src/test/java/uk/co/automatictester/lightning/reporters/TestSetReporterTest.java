@@ -5,7 +5,6 @@ import uk.co.automatictester.lightning.ConsoleOutputTest;
 import uk.co.automatictester.lightning.TestSet;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
