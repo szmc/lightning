@@ -10,5 +10,5 @@ Test result:      Pass
 Tests executed:    1
 Tests passed:      1
 Tests failed:      0
-Tests with errors: 0
+Tests ignored:     0
 Test set status:   Pass
