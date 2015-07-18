@@ -7,7 +7,7 @@ import org.xml.sax.SAXException;
 import uk.co.automatictester.lightning.exceptions.XMLFileException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNoTestsException;
 import uk.co.automatictester.lightning.tests.*;
-import uk.co.automatictester.lightning.utils.XMLReadHelpers;
+import uk.co.automatictester.lightning.utils.XMLProcessingHelpers;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LightningXMLFileReader extends XMLReadHelpers {
+public class LightningXMLFileReader extends XMLProcessingHelpers {
 
     private List<LightningTest> tests = new ArrayList<>();
 

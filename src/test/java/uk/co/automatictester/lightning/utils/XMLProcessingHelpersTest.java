@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class XMLReadHelpersTest {
+public class XMLProcessingHelpersTest {
 
     @DataProvider(name = "positiveTestData")
     private Integer[][] positiveTestData() {
@@ -27,13 +27,13 @@ public class XMLReadHelpersTest {
 
     @Test(dataProvider = "positiveTestData")
     public void testIsPercentileTrue(int integer) {
-        XMLReadHelpers helper = new XMLReadHelpers();
+        XMLProcessingHelpers helper = new XMLProcessingHelpers();
         assertThat(helper.isPercentile(integer), is(true));
     }
 
     @Test(dataProvider = "negativeTestData")
     public void testIsPercentileFalse(int integer) {
-        XMLReadHelpers helper = new XMLReadHelpers();
+        XMLProcessingHelpers helper = new XMLProcessingHelpers();
         assertThat(helper.isPercentile(integer), is(false));
     }
 }

@@ -1,7 +1,8 @@
 package uk.co.automatictester.lightning;
 
-import com.beust.jcommander.JCommander;
-import uk.co.automatictester.lightning.params.CmdLineParams;
+import uk.co.automatictester.lightning.ci.JenkinsReporter;
+import uk.co.automatictester.lightning.ci.TeamCityReporter;
+import uk.co.automatictester.lightning.params.CommandLineParameters;
 import uk.co.automatictester.lightning.tests.LightningTest;
 
 import java.io.File;
@@ -14,20 +15,29 @@ import java.util.Properties;
 public class TestRunner {
 
     private static int exitCode;
-    private static JCommander jc;
-    private static CmdLineParams params;
+    private static CommandLineParameters params;
     private static TestSet testSet;
 
     public static void main(String[] args) {
         parseParams(args);
         printHelpAndExitIfRequested();
         runTests();
-        setTeamCityBuildStatusTextIfRequested();
-        setJenkinsBuildNameIfRequested();
+        notifyCIServer();
         setExitCode();
     }
 
-    public static void runTests() {
+    private static void parseParams(String[] args) {
+        params = new CommandLineParameters(args);
+    }
+
+    private static void printHelpAndExitIfRequested() {
+        if (params.isHelpRequested()) {
+            params.printHelp();
+            System.exit(1);
+        }
+    }
+
+    private static void runTests() {
         long testSetExecStart = System.currentTimeMillis();
 
         String xmlFile = params.getXmlFile();
@@ -47,51 +57,12 @@ public class TestRunner {
         exitCode = testSet.getFailCount() + testSet.getErrorCount();
     }
 
-    public static void parseParams(String[] args) {
-        params = new CmdLineParams();
-        jc = new JCommander(params, args);
-    }
-
-    private static void printHelpAndExitIfRequested() {
-        if (params.isHelp()) {
-            printHelpIfRequested();
-            System.exit(-1);
-        }
-    }
-
-    public static void printHelpIfRequested() {
-        if (params.isHelp()) {
-            jc.setProgramName("java -jar lightning-<version_number>.jar");
-            jc.usage();
-        }
-    }
-
-    public static void setTeamCityBuildStatusTextIfRequested() {
+    private static void notifyCIServer() {
         if (params.isCIEqualTo("teamcity")) {
-            System.out.println(System.lineSeparator() + "Set TeamCity build status text:");
-            System.out.println(String.format("##teamcity[buildStatus text='%s']", getExecutionSummaryForCI()));
+            new TeamCityReporter().setTeamCityBuildStatusText(testSet);
+        } else if(params.isCIEqualTo("jenkins")) {
+            new JenkinsReporter().setJenkinsBuildName(testSet);
         }
-    }
-
-    public static void setJenkinsBuildNameIfRequested() {
-        if (params.isCIEqualTo("jenkins")) {
-            try {
-                Properties props = new Properties();
-                props.setProperty("result.string", getExecutionSummaryForCI());
-                File f = new File("lightning-jenkins.properties");
-                OutputStream out = new FileOutputStream(f);
-                props.store(out, "In Jenkins Build Name Setter Plugin, define build name as: ${PROPFILE,file=\"lightning-jenkins.properties\",property=\"result.string\"}");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private static String getExecutionSummaryForCI() {
-        int executed = testSet.getTests().size();
-        int failed = testSet.getFailCount();
-        int ignored = testSet.getErrorCount();
-        return String.format("Tests executed: %s, failed: %s, ignored: %s", executed, failed, ignored);
     }
 
     private static void setExitCode() {

@@ -8,11 +8,11 @@ import java.io.PrintStream;
 
 public class ConsoleOutputTest {
 
-    protected final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    protected final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     @BeforeMethod
     protected void configureStreams() {
-        System.setOut(new PrintStream(outContent));
+        System.setOut(new PrintStream(out));
     }
 
     @AfterMethod

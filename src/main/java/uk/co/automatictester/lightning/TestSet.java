@@ -1,7 +1,6 @@
 package uk.co.automatictester.lightning;
 
 import uk.co.automatictester.lightning.tests.*;
-import uk.co.automatictester.lightning.utils.XMLReadHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +38,10 @@ public class TestSet {
                 + "Tests failed:      %s%n"
                 + "Tests with errors: %s%n"
                 + "Test set status:   %s", getTests().size(), getPassCount(), getFailCount(), getErrorCount(), getTestSetStatus());
+    }
+
+    public int getTestCount() {
+        return tests.size();
     }
 
     public int getPassCount() {
