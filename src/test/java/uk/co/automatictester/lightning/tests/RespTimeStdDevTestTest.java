@@ -38,7 +38,7 @@ public class RespTimeStdDevTestTest {
 
     @Test
     public void verifyExecuteError() {
-        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", NONEXISTENT_LABEL, 8);
+        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", "nonexistent", 8);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_11221_SUCCESS);
 

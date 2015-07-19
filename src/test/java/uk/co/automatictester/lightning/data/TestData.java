@@ -71,8 +71,4 @@ public class TestData {
     public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_A = new RespTimeNthPercentileTest("Test #1", "Verify 90 percentile", "Search", 9, 9);
     public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_B = new RespTimeNthPercentileTest("Test #1", "Verify 90 percentile", "Search", 9, 8);
 
-    // Other
-    public static final String NONEXISTENT_LABEL = "nonexistent";
-    public static final String LOGIN_LABEL = "Login";
-
 }

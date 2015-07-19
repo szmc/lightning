@@ -56,7 +56,7 @@ public class PassedTransactionsTestTest {
 
     @Test
     public void verifyExecuteMethodError() {
-        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", NONEXISTENT_LABEL, 0);
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "nonexistent", 0);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(LOGIN_1200_FAILURE);
 

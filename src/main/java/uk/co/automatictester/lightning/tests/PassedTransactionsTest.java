@@ -21,7 +21,7 @@ public class PassedTransactionsTest extends LightningTest {
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
         try {
-            JMeterTransactions transactions = null;
+            JMeterTransactions transactions;
             if (transactionName != null) {
                 transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
             } else {

@@ -18,4 +18,19 @@ public class JMeterTransactions extends ArrayList<ArrayList<String>> {
         return transactions;
     }
 
+    public int getFailCount() {
+        int failCount = 0;
+        for (ArrayList<String> transaction : this) {
+            if (transaction.get(2).equals("false")) {
+                failCount++;
+            }
+        }
+        
+        return failCount;
+    }
+
+    public int getTransactionCount() {
+        return this.size();
+    }
+
 }

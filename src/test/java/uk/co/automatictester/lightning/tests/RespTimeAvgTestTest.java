@@ -34,7 +34,7 @@ public class RespTimeAvgTestTest {
 
     @Test
     public void verifyExecuteError() {
-        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", NONEXISTENT_LABEL, 800);
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", "nonexistent", 800);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_11221_SUCCESS);
 

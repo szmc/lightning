@@ -10,7 +10,7 @@ public class TestSet {
 
     private List<LightningTest> tests = new ArrayList<>();
     private int passCount = 0;
-    private int failureCount = 0;
+    private int failCount = 0;
     private int ignoreCount = 0;
 
     public TestSet(List<LightningTest> tests) {
@@ -23,7 +23,7 @@ public class TestSet {
             if (test.getResult() == TestResult.PASS) {
                 passCount++;
             } else if (test.getResult() == TestResult.FAIL) {
-                failureCount++;
+                failCount++;
             } else if (test.getResult() == TestResult.IGNORED) {
                 ignoreCount++;
             }
@@ -40,7 +40,7 @@ public class TestSet {
     }
 
     public int getFailCount() {
-        return failureCount;
+        return failCount;
     }
 
     public int getIgnoreCount() {
