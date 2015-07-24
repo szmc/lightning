@@ -52,8 +52,6 @@ public class LightningXMLFileReaderTest {
     }
 
 
-
-
     @Test
     public void verifyGetTestsMethodThreeTestsOfTwoKinds() {
         List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_3_0_0);

@@ -4,6 +4,7 @@ mkdir -p src/test/resources/results/actual/
 
 java \
     -jar target/lightning*.jar \
+    verify \
     -xml src/test/resources/xml/1_1_1.xml \
     -csv src/test/resources/csv/10_transactions.csv \
     > src/test/resources/results/actual/1_1_1.txt

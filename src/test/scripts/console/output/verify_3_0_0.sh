@@ -7,6 +7,7 @@ ACTUAL_RESULT="src/test/resources/results/actual/3_0_0.txt"
 
 java \
     -jar target/lightning*.jar \
+    verify \
     -xml src/test/resources/xml/3_0_0.xml \
     -csv src/test/resources/csv/10_transactions.csv \
     | grep -v "Execution time:" > $ACTUAL_RESULT

@@ -33,6 +33,7 @@ public class TestSetTest extends ConsoleOutputTest {
         testSet.execute(transactions);
         revertStream();
 
+        assertThat(testSet.getTestCount(), is(2));
         assertThat(testSet.getPassCount(), is(2));
         assertThat(testSet.getFailCount(), is(0));
         assertThat(testSet.getIgnoreCount(), is(0));
@@ -58,6 +59,7 @@ public class TestSetTest extends ConsoleOutputTest {
         testSet.execute(transactions);
         revertStream();
 
+        assertThat(testSet.getTestCount(), is(3));
         assertThat(testSet.getPassCount(), is(1));
         assertThat(testSet.getFailCount(), is(1));
         assertThat(testSet.getIgnoreCount(), is(1));

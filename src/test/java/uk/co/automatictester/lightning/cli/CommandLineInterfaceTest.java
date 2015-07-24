@@ -5,8 +5,7 @@ import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.ConsoleOutputTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 public class CommandLineInterfaceTest extends ConsoleOutputTest {
 
@@ -18,6 +17,12 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
         };
     }
 
+    @Test(dataProvider = "teamcity")
+    public void testIsCIEqualToTeamCityTrue(String ci) {
+        CommandLineInterface params = new CommandLineInterface(new String[]{"verify", String.format("-ci=%s", ci), "-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
+        assertThat(params.verify.isCIEqualTo("teamcity"), is(true));
+    }
+
     @DataProvider(name = "jenkins")
     private String[][] jenkins() {
         return new String[][]{
@@ -26,36 +31,75 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
         };
     }
 
-    @Test(dataProvider = "teamcity")
-    public void testIsCIEqualToTeamCityTrue(String ci) {
-        CommandLineInterface params = new CommandLineInterface(new String[]{String.format("-ci=%s", ci), "-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
-        assertThat(params.isCIEqualTo("teamcity"), is(true));
-    }
-
     @Test(dataProvider = "jenkins")
     public void testIsCIEqualToJenkinsTrue(String ci) {
-        CommandLineInterface params = new CommandLineInterface(new String[]{String.format("-ci=%s", ci), "-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
-        assertThat(params.isCIEqualTo("jenkins"), is(true));
+        CommandLineInterface params = new CommandLineInterface(new String[]{"verify", String.format("-ci=%s", ci), "-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
+        assertThat(params.verify.isCIEqualTo("jenkins"), is(true));
+    }
+
+    @Test
+    public void testGetParsedCommandVerify() {
+        CommandLineInterface params = new CommandLineInterface(new String[]{"verify", "-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
+        assertThat(params.getParsedCommand(), equalToIgnoringCase("verify"));
+    }
+
+    @Test
+    public void testGetParsedCommandReport() {
+        CommandLineInterface params = new CommandLineInterface(new String[]{"report", "-csv=src/test/resources/csv/10_transactions.csv"});
+        assertThat(params.getParsedCommand(), equalToIgnoringCase("report"));
+    }
+
+    @Test
+    public void testGetCSVFileInReportMode() {
+        CommandLineInterface params = new CommandLineInterface(new String[]{"report", "-csv=src/test/resources/csv/10_transactions.csv"});
+        assertThat(params.report.getCSVFile(), equalToIgnoringCase("src/test/resources/csv/10_transactions.csv"));
+    }
+
+    @Test
+    public void testGetCSVFileInVerifyMode() {
+        CommandLineInterface params = new CommandLineInterface(new String[]{"verify", "-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
+        assertThat(params.verify.getCSVFile(), equalToIgnoringCase("src/test/resources/csv/10_transactions.csv"));
+    }
+
+    @Test
+    public void testGetXMLFileInVerifyMode() {
+        CommandLineInterface params = new CommandLineInterface(new String[]{"verify", "-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
+        assertThat(params.verify.getXmlFile(), equalToIgnoringCase("src/test/resources/xml/3_0_0.xml"));
     }
 
     @Test
     public void testIsCIEqualToJenkinsNotSet() {
-        CommandLineInterface params = new CommandLineInterface(new String[]{"-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
-        assertThat(params.isCIEqualTo("jenkins"), is(false));
+        CommandLineInterface params = new CommandLineInterface(new String[]{"verify", "-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
+        assertThat(params.verify.isCIEqualTo("jenkins"), is(false));
+    }
+
+    @Test
+    public void testIsHelpRequested() {
+        CommandLineInterface params = new CommandLineInterface(new String[]{"-h"});
+        assertThat(params.isHelpRequested(), is(true));
     }
 
     @Test
     public void testPrintHelp() {
-        String expectedOutput = String.format("Usage: java -jar lightning-<version_number>.jar [options]%n" +
-                "  Options:%n" +
-                "    -ci%n" +
-                "       CI server (jenkins or teamcity)%n" +
-                "  * -csv%n" +
-                "       JMeter CSV result file%n" +
-                "  * -xml%n" +
-                "       Lightning XML config file");
+        String expectedOutput = String.format("Usage: java -jar lightning-<version_number>.jar [options] [command] [command options]%n" +
+                "  Commands:%n" +
+                "    verify      Execute Lightning tests agains JMeter output%n" +
+                "      Usage: verify [options]%n" +
+                "        Options:%n" +
+                "          -ci%n" +
+                "             CI server (jenkins or teamcity)%n" +
+                "        * -csv%n" +
+                "             JMeter CSV result file%n" +
+                "        * -xml%n" +
+                "             Lightning XML config file%n" +
+                "%n" +
+                "    report      Generate report on JMeter output%n" +
+                "      Usage: report [options]%n" +
+                "        Options:%n" +
+                "        * -csv%n" +
+                "             JMeter CSV result file");
 
-        CommandLineInterface params = new CommandLineInterface(new String[]{"-h"});
+        CommandLineInterface params = new CommandLineInterface(new String[]{});
         configureStream();
         params.printHelp();
         assertThat(out.toString(), containsString(expectedOutput));
