@@ -45,7 +45,8 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
     }
 
     private void addPassedTransactionsTestNodes(Document xmlDoc) {
-        NodeList passedTransactionsTestNodes = xmlDoc.getElementsByTagName("passedTransactionsTest");
+        String testType = "passedTransactionsTest";
+        NodeList passedTransactionsTestNodes = xmlDoc.getElementsByTagName(testType);
         for (int i = 0; i < passedTransactionsTestNodes.getLength(); i++) {
             Element passedTransactionsElement = (Element) passedTransactionsTestNodes.item(i);
 
@@ -55,14 +56,15 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
 
             int allowedNumberOfFailedTransactions = getIntegerValueFromElement(passedTransactionsElement, "allowedNumberOfFailedTransactions");
 
-            PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest(name, description, transactionName, allowedNumberOfFailedTransactions);
+            PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest(name, testType, description, transactionName, allowedNumberOfFailedTransactions);
             tests.add(passedTransactionsTest);
         }
 
     }
 
     private void addRespTimeStdDevTestNodes(Document xmlDoc) {
-        NodeList respTimeStdDevTestNodes = xmlDoc.getElementsByTagName("respTimeStdDevTest");
+        String testType = "respTimeStdDevTest";
+        NodeList respTimeStdDevTestNodes = xmlDoc.getElementsByTagName(testType);
         for (int i = 0; i < respTimeStdDevTestNodes.getLength(); i++) {
             Element respTimeStdDevTestElement = (Element) respTimeStdDevTestNodes.item(i);
 
@@ -71,13 +73,14 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             String transactionName = getTransactionName(respTimeStdDevTestElement);
             int maxRespTimeStdDevTime = getIntegerValueFromElement(respTimeStdDevTestElement, "maxRespTimeStdDev");
 
-            RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest(name, description, transactionName, maxRespTimeStdDevTime);
+            RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest(name, testType, description, transactionName, maxRespTimeStdDevTime);
             tests.add(respTimeStdDevTest);
         }
     }
 
     private void addRespTimeAvgTests(Document xmlDoc) {
-        NodeList avgRespTimeTestNodes = xmlDoc.getElementsByTagName("avgRespTimeTest");
+        String testType = "avgRespTimeTest";
+        NodeList avgRespTimeTestNodes = xmlDoc.getElementsByTagName(testType);
         for (int i = 0; i < avgRespTimeTestNodes.getLength(); i++) {
             Element avgRespTimeTestElement = (Element) avgRespTimeTestNodes.item(i);
 
@@ -86,13 +89,14 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             String transactionName = getTransactionName(avgRespTimeTestElement);
             int maxAvgRespTime = getIntegerValueFromElement(avgRespTimeTestElement, "maxAvgRespTime");
 
-            RespTimeAvgTest respTimeAvgTest = new RespTimeAvgTest(name, description, transactionName, maxAvgRespTime);
+            RespTimeAvgTest respTimeAvgTest = new RespTimeAvgTest(name, testType, description, transactionName, maxAvgRespTime);
             tests.add(respTimeAvgTest);
         }
     }
 
     private void addRespTimeNthPercTests(Document xmlDoc) {
-        NodeList respTimeNthPercTestNodes = xmlDoc.getElementsByTagName("nthPercRespTimeTest");
+        String testType = "nthPercRespTimeTest";
+        NodeList respTimeNthPercTestNodes = xmlDoc.getElementsByTagName(testType);
         for (int i = 0; i < respTimeNthPercTestNodes.getLength(); i++) {
             Element respTimeNthPercTestElement = (Element) respTimeNthPercTestNodes.item(i);
 
@@ -102,7 +106,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int percentile = getPercentile(respTimeNthPercTestElement, "percentile");
             int maxRespTime = getIntegerValueFromElement(respTimeNthPercTestElement, "maxRespTime");
 
-            RespTimeNthPercentileTest respTimeAvgTest = new RespTimeNthPercentileTest(name, description, transactionName, percentile, maxRespTime);
+            RespTimeNthPercentileTest respTimeAvgTest = new RespTimeNthPercentileTest(name, testType, description, transactionName, percentile, maxRespTime);
             tests.add(respTimeAvgTest);
         }
     }

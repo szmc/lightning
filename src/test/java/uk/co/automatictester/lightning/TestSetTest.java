@@ -17,8 +17,8 @@ public class TestSetTest extends ConsoleOutputTest {
 
     @Test
     public void verifyExecuteMethod_2_0_0() {
-        PassedTransactionsTest passedTransactionsTestA = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
-        PassedTransactionsTest passedTransactionsTestB = new PassedTransactionsTest("Test #2", "Verify number of passed tests", null, 0);
+        PassedTransactionsTest passedTransactionsTestA = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
+        PassedTransactionsTest passedTransactionsTestB = new PassedTransactionsTest("Test #2", "passedTransactionsTest", "Verify number of passed tests", null, 0);
 
         JMeterTransactions transactions = new JMeterTransactions();
         transactions.add(LOGIN_3514_SUCCESS);
@@ -41,9 +41,9 @@ public class TestSetTest extends ConsoleOutputTest {
 
     @Test
     public void verifyExecuteMethod_1_1_1() {
-        RespTimeAvgTest respTimeAvgTestA = new RespTimeAvgTest("Test #1", "", "Login", 4000);
-        RespTimeAvgTest respTimeAvgTestB = new RespTimeAvgTest("Test #2", "", "Search", 5000);
-        RespTimeAvgTest respTimeAvgTestC = new RespTimeAvgTest("Test #3", "", "Sear", 1000);
+        RespTimeAvgTest respTimeAvgTestA = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "", "Login", 4000);
+        RespTimeAvgTest respTimeAvgTestB = new RespTimeAvgTest("Test #2", "avgRespTimeTest", "", "Search", 5000);
+        RespTimeAvgTest respTimeAvgTestC = new RespTimeAvgTest("Test #3", "avgRespTimeTest", "", "Sear", 1000);
 
         JMeterTransactions transactions = new JMeterTransactions();
         transactions.add(LOGIN_3514_SUCCESS);

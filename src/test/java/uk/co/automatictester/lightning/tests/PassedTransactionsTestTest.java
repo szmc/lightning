@@ -14,7 +14,7 @@ public class PassedTransactionsTestTest {
 
     @Test
     public void verifyExecuteMethodPass() {
-        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(LOGIN_1000_SUCCESS);
 
@@ -24,7 +24,7 @@ public class PassedTransactionsTestTest {
 
     @Test
     public void verifyExecuteMethodAllTransactionsPass() {
-        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", null, 0);
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", null, 0);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(LOGIN_1000_SUCCESS);
         jmeterTransactions.add(SEARCH_800_SUCCESS);
@@ -35,7 +35,7 @@ public class PassedTransactionsTestTest {
 
     @Test
     public void verifyExecuteMethodFail() {
-        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(LOGIN_1200_FAILURE);
 
@@ -45,7 +45,7 @@ public class PassedTransactionsTestTest {
 
     @Test
     public void verifyExecuteMethodAllTransactionsFail() {
-        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", null, 0);
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", null, 0);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(LOGIN_1200_SUCCESS);
         jmeterTransactions.add(SEARCH_800_FAILURE);
@@ -56,7 +56,7 @@ public class PassedTransactionsTestTest {
 
     @Test
     public void verifyExecuteMethodError() {
-        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "nonexistent", 0);
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "nonexistent", 0);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(LOGIN_1200_FAILURE);
 

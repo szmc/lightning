@@ -17,8 +17,8 @@ public class RespTimeNthPercentileTest extends LightningTest {
     private final double maxRespTime;
     private final int percentile;
 
-    public RespTimeNthPercentileTest(String name, String description, String transactionName, int percentile, double maxRespTime) {
-        super(name, description, transactionName);
+    public RespTimeNthPercentileTest(String name, String type, String description, String transactionName, int percentile, double maxRespTime) {
+        super(name, type, description, transactionName);
         this.maxRespTime = maxRespTime;
         this.percentile = percentile;
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, new IntToOrdConverter().convert(percentile), maxRespTime);

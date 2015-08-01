@@ -13,12 +13,14 @@ public class TestReporter {
 
     public void printTestExecutionReport() {
         String executionReport = String.format("Test name:        %s%n" +
+                        "Test type:        %s%n" +
                         "%s" +
                         "%s" +
                         "Expected result:  %s%n" +
                         "Actual result:    %s%n" +
                         "Test result:      %s%n",
                 test.getName(),
+                test.getType(),
                 getDescription(),
                 getTransactionName(),
                 test.getExpectedResult(),

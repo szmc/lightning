@@ -14,8 +14,8 @@ public class RespTimeStdDevTest extends LightningTest {
 
     private final long maxRespTimeStdDev;
 
-    public RespTimeStdDevTest(String name, String description, String transactionName, long maxRespTimeStdDev) {
-        super(name, description, transactionName);
+    public RespTimeStdDevTest(String name, String type, String description, String transactionName, long maxRespTimeStdDev) {
+        super(name, type, description, transactionName);
         this.maxRespTimeStdDev = maxRespTimeStdDev;
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxRespTimeStdDev);
     }

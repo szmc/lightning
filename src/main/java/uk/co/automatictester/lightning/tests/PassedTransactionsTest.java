@@ -13,8 +13,8 @@ public class PassedTransactionsTest extends LightningTest {
 
     private final long allowedNumberOfFailedTransactions;
 
-    public PassedTransactionsTest(String name, String description, String transactionName, long allowedNumberOfFailedTransactions) {
-        super(name, description, transactionName);
+    public PassedTransactionsTest(String name, String type, String description, String transactionName, long allowedNumberOfFailedTransactions) {
+        super(name, type, description, transactionName);
         this.allowedNumberOfFailedTransactions = allowedNumberOfFailedTransactions;
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, allowedNumberOfFailedTransactions);
     }

@@ -14,7 +14,7 @@ public class RespTimeAvgTestTest {
 
     @Test
     public void verifyExecutePass() {
-        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", "Search", 1000);
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify response times", "Search", 1000);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_800_SUCCESS);
 
@@ -24,7 +24,7 @@ public class RespTimeAvgTestTest {
 
     @Test
     public void verifyExecuteFail() {
-        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", "Search", 800);
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify response times", "Search", 800);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_11221_SUCCESS);
 
@@ -34,7 +34,7 @@ public class RespTimeAvgTestTest {
 
     @Test
     public void verifyExecuteError() {
-        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "Verify response times", "nonexistent", 800);
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify response times", "nonexistent", 800);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_11221_SUCCESS);
 

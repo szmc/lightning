@@ -8,12 +8,14 @@ public abstract class LightningTest {
     protected final String name;
     protected final String description;
     protected final String transactionName;
+    protected final String type;
     protected String expectedResult;
     protected String actualResult;
     protected TestResult result;
 
-    protected LightningTest(String name, String description, String transactionName) {
+    protected LightningTest(String name, String type, String description, String transactionName) {
         this.name = name;
+        this.type = type;
         this.description = description;
         this.transactionName = transactionName;
         this.expectedResult = "";
@@ -25,6 +27,10 @@ public abstract class LightningTest {
 
     public String getName() {
         return name;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getDescription() {

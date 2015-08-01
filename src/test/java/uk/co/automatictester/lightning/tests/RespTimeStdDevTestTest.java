@@ -14,7 +14,7 @@ public class RespTimeStdDevTestTest {
 
     @Test
     public void verifyExecutePass() {
-        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", "Search", 1);
+        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviance", "Search", 1);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_1_SUCCESS);
         jmeterTransactions.add(SEARCH_2_SUCCESS);
@@ -26,7 +26,7 @@ public class RespTimeStdDevTestTest {
 
     @Test
     public void verifyExecuteFail() {
-        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", "Search", 0);
+        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviance", "Search", 0);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_1_SUCCESS);
         jmeterTransactions.add(SEARCH_2_SUCCESS);
@@ -38,7 +38,7 @@ public class RespTimeStdDevTestTest {
 
     @Test
     public void verifyExecuteError() {
-        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "Verify standard deviance", "nonexistent", 8);
+        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviance", "nonexistent", 8);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_11221_SUCCESS);
 

@@ -13,8 +13,8 @@ public class RespTimeAvgTest extends LightningTest {
 
     private final long maxAvgRespTime;
 
-    public RespTimeAvgTest(String name, String description, String transactionName, long maxAvgRespTime) {
-        super(name, description, transactionName);
+    public RespTimeAvgTest(String name, String type, String description, String transactionName, long maxAvgRespTime) {
+        super(name, type, description, transactionName);
         this.maxAvgRespTime = maxAvgRespTime;
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxAvgRespTime);
     }

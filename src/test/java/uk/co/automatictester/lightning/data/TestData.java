@@ -57,18 +57,18 @@ public class TestData {
     public static final ArrayList<String> SEARCH_10_SUCCESS = new ArrayList<>(Arrays.asList("Search", "10", "true"));
 
     // Tests
-    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_A = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
-    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_B = new PassedTransactionsTest("Test #2", "Verify number of passed tests", null, 0);
-    public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_3_0_0_C = new RespTimeNthPercentileTest("Test #3", "Verify nth percentile", "Search", 80, 11245);
+    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_A = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
+    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_B = new PassedTransactionsTest("Test #2", "passedTransactionsTest", "Verify number of passed tests", null, 0);
+    public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_3_0_0_C = new RespTimeNthPercentileTest("Test #3", "nthPercRespTimeTest", "Verify nth percentile", "Search", 80, 11245);
 
-    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_A = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 1);
-    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_B = new PassedTransactionsTest("Test #1", "Verify number of passed tests", "Login", 0);
-    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME = new PassedTransactionsTest("Test #1", "Verify number of passed tests", null, 0);
-    public static final RespTimeAvgTest AVG_RESP_TIME_TEST_A = new RespTimeAvgTest("Test #1", "Verify average response times", "Search", 1000);
-    public static final RespTimeAvgTest AVG_RESP_TIME_TEST_B = new RespTimeAvgTest("Test #1", "Verify average response times", "Search", 100);
-    public static final RespTimeStdDevTest RESP_TIME_STD_DEV_TEST_A = new RespTimeStdDevTest("Test #1", "Verify standard deviation", "Login", 1);
-    public static final RespTimeStdDevTest RESP_TIME_STD_DEV_TEST_B = new RespTimeStdDevTest("Test #1", "Verify standard deviation", "Login", 0);
-    public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_A = new RespTimeNthPercentileTest("Test #1", "Verify 90 percentile", "Search", 9, 9);
-    public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_B = new RespTimeNthPercentileTest("Test #1", "Verify 90 percentile", "Search", 9, 8);
+    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_A = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 1);
+    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_B = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
+    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", null, 0);
+    public static final RespTimeAvgTest AVG_RESP_TIME_TEST_A = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify average response times", "Search", 1000);
+    public static final RespTimeAvgTest AVG_RESP_TIME_TEST_B = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify average response times", "Search", 100);
+    public static final RespTimeStdDevTest RESP_TIME_STD_DEV_TEST_A = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviation", "Login", 1);
+    public static final RespTimeStdDevTest RESP_TIME_STD_DEV_TEST_B = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviation", "Login", 0);
+    public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_A = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90 percentile", "Search", 9, 9);
+    public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_B = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90 percentile", "Search", 9, 8);
 
 }
