@@ -57,7 +57,7 @@ public class PassedTransactionsTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
                     allowedNumberOfFailedTransactions == test.allowedNumberOfFailedTransactions &&
-                    type == test.type;
+                    type.equals(test.type);
         } else {
             return false;
         }

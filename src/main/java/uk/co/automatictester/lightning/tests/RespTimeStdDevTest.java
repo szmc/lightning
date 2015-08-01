@@ -60,7 +60,7 @@ public class RespTimeStdDevTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
                     maxRespTimeStdDev == test.maxRespTimeStdDev &&
-                    type == test.type;
+                    type.equals(test.type);
         } else {
             return false;
         }

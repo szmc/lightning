@@ -52,7 +52,7 @@ public class ThroughputTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
                     minThroughput == test.minThroughput &&
-                    type == test.type;
+                    type.equals(test.type);
         } else {
             return false;
         }
