@@ -3,6 +3,8 @@ package uk.co.automatictester.lightning;
 import uk.co.automatictester.lightning.ci.JenkinsReporter;
 import uk.co.automatictester.lightning.ci.TeamCityReporter;
 import uk.co.automatictester.lightning.cli.CommandLineInterface;
+import uk.co.automatictester.lightning.readers.JMeterCSVFileReader;
+import uk.co.automatictester.lightning.readers.LightningXMLFileReader;
 import uk.co.automatictester.lightning.reporters.JMeterReporter;
 import uk.co.automatictester.lightning.reporters.TestSetReporter;
 import uk.co.automatictester.lightning.tests.LightningTest;

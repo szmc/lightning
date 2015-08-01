@@ -2,6 +2,7 @@ package uk.co.automatictester.lightning;
 
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.exceptions.*;
+import uk.co.automatictester.lightning.readers.LightningXMLFileReader;
 import uk.co.automatictester.lightning.tests.*;
 
 import java.io.ByteArrayOutputStream;

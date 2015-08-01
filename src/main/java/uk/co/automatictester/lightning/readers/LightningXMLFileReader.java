@@ -1,4 +1,4 @@
-package uk.co.automatictester.lightning;
+package uk.co.automatictester.lightning.readers;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

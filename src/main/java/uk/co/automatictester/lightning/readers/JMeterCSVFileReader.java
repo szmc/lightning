@@ -1,6 +1,7 @@
-package uk.co.automatictester.lightning;
+package uk.co.automatictester.lightning.readers;
 
 import com.opencsv.CSVReader;
+import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.exceptions.CSVFileIOException;
 import uk.co.automatictester.lightning.exceptions.CSVFileMissingColumnNameException;
 
