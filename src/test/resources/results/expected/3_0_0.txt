@@ -1,4 +1,5 @@
 Test name:        Test #1
+Test type:        passedTransactionsTest
 Test description: Verify number of passed tests
 Transaction name: Login
 Expected result:  Number of failed transactions <= 0
@@ -6,12 +7,14 @@ Actual result:    Number of failed transactions = 0
 Test result:      Pass
 
 Test name:        Test #2
+Test type:        passedTransactionsTest
 Test description: Verify number of passed tests
 Expected result:  Number of failed transactions <= 0
 Actual result:    Number of failed transactions = 0
 Test result:      Pass
 
 Test name:        Test #3
+Test type:        nthPercRespTimeTest
 Test description: Verify nth percentile
 Transaction name: Search
 Expected result:  80th percentile of transactions have response time <= 11245.0

@@ -1,4 +1,5 @@
 Test name:        Test #1
+Test type:        avgRespTimeTest
 Test description: Verify average login times
 Transaction name: Login
 Expected result:  Average response time <= 4000
@@ -6,6 +7,7 @@ Actual result:    Average response time = 3583.2
 Test result:      Pass
 
 Test name:        Test #2
+Test type:        avgRespTimeTest
 Test description: Verify average login times
 Transaction name: Login
 Expected result:  Average response time <= 3000
@@ -13,6 +15,7 @@ Actual result:    Average response time = 3583.2
 Test result:      FAIL
 
 Test name:        Test #3
+Test type:        avgRespTimeTest
 Test description: Verify average login times
 Transaction name: just wrong
 Expected result:  Average response time <= 1
