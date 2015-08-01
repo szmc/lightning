@@ -14,6 +14,7 @@ public class JMeterCSVFileReader {
     private int labelIndex;
     private int elapsedIndex;
     private int successIndex;
+    private int timeStampIndex;
 
     public JMeterTransactions getTransactions(String csvFile) {
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
@@ -29,9 +30,11 @@ public class JMeterCSVFileReader {
                 String labelValue = jmeterTransaction[labelIndex];
                 String elapsedValue = jmeterTransaction[elapsedIndex];
                 String successValue = jmeterTransaction[successIndex];
+                String timeStampValue = jmeterTransaction[timeStampIndex];
                 currentTransaction.add(labelValue);     // 0
                 currentTransaction.add(elapsedValue);   // 1
                 currentTransaction.add(successValue);   // 2
+                currentTransaction.add(timeStampValue); // 3
                 jmeterTransactions.add(currentTransaction);
             }
         } catch (IOException e) {
@@ -44,6 +47,7 @@ public class JMeterCSVFileReader {
         labelIndex = getColumnIndexFor(columnNames, "label");
         elapsedIndex = getColumnIndexFor(columnNames, "elapsed");
         successIndex = getColumnIndexFor(columnNames, "success");
+        timeStampIndex = getColumnIndexFor(columnNames, "timeStamp");
     }
 
     private int getColumnIndexFor(String[] columnNames, String searchedColumnName) {

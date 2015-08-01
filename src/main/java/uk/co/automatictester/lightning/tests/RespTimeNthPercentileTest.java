@@ -65,7 +65,8 @@ public class RespTimeNthPercentileTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
                     maxRespTime == test.maxRespTime &&
-                    percentile == test.percentile;
+                    percentile == test.percentile &&
+                    type == test.type;
         } else {
             return false;
         }

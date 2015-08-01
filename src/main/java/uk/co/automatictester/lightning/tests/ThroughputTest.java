@@ -3,20 +3,19 @@ package uk.co.automatictester.lightning.tests;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestResult;
 
-import java.util.List;
 import java.util.Objects;
 
-public class PassedTransactionsTest extends LightningTest {
+public class ThroughputTest extends LightningTest {
 
-    private static final String EXPECTED_RESULT_MESSAGE = "Number of failed transactions <= %s";
-    private static final String ACTUAL_RESULT_MESSAGE = "Number of failed transactions = %s";
+    private static final String EXPECTED_RESULT_MESSAGE = "Throughput >= %s / second";
+    private static final String ACTUAL_RESULT_MESSAGE = "Throughput = %s / second";
 
-    private final long allowedNumberOfFailedTransactions;
+    private final double minThroughput;
 
-    public PassedTransactionsTest(String name, String type, String description, String transactionName, long allowedNumberOfFailedTransactions) {
+    public ThroughputTest(String name, String type, String description, String transactionName, double minThroughput) {
         super(name, type, description, transactionName);
-        this.allowedNumberOfFailedTransactions = allowedNumberOfFailedTransactions;
-        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, allowedNumberOfFailedTransactions);
+        this.minThroughput = minThroughput;
+        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, minThroughput);
     }
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
@@ -28,15 +27,11 @@ public class PassedTransactionsTest extends LightningTest {
                 transactions = originalJMeterTransactions;
             }
 
-            int failureCount = 0;
-            for (List<String> transaction : transactions) {
-                String success = transaction.get(2);
-                if (!Boolean.parseBoolean(success)) failureCount++;
-            }
+            double actualThroughput = transactions.getThroughput();
 
-            actualResult = String.format(ACTUAL_RESULT_MESSAGE, failureCount);
+            actualResult = String.format(ACTUAL_RESULT_MESSAGE, actualThroughput);
 
-            if (failureCount > allowedNumberOfFailedTransactions) {
+            if (actualThroughput < minThroughput) {
                 result = TestResult.FAIL;
             } else {
                 result = TestResult.PASS;
@@ -48,15 +43,15 @@ public class PassedTransactionsTest extends LightningTest {
     }
 
     public boolean equals(Object obj) {
-        if (obj instanceof PassedTransactionsTest) {
-            PassedTransactionsTest test = (PassedTransactionsTest) obj;
+        if (obj instanceof ThroughputTest) {
+            ThroughputTest test = (ThroughputTest) obj;
             return name.equals(test.name) &&
                     description.equals(test.description) &&
                     Objects.equals(transactionName, test.transactionName) &&
                     expectedResult.equals(test.expectedResult) &&
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
-                    allowedNumberOfFailedTransactions == test.allowedNumberOfFailedTransactions &&
+                    minThroughput == test.minThroughput &&
                     type == test.type;
         } else {
             return false;

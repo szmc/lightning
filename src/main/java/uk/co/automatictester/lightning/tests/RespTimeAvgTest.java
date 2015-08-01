@@ -59,7 +59,8 @@ public class RespTimeAvgTest extends LightningTest {
                     expectedResult.equals(test.expectedResult) &&
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
-                    maxAvgRespTime == test.maxAvgRespTime;
+                    maxAvgRespTime == test.maxAvgRespTime &&
+                    type == test.type;
         } else {
             return false;
         }

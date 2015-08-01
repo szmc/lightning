@@ -52,6 +52,14 @@ public class LightningXMLFileReaderTest {
         assertThat(tests.contains(test), is(true));
     }
 
+    @Test
+    public void verifyGetTestsMethodThroughput() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_THROUGHPUT);
+        ThroughputTest test = new ThroughputTest("Test #2", "throughputTest", "Verify throughput", null, 2);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
 
     @Test
     public void verifyGetTestsMethodThreeTestsOfTwoKinds() {

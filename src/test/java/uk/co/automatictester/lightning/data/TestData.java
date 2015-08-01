@@ -23,6 +23,7 @@ public class TestData {
     public static final String TEST_SET_PERCENTILE = XML_RESOURCES + "nthPercRespTimeTest.xml";
     public static final String TEST_SET_PASSED = XML_RESOURCES + "passedTransactionsTest.xml";
     public static final String TEST_SET_STD_DEV = XML_RESOURCES + "respTimeStdDevTest.xml";
+    public static final String TEST_SET_THROUGHPUT = XML_RESOURCES + "throughputTest.xml";
     public static final String TEST_SET_NOT_WELL_FORMED = XML_RESOURCES + "not_well_formed.xml";
     public static final String TEST_SET_XML_FILE_NUMBER_FORMAT_EXCEPTION = XML_RESOURCES + "XMLFileNumberFormatException.xml";
     public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementValueException.xml";
@@ -36,8 +37,8 @@ public class TestData {
     public static final String CSV_NONEXISTENT = CSV_RESOURCES + "nonexistent.csv";
 
     // Transactions
-    public static final ArrayList<String> LOGIN_3514_SUCCESS = new ArrayList<>(Arrays.asList("Login", "3514", "true"));
-    public static final ArrayList<String> SEARCH_11221_SUCCESS = new ArrayList<>(Arrays.asList("Search", "11221", "true"));
+    public static final ArrayList<String> LOGIN_3514_SUCCESS = new ArrayList<>(Arrays.asList("Login", "3514", "true", "1434291247743"));
+    public static final ArrayList<String> SEARCH_11221_SUCCESS = new ArrayList<>(Arrays.asList("Search", "11221", "true", "1434291252072"));
 
     public static final ArrayList<String> LOGIN_1200_SUCCESS = new ArrayList<>(Arrays.asList("Login", "1200", "true"));
     public static final ArrayList<String> LOGIN_1200_FAILURE = new ArrayList<>(Arrays.asList("Login", "1200", "false"));

@@ -56,6 +56,17 @@ public abstract class LightningXMLProcessingHelpers {
         }
     }
 
+    protected double getDoubleValueFromElement(Element element, String subElement) {
+        String elementValue = getSubElementValueByTagName(element, subElement);
+
+        try {
+            return Double.parseDouble(elementValue);
+        } catch (NumberFormatException e) {
+            String parentNodeName = element.getNodeName();
+            throw new XMLFileNumberFormatException(String.format("Incorrect %s value for %s: %s", subElement, parentNodeName, elementValue));
+        }
+    }
+
     protected int getPercentile(Element element, String subElement) {
         int elementValue = getIntegerValueFromElement(element, subElement);
         String parentNodeName = element.getNodeName();

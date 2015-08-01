@@ -25,7 +25,7 @@ There are tools which can help you run JMeter tests as part of CI build, and too
 
 ## Design assumptions
 
-- JMeter result files produced in CI environment should be small enought to be processed by Lightning and stored in memory without hacks
+- JMeter result files produced in CI environment should be small enough to be processed by Lightning and stored in memory without hacks
 
 ## Issues and feature requests
 

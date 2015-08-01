@@ -33,4 +33,35 @@ public class JMeterTransactions extends ArrayList<ArrayList<String>> {
         return this.size();
     }
 
+    public double getThroughput() {
+        double transactionTimespanInMilliseconds = (getLastTransactionTimestamp() - getFirstTransactionTimestamp());
+        return getTransactionCount() / (transactionTimespanInMilliseconds / 1000);
+    }
+
+    private long getFirstTransactionTimestamp() {
+        long minTimestamp = 0;
+        for (ArrayList<String> transaction : this) {
+            long currentTransactionTimestamp = Long.parseLong(transaction.get(3));
+            if (minTimestamp == 0) {
+                minTimestamp = currentTransactionTimestamp;
+            } else if (currentTransactionTimestamp < minTimestamp) {
+                minTimestamp = currentTransactionTimestamp;
+            }
+        }
+        return minTimestamp;
+    }
+
+    private long getLastTransactionTimestamp() {
+        long maxTimestamp = 0;
+        for (ArrayList<String> transaction : this) {
+            long currentTransactionTimestamp = Long.parseLong(transaction.get(3));
+            if (maxTimestamp == 0) {
+                maxTimestamp = currentTransactionTimestamp;
+            } else if (currentTransactionTimestamp > maxTimestamp) {
+                maxTimestamp = currentTransactionTimestamp;
+            }
+        }
+        return maxTimestamp;
+    }
+
 }
