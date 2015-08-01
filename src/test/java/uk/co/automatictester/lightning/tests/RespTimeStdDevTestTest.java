@@ -25,11 +25,35 @@ public class RespTimeStdDevTestTest {
     }
 
     @Test
+    public void verifyExecuteAllTransactionsPass() {
+        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviance", null, 1);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1_SUCCESS);
+        jmeterTransactions.add(LOGIN_2_SUCCESS);
+        jmeterTransactions.add(SEARCH_3_SUCCESS);
+
+        test.execute(jmeterTransactions);
+        assertThat(test.getResult(), is(equalTo(TestResult.PASS)));
+    }
+
+    @Test
     public void verifyExecuteFail() {
         RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviance", "Search", 0);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_1_SUCCESS);
         jmeterTransactions.add(SEARCH_2_SUCCESS);
+        jmeterTransactions.add(SEARCH_3_SUCCESS);
+
+        test.execute(jmeterTransactions);
+        assertThat(test.getResult(), is(equalTo(TestResult.FAIL)));
+    }
+
+    @Test
+    public void verifyExecuteAllTransactionsFail() {
+        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviance", null, 0);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1_SUCCESS);
+        jmeterTransactions.add(LOGIN_2_SUCCESS);
         jmeterTransactions.add(SEARCH_3_SUCCESS);
 
         test.execute(jmeterTransactions);

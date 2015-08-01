@@ -23,10 +23,32 @@ public class RespTimeAvgTestTest {
     }
 
     @Test
+    public void verifyExecuteAllTransactionsPass() {
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify response times", null, 900);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_800_SUCCESS);
+        jmeterTransactions.add(LOGIN_1000_SUCCESS);
+
+        test.execute(jmeterTransactions);
+        assertThat(test.getResult(), is(equalTo(TestResult.PASS)));
+    }
+
+    @Test
     public void verifyExecuteFail() {
         RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify response times", "Search", 800);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_11221_SUCCESS);
+
+        test.execute(jmeterTransactions);
+        assertThat(test.getResult(), is(equalTo(TestResult.FAIL)));
+    }
+
+    @Test
+    public void verifyExecuteAllTransactionsFail() {
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify response times", null, 899);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_800_SUCCESS);
+        jmeterTransactions.add(LOGIN_1000_SUCCESS);
 
         test.execute(jmeterTransactions);
         assertThat(test.getResult(), is(equalTo(TestResult.FAIL)));

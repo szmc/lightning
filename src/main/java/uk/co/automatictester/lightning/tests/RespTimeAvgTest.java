@@ -21,7 +21,12 @@ public class RespTimeAvgTest extends LightningTest {
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
         try {
-            JMeterTransactions transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
+            JMeterTransactions transactions;
+            if (transactionName != null) {
+                transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
+            } else {
+                transactions = originalJMeterTransactions;
+            }
 
             double totalRespTime = 0;
             for (List<String> transaction : transactions) {

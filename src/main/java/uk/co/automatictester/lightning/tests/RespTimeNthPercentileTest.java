@@ -26,7 +26,12 @@ public class RespTimeNthPercentileTest extends LightningTest {
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
         try {
-            JMeterTransactions transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
+            JMeterTransactions transactions;
+            if (transactionName != null) {
+                transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
+            } else {
+                transactions = originalJMeterTransactions;
+            }
 
             DescriptiveStatistics ds = new DescriptiveStatistics();
             for (List<String> transaction : transactions) {

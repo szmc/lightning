@@ -55,6 +55,8 @@ public class TestData {
     public static final ArrayList<String> SEARCH_8_SUCCESS = new ArrayList<>(Arrays.asList("Search", "8", "true"));
     public static final ArrayList<String> SEARCH_9_SUCCESS = new ArrayList<>(Arrays.asList("Search", "9", "true"));
     public static final ArrayList<String> SEARCH_10_SUCCESS = new ArrayList<>(Arrays.asList("Search", "10", "true"));
+    public static final ArrayList<String> LOGIN_1_SUCCESS = new ArrayList<>(Arrays.asList("Login", "1", "true"));
+    public static final ArrayList<String> LOGIN_2_SUCCESS = new ArrayList<>(Arrays.asList("Login", "2", "true"));
 
     // Tests
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_A = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
