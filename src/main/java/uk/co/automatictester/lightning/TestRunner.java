@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TestRunner {
 
-    private static int exitCode;
+    private static int exitCode = 0;
     private static CommandLineInterface params;
     private static TestSet testSet;
 
@@ -52,13 +52,18 @@ public class TestRunner {
         long testExecTime = testSetExecEnd - testSetExecStart;
         System.out.println(String.format("Execution time:    %dms", testExecTime));
 
-        exitCode = testSet.getFailCount() + testSet.getIgnoreCount();
+        if (testSet.getFailCount() + testSet.getIgnoreCount() != 0) {
+            exitCode = 1;
+        }
     }
 
     private static void runReport() {
         JMeterTransactions jmeterTransactions = new JMeterCSVFileReader().getTransactions(params.report.getCSVFile());
         JMeterReporter reporter = new JMeterReporter(jmeterTransactions);
         reporter.printJMeterReport();
+        if (jmeterTransactions.getFailCount() != 0) {
+            exitCode = 2;
+        }
     }
 
     private static void notifyCIServer() {

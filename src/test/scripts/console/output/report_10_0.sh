@@ -14,7 +14,8 @@ java \
 DIFF_OUTPUT=`diff $EXPECTED_RESULT $ACTUAL_RESULT`
 OUT=$?
 
-echo "CONSOLE OUTPUT TEST"
+echo -e ''; echo `basename "$0"`
+
 if [ $OUT -eq 0 ];then
     echo "OUTPUT AS EXPECTED"
     echo "TEST PASSED"
