@@ -29,6 +29,7 @@ public class TestRunner {
             setExitCode();
         } else if (parsedCommand.equals("report")) {
             runReport();
+            setExitCode();
         }
     }
 
