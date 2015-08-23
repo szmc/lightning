@@ -31,7 +31,7 @@ public class TestSet {
         }
     }
 
-    public int getTestCount() { // TODO
+    public int getTestCount() {
         return tests.size();
     }
 

@@ -18,9 +18,15 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
     }
 
     @Test(dataProvider = "teamcity")
-    public void testIsCIEqualToTeamCityTrue(String ci) {
+    public void testIsCIEqualToTeamCityTrue_verify(String ci) {
         CommandLineInterface params = new CommandLineInterface(new String[]{"verify", String.format("-ci=%s", ci), "-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
         assertThat(params.verify.isCIEqualTo("teamcity"), is(true));
+    }
+
+    @Test(dataProvider = "teamcity")
+    public void testIsCIEqualToTeamCityTrue_report(String ci) {
+        CommandLineInterface params = new CommandLineInterface(new String[]{"report", String.format("-ci=%s", ci), "-csv=src/test/resources/csv/10_transactions.csv"});
+        assertThat(params.report.isCIEqualTo("teamcity"), is(true));
     }
 
     @DataProvider(name = "jenkins")
@@ -32,9 +38,15 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
     }
 
     @Test(dataProvider = "jenkins")
-    public void testIsCIEqualToJenkinsTrue(String ci) {
+    public void testIsCIEqualToJenkinsTrue_verify(String ci) {
         CommandLineInterface params = new CommandLineInterface(new String[]{"verify", String.format("-ci=%s", ci), "-xml=src/test/resources/xml/3_0_0.xml", "-csv=src/test/resources/csv/10_transactions.csv"});
         assertThat(params.verify.isCIEqualTo("jenkins"), is(true));
+    }
+
+    @Test(dataProvider = "jenkins")
+    public void testIsCIEqualToJenkinsTrue_report(String ci) {
+        CommandLineInterface params = new CommandLineInterface(new String[]{"report", String.format("-ci=%s", ci), "-csv=src/test/resources/csv/10_transactions.csv"});
+        assertThat(params.report.isCIEqualTo("jenkins"), is(true));
     }
 
     @Test
@@ -96,6 +108,8 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
                 "    report      Generate report on JMeter output%n" +
                 "      Usage: report [options]%n" +
                 "        Options:%n" +
+                "          -ci%n" +
+                "             CI server (jenkins or teamcity)%n" +
                 "        * -csv%n" +
                 "             JMeter CSV result file");
 

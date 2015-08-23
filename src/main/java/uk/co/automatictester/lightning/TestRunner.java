@@ -16,19 +16,22 @@ public class TestRunner {
     private static int exitCode = 0;
     private static CommandLineInterface params;
     private static TestSet testSet;
+    private static JMeterTransactions jmeterTransactions;
+    private static String mode;
 
     public static void main(String[] args) {
         parseParams(args);
 
-        String parsedCommand = params.getParsedCommand();
+        mode = params.getParsedCommand();
         if (params.isHelpRequested()) {
             params.printHelp();
-        } else if (parsedCommand.equals("verify")) {
+        } else if (mode.equals("verify")) {
             runTests();
             notifyCIServer();
             setExitCode();
-        } else if (parsedCommand.equals("report")) {
+        } else if (mode.equals("report")) {
             runReport();
+            notifyCIServer();
             setExitCode();
         }
     }
@@ -44,8 +47,8 @@ public class TestRunner {
         List<LightningTest> tests = new LightningXMLFileReader().getTests(xmlFile);
         testSet = new TestSet(tests);
 
-        JMeterTransactions originalJMeterTransactions = new JMeterCSVFileReader().getTransactions(params.verify.getCSVFile());
-        testSet.execute(originalJMeterTransactions);
+        jmeterTransactions = new JMeterCSVFileReader().getTransactions(params.verify.getCSVFile());
+        testSet.execute(jmeterTransactions);
 
         new TestSetReporter(testSet).printTestSetExecutionSummaryReport();
 
@@ -59,7 +62,7 @@ public class TestRunner {
     }
 
     private static void runReport() {
-        JMeterTransactions jmeterTransactions = new JMeterCSVFileReader().getTransactions(params.report.getCSVFile());
+        jmeterTransactions = new JMeterCSVFileReader().getTransactions(params.report.getCSVFile());
         JMeterReporter reporter = new JMeterReporter(jmeterTransactions);
         reporter.printJMeterReport();
         if (jmeterTransactions.getFailCount() != 0) {
@@ -68,10 +71,18 @@ public class TestRunner {
     }
 
     private static void notifyCIServer() {
-        if (params.verify.isCIEqualTo("teamcity")) {
-            new TeamCityReporter().setTeamCityBuildStatusText(testSet);
-        } else if (params.verify.isCIEqualTo("jenkins")) {
-            new JenkinsReporter().setJenkinsBuildName(testSet);
+        if (mode.equals("verify")) {
+            if (params.verify.isCIEqualTo("teamcity")) {
+                new TeamCityReporter().setTeamCityBuildStatusText(testSet);
+            } else if (params.verify.isCIEqualTo("jenkins")) {
+                new JenkinsReporter().setJenkinsBuildName(testSet);
+            }
+        } else if (mode.equals("report")) {
+            if (params.report.isCIEqualTo("teamcity")) {
+                new TeamCityReporter().setTeamCityBuildStatusText(jmeterTransactions);
+            } else if (params.report.isCIEqualTo("jenkins")) {
+                new JenkinsReporter().setJenkinsBuildName(jmeterTransactions);
+            }
         }
     }
 

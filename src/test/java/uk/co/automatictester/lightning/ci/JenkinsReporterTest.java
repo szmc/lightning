@@ -1,6 +1,7 @@
 package uk.co.automatictester.lightning.ci;
 
 import org.testng.annotations.Test;
+import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestSet;
 
 import java.io.File;
@@ -15,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class JenkinsReporterTest {
 
     @Test
-    public void testSetJenkinsBuildName() throws FileNotFoundException {
+    public void testSetJenkinsBuildName_verify() throws FileNotFoundException {
         TestSet testSet = mock(TestSet.class);
         when(testSet.getTestCount()).thenReturn(3);
         when(testSet.getFailCount()).thenReturn(0);
@@ -29,5 +30,21 @@ public class JenkinsReporterTest {
 
         assertThat(text, containsString("In Jenkins Build Name Setter Plugin, define build name as: ${PROPFILE,file=\"lightning-jenkins.properties\",property=\"result.string\"}"));
         assertThat(text, containsString("result.string=Tests executed\\: 3, failed\\: 0, ignored\\: 0"));
+    }
+
+    @Test
+    public void testSetJenkinsBuildName_report() throws FileNotFoundException {
+        JMeterTransactions jmeterTransactions = mock(JMeterTransactions.class);
+        when(jmeterTransactions.getTransactionCount()).thenReturn(3);
+        when(jmeterTransactions.getFailCount()).thenReturn(1);
+
+        new JenkinsReporter().setJenkinsBuildName(jmeterTransactions);
+
+        File lightningFile = new File("lightning-jenkins.properties");
+        String text = new Scanner(lightningFile).useDelimiter("\\A").next();
+        lightningFile.delete();
+
+        assertThat(text, containsString("In Jenkins Build Name Setter Plugin, define build name as: ${PROPFILE,file=\"lightning-jenkins.properties\",property=\"result.string\"}"));
+        assertThat(text, containsString("result.string=Transactions executed\\: 3, failed\\: 1"));
     }
 }
