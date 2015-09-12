@@ -7,6 +7,7 @@ import uk.co.automatictester.lightning.utils.IntToOrdConverter;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class RespTimeNthPercentileTest extends LightningTest {
 
@@ -25,6 +26,8 @@ public class RespTimeNthPercentileTest extends LightningTest {
     }
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
+        Locale.setDefault(new Locale("en", "en-GB"));
+
         try {
             JMeterTransactions transactions;
             if (transactionName != null) {

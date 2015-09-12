@@ -6,6 +6,7 @@ import uk.co.automatictester.lightning.TestResult;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class RespTimeStdDevTest extends LightningTest {
 
@@ -21,6 +22,8 @@ public class RespTimeStdDevTest extends LightningTest {
     }
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
+        Locale.setDefault(new Locale("en", "en-GB"));
+
         try {
             JMeterTransactions transactions;
             if (transactionName != null) {
