@@ -61,7 +61,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>uk.co.automatictester.lightning.TestRunner</mainClass>
+                            <mainClass>uk.co.automatictester.lightning.runners.CliTestRunner</mainClass>
                         </manifest>
                         <manifestEntries>
                             <Built-By>automatictester</Built-By>

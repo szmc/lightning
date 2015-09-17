@@ -1,5 +1,7 @@
-package uk.co.automatictester.lightning;
+package uk.co.automatictester.lightning.runners;
 
+import uk.co.automatictester.lightning.JMeterTransactions;
+import uk.co.automatictester.lightning.TestSet;
 import uk.co.automatictester.lightning.ci.JenkinsReporter;
 import uk.co.automatictester.lightning.ci.TeamCityReporter;
 import uk.co.automatictester.lightning.cli.CommandLineInterface;
@@ -11,7 +13,7 @@ import uk.co.automatictester.lightning.tests.LightningTest;
 
 import java.util.List;
 
-public class TestRunner {
+public class CliTestRunner {
 
     private static int exitCode = 0;
     private static CommandLineInterface params;
