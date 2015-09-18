@@ -17,14 +17,6 @@ public class TestSet {
         this.tests = tests;
     }
 
-    public void addTest(LightningTest test) {
-        tests.add(test);
-    }
-
-    public void addTests(List<LightningTest> tests) {
-        tests.addAll(tests);
-    }
-
     public void execute(JMeterTransactions originalJMeterTransactions) {
         for (LightningTest test : getTests()) {
             test.execute(originalJMeterTransactions);
