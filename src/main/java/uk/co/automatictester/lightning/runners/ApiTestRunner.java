@@ -49,6 +49,10 @@ public class ApiTestRunner {
         }
     }
 
+    public int getExitCode() {
+        return exitCode;
+    }
+
     private void runTests() {
         long testSetExecStart = System.currentTimeMillis();
 
