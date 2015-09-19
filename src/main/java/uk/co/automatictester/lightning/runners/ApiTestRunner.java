@@ -19,13 +19,14 @@ public class ApiTestRunner {
     private Mode mode;
     private CIServer ciServer;
 
-    public ApiTestRunner(Mode mode, String jmeterCsvFile) {
-        this.mode = mode;
+    public ApiTestRunner(String jmeterCsvFile) {
+        this.mode = Mode.REPORT;
         this.jmeterCsvFile = jmeterCsvFile;
     }
 
-    public ApiTestRunner(Mode mode, String jmeterCsvFile, TestSet testSet) {
-        this(mode, jmeterCsvFile);
+    public ApiTestRunner(String jmeterCsvFile, TestSet testSet) {
+        this.mode = Mode.VERIFY;
+        this.jmeterCsvFile = jmeterCsvFile;
         this.testSet = testSet;
     }
 
@@ -46,10 +47,6 @@ public class ApiTestRunner {
         if (ciServer != null) {
             notifyCIServer();
         }
-    }
-
-    public int getExitCode() {
-        return exitCode;
     }
 
     private void runTests() {
