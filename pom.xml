@@ -86,7 +86,9 @@
 
             <!-- generate single jar with all dependencies -->
             <plugin>
+
                 <artifactId>maven-assembly-plugin</artifactId>
+
                 <configuration>
                     <finalName>${project.build.finalName}</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
@@ -102,6 +104,18 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                 </configuration>
+
+                <!-- deploy standalone jar - output of 'assembly:single', not of (default) 'deploy' -->
+                <executions>
+                    <execution>
+                        <id>dist-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
             </plugin>
 
             <!-- run unit tests -->
