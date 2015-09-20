@@ -5,7 +5,7 @@
 
 ## Current version
 
-Current version: [0.7.0](https://github.com/automatictester/lightning/releases/download/0.7.0/lightning-0.7.0.jar)
+Current version: [0.8.0](https://github.com/automatictester/lightning/releases/download/0.8.0/lightning-0.8.0.jar)
 
 ## Introduction
 
