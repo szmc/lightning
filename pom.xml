@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.co.automatictester</groupId>
@@ -29,8 +30,8 @@
         <connection>scm:git:git@github.com:automatictester/lightning.git</connection>
         <developerConnection>scm:git:git@github.com:automatictester/lightning.git</developerConnection>
         <url>git@github.com:automatictester/lightning.git</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -83,13 +84,13 @@
                 </configuration>
             </plugin>
 
-            <!-- generate single jar with all dependencies -->
+            <!-- generate standalone jar with all dependencies -->
             <plugin>
 
                 <artifactId>maven-assembly-plugin</artifactId>
 
                 <configuration>
-                    <finalName>${project.build.finalName}</finalName>
+                    <finalName>${project.name}-standalone-${project.version}</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
@@ -103,17 +104,6 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                 </configuration>
-
-                <!-- deploy standalone jar - output of 'assembly:single', not of (default) 'deploy' -->
-                <executions>
-                    <execution>
-                        <id>dist-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
 
             </plugin>
 
