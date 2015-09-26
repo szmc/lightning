@@ -18,4 +18,4 @@ script:
  - ./src/test/scripts/exit/code/verify_3_0_0.sh
  - ./src/test/scripts/exit/code/report_2_0.sh
  - ./src/test/scripts/exit/code/report_2_1.sh
- - ls -l target/lightning*
+ - ls -l target/lightning-standalone-*.jar
