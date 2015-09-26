@@ -53,6 +53,15 @@ public class LightningXMLFileReaderTest {
     }
 
     @Test
+    public void verifyGetTestsMethodMaxRespTime() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_MAX_RESP_TIME);
+        RespTimeMaxTest test = new RespTimeMaxTest("Test #1", "maxRespTimeTest", "Verify max login times", "Login", 4000);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
+
+    @Test
     public void verifyGetTestsMethodThroughput() {
         List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_THROUGHPUT);
         ThroughputTest test = new ThroughputTest("Test #2", "throughputTest", "Verify throughput", null, 2);

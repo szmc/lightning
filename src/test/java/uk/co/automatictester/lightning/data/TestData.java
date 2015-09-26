@@ -20,6 +20,7 @@ public class TestData {
     public static final String TEST_SET_1_1_1 = XML_RESOURCES + "1_1_1.xml";
     public static final String TEST_SET_0_0_0 = XML_RESOURCES + "0_0_0.xml";
     public static final String TEST_SET_AVG_RESP_TIME = XML_RESOURCES + "avgRespTimeTest.xml";
+    public static final String TEST_SET_MAX_RESP_TIME = XML_RESOURCES + "maxRespTimeTest.xml";
     public static final String TEST_SET_PERCENTILE = XML_RESOURCES + "nthPercRespTimeTest.xml";
     public static final String TEST_SET_PASSED = XML_RESOURCES + "passedTransactionsTest.xml";
     public static final String TEST_SET_STD_DEV = XML_RESOURCES + "respTimeStdDevTest.xml";
