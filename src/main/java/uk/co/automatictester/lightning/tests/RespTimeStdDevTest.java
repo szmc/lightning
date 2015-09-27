@@ -22,7 +22,7 @@ public class RespTimeStdDevTest extends LightningTest {
     }
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
-        Locale.setDefault(new Locale("en", "en-GB"));
+        Locale.setDefault(Locale.ENGLISH);
 
         try {
             JMeterTransactions transactions;
