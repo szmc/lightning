@@ -1,9 +1,6 @@
 package uk.co.automatictester.lightning.data;
 
-import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
-import uk.co.automatictester.lightning.tests.RespTimeAvgTest;
-import uk.co.automatictester.lightning.tests.RespTimeNthPercentileTest;
-import uk.co.automatictester.lightning.tests.RespTimeStdDevTest;
+import uk.co.automatictester.lightning.tests.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,6 +67,8 @@ public class TestData {
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", null, 0);
     public static final RespTimeAvgTest AVG_RESP_TIME_TEST_A = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify average response times", "Search", 1000);
     public static final RespTimeAvgTest AVG_RESP_TIME_TEST_B = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify average response times", "Search", 100);
+    public static final RespTimeMaxTest MAX_RESP_TIME_TEST_A = new RespTimeMaxTest("Test #1", "maxRespTimeTest", "Verify max response times", "Search", 1000);
+    public static final RespTimeMaxTest MAX_RESP_TIME_TEST_B = new RespTimeMaxTest("Test #1", "maxRespTimeTest", "Verify max response times", "Search", 100);
     public static final RespTimeStdDevTest RESP_TIME_STD_DEV_TEST_A = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviation", "Login", 1);
     public static final RespTimeStdDevTest RESP_TIME_STD_DEV_TEST_B = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviation", "Login", 0);
     public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_A = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90 percentile", "Search", 9, 9);

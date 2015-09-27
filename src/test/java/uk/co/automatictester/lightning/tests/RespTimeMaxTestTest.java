@@ -66,16 +66,16 @@ public class RespTimeMaxTestTest {
 
     @Test
     public void verifyIsEqual() {
-        assertThat(AVG_RESP_TIME_TEST_A, is(equalTo(AVG_RESP_TIME_TEST_A)));
+        assertThat(MAX_RESP_TIME_TEST_A, is(equalTo(MAX_RESP_TIME_TEST_A)));
     }
 
     @Test
     public void verifyIsNotEqualOtherTestType() {
-        assertThat(AVG_RESP_TIME_TEST_A, is(not(equalTo((LightningTest) RESP_TIME_PERC_TEST_A))));
+        assertThat(MAX_RESP_TIME_TEST_A, is(not(equalTo((LightningTest) RESP_TIME_PERC_TEST_A))));
     }
 
     @Test
     public void verifyIsNotEqual() {
-        assertThat(AVG_RESP_TIME_TEST_A, is(not(equalTo(AVG_RESP_TIME_TEST_B))));
+        assertThat(MAX_RESP_TIME_TEST_A, is(not(equalTo(MAX_RESP_TIME_TEST_B))));
     }
 }
