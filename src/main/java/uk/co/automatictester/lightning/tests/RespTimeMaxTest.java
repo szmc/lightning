@@ -3,9 +3,7 @@ package uk.co.automatictester.lightning.tests;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestResult;
 
-import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class RespTimeMaxTest extends LightningTest {
 
@@ -21,7 +19,6 @@ public class RespTimeMaxTest extends LightningTest {
     }
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
-        Locale.setDefault(Locale.ENGLISH);
 
         try {
             JMeterTransactions transactions;

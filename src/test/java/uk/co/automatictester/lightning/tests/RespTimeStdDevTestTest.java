@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestResult;
 
+import java.util.Locale;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
@@ -19,6 +21,20 @@ public class RespTimeStdDevTestTest {
         jmeterTransactions.add(SEARCH_1_SUCCESS);
         jmeterTransactions.add(SEARCH_2_SUCCESS);
         jmeterTransactions.add(SEARCH_3_SUCCESS);
+
+        test.execute(jmeterTransactions);
+        assertThat(test.getResult(), is(equalTo(TestResult.PASS)));
+    }
+
+    @Test
+    public void verifyExecutePassOnNonDefaultLocale() {
+        Locale.setDefault(Locale.FRANCE);
+
+        RespTimeStdDevTest test = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviance", "Search", 3);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_1_SUCCESS);
+        jmeterTransactions.add(SEARCH_2_SUCCESS);
+        jmeterTransactions.add(SEARCH_4_SUCCESS);
 
         test.execute(jmeterTransactions);
         assertThat(test.getResult(), is(equalTo(TestResult.PASS)));

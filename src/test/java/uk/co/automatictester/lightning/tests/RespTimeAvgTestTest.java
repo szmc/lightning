@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestResult;
 
+import java.util.Locale;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
@@ -14,9 +16,22 @@ public class RespTimeAvgTestTest {
 
     @Test
     public void verifyExecutePass() {
-        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify response times", "Search", 1000);
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify response times", "Search", 800);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_800_SUCCESS);
+
+        test.execute(jmeterTransactions);
+        assertThat(test.getResult(), is(equalTo(TestResult.PASS)));
+    }
+
+    @Test
+    public void verifyExecutePassOnNonDefaultLocale() {
+        Locale.setDefault(Locale.FRENCH);
+
+        RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify response times", "Search", 6011);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_800_SUCCESS);
+        jmeterTransactions.add(SEARCH_11221_SUCCESS);
 
         test.execute(jmeterTransactions);
         assertThat(test.getResult(), is(equalTo(TestResult.PASS)));
