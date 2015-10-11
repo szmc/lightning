@@ -5,7 +5,7 @@
 
 ## Current version
 
-Current version: [0.8.0](https://github.com/automatictester/lightning/releases/download/0.8.0/lightning-0.8.0.jar)
+Standalone JAR is available for download from [Releases](https://github.com/automatictester/lightning/releases) tab. Lightning is also available as a dependency in [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22uk.co.automatictester%22%20AND%20a%3A%22lightning%22). If you are not sure which to choose, check our [wiki](https://github.com/automatictester/lightning/wiki).
 
 ## Introduction
 
