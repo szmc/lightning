@@ -21,12 +21,8 @@ public class PassedTransactionsTest extends LightningTest {
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
         try {
-            JMeterTransactions transactions;
-            if (transactionName != null) {
-                transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
-            } else {
-                transactions = originalJMeterTransactions;
-            }
+            JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
+            transactionCount = transactions.getTransactionCount();
 
             int failureCount = 0;
             for (List<String> transaction : transactions) {
@@ -57,6 +53,7 @@ public class PassedTransactionsTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
                     allowedNumberOfFailedTransactions == test.allowedNumberOfFailedTransactions &&
+                    transactionCount == test.transactionCount &&
                     type.equals(test.type);
         } else {
             return false;

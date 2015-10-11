@@ -20,12 +20,8 @@ public class ThroughputTest extends LightningTest {
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
         try {
-            JMeterTransactions transactions;
-            if (transactionName != null) {
-                transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
-            } else {
-                transactions = originalJMeterTransactions;
-            }
+            JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
+            transactionCount = transactions.getTransactionCount();
 
             double actualThroughput = transactions.getThroughput();
 
@@ -52,6 +48,7 @@ public class ThroughputTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
                     minThroughput == test.minThroughput &&
+                    transactionCount == test.transactionCount &&
                     type.equals(test.type);
         } else {
             return false;

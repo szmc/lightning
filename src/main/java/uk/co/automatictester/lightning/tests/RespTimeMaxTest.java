@@ -21,12 +21,8 @@ public class RespTimeMaxTest extends LightningTest {
     public void execute(JMeterTransactions originalJMeterTransactions) {
 
         try {
-            JMeterTransactions transactions;
-            if (transactionName != null) {
-                transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
-            } else {
-                transactions = originalJMeterTransactions;
-            }
+            JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
+            transactionCount = transactions.getTransactionCount();
 
             long maxRespTime = 0;
             for (List<String> transaction : transactions) {
@@ -59,6 +55,7 @@ public class RespTimeMaxTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
                     maxRespTime == test.maxRespTime &&
+                    transactionCount == test.transactionCount &&
                     type.equals(test.type);
         } else {
             return false;

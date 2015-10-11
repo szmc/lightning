@@ -12,6 +12,7 @@ public abstract class LightningTest {
     protected String expectedResult;
     protected String actualResult;
     protected TestResult result;
+    protected int transactionCount;
 
     protected LightningTest(String name, String type, String description, String transactionName) {
         this.name = name;
@@ -25,8 +26,20 @@ public abstract class LightningTest {
 
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
 
+    public JMeterTransactions filterTransactions(JMeterTransactions originalJMeterTransactions) {
+        if (getTransactionName() != null) {
+            return originalJMeterTransactions.excludeLabelsOtherThan(getTransactionName());
+        } else {
+            return originalJMeterTransactions;
+        }
+    }
+
     public String getName() {
         return name;
+    }
+
+    public int getTransactionCount() {
+        return transactionCount;
     }
 
     public String getType() {

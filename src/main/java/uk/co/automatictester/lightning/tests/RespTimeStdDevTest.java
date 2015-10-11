@@ -25,12 +25,8 @@ public class RespTimeStdDevTest extends LightningTest {
         Locale.setDefault(Locale.ENGLISH);
 
         try {
-            JMeterTransactions transactions;
-            if (transactionName != null) {
-                transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
-            } else {
-                transactions = originalJMeterTransactions;
-            }
+            JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
+            transactionCount = transactions.getTransactionCount();
 
             DescriptiveStatistics ds = new DescriptiveStatistics();
             for (List<String> transaction : transactions) {
@@ -63,6 +59,7 @@ public class RespTimeStdDevTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
                     maxRespTimeStdDev == test.maxRespTimeStdDev &&
+                    transactionCount == test.transactionCount &&
                     type.equals(test.type);
         } else {
             return false;

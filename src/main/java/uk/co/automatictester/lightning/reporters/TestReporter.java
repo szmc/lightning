@@ -12,30 +12,32 @@ public class TestReporter {
     }
 
     public void printTestExecutionReport() {
-        String executionReport = String.format("Test name:        %s%n" +
-                        "Test type:        %s%n" +
+        String executionReport = String.format("Test name:         %s%n" +
+                        "Test type:         %s%n" +
                         "%s" +
                         "%s" +
-                        "Expected result:  %s%n" +
-                        "Actual result:    %s%n" +
-                        "Test result:      %s%n",
+                        "Expected result:   %s%n" +
+                        "Actual result:     %s%n" +
+                        "Transaction count: %s%n"+
+                        "Test result:       %s%n",
                 test.getName(),
                 test.getType(),
                 getDescription(),
                 getTransactionName(),
                 test.getExpectedResult(),
                 test.getActualResult(),
+                test.getTransactionCount(),
                 getResult());
 
         System.out.println(executionReport);
     }
 
     private String getDescription() {
-        return (!test.getDescription().isEmpty()) ? (String.format("Test description: %s%n", test.getDescription())) : "";
+        return (!test.getDescription().isEmpty()) ? (String.format("Test description:  %s%n", test.getDescription())) : "";
     }
 
     private String getTransactionName() {
-        return (test.getTransactionName() != null) ? (String.format("Transaction name: %s%n", test.getTransactionName())) : "";
+        return (test.getTransactionName() != null) ? (String.format("Transaction name:  %s%n", test.getTransactionName())) : "";
     }
 
     private String getResult() {

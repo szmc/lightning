@@ -24,12 +24,8 @@ public class RespTimeAvgTest extends LightningTest {
         Locale.setDefault(Locale.ENGLISH);
 
         try {
-            JMeterTransactions transactions;
-            if (transactionName != null) {
-                transactions = originalJMeterTransactions.excludeLabelsOtherThan(transactionName);
-            } else {
-                transactions = originalJMeterTransactions;
-            }
+            JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
+            transactionCount = transactions.getTransactionCount();
 
             double totalRespTime = 0;
             for (List<String> transaction : transactions) {
@@ -63,6 +59,7 @@ public class RespTimeAvgTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
                     maxAvgRespTime == test.maxAvgRespTime &&
+                    transactionCount == test.transactionCount &&
                     type.equals(test.type);
         } else {
             return false;
