@@ -19,7 +19,7 @@ Test name:         Test #3
 Test type:         nthPercRespTimeTest
 Test description:  Verify nth percentile
 Transaction name:  Search
-Expected result:   80th percentile of transactions have response time <= 11245.0
+Expected result:   80th percentile of transactions have response time <= 11245
 Actual result:     80th percentile of transactions have response time = 11244.2
 Transaction count: 5
 Test result:       Pass

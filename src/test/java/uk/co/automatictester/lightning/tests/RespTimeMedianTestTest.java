@@ -12,11 +12,11 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 import static uk.co.automatictester.lightning.data.TestData.*;
 
-public class RespTimeNthPercentileTestTest {
+public class RespTimeMedianTestTest {
 
     @Test
     public void testExecutePass() {
-        RespTimeNthPercentileTest test = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90th percentile", "Search", 90, 10);
+        RespTimeMedianTest test = new RespTimeMedianTest("Test #1", "medianRespTimeTest", "Verify median", "Search", 6);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_1_SUCCESS);
         jmeterTransactions.add(SEARCH_2_SUCCESS);
@@ -37,7 +37,7 @@ public class RespTimeNthPercentileTestTest {
     public void testExecutePassOnNonDefaultLocale() {
         Locale.setDefault(Locale.FRENCH);
 
-        RespTimeNthPercentileTest test = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90th percentile", "Search", 90, 10);
+        RespTimeMedianTest test = new RespTimeMedianTest("Test #1", "medianRespTimeTest", "Verify median", "Search", 6);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_1_SUCCESS);
         jmeterTransactions.add(SEARCH_2_SUCCESS);
@@ -56,7 +56,7 @@ public class RespTimeNthPercentileTestTest {
 
     @Test
     public void testExecuteAllTransactionsPass() {
-        RespTimeNthPercentileTest test = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90th percentile", null, 90, 10);
+        RespTimeMedianTest test = new RespTimeMedianTest("Test #1", "medianRespTimeTest", "Verify median", null, 6);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(LOGIN_1_SUCCESS);
         jmeterTransactions.add(LOGIN_2_SUCCESS);
@@ -75,7 +75,7 @@ public class RespTimeNthPercentileTestTest {
 
     @Test
     public void testExecuteFail() {
-        RespTimeNthPercentileTest test = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90th percentile", "Search", 90, 9);
+        RespTimeMedianTest test = new RespTimeMedianTest("Test #1", "medianRespTimeTest", "Verify median", "Search", 5);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(SEARCH_1_SUCCESS);
         jmeterTransactions.add(SEARCH_2_SUCCESS);
@@ -94,7 +94,7 @@ public class RespTimeNthPercentileTestTest {
 
     @Test
     public void testExecuteAllTransactionsFail() {
-        RespTimeNthPercentileTest test = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90th percentile", null, 90, 9);
+        RespTimeMedianTest test = new RespTimeMedianTest("Test #1", "medianRespTimeTest", "Verify median", null, 5);
         JMeterTransactions jmeterTransactions = new JMeterTransactions();
         jmeterTransactions.add(LOGIN_1_SUCCESS);
         jmeterTransactions.add(LOGIN_2_SUCCESS);
@@ -112,26 +112,17 @@ public class RespTimeNthPercentileTestTest {
     }
 
     @Test
-    public void testExecuteError() {
-        RespTimeNthPercentileTest test = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90th percentile", "Search", -90, 9);
-        JMeterTransactions jmeterTransactions = new JMeterTransactions();
-        jmeterTransactions.add(SEARCH_5_SUCCESS);
-        test.execute(jmeterTransactions);
-        assertThat(test.getResult(), is(equalTo(TestResult.IGNORED)));
-    }
-
-    @Test
     public void verifyIsEqual() {
-        assertThat(RESP_TIME_PERC_TEST_A, is(equalTo(RESP_TIME_PERC_TEST_A)));
+        assertThat(RESP_TIME_MEDIAN_TEST_A, is(equalTo(RESP_TIME_MEDIAN_TEST_A)));
     }
 
     @Test
     public void verifyIsNotEqualOtherTestType() {
-        assertThat((LightningTest) RESP_TIME_PERC_TEST_A, is(not(equalTo((LightningTest) AVG_RESP_TIME_TEST_A))));
+        assertThat(RESP_TIME_MEDIAN_TEST_A, is(not(equalTo((LightningTest) AVG_RESP_TIME_TEST_A))));
     }
 
     @Test
     public void verifyIsNotEqual() {
-        assertThat(RESP_TIME_PERC_TEST_A, is(not(equalTo(RESP_TIME_PERC_TEST_B))));
+        assertThat(RESP_TIME_MEDIAN_TEST_A, is(not(equalTo(RESP_TIME_MEDIAN_TEST_B))));
     }
 }

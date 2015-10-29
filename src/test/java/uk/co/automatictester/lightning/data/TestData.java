@@ -22,6 +22,7 @@ public class TestData {
     public static final String TEST_SET_PASSED = XML_RESOURCES + "passedTransactionsTest.xml";
     public static final String TEST_SET_STD_DEV = XML_RESOURCES + "respTimeStdDevTest.xml";
     public static final String TEST_SET_THROUGHPUT = XML_RESOURCES + "throughputTest.xml";
+    public static final String TEST_SET_MEDIAN = XML_RESOURCES + "medianRespTimeTest.xml";
     public static final String TEST_SET_NOT_WELL_FORMED = XML_RESOURCES + "not_well_formed.xml";
     public static final String TEST_SET_XML_FILE_NUMBER_FORMAT_EXCEPTION = XML_RESOURCES + "XMLFileNumberFormatException.xml";
     public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementValueException.xml";
@@ -73,5 +74,7 @@ public class TestData {
     public static final RespTimeStdDevTest RESP_TIME_STD_DEV_TEST_B = new RespTimeStdDevTest("Test #1", "respTimeStdDevTest", "Verify standard deviation", "Login", 0);
     public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_A = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90 percentile", "Search", 9, 9);
     public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_B = new RespTimeNthPercentileTest("Test #1", "nthPercRespTimeTest", "Verify 90 percentile", "Search", 9, 8);
+    public static final RespTimeMedianTest RESP_TIME_MEDIAN_TEST_A = new RespTimeMedianTest("Test #1", "medianRespTimeTest", "Verify median", "Search", 9);
+    public static final RespTimeMedianTest RESP_TIME_MEDIAN_TEST_B = new RespTimeMedianTest("Test #1", "medianRespTimeTest", "Verify median", "Search", 8);
 
 }

@@ -34,6 +34,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             addRespTimeNthPercTests(doc);
             addThroughputTests(doc);
             addRespTimeMaxTests(doc);
+            addRespTimeMedianTests(doc);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             throw new XMLFileException(e.getMessage());
@@ -91,8 +92,8 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             String transactionName = getTransactionName(avgRespTimeTestElement);
             int maxAvgRespTime = getIntegerValueFromElement(avgRespTimeTestElement, "maxAvgRespTime");
 
-            RespTimeAvgTest respTimeAvgTest = new RespTimeAvgTest(name, testType, description, transactionName, maxAvgRespTime);
-            tests.add(respTimeAvgTest);
+            RespTimeAvgTest avgRespTimeTest = new RespTimeAvgTest(name, testType, description, transactionName, maxAvgRespTime);
+            tests.add(avgRespTimeTest);
         }
     }
 
@@ -124,8 +125,24 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int percentile = getPercentile(respTimeNthPercTestElement, "percentile");
             int maxRespTime = getIntegerValueFromElement(respTimeNthPercTestElement, "maxRespTime");
 
-            RespTimeNthPercentileTest respTimeAvgTest = new RespTimeNthPercentileTest(name, testType, description, transactionName, percentile, maxRespTime);
-            tests.add(respTimeAvgTest);
+            RespTimeNthPercentileTest nthPercRespTimeTest = new RespTimeNthPercentileTest(name, testType, description, transactionName, percentile, maxRespTime);
+            tests.add(nthPercRespTimeTest);
+        }
+    }
+
+    private void addRespTimeMedianTests(Document xmlDoc) {
+        String testType = "medianRespTimeTest";
+        NodeList respTimeMedianTestNodes = xmlDoc.getElementsByTagName(testType);
+        for (int i = 0; i < respTimeMedianTestNodes.getLength(); i++) {
+            Element respTimeMedianTestElement = (Element) respTimeMedianTestNodes.item(i);
+
+            String name = getTestName(respTimeMedianTestElement);
+            String description = getTestDescription(respTimeMedianTestElement);
+            String transactionName = getTransactionName(respTimeMedianTestElement);
+            int maxRespTime = getIntegerValueFromElement(respTimeMedianTestElement, "maxRespTime");
+
+            RespTimeMedianTest respTimeMedianTest = new RespTimeMedianTest(name, testType, description, transactionName, maxRespTime);
+            tests.add(respTimeMedianTest);
         }
     }
 
@@ -140,8 +157,8 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             String transactionName = getTransactionName(throughputTestElement);
             double minThroughput = getDoubleValueFromElement(throughputTestElement, "minThroughput");
 
-            ThroughputTest respTimeAvgTest = new ThroughputTest(name, testType, description, transactionName, minThroughput);
-            tests.add(respTimeAvgTest);
+            ThroughputTest throughputTest = new ThroughputTest(name, testType, description, transactionName, minThroughput);
+            tests.add(throughputTest);
         }
     }
 }

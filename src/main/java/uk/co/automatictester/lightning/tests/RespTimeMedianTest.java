@@ -9,20 +9,18 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
-public class RespTimeNthPercentileTest extends LightningTest {
+public class RespTimeMedianTest extends LightningTest {
 
-    private static final String MESSAGE = "%s percentile of transactions have response time ";
+    private static final String MESSAGE = "median response time ";
     private static final String EXPECTED_RESULT_MESSAGE = MESSAGE + "<= %s";
     private static final String ACTUAL_RESULT_MESSAGE = MESSAGE + "= %s";
 
-    private final long maxRespTime;
-    private final int percentile;
+    private final double maxRespTime;
 
-    public RespTimeNthPercentileTest(String name, String type, String description, String transactionName, int percentile, long maxRespTime) {
+    public RespTimeMedianTest(String name, String type, String description, String transactionName, long maxRespTime) {
         super(name, type, description, transactionName);
         this.maxRespTime = maxRespTime;
-        this.percentile = percentile;
-        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, new IntToOrdConverter().convert(percentile), maxRespTime);
+        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxRespTime);
     }
 
     public void execute(JMeterTransactions originalJMeterTransactions) {
@@ -37,11 +35,11 @@ public class RespTimeNthPercentileTest extends LightningTest {
                 String elapsed = transaction.get(1);
                 ds.addValue(Double.parseDouble(elapsed));
             }
-            double actualRespTimePercentile = ds.getPercentile((double) percentile);
+            double actualRespTimePercentile = ds.getPercentile(50);
             DecimalFormat df = new DecimalFormat("#.##");
             double roundedActualRespTimePercentile = Double.valueOf(df.format(actualRespTimePercentile));
 
-            actualResult = String.format(ACTUAL_RESULT_MESSAGE, new IntToOrdConverter().convert(percentile), roundedActualRespTimePercentile);
+            actualResult = String.format(ACTUAL_RESULT_MESSAGE, roundedActualRespTimePercentile);
 
             if (roundedActualRespTimePercentile > maxRespTime) {
                 result = TestResult.FAIL;
@@ -55,8 +53,8 @@ public class RespTimeNthPercentileTest extends LightningTest {
     }
 
     public boolean equals(Object obj) {
-        if (obj instanceof RespTimeNthPercentileTest) {
-            RespTimeNthPercentileTest test = (RespTimeNthPercentileTest) obj;
+        if (obj instanceof RespTimeMedianTest) {
+            RespTimeMedianTest test = (RespTimeMedianTest) obj;
             return name.equals(test.name) &&
                     description.equals(test.description) &&
                     transactionName.equals(test.transactionName) &&
@@ -64,7 +62,6 @@ public class RespTimeNthPercentileTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     result == test.result &&
                     maxRespTime == test.maxRespTime &&
-                    percentile == test.percentile &&
                     transactionCount == test.transactionCount &&
                     type.equals(test.type);
         } else {

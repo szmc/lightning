@@ -1,4 +1,4 @@
-package uk.co.automatictester.lightning;
+package uk.co.automatictester.lightning.readers;
 
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.exceptions.*;
@@ -56,6 +56,15 @@ public class LightningXMLFileReaderTest {
     public void verifyGetTestsMethodMaxRespTime() {
         List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_MAX_RESP_TIME);
         RespTimeMaxTest test = new RespTimeMaxTest("Test #1", "maxRespTimeTest", "Verify max login times", "Login", 4000);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
+
+    @Test
+    public void verifyGetTestsMethodMedianRespTime() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_MEDIAN);
+        RespTimeMedianTest test = new RespTimeMedianTest("Test #4", "medianRespTimeTest", "Verify median response time", "Search", 11244);
 
         assertThat(tests, hasSize(1));
         assertThat(tests.contains(test), is(true));
