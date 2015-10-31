@@ -1,6 +1,7 @@
 package uk.co.automatictester.lightning.data;
 
 import uk.co.automatictester.lightning.tests.*;
+import uk.co.automatictester.lightning.utils.Percent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,7 @@ public class TestData {
     public static final String TEST_SET_MAX_RESP_TIME = XML_RESOURCES + "maxRespTimeTest.xml";
     public static final String TEST_SET_PERCENTILE = XML_RESOURCES + "nthPercRespTimeTest.xml";
     public static final String TEST_SET_PASSED = XML_RESOURCES + "passedTransactionsTest.xml";
+    public static final String TEST_SET_PASSED_PERCENT = XML_RESOURCES + "passedTransactionsPercentTest.xml";
     public static final String TEST_SET_STD_DEV = XML_RESOURCES + "respTimeStdDevTest.xml";
     public static final String TEST_SET_THROUGHPUT = XML_RESOURCES + "throughputTest.xml";
     public static final String TEST_SET_MEDIAN = XML_RESOURCES + "medianRespTimeTest.xml";
@@ -59,12 +61,13 @@ public class TestData {
     public static final ArrayList<String> LOGIN_2_SUCCESS = new ArrayList<>(Arrays.asList("Login", "2", "true"));
 
     // Tests
-    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_A = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
+    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_A = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", new Percent(0));
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_3_0_0_B = new PassedTransactionsTest("Test #2", "passedTransactionsTest", "Verify number of passed tests", null, 0);
     public static final RespTimeNthPercentileTest RESP_TIME_PERC_TEST_3_0_0_C = new RespTimeNthPercentileTest("Test #3", "nthPercRespTimeTest", "Verify nth percentile", "Search", 80, 11245);
 
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_A = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 1);
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_B = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
+    public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_PERC = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", new Percent(0));
     public static final PassedTransactionsTest PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", null, 0);
     public static final RespTimeAvgTest AVG_RESP_TIME_TEST_A = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify average response times", "Search", 1000);
     public static final RespTimeAvgTest AVG_RESP_TIME_TEST_B = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify average response times", "Search", 100);

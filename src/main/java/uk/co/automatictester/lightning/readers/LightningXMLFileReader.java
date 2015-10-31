@@ -8,6 +8,7 @@ import uk.co.automatictester.lightning.exceptions.XMLFileException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNoTestsException;
 import uk.co.automatictester.lightning.tests.*;
 import uk.co.automatictester.lightning.utils.LightningXMLProcessingHelpers;
+import uk.co.automatictester.lightning.utils.Percent;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -57,9 +58,18 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             String description = getTestDescription(passedTransactionsElement);
             String transactionName = getTransactionName(passedTransactionsElement);
 
-            int allowedNumberOfFailedTransactions = getIntegerValueFromElement(passedTransactionsElement, "allowedNumberOfFailedTransactions");
+            int allowedNumberOfFailedTransactions;
+            int allowedPercentOfFailedTransactions;
+            PassedTransactionsTest passedTransactionsTest;
 
-            PassedTransactionsTest passedTransactionsTest = new PassedTransactionsTest(name, testType, description, transactionName, allowedNumberOfFailedTransactions);
+            if(isSubElementPresent(passedTransactionsElement, "allowedNumberOfFailedTransactions")) {
+                allowedNumberOfFailedTransactions = getIntegerValueFromElement(passedTransactionsElement, "allowedNumberOfFailedTransactions");
+                passedTransactionsTest = new PassedTransactionsTest(name, testType, description, transactionName, allowedNumberOfFailedTransactions);
+            } else {
+                allowedPercentOfFailedTransactions = getPercent(passedTransactionsElement, "allowedPercentOfFailedTransactions");
+                passedTransactionsTest = new PassedTransactionsTest(name, testType, description, transactionName, new Percent(allowedPercentOfFailedTransactions));
+            }
+
             tests.add(passedTransactionsTest);
         }
 

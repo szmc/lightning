@@ -5,7 +5,7 @@
         <testName>Test #1</testName>
         <description>Verify number of passed tests</description>
         <transactionName>Login</transactionName>
-        <allowedNumberOfFailedTransactions>0</allowedNumberOfFailedTransactions>
+        <allowedPercentOfFailedTransactions>0</allowedPercentOfFailedTransactions>
     </passedTransactionsTest>
 
     <passedTransactionsTest>

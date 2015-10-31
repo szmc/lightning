@@ -2,8 +2,8 @@ package uk.co.automatictester.lightning.readers;
 
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.exceptions.*;
-import uk.co.automatictester.lightning.readers.LightningXMLFileReader;
 import uk.co.automatictester.lightning.tests.*;
+import uk.co.automatictester.lightning.utils.Percent;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -38,6 +38,15 @@ public class LightningXMLFileReaderTest {
     public void verifyGetTestsMethodPassedTest() {
         List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_PASSED);
         PassedTransactionsTest test = new PassedTransactionsTest("Test #3", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
+
+    @Test
+    public void verifyGetTestsMethodPassedPercentTest() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_PASSED_PERCENT);
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #3", "passedTransactionsTest", "Verify percent of passed tests", "Login", new Percent(0));
 
         assertThat(tests, hasSize(1));
         assertThat(tests.contains(test), is(true));

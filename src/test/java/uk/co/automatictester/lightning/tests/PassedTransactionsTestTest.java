@@ -3,8 +3,10 @@ package uk.co.automatictester.lightning.tests;
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.utils.Percent;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
@@ -20,6 +22,7 @@ public class PassedTransactionsTestTest {
 
         test.execute(jmeterTransactions);
         assertThat(test.getResult(), is(equalTo(TestResult.PASS)));
+        assertThat(test.getActualResult(), containsString("Number of failed transactions = 0"));
     }
 
     @Test
@@ -31,6 +34,47 @@ public class PassedTransactionsTestTest {
 
         test.execute(jmeterTransactions);
         assertThat(test.getResult(), is(equalTo(TestResult.PASS)));
+        assertThat(test.getActualResult(), containsString("Number of failed transactions = 0"));
+    }
+
+    @Test
+    public void verifyExecuteMethodPercentPass() {
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify percent of passed tests", "Search", new Percent(10));
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_1_SUCCESS);
+        jmeterTransactions.add(SEARCH_2_SUCCESS);
+        jmeterTransactions.add(SEARCH_3_SUCCESS);
+        jmeterTransactions.add(SEARCH_4_SUCCESS);
+        jmeterTransactions.add(SEARCH_5_SUCCESS);
+        jmeterTransactions.add(SEARCH_6_SUCCESS);
+        jmeterTransactions.add(SEARCH_7_SUCCESS);
+        jmeterTransactions.add(SEARCH_8_SUCCESS);
+        jmeterTransactions.add(SEARCH_9_SUCCESS);
+        jmeterTransactions.add(SEARCH_800_FAILURE);
+
+        test.execute(jmeterTransactions);
+        assertThat(test.getResult(), is(equalTo(TestResult.PASS)));
+        assertThat(test.getActualResult(), containsString("Percent of failed transactions = 10.0"));
+    }
+
+    @Test
+    public void verifyExecuteMethodPercentFail() {
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify percent of passed tests", "Search", new Percent(9));
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_1_SUCCESS);
+        jmeterTransactions.add(SEARCH_2_SUCCESS);
+        jmeterTransactions.add(SEARCH_3_SUCCESS);
+        jmeterTransactions.add(SEARCH_4_SUCCESS);
+        jmeterTransactions.add(SEARCH_5_SUCCESS);
+        jmeterTransactions.add(SEARCH_6_SUCCESS);
+        jmeterTransactions.add(SEARCH_7_SUCCESS);
+        jmeterTransactions.add(SEARCH_8_SUCCESS);
+        jmeterTransactions.add(SEARCH_9_SUCCESS);
+        jmeterTransactions.add(SEARCH_800_FAILURE);
+
+        test.execute(jmeterTransactions);
+        assertThat(test.getResult(), is(equalTo(TestResult.FAIL)));
+        assertThat(test.getActualResult(), containsString("Percent of failed transactions = 10.0"));
     }
 
     @Test
@@ -41,6 +85,7 @@ public class PassedTransactionsTestTest {
 
         test.execute(jmeterTransactions);
         assertThat(test.getResult(), is(equalTo(TestResult.FAIL)));
+        assertThat(test.getActualResult(), containsString("Number of failed transactions = 1"));
     }
 
     @Test
@@ -52,6 +97,7 @@ public class PassedTransactionsTestTest {
 
         test.execute(jmeterTransactions);
         assertThat(test.getResult(), is(equalTo(TestResult.FAIL)));
+        assertThat(test.getActualResult(), containsString("Number of failed transactions = 1"));
     }
 
     @Test
@@ -80,8 +126,13 @@ public class PassedTransactionsTestTest {
     }
 
     @Test
+    public void verifyNumberIsNotEqualPerc() {
+        assertThat(PASSED_TRANSACTIONS_TEST_B, is(not(equalTo(PASSED_TRANSACTIONS_TEST_PERC))));
+    }
+
+    @Test
     public void verifyIsNotEqualOtherTestType() {
-        assertThat((LightningTest) PASSED_TRANSACTIONS_TEST_A, is(not(equalTo((LightningTest) RESP_TIME_PERC_TEST_A))));
+        assertThat(PASSED_TRANSACTIONS_TEST_A, is(not(equalTo((LightningTest) RESP_TIME_PERC_TEST_A))));
     }
 
     @Test

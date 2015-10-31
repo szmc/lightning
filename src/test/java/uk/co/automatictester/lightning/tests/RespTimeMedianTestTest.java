@@ -112,6 +112,16 @@ public class RespTimeMedianTestTest {
     }
 
     @Test
+    public void verifyExecuteError() {
+        RespTimeMedianTest test = new RespTimeMedianTest("Test #1", "medianRespTimeTest", "Verify median", "nonexistent", 800);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_11221_SUCCESS);
+
+        test.execute(jmeterTransactions);
+        assertThat(test.getResult(), is(equalTo(TestResult.IGNORED)));
+    }
+
+    @Test
     public void verifyIsEqual() {
         assertThat(RESP_TIME_MEDIAN_TEST_A, is(equalTo(RESP_TIME_MEDIAN_TEST_A)));
     }

@@ -2,8 +2,8 @@ Test name:         Test #1
 Test type:         passedTransactionsTest
 Test description:  Verify number of passed tests
 Transaction name:  Login
-Expected result:   Number of failed transactions <= 0
-Actual result:     Number of failed transactions = 0
+Expected result:   Percent of failed transactions <= 0
+Actual result:     Percent of failed transactions = 0.0
 Transaction count: 5
 Test result:       Pass
 

@@ -28,6 +28,10 @@ public abstract class LightningXMLProcessingHelpers {
         }
     }
 
+    protected boolean isSubElementPresent(Element element, String subElement) {
+        return element.getElementsByTagName(subElement).getLength() != 0;
+    }
+
     protected String getTestName(Element element) {
         return getSubElementValueByTagName(element, "testName");
     }
@@ -75,6 +79,11 @@ public abstract class LightningXMLProcessingHelpers {
         } else {
             throw new XMLFilePercentileException(String.format("Incorrect %s value for %s: %s", subElement, parentNodeName, elementValue));
         }
+    }
+
+    protected int getPercent(Element element, String subElement) {
+        int elementValue = getIntegerValueFromElement(element, subElement);
+        return new Percent(elementValue).getPercent();
     }
 
 }
