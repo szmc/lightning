@@ -1,5 +1,6 @@
 package uk.co.automatictester.lightning.tests;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestResult;
 
@@ -24,13 +25,12 @@ public class RespTimeMaxTest extends LightningTest {
             JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
             transactionCount = transactions.getTransactionCount();
 
-            long maxRespTime = 0;
+            DescriptiveStatistics ds = new DescriptiveStatistics();
             for (List<String> transaction : transactions) {
-                long elapsed = Long.parseLong(transaction.get(1));
-                if (elapsed > maxRespTime) {
-                    maxRespTime = elapsed;
-                }
+                String elapsed = transaction.get(1);
+                ds.addValue(Double.parseDouble(elapsed));
             }
+            long maxRespTime = (long) ds.getMax();
 
             actualResult = String.format(ACTUAL_RESULT_MESSAGE, maxRespTime);
 

@@ -1,5 +1,6 @@
 package uk.co.automatictester.lightning.tests;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestResult;
 
@@ -27,12 +28,13 @@ public class RespTimeAvgTest extends LightningTest {
             JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
             transactionCount = transactions.getTransactionCount();
 
-            double totalRespTime = 0;
+            DescriptiveStatistics ds = new DescriptiveStatistics();
             for (List<String> transaction : transactions) {
                 String elapsed = transaction.get(1);
-                totalRespTime += Long.parseLong(elapsed);
+                ds.addValue(Double.parseDouble(elapsed));
             }
-            double avgRespTime = totalRespTime / transactions.size();
+            double avgRespTime = ds.getMean();
+
             DecimalFormat df = new DecimalFormat("#.##");
             double roundedAvgRespTime = Double.valueOf(df.format(avgRespTime));
 
