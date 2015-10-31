@@ -1,28 +1,29 @@
-Test name:         Test #1
-Test type:         passedTransactionsTest
-Test description:  Verify number of passed tests
-Transaction name:  Login
-Expected result:   Percent of failed transactions <= 0
-Actual result:     Percent of failed transactions = 0.0
-Transaction count: 5
-Test result:       Pass
+Test name:            Test #1
+Test type:            passedTransactionsTest
+Test description:     Verify number of passed tests
+Transaction name:     Login
+Expected result:      Percent of failed transactions <= 0
+Actual result:        Percent of failed transactions = 0.0
+Transaction count:    5
+Test result:          Pass
 
-Test name:         Test #2
-Test type:         passedTransactionsTest
-Test description:  Verify number of passed tests
-Expected result:   Number of failed transactions <= 0
-Actual result:     Number of failed transactions = 0
-Transaction count: 10
-Test result:       Pass
+Test name:            Test #2
+Test type:            passedTransactionsTest
+Test description:     Verify number of passed tests
+Expected result:      Number of failed transactions <= 0
+Actual result:        Number of failed transactions = 0
+Transaction count:    10
+Test result:          Pass
 
-Test name:         Test #3
-Test type:         nthPercRespTimeTest
-Test description:  Verify nth percentile
-Transaction name:  Search
-Expected result:   80th percentile of transactions have response time <= 11245
-Actual result:     80th percentile of transactions have response time = 11244.2
-Transaction count: 5
-Test result:       Pass
+Test name:            Test #3
+Test type:            nthPercRespTimeTest
+Test description:     Verify nth percentile
+Transaction name:     Search
+Expected result:      80th percentile of transactions have response time <= 11245
+Actual result:        80th percentile of transactions have response time = 11244.2
+Transaction count:    5
+Longest transactions: [11250, 11221, 11086, 10769, 10626]
+Test result:          Pass
 
 
 ============= EXECUTION SUMMARY =============

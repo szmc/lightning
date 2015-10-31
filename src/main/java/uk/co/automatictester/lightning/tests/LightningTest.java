@@ -1,7 +1,10 @@
 package uk.co.automatictester.lightning.tests;
 
+import org.apache.commons.lang3.NotImplementedException;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestResult;
+
+import java.util.List;
 
 public abstract class LightningTest {
 
@@ -64,5 +67,9 @@ public abstract class LightningTest {
 
     public TestResult getResult() {
         return result;
+    }
+
+    public List<Integer> getLongestTransactions() {
+        throw new NotImplementedException("Method not implemented for LightningTest which is not RespTimeBasedTest");
     }
 }

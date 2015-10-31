@@ -5,9 +5,11 @@ import uk.co.automatictester.lightning.exceptions.CSVFileNonexistentLabelExcepti
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
@@ -106,5 +108,44 @@ public class JMeterTransactionsTest {
         jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "1000", "true", "1434291246000")));
 
         assertThat(jmeterTransactions.getThroughput(), is(closeTo(0.5, 0.01)));
+    }
+
+    @Test
+    public void testGetLongestTransactions_moreThanFive() {
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "421", "true", "1434291240000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "2432", "true", "1434291245000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "345", "true", "1434291246000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "2", "true", "1434291245000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "334", "true", "1434291246000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "29876", "true", "1434291245000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "90000", "true", "1434291246000")));
+
+        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(90000, 29876, 2432, 421, 345));
+        assertThat(jmeterTransactions.getLongestTransactions(), contains(expectedResult.toArray()));
+    }
+
+    @Test
+    public void testGetLongestTransactions_five() {
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "421", "true", "1434291240000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "2432", "true", "1434291245000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "345", "true", "1434291246000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "29876", "true", "1434291245000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "90000", "true", "1434291246000")));
+
+        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(90000, 29876, 2432, 421, 345));
+        assertThat(jmeterTransactions.getLongestTransactions(), contains(expectedResult.toArray()));
+    }
+
+    @Test
+    public void testGetLongestTransactions_lessThanFive() {
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "421", "true", "1434291240000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "2432", "true", "1434291245000")));
+        jmeterTransactions.add(new ArrayList<>(Arrays.asList("Login", "90000", "true", "1434291246000")));
+
+        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(90000, 2432, 421));
+        assertThat(jmeterTransactions.getLongestTransactions(), contains(expectedResult.toArray()));
     }
 }

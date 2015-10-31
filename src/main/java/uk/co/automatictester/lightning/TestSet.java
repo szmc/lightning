@@ -1,7 +1,9 @@
 package uk.co.automatictester.lightning;
 
+import uk.co.automatictester.lightning.reporters.RespTimeBasedTestReporter;
 import uk.co.automatictester.lightning.reporters.TestReporter;
 import uk.co.automatictester.lightning.tests.LightningTest;
+import uk.co.automatictester.lightning.tests.RespTimeBasedTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,11 @@ public class TestSet {
             } else if (test.getResult() == TestResult.IGNORED) {
                 ignoreCount++;
             }
-            new TestReporter(test).printTestExecutionReport();
+            if (test instanceof RespTimeBasedTest) {
+                new RespTimeBasedTestReporter((RespTimeBasedTest) test).printTestExecutionReport();
+            } else {
+                new TestReporter(test).printTestExecutionReport();
+            }
         }
     }
 

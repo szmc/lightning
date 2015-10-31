@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
-public class RespTimeAvgTest extends LightningTest {
+public class RespTimeAvgTest extends RespTimeBasedTest {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Average response time <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Average response time = %s";
@@ -33,6 +33,7 @@ public class RespTimeAvgTest extends LightningTest {
                 String elapsed = transaction.get(1);
                 ds.addValue(Double.parseDouble(elapsed));
             }
+            longestTransactions = transactions.getLongestTransactions();
             double avgRespTime = ds.getMean();
 
             DecimalFormat df = new DecimalFormat("#.##");

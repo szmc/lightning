@@ -3,13 +3,12 @@ package uk.co.automatictester.lightning.tests;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestResult;
-import uk.co.automatictester.lightning.utils.IntToOrdConverter;
 
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
-public class RespTimeMedianTest extends LightningTest {
+public class RespTimeMedianTest extends RespTimeBasedTest {
 
     private static final String MESSAGE = "median response time ";
     private static final String EXPECTED_RESULT_MESSAGE = MESSAGE + "<= %s";
@@ -35,6 +34,7 @@ public class RespTimeMedianTest extends LightningTest {
                 String elapsed = transaction.get(1);
                 ds.addValue(Double.parseDouble(elapsed));
             }
+            longestTransactions = transactions.getLongestTransactions();
             double actualRespTimePercentile = ds.getPercentile(50);
             DecimalFormat df = new DecimalFormat("#.##");
             double roundedActualRespTimePercentile = Double.valueOf(df.format(actualRespTimePercentile));

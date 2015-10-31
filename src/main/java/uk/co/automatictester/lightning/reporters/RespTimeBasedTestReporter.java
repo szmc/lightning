@@ -1,14 +1,11 @@
 package uk.co.automatictester.lightning.reporters;
 
-import uk.co.automatictester.lightning.TestResult;
 import uk.co.automatictester.lightning.tests.LightningTest;
 
-public class TestReporter {
+public class RespTimeBasedTestReporter extends TestReporter {
 
-    protected LightningTest test;
-
-    public TestReporter(LightningTest test) {
-        this.test = test;
+    public RespTimeBasedTestReporter(LightningTest test) {
+        super(test);
     }
 
     public void printTestExecutionReport() {
@@ -19,6 +16,7 @@ public class TestReporter {
                         "Expected result:      %s%n" +
                         "Actual result:        %s%n" +
                         "Transaction count:    %s%n" +
+                        "Longest transactions: %s%n" +
                         "Test result:          %s%n",
                 test.getName(),
                 test.getType(),
@@ -27,26 +25,9 @@ public class TestReporter {
                 test.getExpectedResult(),
                 test.getActualResult(),
                 test.getTransactionCount(),
+                test.getLongestTransactions(),
                 getResult());
 
         System.out.println(executionReport);
-    }
-
-    protected String getDescription() {
-        return (!test.getDescription().isEmpty()) ? (String.format("Test description:     %s%n", test.getDescription())) : "";
-    }
-
-    protected String getTransactionName() {
-        return (test.getTransactionName() != null) ? (String.format("Transaction name:     %s%n", test.getTransactionName())) : "";
-    }
-
-    protected String getResult() {
-        if (test.getResult() == TestResult.IGNORED) {
-            return "IGNORED";
-        } else if (test.getResult() == TestResult.FAIL) {
-            return "FAIL";
-        } else {
-            return "Pass";
-        }
     }
 }

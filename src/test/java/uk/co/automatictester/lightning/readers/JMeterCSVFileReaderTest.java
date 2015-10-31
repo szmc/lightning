@@ -4,7 +4,6 @@ import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.exceptions.CSVFileIOException;
 import uk.co.automatictester.lightning.exceptions.CSVFileMissingColumnNameException;
-import uk.co.automatictester.lightning.readers.JMeterCSVFileReader;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;

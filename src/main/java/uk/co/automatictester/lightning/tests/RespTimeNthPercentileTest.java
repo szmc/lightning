@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
-public class RespTimeNthPercentileTest extends LightningTest {
+public class RespTimeNthPercentileTest extends RespTimeBasedTest {
 
     private static final String MESSAGE = "%s percentile of transactions have response time ";
     private static final String EXPECTED_RESULT_MESSAGE = MESSAGE + "<= %s";
@@ -37,6 +37,7 @@ public class RespTimeNthPercentileTest extends LightningTest {
                 String elapsed = transaction.get(1);
                 ds.addValue(Double.parseDouble(elapsed));
             }
+            longestTransactions = transactions.getLongestTransactions();
             double actualRespTimePercentile = ds.getPercentile((double) percentile);
             DecimalFormat df = new DecimalFormat("#.##");
             double roundedActualRespTimePercentile = Double.valueOf(df.format(actualRespTimePercentile));

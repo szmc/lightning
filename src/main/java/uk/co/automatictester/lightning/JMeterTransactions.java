@@ -3,6 +3,8 @@ package uk.co.automatictester.lightning;
 import uk.co.automatictester.lightning.exceptions.CSVFileNonexistentLabelException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class JMeterTransactions extends ArrayList<ArrayList<String>> {
 
@@ -16,6 +18,21 @@ public class JMeterTransactions extends ArrayList<ArrayList<String>> {
         if (transactions.size() == 0)
             throw new CSVFileNonexistentLabelException(label);
         return transactions;
+    }
+
+    public List<Integer> getLongestTransactions() {
+        List<Integer> longestTransactions = new ArrayList<>();
+        for (List<String> transaction : this) {
+            String elapsed = transaction.get(1);
+            longestTransactions.add(Integer.parseInt(elapsed));
+        }
+        Collections.sort(longestTransactions);
+        Collections.reverse(longestTransactions);
+        if (longestTransactions.size() >= 5) {
+            return longestTransactions.subList(0, 5);
+        } else {
+            return longestTransactions.subList(0, longestTransactions.size());
+        }
     }
 
     public int getFailCount() {

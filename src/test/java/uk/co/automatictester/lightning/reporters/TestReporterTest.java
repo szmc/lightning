@@ -14,14 +14,14 @@ public class TestReporterTest extends ConsoleOutputTest {
 
     @Test
     public void testPrintTestExecutionReportPass() {
-        String expectedOutput = String.format("Test name:         my name%n" +
-                "Test type:         my type%n" +
-                "Test description:  my description%n" +
-                "Transaction name:  my transaction%n" +
-                "Expected result:   my expectations%n" +
-                "Actual result:     my reality%n" +
-                "Transaction count: 10%n" +
-                "Test result:       Pass");
+        String expectedOutput = String.format("Test name:            my name%n" +
+                "Test type:            my type%n" +
+                "Test description:     my description%n" +
+                "Transaction name:     my transaction%n" +
+                "Expected result:      my expectations%n" +
+                "Actual result:        my reality%n" +
+                "Transaction count:    10%n" +
+                "Test result:          Pass");
 
         PassedTransactionsTest test = mock(PassedTransactionsTest.class);
         when(test.getDescription()).thenReturn("my description");
@@ -41,14 +41,14 @@ public class TestReporterTest extends ConsoleOutputTest {
 
     @Test
     public void testPrintTestExecutionReportFail() {
-        String expectedOutput = String.format("Test name:         my name%n" +
-                "Test type:         my type%n" +
-                "Test description:  my description%n" +
-                "Transaction name:  my transaction%n" +
-                "Expected result:   my expectations%n" +
-                "Actual result:     my reality%n" +
-                "Transaction count: 10%n" +
-                "Test result:       FAIL");
+        String expectedOutput = String.format("Test name:            my name%n" +
+                "Test type:            my type%n" +
+                "Test description:     my description%n" +
+                "Transaction name:     my transaction%n" +
+                "Expected result:      my expectations%n" +
+                "Actual result:        my reality%n" +
+                "Transaction count:    10%n" +
+                "Test result:          FAIL");
 
         PassedTransactionsTest test = mock(PassedTransactionsTest.class);
         when(test.getDescription()).thenReturn("my description");
@@ -68,14 +68,14 @@ public class TestReporterTest extends ConsoleOutputTest {
 
     @Test
     public void testPrintTestExecutionReportIgnored() {
-        String expectedOutput = String.format("Test name:         my name%n" +
-                "Test type:         my type%n" +
-                "Test description:  my description%n" +
-                "Transaction name:  my transaction%n" +
-                "Expected result:   my expectations%n" +
-                "Actual result:     my reality%n" +
-                "Transaction count: 10%n" +
-                "Test result:       IGNORED");
+        String expectedOutput = String.format("Test name:            my name%n" +
+                "Test type:            my type%n" +
+                "Test description:     my description%n" +
+                "Transaction name:     my transaction%n" +
+                "Expected result:      my expectations%n" +
+                "Actual result:        my reality%n" +
+                "Transaction count:    10%n" +
+                "Test result:          IGNORED");
 
         PassedTransactionsTest test = mock(PassedTransactionsTest.class);
         when(test.getDescription()).thenReturn("my description");
@@ -95,13 +95,13 @@ public class TestReporterTest extends ConsoleOutputTest {
 
     @Test
     public void testPrintTestExecutionReportPassNoDescription() {
-        String expectedOutput = String.format("Test name:         my name%n" +
-                "Test type:         my type%n" +
-                "Transaction name:  my transaction%n" +
-                "Expected result:   my expectations%n" +
-                "Actual result:     my reality%n" +
-                "Transaction count: 10%n" +
-                "Test result:       Pass");
+        String expectedOutput = String.format("Test name:            my name%n" +
+                "Test type:            my type%n" +
+                "Transaction name:     my transaction%n" +
+                "Expected result:      my expectations%n" +
+                "Actual result:        my reality%n" +
+                "Transaction count:    10%n" +
+                "Test result:          Pass");
 
         PassedTransactionsTest test = mock(PassedTransactionsTest.class);
         when(test.getDescription()).thenReturn("");
@@ -121,13 +121,13 @@ public class TestReporterTest extends ConsoleOutputTest {
 
     @Test
     public void testPrintTestExecutionReportPassNoTransactionName() {
-        String expectedOutput = String.format("Test name:         my name%n" +
-                "Test type:         my type%n" +
-                "Test description:  my description%n" +
-                "Expected result:   my expectations%n" +
-                "Actual result:     my reality%n" +
-                "Transaction count: 10%n" +
-                "Test result:       Pass");
+        String expectedOutput = String.format("Test name:            my name%n" +
+                "Test type:            my type%n" +
+                "Test description:     my description%n" +
+                "Expected result:      my expectations%n" +
+                "Actual result:        my reality%n" +
+                "Transaction count:    10%n" +
+                "Test result:          Pass");
 
         PassedTransactionsTest test = mock(PassedTransactionsTest.class);
         when(test.getDescription()).thenReturn("my description");

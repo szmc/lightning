@@ -6,7 +6,7 @@ import uk.co.automatictester.lightning.TestResult;
 
 import java.util.List;
 
-public class RespTimeMaxTest extends LightningTest {
+public class RespTimeMaxTest extends RespTimeBasedTest {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Max response time <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Max response time = %s";
@@ -30,6 +30,7 @@ public class RespTimeMaxTest extends LightningTest {
                 String elapsed = transaction.get(1);
                 ds.addValue(Double.parseDouble(elapsed));
             }
+            longestTransactions = transactions.getLongestTransactions();
             long maxRespTime = (long) ds.getMax();
 
             actualResult = String.format(ACTUAL_RESULT_MESSAGE, maxRespTime);

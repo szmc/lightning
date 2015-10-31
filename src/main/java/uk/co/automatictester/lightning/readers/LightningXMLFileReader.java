@@ -62,7 +62,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int allowedPercentOfFailedTransactions;
             PassedTransactionsTest passedTransactionsTest;
 
-            if(isSubElementPresent(passedTransactionsElement, "allowedNumberOfFailedTransactions")) {
+            if (isSubElementPresent(passedTransactionsElement, "allowedNumberOfFailedTransactions")) {
                 allowedNumberOfFailedTransactions = getIntegerValueFromElement(passedTransactionsElement, "allowedNumberOfFailedTransactions");
                 passedTransactionsTest = new PassedTransactionsTest(name, testType, description, transactionName, allowedNumberOfFailedTransactions);
             } else {
