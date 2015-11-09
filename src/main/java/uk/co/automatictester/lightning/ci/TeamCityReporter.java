@@ -5,23 +5,19 @@ import uk.co.automatictester.lightning.TestSet;
 
 public class TeamCityReporter extends CIReporter {
 
-    private static final String teamCityOutput = "%nSet TeamCity build status text:%n" +
-            "##teamcity[buildStatus text='%s']";
+	private static final String teamCityOutputBuildStatus = "%nSet TeamCity build status text:%n" +
+			"##teamcity[buildStatus text='%s']";
+
+	private static final String teamCityOutputBuildProblem = "%nSet TeamCity build status text:%n" +
+			"##teamcity[buildProblem description='%s']";
 
     public void setTeamCityBuildStatusText(TestSet testSet) {
+		String teamCityOutput = testSet.getFailCount() + testSet.getIgnoreCount() > 0 ? teamCityOutputBuildProblem : teamCityOutputBuildStatus;
         System.out.println(String.format(teamCityOutput, getVerifySummary(testSet)));
     }
 
     public void setTeamCityBuildStatusText(JMeterTransactions jmeterTransactions) {
-        System.out.println(String.format(teamCityOutput, getReportSummary(jmeterTransactions)));
+        System.out.println(String.format(teamCityOutputBuildStatus, getReportSummary(jmeterTransactions)));
     }
-
-	public static String getVerifySummary(TestSet testSet) {
-		int executed = testSet.getTestCount();
-		int failed = testSet.getFailCount();
-		int ignored = testSet.getIgnoreCount();
-		String testMsgHead = failed > 0 ? "Tests failed:" : "Tests passed:";
-		return String.format(testMsgHead + " executed: %s, failed: %s, ignored: %s", executed, failed, ignored);
-	}
 
 }

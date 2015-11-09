@@ -15,7 +15,7 @@ public class TeamCityReporterTest extends ConsoleOutputTest {
     @Test
     public void testSetTeamCityBuildStatusTextFailedTests_verify() {
         String expectedOutput = String.format("%nSet TeamCity build status text:%n" +
-                "##teamcity[buildStatus text='Tests failed: executed: 6, failed: 2, ignored: 1']%n");
+                "##teamcity[buildProblem description='Tests executed: 6, failed: 2, ignored: 1']%n");
 
         TestSet testSet = mock(TestSet.class);
         when(testSet.getTestCount()).thenReturn(6);
@@ -31,7 +31,7 @@ public class TeamCityReporterTest extends ConsoleOutputTest {
 	@Test
 	public void testSetTeamCityBuildStatusTextZeroFailedTests_verify() {
 		String expectedOutput = String.format("%nSet TeamCity build status text:%n" +
-				"##teamcity[buildStatus text='Tests passed: executed: 6, failed: 0, ignored: 1']%n");
+				"##teamcity[buildProblem description='Tests executed: 6, failed: 0, ignored: 1']%n");
 
 		TestSet testSet = mock(TestSet.class);
 		when(testSet.getTestCount()).thenReturn(6);
