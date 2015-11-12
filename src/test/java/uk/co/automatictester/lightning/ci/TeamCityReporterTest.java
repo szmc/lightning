@@ -44,14 +44,29 @@ public class TeamCityReporterTest extends ConsoleOutputTest {
 		revertStream();
 	}
 
+	@Test
+	public void testSetTeamCityBuildStatusTextFailedTests_report() {
+		String expectedOutput = String.format("%nSet TeamCity build status text:%n" +
+				"##teamcity[buildProblem description='Transactions executed: 10, failed: 2']%n");
+
+		JMeterTransactions jmeterTransactions = mock(JMeterTransactions.class);
+		when(jmeterTransactions.getTransactionCount()).thenReturn(10);
+		when(jmeterTransactions.getFailCount()).thenReturn(2);
+
+		configureStream();
+		new TeamCityReporter().setTeamCityBuildStatusText(jmeterTransactions);
+		assertThat(out.toString(), containsString(expectedOutput));
+		revertStream();
+	}
+
     @Test
-    public void testSetTeamCityBuildStatusText_report() {
+    public void testSetTeamCityBuildStatusTextZeroFailedTests_report() {
         String expectedOutput = String.format("%nSet TeamCity build status text:%n" +
-                "##teamcity[buildStatus text='Transactions executed: 10, failed: 2']%n");
+                "##teamcity[buildStatus text='Transactions executed: 10, failed: 0']%n");
 
         JMeterTransactions jmeterTransactions = mock(JMeterTransactions.class);
         when(jmeterTransactions.getTransactionCount()).thenReturn(10);
-        when(jmeterTransactions.getFailCount()).thenReturn(2);
+        when(jmeterTransactions.getFailCount()).thenReturn(0);
 
         configureStream();
         new TeamCityReporter().setTeamCityBuildStatusText(jmeterTransactions);

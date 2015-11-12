@@ -17,7 +17,8 @@ public class TeamCityReporter extends CIReporter {
     }
 
     public void setTeamCityBuildStatusText(JMeterTransactions jmeterTransactions) {
-        System.out.println(String.format(teamCityOutputBuildStatus, getReportSummary(jmeterTransactions)));
+		String teamCityOutput = jmeterTransactions.getFailCount()  > 0 ? teamCityOutputBuildProblem : teamCityOutputBuildStatus;
+        System.out.println(String.format(teamCityOutput, getReportSummary(jmeterTransactions)));
     }
 
 }
