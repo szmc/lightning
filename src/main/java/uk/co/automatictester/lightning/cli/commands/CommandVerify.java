@@ -7,7 +7,7 @@ import uk.co.automatictester.lightning.cli.delegates.CI;
 import uk.co.automatictester.lightning.cli.delegates.CSVFile;
 import uk.co.automatictester.lightning.cli.validators.FileValidator;
 
-@Parameters(separators = "=", commandDescription = "Execute Lightning tests agains JMeter output")
+@Parameters(separators = "=", commandDescription = "Execute Lightning tests against JMeter output")
 public class CommandVerify {
 
     @Parameter(names = "-xml", description = "Lightning XML config file", required = true, validateWith = FileValidator.class)

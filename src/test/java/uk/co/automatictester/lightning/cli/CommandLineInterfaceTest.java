@@ -95,7 +95,7 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
     public void testPrintHelp() {
         String expectedOutput = String.format("Usage: java -jar lightning-<version_number>.jar [options] [command] [command options]%n" +
                 "  Commands:%n" +
-                "    verify      Execute Lightning tests agains JMeter output%n" +
+                "    verify      Execute Lightning tests against JMeter output%n" +
                 "      Usage: verify [options]%n" +
                 "        Options:%n" +
                 "          -ci%n" +
