@@ -116,7 +116,11 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
         CommandLineInterface params = new CommandLineInterface(new String[]{});
         configureStream();
         params.printHelp();
-        assertThat(out.toString(), containsString(expectedOutput));
+        String actual = out.toString();
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            actual = actual.replace("\n", "\r\n");
+        }
+        assertThat(actual, containsString(expectedOutput));
         revertStream();
     }
 }
