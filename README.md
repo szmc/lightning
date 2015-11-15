@@ -3,23 +3,23 @@
 [![Build status](https://api.travis-ci.org/automatictester/lightning.svg?branch=master)](https://travis-ci.org/automatictester/lightning)
 [![Coverage Status](https://coveralls.io/repos/automatictester/lightning/badge.svg?branch=master)](https://coveralls.io/r/automatictester/lightning?branch=master)
 
-## Current version
+## Download
 
 Lightning as standalone JAR is available for download from [Releases](https://github.com/automatictester/lightning/releases) tab.
 Lightning as a dependency is available in [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22uk.co.automatictester%22%20AND%20a%3A%22lightning%22).
 
 ## Changelog
 
-All functional changes are described in [release notes](https://github.com/automatictester/lightning/releases).
+All new features and bugfixes are included in [release notes](https://github.com/automatictester/lightning/releases).
 
 ## Project goals
 
-Lightning's goal is to revolutionise how we do performance testing. Lightning enables JMeter performance testing integration with Continuous Integration infrastructure. It can instantly provide CI server with simple and meaningful information whether to pass or fail the build - with no human involvement needed. Check our [wiki pages](https://github.com/automatictester/lightning/wiki) and [story behind Lightning](https://github.com/automatictester/lightning/wiki/Story-Behind-Lightning) for more information.
+Lightning's goal is to revolutionise how we do performance testing. Lightning integrates JMeter performance testing with Continuous Integration infrastructure. It can instantly provide CI server with simple and meaningful information whether to pass or fail the build - with no human involvement needed. Check the [story behind Lightning](https://github.com/automatictester/lightning/wiki/Story-Behind-Lightning) for more information.
 
 ## Project maturity
 
 Lightning as a standalone JAR has been used in day-to-day delivery for months and can be considered production-ready.
-Lightning as a Java dependency is a relatively new feature and is used by only a subset of users.
+Lightning as a Java dependency is a relatively new feature and is used only by a subset of users.
 
 ## First steps - standalone JAR
 
@@ -27,13 +27,13 @@ This option is most suitable for most users.
 
 By default, continuous integration servers mark build as failed based on exit code of executed build step. This behaviour can be amended using CI server-specific features or plugins, which allow to fail build based on build console output.
 
-There are two modes of Lightning execution: `verify` and `report`. To make things simple, Lightning running in `verify` mode exits with code 0 if none of the defined tests failed, and 1 if any of the tests failed. Lightning running in `report` mode exits with code 0 if there were no failed JMeter transactions, and 2 if any of JMeter transactions failed. If for some reason you prefer to parse Lightning output, you can do that as well. Lightning offers some extra features for [TeamCity](https://github.com/automatictester/lightning/wiki/Enhanced-TeamCity-Integration) and [Jenkins](https://github.com/automatictester/lightning/wiki/Enhanced-Jenkins-Integration) users.
+There are two modes of Lightning execution: `verify` and `report`. Differences between those two are described in the below sections. To make things simple, Lightning running in `verify` mode exits with code 0 if none of the defined tests failed, and 1 if any of the tests failed. Lightning running in `report` mode exits with code 0 if there were no failed JMeter transactions, and 2 if any of JMeter transactions failed. If for some reason you prefer to parse Lightning output, you can do that as well. Lightning offers some extra features for [TeamCity](https://github.com/automatictester/lightning/wiki/Enhanced-TeamCity-Integration) and [Jenkins](https://github.com/automatictester/lightning/wiki/Enhanced-Jenkins-Integration) users.
 
-### Preconditions:
+### Preconditions
 
 - Check your Java version with `java -version`. Lightning requires Java 7 or above.
 - Download most recent `lightning-standalone-<version>.jar` from [releases](https://github.com/automatictester/lightning/releases).
-- Configure your JMeter tests to produce output in CSV format with relevant columnn. There columns must be included: `label`, `elapsed`, `success`.
+- Configure your JMeter tests to produce output in CSV format with relevant columns. There columns must be included: `label`, `elapsed`, `success`.
 
 ### Verify mode
 
@@ -88,7 +88,7 @@ Test result:      Pass
 
 ### Report mode
 
-A: In this mode, JMeter doesn't execute any tests. It only parses JMeter output and reports total number of transactions and number of failed transactions. Lightning returns 2 exit code on non-zero number of failed transactions.
+In this mode, JMeter doesn't execute any tests. It only parses JMeter output and reports total number of transactions and number of failed transactions. Lightning returns 2 exit code on non-zero number of failed transactions.
 
 In `report` mode, Lightning requires only 1 source of input data: JMeter CSV output. In this mode Lightning parses JMeter output and reports total number of transactions and number of failed transactions. In this mode, Lightning doesn't perform any verification.
 
