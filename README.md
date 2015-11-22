@@ -19,7 +19,12 @@ Lightning's goal is to revolutionise how we do performance testing. Lightning in
 ## Project maturity
 
 Lightning as a standalone JAR has been used in day-to-day delivery for months and can be considered production-ready.
+
 Lightning as a Java dependency is a relatively new feature and is used only by a subset of users.
+
+## Future
+
+Lightning 2 is under way! It will provide twice as many features and revolutionise how you assess results of performance tests.
 
 ## First steps - standalone JAR
 
