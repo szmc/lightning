@@ -1,4 +1,4 @@
-# Overview
+# Lightning Overview
 
 [![Build status](https://api.travis-ci.org/automatictester/lightning.svg?branch=master)](https://travis-ci.org/automatictester/lightning)
 [![Coverage Status](https://coveralls.io/repos/automatictester/lightning/badge.svg?branch=master)](https://coveralls.io/r/automatictester/lightning?branch=master)
@@ -6,6 +6,7 @@
 ### Download
 
 Lightning as standalone JAR is available for download from [Releases](https://github.com/automatictester/lightning/releases) tab.
+
 Lightning as a dependency is available in [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22uk.co.automatictester%22%20AND%20a%3A%22lightning%22).
 
 ### Changelog
@@ -41,7 +42,7 @@ Lightning as a Java dependency is used only by a subset of users.
 
 Lightning 2 is under way! It will provide twice as many features and revolutionise how you assess results of performance tests.
 
-# How to start
+# How to start using Lightning
 
 You can start using Lightning as a standalone JAR or directly from Java code.
 
@@ -58,10 +59,6 @@ There are two modes of Lightning execution: `verify` and `report`. Differences b
 - Check your Java version with `java -version`. Lightning requires Java 7 or above.
 - Download most recent `lightning-standalone-<version>.jar` from [releases](https://github.com/automatictester/lightning/releases).
 - Configure your JMeter tests to [save relevant data](https://github.com/automatictester/lightning/wiki/Configure-JMeter-to-Save-Relevant-Data).
-
-### Lightning modes
-
-Lightning supports 2 modes: `verify` and `report`.
 
 ### Verify mode
 
