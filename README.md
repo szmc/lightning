@@ -46,7 +46,7 @@ Lightning 2 is under way! It will provide twice as many features and revolutioni
 
 You can start using Lightning as a standalone JAR or directly from Java code.
 
-### First steps - standalone JAR
+### Standalone JAR
 
 Using Lightning as a standalone JAR is a most suitable option for most users.
 
@@ -125,7 +125,7 @@ Sample output:
 
 `Transactions executed: 10, failed: 0`
 
-### First steps - Java API
+### Java API
 
 Advanced Lightning users may want to call its Java API directly. It doesn't provide any extra features over standalone JAR, but gives you more low-level control. Here you can find examples of calling Lightning Java API in [verify](https://github.com/automatictester/lightning-java-api-tests/blob/master/src/test/java/uk/co/automatictester/lightning/java/api/tests/VerifyTest.java) and [report](https://github.com/automatictester/lightning-java-api-tests/blob/master/src/test/java/uk/co/automatictester/lightning/java/api/tests/ReportTest.java) mode.
 
