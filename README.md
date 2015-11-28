@@ -38,7 +38,7 @@ There are two modes of Lightning execution: `verify` and `report`. Differences b
 
 - Check your Java version with `java -version`. Lightning requires Java 7 or above.
 - Download most recent `lightning-standalone-<version>.jar` from [releases](https://github.com/automatictester/lightning/releases).
-- Configure your JMeter tests to produce output in CSV format with relevant columns. There columns must be included: `label`, `elapsed`, `success`.
+- Configure your JMeter tests to [save relevant data](https://github.com/automatictester/lightning/wiki/Configure-JMeter-to-Save-Relevant-Data).
 
 ### Verify mode
 
