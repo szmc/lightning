@@ -1,34 +1,53 @@
-## Lightning
+# Overview
 
 [![Build status](https://api.travis-ci.org/automatictester/lightning.svg?branch=master)](https://travis-ci.org/automatictester/lightning)
 [![Coverage Status](https://coveralls.io/repos/automatictester/lightning/badge.svg?branch=master)](https://coveralls.io/r/automatictester/lightning?branch=master)
 
-## Download
+### Download
 
 Lightning as standalone JAR is available for download from [Releases](https://github.com/automatictester/lightning/releases) tab.
 Lightning as a dependency is available in [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22uk.co.automatictester%22%20AND%20a%3A%22lightning%22).
 
-## Changelog
+### Changelog
 
 All new features and bugfixes are included in [release notes](https://github.com/automatictester/lightning/releases).
 
-## Project goals
+### Goals
 
 Lightning's goal is to revolutionise how we do performance testing. Lightning integrates JMeter performance testing with Continuous Integration infrastructure. It can instantly provide CI server with simple and meaningful information whether to pass or fail the build - with no human involvement needed. Check the [story behind Lightning](https://github.com/automatictester/lightning/wiki/Story-Behind-Lightning) for more information.
 
-## Project maturity
+### Philosophy
+
+- Keep technology stack as close to JMeter as possible
+- Be continuous integration server-independent and operating system-independent. Lightning should not be designed to run in particular environment only, but can offer extra features for certain environments
+- Using Lightning shouldn't require coding skills, as JMeter doesn't require that neither
+- Release changes frequently
+- Be well documented
+- Be well tested
+- Do not provide bugfixes and support for old versions
+- Follow [SemVer](http://semver.org)
+
+### Design assumptions
+
+- JMeter result files produced in CI environment should be small enough to be processed by Lightning and stored in memory without hacks
+
+### Project maturity
 
 Lightning as a standalone JAR has been used in day-to-day delivery for months and can be considered production-ready.
 
-Lightning as a Java dependency is a relatively new feature and is used only by a subset of users.
+Lightning as a Java dependency is used only by a subset of users.
 
-## Future
+### Future
 
 Lightning 2 is under way! It will provide twice as many features and revolutionise how you assess results of performance tests.
 
-## First steps - standalone JAR
+# How to start
 
-This option is most suitable for most users.
+You can start using Lightning as a standalone JAR or directly from Java code.
+
+### First steps - standalone JAR
+
+Using Lightning as a standalone JAR is a most suitable option for most users.
 
 By default, continuous integration servers mark build as failed based on exit code of executed build step. This behaviour can be amended using CI server-specific features or plugins, which allow to fail build based on build console output.
 
@@ -39,6 +58,10 @@ There are two modes of Lightning execution: `verify` and `report`. Differences b
 - Check your Java version with `java -version`. Lightning requires Java 7 or above.
 - Download most recent `lightning-standalone-<version>.jar` from [releases](https://github.com/automatictester/lightning/releases).
 - Configure your JMeter tests to [save relevant data](https://github.com/automatictester/lightning/wiki/Configure-JMeter-to-Save-Relevant-Data).
+
+### Lightning modes
+
+Lightning supports 2 modes: `verify` and `report`.
 
 ### Verify mode
 
@@ -105,33 +128,20 @@ Sample output:
 
 `Transactions executed: 10, failed: 0`
 
-## First steps - Java API
+### First steps - Java API
 
 Advanced Lightning users may want to call its Java API directly. It doesn't provide any extra features over standalone JAR, but gives you more low-level control. Here you can find examples of calling Lightning Java API in [verify](https://github.com/automatictester/lightning-java-api-tests/blob/master/src/test/java/uk/co/automatictester/lightning/java/api/tests/VerifyTest.java) and [report](https://github.com/automatictester/lightning-java-api-tests/blob/master/src/test/java/uk/co/automatictester/lightning/java/api/tests/ReportTest.java) mode.
 
-## Philosophy
+# Miscellaneous
 
-- Keep technology stack as close to JMeter as possible
-- Be continuous integration server-independent and operating system-independent. Lightning should not be designed to run in particular environment only, but can offer extra features for certain environments
-- Using Lightning shouldn't require coding skills, as JMeter doesn't require that neither
-- Release changes frequently
-- Be well documented
-- Be well tested
-- Do not provide bugfixes and support for old versions
-- Follow [SemVer](http://semver.org)
-
-## Design assumptions
-
-- JMeter result files produced in CI environment should be small enough to be processed by Lightning and stored in memory without hacks
-
-## Issues, questions and feature requests
+### Issues, questions and feature requests
 
 Issues, questions and feature requests should be raised [here](https://github.com/automatictester/lightning/issues).
 
-## Contributors
+### Contributors
 
 All the information you may need (and even more) can be found [here](https://github.com/automatictester/lightning/wiki/Info-for-Contributors). Pull requests are welcome!
 
-## License
+### License
 
 Released under the MIT license.
