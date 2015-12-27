@@ -1,4 +1,4 @@
-# Lightning Overview
+# Overview
 
 [![Build status](https://api.travis-ci.org/automatictester/lightning.svg?branch=master)](https://travis-ci.org/automatictester/lightning)
 [![Coverage Status](https://coveralls.io/repos/automatictester/lightning/badge.svg?branch=master)](https://coveralls.io/r/automatictester/lightning?branch=master)
@@ -42,7 +42,7 @@ Lightning as a Java dependency is used only by a subset of users.
 
 Lightning 2 is under way! It will provide twice as many features and revolutionise how you assess results of performance tests.
 
-# How to start using Lightning
+# How to start
 
 You can start using Lightning as a standalone JAR or directly from Java code.
 
@@ -129,7 +129,7 @@ Sample output:
 
 Advanced Lightning users may want to call its Java API directly. It doesn't provide any extra features over standalone JAR, but gives you more low-level control. Here you can find examples of calling Lightning Java API in [verify](https://github.com/automatictester/lightning-java-api-tests/blob/master/src/test/java/uk/co/automatictester/lightning/java/api/tests/VerifyTest.java) and [report](https://github.com/automatictester/lightning-java-api-tests/blob/master/src/test/java/uk/co/automatictester/lightning/java/api/tests/ReportTest.java) mode.
 
-# Miscellaneous
+# Misc
 
 ### Issues, questions and feature requests
 
