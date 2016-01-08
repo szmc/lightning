@@ -33,7 +33,9 @@ public class TestData {
 
     // CSV files
     public static final String CSV_MISSING_LABEL_COLUMN = CSV_RESOURCES + "missing_label_column.csv";
+    public static final String CSV_NOT_ENOUGH_COLUMNS_IN_DATA_PART = CSV_RESOURCES + "not_enough_columns_in_data_part.csv";
     public static final String CSV_2_TRANSACTIONS = CSV_RESOURCES + "2_transactions.csv";
+    public static final String CSV_0_TRANSACTIONS = CSV_RESOURCES + "0_transactions.csv";
     public static final String CSV_10_TRANSACTIONS = CSV_RESOURCES + "10_transactions.csv";
     public static final String CSV_NONEXISTENT = CSV_RESOURCES + "nonexistent.csv";
 

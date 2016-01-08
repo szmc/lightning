@@ -3,7 +3,9 @@ package uk.co.automatictester.lightning.readers;
 import com.opencsv.CSVReader;
 import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.exceptions.CSVFileIOException;
+import uk.co.automatictester.lightning.exceptions.CSVFileMalformedDataException;
 import uk.co.automatictester.lightning.exceptions.CSVFileMissingColumnNameException;
+import uk.co.automatictester.lightning.exceptions.CSVFileNoTransactionsException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,12 +27,21 @@ public class JMeterCSVFileReader {
             getColumnIndexes(columnNames);
 
             String[] jmeterTransaction;
+            String labelValue = null;
+            String elapsedValue = null;
+            String successValue = null;
+            String timeStampValue = null;
+
             while ((jmeterTransaction = reader.readNext()) != null) {
                 ArrayList<String> currentTransaction = new ArrayList<>();
-                String labelValue = jmeterTransaction[labelIndex];
-                String elapsedValue = jmeterTransaction[elapsedIndex];
-                String successValue = jmeterTransaction[successIndex];
-                String timeStampValue = jmeterTransaction[timeStampIndex];
+                try {
+                    labelValue = jmeterTransaction[labelIndex];
+                    elapsedValue = jmeterTransaction[elapsedIndex];
+                    successValue = jmeterTransaction[successIndex];
+                    timeStampValue = jmeterTransaction[timeStampIndex];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new CSVFileMalformedDataException();
+                }
                 currentTransaction.add(labelValue);     // 0
                 currentTransaction.add(elapsedValue);   // 1
                 currentTransaction.add(successValue);   // 2
@@ -39,6 +50,9 @@ public class JMeterCSVFileReader {
             }
         } catch (IOException e) {
             throw new CSVFileIOException(e.getMessage());
+        }
+        if (jmeterTransactions.isEmpty()) {
+            throw new CSVFileNoTransactionsException();
         }
         return jmeterTransactions;
     }
