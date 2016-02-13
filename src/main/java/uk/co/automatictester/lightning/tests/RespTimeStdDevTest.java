@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
-public class RespTimeStdDevTest extends LightningTest {
+public class RespTimeStdDevTest extends ClientSideTest {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Average standard deviance time <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Average standard deviance time = %s";

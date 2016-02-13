@@ -1,10 +1,10 @@
 package uk.co.automatictester.lightning.reporters;
 
-import uk.co.automatictester.lightning.tests.LightningTest;
+import uk.co.automatictester.lightning.tests.ClientSideTest;
 
 public class RespTimeBasedTestReporter extends TestReporter {
 
-    public RespTimeBasedTestReporter(LightningTest test) {
+    public RespTimeBasedTestReporter(ClientSideTest test) {
         super(test);
     }
 

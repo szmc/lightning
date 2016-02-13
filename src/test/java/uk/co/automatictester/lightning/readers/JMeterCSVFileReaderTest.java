@@ -9,7 +9,7 @@ import uk.co.automatictester.lightning.exceptions.CSVFileNoTransactionsException
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static uk.co.automatictester.lightning.data.TestData.*;
+import static uk.co.automatictester.lightning.shared.TestData.*;
 
 public class JMeterCSVFileReaderTest {
 

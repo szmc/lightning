@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
-import static uk.co.automatictester.lightning.data.TestData.RESP_TIME_PERC_TEST_A;
+import static uk.co.automatictester.lightning.shared.TestData.RESP_TIME_PERC_TEST_A;
 
 public class ThroughputTestTest {
 
@@ -71,7 +71,7 @@ public class ThroughputTestTest {
 
     @Test
     public void testIsNotEqualOtherTestType() {
-        assertThat(THROUGHPUT_TEST_A, is(not(equalTo((LightningTest) RESP_TIME_PERC_TEST_A))));
+        assertThat(THROUGHPUT_TEST_A, is(not(equalTo((ClientSideTest) RESP_TIME_PERC_TEST_A))));
     }
 
     @Test

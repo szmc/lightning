@@ -9,7 +9,7 @@ import uk.co.automatictester.lightning.utils.Percent;
 import java.util.List;
 import java.util.Objects;
 
-public class PassedTransactionsTest extends LightningTest {
+public class PassedTransactionsTest extends ClientSideTest {
 
     private static final String EXPECTED_RESULT_MESSAGE = "%s of failed transactions <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "%s of failed transactions = %s";

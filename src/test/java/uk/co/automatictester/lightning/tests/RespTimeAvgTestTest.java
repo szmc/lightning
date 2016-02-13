@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
-import static uk.co.automatictester.lightning.data.TestData.*;
+import static uk.co.automatictester.lightning.shared.TestData.*;
 
 public class RespTimeAvgTestTest {
 
@@ -86,7 +86,7 @@ public class RespTimeAvgTestTest {
 
     @Test
     public void verifyIsNotEqualOtherTestType() {
-        assertThat((LightningTest) AVG_RESP_TIME_TEST_A, is(not(equalTo((LightningTest) RESP_TIME_PERC_TEST_A))));
+        assertThat((ClientSideTest) AVG_RESP_TIME_TEST_A, is(not(equalTo((ClientSideTest) RESP_TIME_PERC_TEST_A))));
     }
 
     @Test

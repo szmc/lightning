@@ -20,9 +20,9 @@ import java.util.List;
 
 public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
 
-    private List<LightningTest> tests = new ArrayList<>();
+    private List<ClientSideTest> tests = new ArrayList<>();
 
-    public List<LightningTest> getTests(String xmlFile) {
+    public List<ClientSideTest> getTests(String xmlFile) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();

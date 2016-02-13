@@ -1,13 +1,13 @@
 package uk.co.automatictester.lightning.reporters;
 
 import uk.co.automatictester.lightning.TestResult;
-import uk.co.automatictester.lightning.tests.LightningTest;
+import uk.co.automatictester.lightning.tests.ClientSideTest;
 
 public class TestReporter {
 
-    protected LightningTest test;
+    protected ClientSideTest test;
 
-    public TestReporter(LightningTest test) {
+    public TestReporter(ClientSideTest test) {
         this.test = test;
     }
 

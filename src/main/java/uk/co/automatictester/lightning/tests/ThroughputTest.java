@@ -5,7 +5,7 @@ import uk.co.automatictester.lightning.data.JMeterTransactions;
 
 import java.util.Objects;
 
-public class ThroughputTest extends LightningTest {
+public class ThroughputTest extends ClientSideTest {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Throughput >= %s / second";
     private static final String ACTUAL_RESULT_MESSAGE = "Throughput = %s / second";

@@ -2,7 +2,7 @@ package uk.co.automatictester.lightning.tests;
 
 import java.util.List;
 
-public abstract class RespTimeBasedTest extends LightningTest {
+public abstract class RespTimeBasedTest extends ClientSideTest {
 
     protected List<Integer> longestTransactions;
 

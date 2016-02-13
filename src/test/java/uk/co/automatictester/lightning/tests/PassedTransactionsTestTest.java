@@ -8,7 +8,7 @@ import uk.co.automatictester.lightning.utils.Percent;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
-import static uk.co.automatictester.lightning.data.TestData.*;
+import static uk.co.automatictester.lightning.shared.TestData.*;
 
 public class PassedTransactionsTestTest {
 
@@ -130,7 +130,7 @@ public class PassedTransactionsTestTest {
 
     @Test
     public void verifyIsNotEqualOtherTestType() {
-        assertThat(PASSED_TRANSACTIONS_TEST_A, is(not(equalTo((LightningTest) RESP_TIME_PERC_TEST_A))));
+        assertThat(PASSED_TRANSACTIONS_TEST_A, is(not(equalTo((ClientSideTest) RESP_TIME_PERC_TEST_A))));
     }
 
     @Test

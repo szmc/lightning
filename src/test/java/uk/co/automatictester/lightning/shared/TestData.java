@@ -1,4 +1,4 @@
-package uk.co.automatictester.lightning.data;
+package uk.co.automatictester.lightning.shared;
 
 import uk.co.automatictester.lightning.tests.*;
 import uk.co.automatictester.lightning.utils.Percent;

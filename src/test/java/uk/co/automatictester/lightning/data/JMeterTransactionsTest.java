@@ -1,7 +1,6 @@
-package uk.co.automatictester.lightning;
+package uk.co.automatictester.lightning.data;
 
 import org.testng.annotations.Test;
-import uk.co.automatictester.lightning.data.JMeterTransactions;
 import uk.co.automatictester.lightning.exceptions.CSVFileNonexistentLabelException;
 
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ import uk.co.automatictester.lightning.data.JMeterTransactions;
 
 import java.util.List;
 
-public abstract class LightningTest {
+public abstract class ClientSideTest {
 
     protected final String name;
     protected final String description;
@@ -17,7 +17,7 @@ public abstract class LightningTest {
     protected TestResult result;
     protected int transactionCount;
 
-    protected LightningTest(String name, String type, String description, String transactionName) {
+    protected ClientSideTest(String name, String type, String description, String transactionName) {
         this.name = name;
         this.type = type;
         this.description = description;
