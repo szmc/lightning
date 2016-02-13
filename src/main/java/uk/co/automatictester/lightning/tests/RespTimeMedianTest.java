@@ -1,8 +1,8 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
 
 import java.text.DecimalFormat;
 import java.util.List;

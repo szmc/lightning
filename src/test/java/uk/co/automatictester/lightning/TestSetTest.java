@@ -1,6 +1,7 @@
 package uk.co.automatictester.lightning;
 
 import org.testng.annotations.Test;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
 import uk.co.automatictester.lightning.tests.LightningTest;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
 import uk.co.automatictester.lightning.tests.RespTimeAvgTest;

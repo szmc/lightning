@@ -1,7 +1,7 @@
 package uk.co.automatictester.lightning.readers;
 
 import org.testng.annotations.Test;
-import uk.co.automatictester.lightning.JMeterTransactions;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
 import uk.co.automatictester.lightning.exceptions.CSVFileIOException;
 import uk.co.automatictester.lightning.exceptions.CSVFileMalformedDataException;
 import uk.co.automatictester.lightning.exceptions.CSVFileMissingColumnNameException;

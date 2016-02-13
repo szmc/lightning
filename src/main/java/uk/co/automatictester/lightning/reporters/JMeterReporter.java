@@ -1,6 +1,6 @@
 package uk.co.automatictester.lightning.reporters;
 
-import uk.co.automatictester.lightning.JMeterTransactions;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
 
 public class JMeterReporter {
 

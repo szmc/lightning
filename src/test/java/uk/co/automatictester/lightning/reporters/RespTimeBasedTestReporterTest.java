@@ -3,7 +3,6 @@ package uk.co.automatictester.lightning.reporters;
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.ConsoleOutputTest;
 import uk.co.automatictester.lightning.TestResult;
-import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
 import uk.co.automatictester.lightning.tests.RespTimeAvgTest;
 
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.*;
 
 public class RespTimeBasedTestReporterTest extends ConsoleOutputTest {
 

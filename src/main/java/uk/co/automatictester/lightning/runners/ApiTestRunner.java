@@ -1,9 +1,9 @@
 package uk.co.automatictester.lightning.runners;
 
-import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestSet;
 import uk.co.automatictester.lightning.ci.JenkinsReporter;
 import uk.co.automatictester.lightning.ci.TeamCityReporter;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
 import uk.co.automatictester.lightning.enums.CIServer;
 import uk.co.automatictester.lightning.enums.Mode;
 import uk.co.automatictester.lightning.readers.JMeterCSVFileReader;

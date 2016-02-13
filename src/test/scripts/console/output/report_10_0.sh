@@ -8,7 +8,7 @@ ACTUAL_RESULT="src/test/resources/results/actual/report.txt"
 java \
     -jar target/lightning*.jar \
     report \
-    -csv src/test/resources/csv/10_transactions.csv \
+    -csv src/test/resources/csv/jmeter/10_transactions.csv \
     > $ACTUAL_RESULT
 
 DIFF_OUTPUT=`diff $EXPECTED_RESULT $ACTUAL_RESULT`

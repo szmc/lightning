@@ -11,7 +11,8 @@ public class TestData {
     // Resources
     private static final String RESOURCES = "src/test/resources/";
     private static final String XML_RESOURCES = RESOURCES + "xml/";
-    private static final String CSV_RESOURCES = RESOURCES + "csv/";
+    private static final String JMETER_CSV_RESOURCES = RESOURCES + "csv/jmeter/";
+    private static final String PERFMON_CSV_RESOURCES = RESOURCES + "csv/perfmon/";
 
     // XML files
     public static final String TEST_SET_3_0_0 = XML_RESOURCES + "3_0_0.xml";
@@ -31,13 +32,20 @@ public class TestData {
     public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementException.xml";
     public static final String TEST_SET_XML_FILE_PERCENTILE_EXCEPTION = XML_RESOURCES + "XMLFilePercentileException.xml";
 
-    // CSV files
-    public static final String CSV_MISSING_LABEL_COLUMN = CSV_RESOURCES + "missing_label_column.csv";
-    public static final String CSV_NOT_ENOUGH_COLUMNS_IN_DATA_PART = CSV_RESOURCES + "not_enough_columns_in_data_part.csv";
-    public static final String CSV_2_TRANSACTIONS = CSV_RESOURCES + "2_transactions.csv";
-    public static final String CSV_0_TRANSACTIONS = CSV_RESOURCES + "0_transactions.csv";
-    public static final String CSV_10_TRANSACTIONS = CSV_RESOURCES + "10_transactions.csv";
-    public static final String CSV_NONEXISTENT = CSV_RESOURCES + "nonexistent.csv";
+    // JMeter CSV files
+    public static final String CSV_MISSING_LABEL_COLUMN = JMETER_CSV_RESOURCES + "missing_label_column.csv";
+    public static final String CSV_NOT_ENOUGH_COLUMNS_IN_DATA_PART = JMETER_CSV_RESOURCES + "not_enough_columns_in_data_part.csv";
+    public static final String CSV_2_TRANSACTIONS = JMETER_CSV_RESOURCES + "2_transactions.csv";
+    public static final String CSV_0_TRANSACTIONS = JMETER_CSV_RESOURCES + "0_transactions.csv";
+    public static final String CSV_NONEXISTENT = JMETER_CSV_RESOURCES + "nonexistent.csv";
+
+    // PerfMon CSV files
+    public static final String CSV_2_ENTRIES = PERFMON_CSV_RESOURCES + "2_entries.csv";
+    public static final String CSV_0_ENTRIES = PERFMON_CSV_RESOURCES + "0_entries.csv";
+
+    // PerfMon data entries
+    public static final ArrayList<String> CPU_ENTRY_1 = new ArrayList<>(Arrays.asList("1455366135623", "9128", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_2 = new ArrayList<>(Arrays.asList("1455366136635", "21250", "192.168.0.12 CPU"));
 
     // Transactions
     public static final ArrayList<String> LOGIN_3514_SUCCESS = new ArrayList<>(Arrays.asList("Login", "3514", "true", "1434291247743"));
