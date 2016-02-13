@@ -10,21 +10,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class ServerSideTest {
+public class ServerSideTest extends LightningTest {
 
     private static final String GREATER_THAN_MESSAGE = "Average value > %s";
     private static final String LESS_THAN_MESSAGE = "Average value < %s";
     private static final String BETWEEN_MESSAGE = "Average value between %s and %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Average value = %s";
 
-    private final String name;
-    private final String description;
     private final String hostAndMetric;
-    private final String type;
     private final ServerSideTestType subtype;
-    private String expectedResult;
-    private String actualResult;
-    private TestResult result;
     private int dataEntriesCount;
     private final long avgRespTimeA;
     private long avgRespTimeB;
@@ -36,14 +30,9 @@ public class ServerSideTest {
     }
 
     public ServerSideTest(String name, String type, ServerSideTestType subtype, String description, String hostAndMetric, long avgRespTimeA) {
-        this.name = name;
-        this.type = type;
+        super(name, type, description);
         this.subtype = subtype;
-        this.description = description;
         this.hostAndMetric = hostAndMetric;
-        this.expectedResult = "";
-        this.actualResult = "";
-        this.result = null;
         this.avgRespTimeA = avgRespTimeA;
         this.expectedResultMessage = getExpectedResultMessage();
     }
@@ -104,36 +93,8 @@ public class ServerSideTest {
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getDataEntriesCount() {
-        return dataEntriesCount;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public String getHostAndMetric() {
         return hostAndMetric;
-    }
-
-    public String getExpectedResult() {
-        return expectedResult;
-    }
-
-    public String getActualResult() {
-        return actualResult;
-    }
-
-    public TestResult getResult() {
-        return result;
     }
 
     public boolean equals(Object obj) {

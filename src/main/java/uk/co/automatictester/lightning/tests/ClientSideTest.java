@@ -6,25 +6,14 @@ import uk.co.automatictester.lightning.data.JMeterTransactions;
 
 import java.util.List;
 
-public abstract class ClientSideTest {
+public abstract class ClientSideTest extends LightningTest {
 
-    protected final String name;
-    protected final String description;
     protected final String transactionName;
-    protected final String type;
-    protected String expectedResult;
-    protected String actualResult;
-    protected TestResult result;
     protected int transactionCount;
 
     protected ClientSideTest(String name, String type, String description, String transactionName) {
-        this.name = name;
-        this.type = type;
-        this.description = description;
+        super(name, type, description);
         this.transactionName = transactionName;
-        this.expectedResult = "";
-        this.actualResult = "";
-        this.result = null;
     }
 
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
@@ -37,36 +26,12 @@ public abstract class ClientSideTest {
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getTransactionCount() {
         return transactionCount;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public String getTransactionName() {
         return transactionName;
-    }
-
-    public String getExpectedResult() {
-        return expectedResult;
-    }
-
-    public String getActualResult() {
-        return actualResult;
-    }
-
-    public TestResult getResult() {
-        return result;
     }
 
     public List<Integer> getLongestTransactions() {
