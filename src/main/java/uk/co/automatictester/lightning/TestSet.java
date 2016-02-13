@@ -1,6 +1,7 @@
 package uk.co.automatictester.lightning;
 
 import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.reporters.RespTimeBasedTestReporter;
 import uk.co.automatictester.lightning.reporters.TestReporter;
 import uk.co.automatictester.lightning.tests.ClientSideTest;

@@ -1,4 +1,4 @@
-package uk.co.automatictester.lightning;
+package uk.co.automatictester.lightning.enums;
 
 public enum TestResult {
     PASS,

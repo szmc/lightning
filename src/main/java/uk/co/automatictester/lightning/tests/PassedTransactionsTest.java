@@ -1,7 +1,7 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.apache.commons.lang3.StringUtils;
-import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.data.JMeterTransactions;
 import uk.co.automatictester.lightning.enums.ThresholdType;
 import uk.co.automatictester.lightning.utils.Percent;

@@ -2,7 +2,7 @@ package uk.co.automatictester.lightning.reporters;
 
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.ConsoleOutputTest;
-import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.tests.RespTimeAvgTest;
 
 import java.util.ArrayList;

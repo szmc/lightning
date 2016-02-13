@@ -1,6 +1,6 @@
 package uk.co.automatictester.lightning.reporters;
 
-import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.tests.ClientSideTest;
 
 public class TestReporter {

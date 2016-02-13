@@ -1,7 +1,7 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.data.PerfMonDataEntries;
 import uk.co.automatictester.lightning.enums.ServerSideTestType;
 
