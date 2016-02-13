@@ -14,8 +14,8 @@ public class PerfMonDataReaderTest {
     @Test
     public void verifyReadMethod() {
         PerfMonDataEntries perfMonDataEntries = new PerfMonDataReader().getDataEntires(CSV_2_ENTRIES);
-        assertThat(perfMonDataEntries, hasItem(CPU_ENTRY_1));
-        assertThat(perfMonDataEntries, hasItem(CPU_ENTRY_2));
+        assertThat(perfMonDataEntries, hasItem(CPU_ENTRY_9128));
+        assertThat(perfMonDataEntries, hasItem(CPU_ENTRY_21250));
     }
 
     @Test(expectedExceptions = CSVFileIOException.class)

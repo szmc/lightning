@@ -44,8 +44,13 @@ public class TestData {
     public static final String CSV_0_ENTRIES = PERFMON_CSV_RESOURCES + "0_entries.csv";
 
     // PerfMon data entries
-    public static final ArrayList<String> CPU_ENTRY_1 = new ArrayList<>(Arrays.asList("1455366135623", "9128", "192.168.0.12 CPU"));
-    public static final ArrayList<String> CPU_ENTRY_2 = new ArrayList<>(Arrays.asList("1455366136635", "21250", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_9128 = new ArrayList<>(Arrays.asList("1455366135623", "9128", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_21250 = new ArrayList<>(Arrays.asList("1455366136635", "21250", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_10000 = new ArrayList<>(Arrays.asList("1455366136635", "10000", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_10001 = new ArrayList<>(Arrays.asList("1455366136635", "10001", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_15000 = new ArrayList<>(Arrays.asList("1455366136635", "15000", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_25000 = new ArrayList<>(Arrays.asList("1455366136635", "25000", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_30000 = new ArrayList<>(Arrays.asList("1455366136635", "30000", "192.168.0.12 CPU"));
 
     // Transactions
     public static final ArrayList<String> LOGIN_3514_SUCCESS = new ArrayList<>(Arrays.asList("Login", "3514", "true", "1434291247743"));

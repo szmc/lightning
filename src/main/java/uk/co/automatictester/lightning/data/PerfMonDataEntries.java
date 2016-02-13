@@ -18,4 +18,8 @@ public class PerfMonDataEntries extends ArrayList<ArrayList<String>> {
         return dataEntries;
     }
 
+    public int getDataEntriesCount() {
+        return this.size();
+    }
+
 }
