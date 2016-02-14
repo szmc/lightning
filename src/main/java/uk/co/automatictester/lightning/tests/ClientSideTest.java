@@ -1,7 +1,6 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.apache.commons.lang3.NotImplementedException;
-import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.data.JMeterTransactions;
 
 import java.util.List;
@@ -15,8 +14,6 @@ public abstract class ClientSideTest extends LightningTest {
         super(name, type, description);
         this.transactionName = transactionName;
     }
-
-    public abstract void execute(JMeterTransactions originalJMeterTransactions);
 
     public JMeterTransactions filterTransactions(JMeterTransactions originalJMeterTransactions) {
         if (getTransactionName() != null) {
@@ -32,6 +29,31 @@ public abstract class ClientSideTest extends LightningTest {
 
     public String getTransactionName() {
         return transactionName;
+    }
+
+    public void printTestExecutionReport() {
+        String executionReport = String.format("Test name:            %s%n" +
+                        "Test type:            %s%n" +
+                        "%s" +
+                        "%s" +
+                        "Expected result:      %s%n" +
+                        "Actual result:        %s%n" +
+                        "Transaction count:    %s%n" +
+                        "Test result:          %s%n",
+                getName(),
+                getType(),
+                getDescriptionForReport(),
+                getTransactionNameForReport(),
+                getExpectedResult(),
+                getActualResult(),
+                getTransactionCount(),
+                getResultForReport());
+
+        System.out.println(executionReport);
+    }
+
+    protected String getTransactionNameForReport() {
+        return (getTransactionName() != null) ? (String.format("Transaction name:     %s%n", getTransactionName())) : "";
     }
 
     public List<Integer> getLongestTransactions() {

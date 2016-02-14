@@ -1,11 +1,12 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.utils.IntToOrdConverter;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,11 +26,11 @@ public class RespTimeNthPercentileTest extends RespTimeBasedTest {
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, new IntToOrdConverter().convert(percentile), maxRespTime);
     }
 
-    public void execute(JMeterTransactions originalJMeterTransactions) {
+    public void execute(ArrayList<ArrayList<String>> originalJMeterTransactions) {
         Locale.setDefault(Locale.ENGLISH);
 
         try {
-            JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
+            JMeterTransactions transactions = filterTransactions((JMeterTransactions) originalJMeterTransactions);
             transactionCount = transactions.getTransactionCount();
 
             DescriptiveStatistics ds = new DescriptiveStatistics();

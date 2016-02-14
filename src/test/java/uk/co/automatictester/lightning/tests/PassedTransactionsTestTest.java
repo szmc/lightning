@@ -1,8 +1,9 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.testng.annotations.Test;
-import uk.co.automatictester.lightning.enums.TestResult;
+import uk.co.automatictester.lightning.ConsoleOutputTest;
 import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.utils.Percent;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,7 +11,7 @@ import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
 import static uk.co.automatictester.lightning.shared.TestData.*;
 
-public class PassedTransactionsTestTest {
+public class PassedTransactionsTestTest extends ConsoleOutputTest {
 
     @Test
     public void verifyExecuteMethodPass() {
@@ -136,5 +137,113 @@ public class PassedTransactionsTestTest {
     @Test
     public void verifyIsNotEqualNoTransactionName() {
         assertThat(PASSED_TRANSACTIONS_TEST_B, is(not(equalTo(PASSED_TRANSACTIONS_TEST_NO_TRANS_NAME))));
+    }
+
+    @Test
+    public void testPrintTestExecutionReportPass() {
+        String expectedOutput = String.format("Test name:            Test #1%n" +
+                "Test type:            passedTransactionsTest%n" +
+                "Test description:     Verify number of passed tests%n" +
+                "Transaction name:     Login%n" +
+                "Expected result:      Number of failed transactions <= 0%n" +
+                "Actual result:        Number of failed transactions = 0%n" +
+                "Transaction count:    1%n" +
+                "Test result:          Pass");
+
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1000_SUCCESS);
+
+        configureStream();
+        test.execute(jmeterTransactions);
+        test.printTestExecutionReport();
+        assertThat(out.toString(), containsString(expectedOutput));
+        revertStream();
+    }
+
+    @Test
+    public void testPrintTestExecutionReportFail() {
+        String expectedOutput = String.format("Test name:            Test #1%n" +
+                "Test type:            passedTransactionsTest%n" +
+                "Test description:     Verify number of passed tests%n" +
+                "Transaction name:     Login%n" +
+                "Expected result:      Number of failed transactions <= 0%n" +
+                "Actual result:        Number of failed transactions = 1%n" +
+                "Transaction count:    1%n" +
+                "Test result:          FAIL");
+
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1200_FAILURE);
+
+        configureStream();
+        test.execute(jmeterTransactions);
+        test.printTestExecutionReport();
+        assertThat(out.toString(), containsString(expectedOutput));
+        revertStream();
+    }
+
+    @Test
+    public void testPrintTestExecutionReportIgnored() {
+        String expectedOutput = String.format("Test name:            Test #1%n" +
+                "Test type:            passedTransactionsTest%n" +
+                "Test description:     Verify number of passed tests%n" +
+                "Transaction name:     incorrect%n" +
+                "Expected result:      Number of failed transactions <= 0%n" +
+                "Actual result:        No transactions with label equal to 'incorrect' found in CSV file%n" +
+                "Transaction count:    0%n" +
+                "Test result:          IGNORED");
+
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", "incorrect", 0);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1000_SUCCESS);
+
+        configureStream();
+        test.execute(jmeterTransactions);
+        test.printTestExecutionReport();
+        assertThat(out.toString(), containsString(expectedOutput));
+        revertStream();
+    }
+
+    @Test
+    public void testPrintTestExecutionReportPassNoDescription() {
+        String expectedOutput = String.format("Test name:            Test #1%n" +
+                "Test type:            passedTransactionsTest%n" +
+                "Transaction name:     Login%n" +
+                "Expected result:      Number of failed transactions <= 0%n" +
+                "Actual result:        Number of failed transactions = 0%n" +
+                "Transaction count:    1%n" +
+                "Test result:          Pass");
+
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "", "Login", 0);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1000_SUCCESS);
+
+        configureStream();
+        test.execute(jmeterTransactions);
+        test.printTestExecutionReport();
+        assertThat(out.toString(), containsString(expectedOutput));
+        revertStream();
+    }
+
+    @Test
+    public void testPrintTestExecutionReportPassNoTransactionName() {
+        String expectedOutput = String.format("Test name:            Test #1%n" +
+                "Test type:            passedTransactionsTest%n" +
+                "Test description:     Verify number of passed tests%n" +
+                "Expected result:      Number of failed transactions <= 0%n" +
+                "Actual result:        Number of failed transactions = 0%n" +
+                "Transaction count:    1%n" +
+                "Test result:          Pass");
+
+        PassedTransactionsTest test = new PassedTransactionsTest("Test #1", "passedTransactionsTest", "Verify number of passed tests", null, 0);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(LOGIN_1000_SUCCESS);
+
+        configureStream();
+        test.execute(jmeterTransactions);
+        test.printTestExecutionReport();
+        assertThat(out.toString(), containsString(expectedOutput));
+        revertStream();
     }
 }

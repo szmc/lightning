@@ -2,7 +2,7 @@ package uk.co.automatictester.lightning;
 
 import org.testng.annotations.Test;
 import uk.co.automatictester.lightning.data.JMeterTransactions;
-import uk.co.automatictester.lightning.tests.ClientSideTest;
+import uk.co.automatictester.lightning.tests.LightningTest;
 import uk.co.automatictester.lightning.tests.PassedTransactionsTest;
 import uk.co.automatictester.lightning.tests.RespTimeAvgTest;
 
@@ -25,7 +25,7 @@ public class TestSetTest extends ConsoleOutputTest {
         transactions.add(LOGIN_3514_SUCCESS);
         transactions.add(SEARCH_11221_SUCCESS);
 
-        List<ClientSideTest> tests = new ArrayList<>();
+        List<LightningTest> tests = new ArrayList<>();
         tests.add(passedTransactionsTestA);
         tests.add(passedTransactionsTestB);
 
@@ -50,7 +50,7 @@ public class TestSetTest extends ConsoleOutputTest {
         transactions.add(LOGIN_3514_SUCCESS);
         transactions.add(SEARCH_11221_SUCCESS);
 
-        List<ClientSideTest> tests = new ArrayList<>();
+        List<LightningTest> tests = new ArrayList<>();
         tests.add(respTimeAvgTestA);
         tests.add(respTimeAvgTestB);
         tests.add(respTimeAvgTestC);

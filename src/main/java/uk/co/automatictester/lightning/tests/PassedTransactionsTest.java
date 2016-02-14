@@ -1,11 +1,12 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.apache.commons.lang3.StringUtils;
-import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.enums.ThresholdType;
 import uk.co.automatictester.lightning.utils.Percent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,9 +37,9 @@ public class PassedTransactionsTest extends ClientSideTest {
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, prefix, allowedPercentOfFailedTransactions.getPercent());
     }
 
-    public void execute(JMeterTransactions originalJMeterTransactions) {
+    public void execute(ArrayList<ArrayList<String>> originalJMeterTransactions) {
         try {
-            JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
+            JMeterTransactions transactions = filterTransactions((JMeterTransactions) originalJMeterTransactions);
             transactionCount = transactions.getTransactionCount();
 
             int failureCount = 0;

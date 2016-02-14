@@ -4,6 +4,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import uk.co.automatictester.lightning.enums.ServerSideTestType;
 import uk.co.automatictester.lightning.exceptions.XMLFileException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNoTestsException;
 import uk.co.automatictester.lightning.tests.*;
@@ -20,9 +21,9 @@ import java.util.List;
 
 public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
 
-    private List<ClientSideTest> tests = new ArrayList<>();
+    private List<LightningTest> tests = new ArrayList<>();
 
-    public List<ClientSideTest> getTests(String xmlFile) {
+    public List<LightningTest> getTests(String xmlFile) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -36,6 +37,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             addThroughputTests(doc);
             addRespTimeMaxTests(doc);
             addRespTimeMedianTests(doc);
+            addServerSideTests(doc);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             throw new XMLFileException(e.getMessage());
@@ -169,6 +171,22 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
 
             ThroughputTest throughputTest = new ThroughputTest(name, testType, description, transactionName, minThroughput);
             tests.add(throughputTest);
+        }
+    }
+
+    private void addServerSideTests(Document xmlDoc) { // TODO
+        String testType = "serverSideTest";
+        NodeList respTimeNthPercTestNodes = xmlDoc.getElementsByTagName(testType);
+        for (int i = 0; i < respTimeNthPercTestNodes.getLength(); i++) {
+            Element throughputTestElement = (Element) respTimeNthPercTestNodes.item(i);
+
+            String name = getTestName(throughputTestElement);
+            String description = getTestDescription(throughputTestElement);
+            String transactionName = getTransactionName(throughputTestElement);
+            double minThroughput = getDoubleValueFromElement(throughputTestElement, "minThroughput");
+
+            ServerSideTest serverSideTest = new ServerSideTest("Test #1", "serverSideTest", ServerSideTestType.BETWEEN, "Verify CPU utilisation", "192.168.0.12 CPU", 10000, 12499);
+            tests.add(serverSideTest);
         }
     }
 }

@@ -18,7 +18,7 @@ public class LightningXMLFileReaderTest {
 
     @Test
     public void verifyGetTestsMethodPercentileTest() {
-        List<ClientSideTest> tests = new LightningXMLFileReader().getTests(TEST_SET_PERCENTILE);
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_PERCENTILE);
         RespTimeNthPercentileTest test = new RespTimeNthPercentileTest("Test #4", "nthPercRespTimeTest", "Verify nth percentile", "Search", 80, 11245);
 
         assertThat(tests, hasSize(1));
@@ -27,7 +27,7 @@ public class LightningXMLFileReaderTest {
 
     @Test
     public void verifyGetTestsMethodStdDevTest() {
-        List<ClientSideTest> tests = new LightningXMLFileReader().getTests(TEST_SET_STD_DEV);
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_STD_DEV);
         RespTimeStdDevTest test = new RespTimeStdDevTest("Test #2", "respTimeStdDevTest", "Verify standard deviation", "Search", 500);
 
         assertThat(tests, hasSize(1));
@@ -36,7 +36,7 @@ public class LightningXMLFileReaderTest {
 
     @Test
     public void verifyGetTestsMethodPassedTest() {
-        List<ClientSideTest> tests = new LightningXMLFileReader().getTests(TEST_SET_PASSED);
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_PASSED);
         PassedTransactionsTest test = new PassedTransactionsTest("Test #3", "passedTransactionsTest", "Verify number of passed tests", "Login", 0);
 
         assertThat(tests, hasSize(1));
@@ -45,7 +45,7 @@ public class LightningXMLFileReaderTest {
 
     @Test
     public void verifyGetTestsMethodPassedPercentTest() {
-        List<ClientSideTest> tests = new LightningXMLFileReader().getTests(TEST_SET_PASSED_PERCENT);
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_PASSED_PERCENT);
         PassedTransactionsTest test = new PassedTransactionsTest("Test #3", "passedTransactionsTest", "Verify percent of passed tests", "Login", new Percent(0));
 
         assertThat(tests, hasSize(1));
@@ -54,7 +54,7 @@ public class LightningXMLFileReaderTest {
 
     @Test
     public void verifyGetTestsMethodAvgRespTime() {
-        List<ClientSideTest> tests = new LightningXMLFileReader().getTests(TEST_SET_AVG_RESP_TIME);
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_AVG_RESP_TIME);
         RespTimeAvgTest test = new RespTimeAvgTest("Test #1", "avgRespTimeTest", "Verify average login times", "Login", 4000);
 
         assertThat(tests, hasSize(1));
@@ -63,7 +63,7 @@ public class LightningXMLFileReaderTest {
 
     @Test
     public void verifyGetTestsMethodMaxRespTime() {
-        List<ClientSideTest> tests = new LightningXMLFileReader().getTests(TEST_SET_MAX_RESP_TIME);
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_MAX_RESP_TIME);
         RespTimeMaxTest test = new RespTimeMaxTest("Test #1", "maxRespTimeTest", "Verify max login times", "Login", 4000);
 
         assertThat(tests, hasSize(1));
@@ -72,7 +72,7 @@ public class LightningXMLFileReaderTest {
 
     @Test
     public void verifyGetTestsMethodMedianRespTime() {
-        List<ClientSideTest> tests = new LightningXMLFileReader().getTests(TEST_SET_MEDIAN);
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_MEDIAN);
         RespTimeMedianTest test = new RespTimeMedianTest("Test #4", "medianRespTimeTest", "Verify median response time", "Search", 11244);
 
         assertThat(tests, hasSize(1));
@@ -81,7 +81,7 @@ public class LightningXMLFileReaderTest {
 
     @Test
     public void verifyGetTestsMethodThroughput() {
-        List<ClientSideTest> tests = new LightningXMLFileReader().getTests(TEST_SET_THROUGHPUT);
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_THROUGHPUT);
         ThroughputTest test = new ThroughputTest("Test #2", "throughputTest", "Verify throughput", null, 2);
 
         assertThat(tests, hasSize(1));
@@ -90,7 +90,7 @@ public class LightningXMLFileReaderTest {
 
     @Test
     public void verifyGetTestsMethodThreeTestsOfTwoKinds() {
-        List<ClientSideTest> tests = new LightningXMLFileReader().getTests(TEST_SET_3_0_0);
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_3_0_0);
 
         assertThat(tests, hasSize(3));
         assertThat(tests.contains(PASSED_TRANSACTIONS_TEST_3_0_0_A), is(true));

@@ -9,7 +9,7 @@ import uk.co.automatictester.lightning.readers.JMeterCSVFileReader;
 import uk.co.automatictester.lightning.readers.LightningXMLFileReader;
 import uk.co.automatictester.lightning.reporters.JMeterReporter;
 import uk.co.automatictester.lightning.reporters.TestSetReporter;
-import uk.co.automatictester.lightning.tests.ClientSideTest;
+import uk.co.automatictester.lightning.tests.LightningTest;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class CliTestRunner {
         long testSetExecStart = System.currentTimeMillis();
 
         String xmlFile = params.verify.getXmlFile();
-        List<ClientSideTest> tests = new LightningXMLFileReader().getTests(xmlFile);
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(xmlFile);
         testSet = new TestSet(tests);
 
         jmeterTransactions = new JMeterCSVFileReader().getTransactions(params.verify.getCSVFile());

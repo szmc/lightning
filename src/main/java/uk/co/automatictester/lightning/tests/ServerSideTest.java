@@ -1,11 +1,12 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.data.PerfMonDataEntries;
 import uk.co.automatictester.lightning.enums.ServerSideTestType;
+import uk.co.automatictester.lightning.enums.TestResult;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -37,11 +38,11 @@ public class ServerSideTest extends LightningTest {
         this.expectedResultMessage = getExpectedResultMessage();
     }
 
-    public void execute(PerfMonDataEntries originalDataEntries) {
+    public void execute(ArrayList<ArrayList<String>> originalDataEntries) {
         Locale.setDefault(Locale.ENGLISH);
 
         try {
-            PerfMonDataEntries dataEntries = filterDataEntries(originalDataEntries);
+            PerfMonDataEntries dataEntries = filterDataEntries((PerfMonDataEntries) originalDataEntries);
             dataEntriesCount = dataEntries.getDataEntriesCount();
 
             DescriptiveStatistics ds = new DescriptiveStatistics();
@@ -93,8 +94,39 @@ public class ServerSideTest extends LightningTest {
         }
     }
 
+    public void printTestExecutionReport() {
+        String executionReport = String.format("Test name:            %s%n" +
+                        "Test type:            %s%n" +
+                        "Test subtype:         %s%n" +
+                        "%s" +
+                        "Host and metric:      %s%n" +
+                        "Expected result:      %s%n" +
+                        "Actual result:        %s%n" +
+                        "Entries count:        %s%n" +
+                        "Test result:          %s%n",
+                getName(),
+                getType(),
+                getSubType(),
+                getDescriptionForReport(),
+                getHostAndMetric(),
+                getExpectedResult(),
+                getActualResult(),
+                getDataEntriesCount(),
+                getResultForReport());
+
+        System.out.println(executionReport);
+    }
+
     public String getHostAndMetric() {
         return hostAndMetric;
+    }
+
+    public int getDataEntriesCount() {
+        return dataEntriesCount;
+    }
+
+    public String getSubType() {
+        return subtype.toString();
     }
 
     public boolean equals(Object obj) {

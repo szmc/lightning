@@ -1,29 +1,25 @@
 package uk.co.automatictester.lightning;
 
-import uk.co.automatictester.lightning.data.JMeterTransactions;
 import uk.co.automatictester.lightning.enums.TestResult;
-import uk.co.automatictester.lightning.reporters.RespTimeBasedTestReporter;
-import uk.co.automatictester.lightning.reporters.TestReporter;
-import uk.co.automatictester.lightning.tests.ClientSideTest;
-import uk.co.automatictester.lightning.tests.RespTimeBasedTest;
+import uk.co.automatictester.lightning.tests.LightningTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestSet {
 
-    private List<ClientSideTest> tests = new ArrayList<>();
+    private List<LightningTest> tests = new ArrayList<>();
     private int passCount = 0;
     private int failCount = 0;
     private int ignoreCount = 0;
 
-    public TestSet(List<ClientSideTest> tests) {
+    public TestSet(List<LightningTest> tests) {
         this.tests = tests;
     }
 
-    public void execute(JMeterTransactions originalJMeterTransactions) {
-        for (ClientSideTest test : getTests()) {
-            test.execute(originalJMeterTransactions);
+    public void execute(ArrayList<ArrayList<String>> dataEntires) {
+        for (LightningTest test : getTests()) {
+            test.execute(dataEntires);
             if (test.getResult() == TestResult.PASS) {
                 passCount++;
             } else if (test.getResult() == TestResult.FAIL) {
@@ -31,11 +27,7 @@ public class TestSet {
             } else if (test.getResult() == TestResult.IGNORED) {
                 ignoreCount++;
             }
-            if (test instanceof RespTimeBasedTest) {
-                new RespTimeBasedTestReporter((RespTimeBasedTest) test).printTestExecutionReport();
-            } else {
-                new TestReporter(test).printTestExecutionReport();
-            }
+            test.printTestExecutionReport();
         }
     }
 
@@ -55,7 +47,7 @@ public class TestSet {
         return ignoreCount;
     }
 
-    public List<ClientSideTest> getTests() {
+    public List<LightningTest> getTests() {
         return tests;
     }
 

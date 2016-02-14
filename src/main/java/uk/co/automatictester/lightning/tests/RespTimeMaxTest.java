@@ -1,9 +1,10 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import uk.co.automatictester.lightning.enums.TestResult;
 import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.enums.TestResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RespTimeMaxTest extends RespTimeBasedTest {
@@ -19,10 +20,10 @@ public class RespTimeMaxTest extends RespTimeBasedTest {
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxRespTime);
     }
 
-    public void execute(JMeterTransactions originalJMeterTransactions) {
+    public void execute(ArrayList<ArrayList<String>> originalJMeterTransactions) {
 
         try {
-            JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
+            JMeterTransactions transactions = filterTransactions((JMeterTransactions) originalJMeterTransactions);
             transactionCount = transactions.getTransactionCount();
 
             DescriptiveStatistics ds = new DescriptiveStatistics();
