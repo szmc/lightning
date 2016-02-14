@@ -27,6 +27,10 @@ public class TestData {
     public static final String TEST_SET_THROUGHPUT = XML_RESOURCES + "throughputTest.xml";
     public static final String TEST_SET_MEDIAN = XML_RESOURCES + "medianRespTimeTest.xml";
     public static final String TEST_SET_NOT_WELL_FORMED = XML_RESOURCES + "not_well_formed.xml";
+    public static final String TEST_SET_SERVER_LESS = XML_RESOURCES + "serverSideTest_lessThan.xml";
+    public static final String TEST_SET_SERVER_BETWEEN = XML_RESOURCES + "serverSideTest_between.xml";
+    public static final String TEST_SET_SERVER_GREATER = XML_RESOURCES + "serverSideTest_greaterThan.xml";
+    public static final String TEST_SET_XML_FILE_NO_VALID_SUB_TYPE_EXCAPTION = XML_RESOURCES + "XMLFileNoValidSubTypeException.xml";
     public static final String TEST_SET_XML_FILE_NUMBER_FORMAT_EXCEPTION = XML_RESOURCES + "XMLFileNumberFormatException.xml";
     public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementValueException.xml";
     public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementException.xml";

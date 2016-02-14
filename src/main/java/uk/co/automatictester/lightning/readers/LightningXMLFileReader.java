@@ -174,18 +174,28 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
         }
     }
 
-    private void addServerSideTests(Document xmlDoc) { // TODO
+    private void addServerSideTests(Document xmlDoc) {
         String testType = "serverSideTest";
-        NodeList respTimeNthPercTestNodes = xmlDoc.getElementsByTagName(testType);
-        for (int i = 0; i < respTimeNthPercTestNodes.getLength(); i++) {
-            Element throughputTestElement = (Element) respTimeNthPercTestNodes.item(i);
+        NodeList serverSideTestNodes = xmlDoc.getElementsByTagName(testType);
+        for (int i = 0; i < serverSideTestNodes.getLength(); i++) {
+            Element serverSideTestElement = (Element) serverSideTestNodes.item(i);
 
-            String name = getTestName(throughputTestElement);
-            String description = getTestDescription(throughputTestElement);
-            String transactionName = getTransactionName(throughputTestElement);
-            double minThroughput = getDoubleValueFromElement(throughputTestElement, "minThroughput");
+            String name = getTestName(serverSideTestElement);
+            ServerSideTestType subType = getSubType(serverSideTestElement);
+            String description = getTestDescription(serverSideTestElement);
+            String hostAndMetric = getHostAndMetric(serverSideTestElement);
+            int avgRespTimeA = getIntegerValueFromElement(serverSideTestElement, "avgRespTimeA");
 
-            ServerSideTest serverSideTest = new ServerSideTest("Test #1", "serverSideTest", ServerSideTestType.BETWEEN, "Verify CPU utilisation", "192.168.0.12 CPU", 10000, 12499);
+            int avgRespTimeB;
+            ServerSideTest serverSideTest;
+
+            if (subType.name().equals(ServerSideTestType.BETWEEN.name())) {
+                avgRespTimeB = getIntegerValueFromElement(serverSideTestElement, "avgRespTimeB");
+                serverSideTest = new ServerSideTest(name, testType, subType, description, hostAndMetric, avgRespTimeA, avgRespTimeB);
+            } else {
+                serverSideTest = new ServerSideTest(name, testType, subType, description, hostAndMetric, avgRespTimeA);
+            }
+
             tests.add(serverSideTest);
         }
     }

@@ -1,6 +1,7 @@
 package uk.co.automatictester.lightning.readers;
 
 import org.testng.annotations.Test;
+import uk.co.automatictester.lightning.enums.ServerSideTestType;
 import uk.co.automatictester.lightning.exceptions.*;
 import uk.co.automatictester.lightning.tests.*;
 import uk.co.automatictester.lightning.utils.Percent;
@@ -89,6 +90,33 @@ public class LightningXMLFileReaderTest {
     }
 
     @Test
+    public void verifyGetTestsMethod_Server_Less() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_SERVER_LESS);
+        ServerSideTest test = new ServerSideTest("Test #2", "serverSideTest", ServerSideTestType.LESS_THAN, "Verify server-side resource utilisation", "192.168.0.12 CPU", 80000);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
+
+    @Test
+    public void verifyGetTestsMethod_Server_Between() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_SERVER_BETWEEN);
+        ServerSideTest test = new ServerSideTest("Test #2", "serverSideTest", ServerSideTestType.BETWEEN, "Verify server-side resource utilisation", "192.168.0.12 CPU", 40000, 80000);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
+
+    @Test
+    public void verifyGetTestsMethod_Server_Greater() {
+        List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_SERVER_GREATER);
+        ServerSideTest test = new ServerSideTest("Test #2", "serverSideTest", ServerSideTestType.GREATER_THAN, "Verify server-side resource utilisation", "192.168.0.12 CPU", 20000);
+
+        assertThat(tests, hasSize(1));
+        assertThat(tests.contains(test), is(true));
+    }
+
+    @Test
     public void verifyGetTestsMethodThreeTestsOfTwoKinds() {
         List<LightningTest> tests = new LightningXMLFileReader().getTests(TEST_SET_3_0_0);
 
@@ -112,6 +140,11 @@ public class LightningXMLFileReaderTest {
     @Test(expectedExceptions = XMLFileNumberFormatException.class)
     public void verifyGetTestsMethodThrowsXMLFileNumberFormatException() {
         new LightningXMLFileReader().getTests(TEST_SET_XML_FILE_NUMBER_FORMAT_EXCEPTION);
+    }
+
+    @Test(expectedExceptions = XMLFileNoValidSubTypeException.class)
+    public void verifyGetTestsMethodThrowsXMLFileNoValidSubTypeException() {
+        new LightningXMLFileReader().getTests(TEST_SET_XML_FILE_NO_VALID_SUB_TYPE_EXCAPTION);
     }
 
     @Test(expectedExceptions = XMLFileMissingElementValueException.class)

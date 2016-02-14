@@ -87,11 +87,7 @@ public class ServerSideTest extends LightningTest {
     }
 
     public PerfMonDataEntries filterDataEntries(PerfMonDataEntries originalPerfMonDataEntries) {
-        if (getHostAndMetric() != null) {
-            return originalPerfMonDataEntries.excludeHostAndMetricOtherThan(getHostAndMetric());
-        } else {
-            return originalPerfMonDataEntries;
-        }
+        return originalPerfMonDataEntries.excludeHostAndMetricOtherThan(getHostAndMetric());
     }
 
     public void printTestExecutionReport() {
