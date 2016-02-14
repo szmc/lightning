@@ -23,18 +23,14 @@ public class PassedTransactionsTest extends ClientSideTest {
         super(name, type, description, transactionName);
         this.type = ThresholdType.NUMBER;
         this.allowedNumberOfFailedTransactions = allowedNumberOfFailedTransactions;
-        String prefix = StringUtils.lowerCase(this.type.toString());
-        prefix = StringUtils.capitalize(prefix);
-        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, prefix, allowedNumberOfFailedTransactions);
+        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, this.type.toString(), allowedNumberOfFailedTransactions);
     }
 
     public PassedTransactionsTest(String name, String type, String description, String transactionName, Percent percent) {
         super(name, type, description, transactionName);
         this.type = ThresholdType.PERCENT;
         this.allowedPercentOfFailedTransactions = percent;
-        String prefix = StringUtils.lowerCase(this.type.toString());
-        prefix = StringUtils.capitalize(prefix);
-        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, prefix, allowedPercentOfFailedTransactions.getPercent());
+        expectedResult = String.format(EXPECTED_RESULT_MESSAGE, this.type.toString(), allowedPercentOfFailedTransactions.getPercent());
     }
 
     public void execute(ArrayList<ArrayList<String>> originalJMeterTransactions) {
@@ -48,16 +44,13 @@ public class PassedTransactionsTest extends ClientSideTest {
                 if (!Boolean.parseBoolean(success)) failureCount++;
             }
 
-            String prefix = StringUtils.lowerCase(this.type.toString());
-            prefix = StringUtils.capitalize(prefix);
-
             if (type.equals(ThresholdType.NUMBER)) {
                 if (failureCount > allowedNumberOfFailedTransactions) {
                     result = TestResult.FAIL;
                 } else {
                     result = TestResult.PASS;
                 }
-                actualResult = String.format(ACTUAL_RESULT_MESSAGE, prefix, failureCount);
+                actualResult = String.format(ACTUAL_RESULT_MESSAGE, this.type.toString(), failureCount);
             } else {
                 float percentOfFailedTransactions = ((float) failureCount / transactionCount) * 100;
                 if (percentOfFailedTransactions > (float) allowedPercentOfFailedTransactions.getPercent()) {
@@ -65,7 +58,7 @@ public class PassedTransactionsTest extends ClientSideTest {
                 } else {
                     result = TestResult.PASS;
                 }
-                actualResult = String.format(ACTUAL_RESULT_MESSAGE, prefix, percentOfFailedTransactions);
+                actualResult = String.format(ACTUAL_RESULT_MESSAGE, this.type.toString(), percentOfFailedTransactions);
             }
         } catch (Exception e) {
             result = TestResult.IGNORED;

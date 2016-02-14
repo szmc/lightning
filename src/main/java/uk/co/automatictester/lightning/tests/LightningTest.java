@@ -31,13 +31,7 @@ public abstract class LightningTest {
     }
 
     protected String getResultForReport() {
-        if (getResult() == TestResult.IGNORED) {
-            return "IGNORED";
-        } else if (getResult() == TestResult.FAIL) {
-            return "FAIL";
-        } else {
-            return "Pass";
-        }
+        return result.toString();
     }
 
     public String getName() {
