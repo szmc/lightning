@@ -5,13 +5,13 @@ import com.beust.jcommander.Parameters;
 import uk.co.automatictester.lightning.cli.validators.FileValidator;
 
 @Parameters(separators = "=")
-public class CSVFile {
+public class JmeterCsvFile {
 
     @Parameter(names = "--jmeter-csv", description = "JMeter CSV result file", required = true, validateWith = FileValidator.class)
-    private String csvFile;
+    private String jmeterCsvFile;
 
-    public String getCSVFile() {
-        return csvFile;
+    public String getJmeterCsvFile() {
+        return jmeterCsvFile;
     }
 
 }

@@ -49,7 +49,7 @@ public class CliTestRunner {
         List<LightningTest> tests = new LightningXMLFileReader().getTests(xmlFile);
         testSet = new TestSet(tests);
 
-        jmeterTransactions = new JMeterCSVFileReader().getTransactions(params.verify.getCSVFile());
+        jmeterTransactions = new JMeterCSVFileReader().getTransactions(params.verify.getJmeterCsvFile());
         testSet.execute(jmeterTransactions);
 
         new TestSetReporter(testSet).printTestSetExecutionSummaryReport();
@@ -64,7 +64,7 @@ public class CliTestRunner {
     }
 
     private static void runReport() {
-        jmeterTransactions = new JMeterCSVFileReader().getTransactions(params.report.getCSVFile());
+        jmeterTransactions = new JMeterCSVFileReader().getTransactions(params.report.getJmeterCsvFile());
         JMeterReporter reporter = new JMeterReporter(jmeterTransactions);
         reporter.printJMeterReport();
         if (jmeterTransactions.getFailCount() != 0) {
@@ -74,15 +74,15 @@ public class CliTestRunner {
 
     private static void notifyCIServer() {
         if (mode.equals("verify")) {
-            if (params.verify.isCIEqualTo("teamcity")) {
+            if (params.verify.isCiEqualTo("teamcity")) {
                 new TeamCityReporter().setTeamCityBuildStatusText(testSet);
-            } else if (params.verify.isCIEqualTo("jenkins")) {
+            } else if (params.verify.isCiEqualTo("jenkins")) {
                 new JenkinsReporter().setJenkinsBuildName(testSet);
             }
         } else if (mode.equals("report")) {
-            if (params.report.isCIEqualTo("teamcity")) {
+            if (params.report.isCiEqualTo("teamcity")) {
                 new TeamCityReporter().setTeamCityBuildStatusText(jmeterTransactions);
-            } else if (params.report.isCIEqualTo("jenkins")) {
+            } else if (params.report.isCiEqualTo("jenkins")) {
                 new JenkinsReporter().setJenkinsBuildName(jmeterTransactions);
             }
         }

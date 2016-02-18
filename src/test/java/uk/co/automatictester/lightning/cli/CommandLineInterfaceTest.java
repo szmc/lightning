@@ -20,13 +20,13 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
     @Test(dataProvider = "teamcity")
     public void testIsCIEqualToTeamCityTrue_verify(String ci) {
         CommandLineInterface params = new CommandLineInterface(new String[]{"verify", String.format("-ci=%s", ci), "-xml=src/test/resources/xml/3_0_0.xml", "--jmeter-csv=src/test/resources/csv/jmeter/10_transactions.csv"});
-        assertThat(params.verify.isCIEqualTo("teamcity"), is(true));
+        assertThat(params.verify.isCiEqualTo("teamcity"), is(true));
     }
 
     @Test(dataProvider = "teamcity")
     public void testIsCIEqualToTeamCityTrue_report(String ci) {
         CommandLineInterface params = new CommandLineInterface(new String[]{"report", String.format("-ci=%s", ci), "--jmeter-csv=src/test/resources/csv/jmeter/10_transactions.csv"});
-        assertThat(params.report.isCIEqualTo("teamcity"), is(true));
+        assertThat(params.report.isCiEqualTo("teamcity"), is(true));
     }
 
     @DataProvider(name = "jenkins")
@@ -40,13 +40,13 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
     @Test(dataProvider = "jenkins")
     public void testIsCIEqualToJenkinsTrue_verify(String ci) {
         CommandLineInterface params = new CommandLineInterface(new String[]{"verify", String.format("-ci=%s", ci), "-xml=src/test/resources/xml/3_0_0.xml", "--jmeter-csv=src/test/resources/csv/jmeter/10_transactions.csv"});
-        assertThat(params.verify.isCIEqualTo("jenkins"), is(true));
+        assertThat(params.verify.isCiEqualTo("jenkins"), is(true));
     }
 
     @Test(dataProvider = "jenkins")
     public void testIsCIEqualToJenkinsTrue_report(String ci) {
         CommandLineInterface params = new CommandLineInterface(new String[]{"report", String.format("-ci=%s", ci), "--jmeter-csv=src/test/resources/csv/jmeter/10_transactions.csv"});
-        assertThat(params.report.isCIEqualTo("jenkins"), is(true));
+        assertThat(params.report.isCiEqualTo("jenkins"), is(true));
     }
 
     @Test
@@ -64,13 +64,13 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
     @Test
     public void testGetCSVFileInReportMode() {
         CommandLineInterface params = new CommandLineInterface(new String[]{"report", "--jmeter-csv=src/test/resources/csv/jmeter/10_transactions.csv"});
-        assertThat(params.report.getCSVFile(), equalToIgnoringCase("src/test/resources/csv/jmeter/10_transactions.csv"));
+        assertThat(params.report.getJmeterCsvFile(), equalToIgnoringCase("src/test/resources/csv/jmeter/10_transactions.csv"));
     }
 
     @Test
     public void testGetCSVFileInVerifyMode() {
         CommandLineInterface params = new CommandLineInterface(new String[]{"verify", "-xml=src/test/resources/xml/3_0_0.xml", "--jmeter-csv=src/test/resources/csv/jmeter/10_transactions.csv"});
-        assertThat(params.verify.getCSVFile(), equalToIgnoringCase("src/test/resources/csv/jmeter/10_transactions.csv"));
+        assertThat(params.verify.getJmeterCsvFile(), equalToIgnoringCase("src/test/resources/csv/jmeter/10_transactions.csv"));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
     @Test
     public void testIsCIEqualToJenkinsNotSet() {
         CommandLineInterface params = new CommandLineInterface(new String[]{"verify", "-xml=src/test/resources/xml/3_0_0.xml", "--jmeter-csv=src/test/resources/csv/jmeter/10_transactions.csv"});
-        assertThat(params.verify.isCIEqualTo("jenkins"), is(false));
+        assertThat(params.verify.isCiEqualTo("jenkins"), is(false));
     }
 
     @Test
@@ -100,6 +100,8 @@ public class CommandLineInterfaceTest extends ConsoleOutputTest {
                 "        Options:%n" +
                 "        * --jmeter-csv%n" +
                 "             JMeter CSV result file%n" +
+                "          --perfmon-csv%n" +
+                "             PerfMon CSV result file%n" +
                 "          -ci%n" +
                 "             CI server (jenkins or teamcity)%n" +
                 "        * -xml%n" +
