@@ -4,9 +4,11 @@ import uk.co.automatictester.lightning.TestSet;
 import uk.co.automatictester.lightning.ci.JenkinsReporter;
 import uk.co.automatictester.lightning.ci.TeamCityReporter;
 import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.data.PerfMonDataEntries;
 import uk.co.automatictester.lightning.enums.CIServer;
 import uk.co.automatictester.lightning.enums.Mode;
 import uk.co.automatictester.lightning.readers.JMeterCSVFileReader;
+import uk.co.automatictester.lightning.readers.PerfMonDataReader;
 import uk.co.automatictester.lightning.reporters.JMeterReporter;
 import uk.co.automatictester.lightning.reporters.TestSetReporter;
 
@@ -16,6 +18,7 @@ public class ApiTestRunner {
     private TestSet testSet;
     private JMeterTransactions jmeterTransactions;
     private String jmeterCsvFile;
+    private String perfmonCsvFile;
     private Mode mode;
     private CIServer ciServer;
 
@@ -24,9 +27,10 @@ public class ApiTestRunner {
         this.jmeterCsvFile = jmeterCsvFile;
     }
 
-    public ApiTestRunner(String jmeterCsvFile, TestSet testSet) {
+    public ApiTestRunner(String jmeterCsvFile, String perfmonCsvFile, TestSet testSet) {
         this.mode = Mode.VERIFY;
         this.jmeterCsvFile = jmeterCsvFile;
+        this.perfmonCsvFile = perfmonCsvFile;
         this.testSet = testSet;
     }
 
@@ -57,7 +61,12 @@ public class ApiTestRunner {
         long testSetExecStart = System.currentTimeMillis();
 
         jmeterTransactions = new JMeterCSVFileReader().getTransactions(jmeterCsvFile);
-        testSet.execute(jmeterTransactions);
+        testSet.executeClientSideTests(jmeterTransactions);
+
+        if (perfmonCsvFile != null) {
+            PerfMonDataEntries perfMonDataEntries = new PerfMonDataReader().getDataEntires(perfmonCsvFile);
+            testSet.executeServerSideTests(perfMonDataEntries);
+        }
 
         new TestSetReporter(testSet).printTestSetExecutionSummaryReport();
 

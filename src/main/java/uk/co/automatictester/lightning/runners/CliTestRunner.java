@@ -5,11 +5,14 @@ import uk.co.automatictester.lightning.ci.JenkinsReporter;
 import uk.co.automatictester.lightning.ci.TeamCityReporter;
 import uk.co.automatictester.lightning.cli.CommandLineInterface;
 import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.data.PerfMonDataEntries;
 import uk.co.automatictester.lightning.readers.JMeterCSVFileReader;
 import uk.co.automatictester.lightning.readers.LightningXMLFileReader;
+import uk.co.automatictester.lightning.readers.PerfMonDataReader;
 import uk.co.automatictester.lightning.reporters.JMeterReporter;
 import uk.co.automatictester.lightning.reporters.TestSetReporter;
-import uk.co.automatictester.lightning.tests.LightningTest;
+import uk.co.automatictester.lightning.tests.ClientSideTest;
+import uk.co.automatictester.lightning.tests.ServerSideTest;
 
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class CliTestRunner {
     private static CommandLineInterface params;
     private static TestSet testSet;
     private static JMeterTransactions jmeterTransactions;
+    private static PerfMonDataEntries perfMonDataEntries;
     private static String mode;
 
     public static void main(String[] args) {
@@ -46,11 +50,25 @@ public class CliTestRunner {
         long testSetExecStart = System.currentTimeMillis();
 
         String xmlFile = params.verify.getXmlFile();
-        List<LightningTest> tests = new LightningXMLFileReader().getTests(xmlFile);
-        testSet = new TestSet(tests);
+        String jmeterCsvFile = params.verify.getJmeterCsvFile();
+        String perfmonCsvFile = params.verify.getPerfmonCsvFile();
 
-        jmeterTransactions = new JMeterCSVFileReader().getTransactions(params.verify.getJmeterCsvFile());
-        testSet.execute(jmeterTransactions);
+        LightningXMLFileReader xmlFileReader = new LightningXMLFileReader();
+        xmlFileReader.readTests(xmlFile);
+
+        List<ClientSideTest> clientSideTests = xmlFileReader.getClientSideTests();
+        List<ServerSideTest> serverSideTests = xmlFileReader.getServerSideTests();
+
+        testSet = new TestSet(clientSideTests, serverSideTests);
+
+        jmeterTransactions = new JMeterCSVFileReader().getTransactions(jmeterCsvFile);
+
+        if (params.verify.isPerfmonCsvFileProvided()) {
+            perfMonDataEntries = new PerfMonDataReader().getDataEntires(perfmonCsvFile);
+            testSet.executeServerSideTests(perfMonDataEntries);
+        }
+
+        testSet.executeClientSideTests(jmeterTransactions);
 
         new TestSetReporter(testSet).printTestSetExecutionSummaryReport();
 

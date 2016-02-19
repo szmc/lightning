@@ -37,4 +37,8 @@ public class CommandVerify {
     public boolean isCiEqualTo(String ci) {
         return this.ci.isCIEqualTo(ci);
     }
+
+    public boolean isPerfmonCsvFileProvided() {
+        return (perfmonCsvFile != null);
+    }
 }

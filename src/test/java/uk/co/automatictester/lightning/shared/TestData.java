@@ -16,6 +16,7 @@ public class TestData {
 
     // XML files
     public static final String TEST_SET_3_0_0 = XML_RESOURCES + "3_0_0.xml";
+    public static final String TEST_SET_1_2 = XML_RESOURCES + "1_client_2_server.xml";
     public static final String TEST_SET_1_1_1 = XML_RESOURCES + "1_1_1.xml";
     public static final String TEST_SET_0_0_0 = XML_RESOURCES + "0_0_0.xml";
     public static final String TEST_SET_AVG_RESP_TIME = XML_RESOURCES + "avgRespTimeTest.xml";
