@@ -70,6 +70,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
                 passedTransactionsTest = new PassedTransactionsTest(name, testType, description, transactionName, new Percent(allowedPercentOfFailedTransactions));
             }
 
+            checkForRegexpElement(passedTransactionsElement, passedTransactionsTest);
             tests.add(passedTransactionsTest);
         }
 
@@ -87,6 +88,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int maxRespTimeStdDevTime = getIntegerValueFromElement(respTimeStdDevTestElement, "maxRespTimeStdDev");
 
             RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest(name, testType, description, transactionName, maxRespTimeStdDevTime);
+            checkForRegexpElement(respTimeStdDevTestElement, respTimeStdDevTest);
             tests.add(respTimeStdDevTest);
         }
     }
@@ -103,6 +105,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int maxAvgRespTime = getIntegerValueFromElement(avgRespTimeTestElement, "maxAvgRespTime");
 
             RespTimeAvgTest avgRespTimeTest = new RespTimeAvgTest(name, testType, description, transactionName, maxAvgRespTime);
+            checkForRegexpElement(avgRespTimeTestElement, avgRespTimeTest);
             tests.add(avgRespTimeTest);
         }
     }
@@ -119,6 +122,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int maxRespTime = getIntegerValueFromElement(maxRespTimeTestElement, "maxAllowedRespTime");
 
             RespTimeMaxTest maxRespTimeTest = new RespTimeMaxTest(name, testType, description, transactionName, maxRespTime);
+            checkForRegexpElement(maxRespTimeTestElement, maxRespTimeTest);
             tests.add(maxRespTimeTest);
         }
     }
@@ -136,6 +140,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int maxRespTime = getIntegerValueFromElement(respTimeNthPercTestElement, "maxRespTime");
 
             RespTimeNthPercentileTest nthPercRespTimeTest = new RespTimeNthPercentileTest(name, testType, description, transactionName, percentile, maxRespTime);
+            checkForRegexpElement(respTimeNthPercTestElement, nthPercRespTimeTest);
             tests.add(nthPercRespTimeTest);
         }
     }
@@ -152,6 +157,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int maxRespTime = getIntegerValueFromElement(respTimeMedianTestElement, "maxRespTime");
 
             RespTimeMedianTest respTimeMedianTest = new RespTimeMedianTest(name, testType, description, transactionName, maxRespTime);
+            checkForRegexpElement(respTimeMedianTestElement, respTimeMedianTest);
             tests.add(respTimeMedianTest);
         }
     }
@@ -168,6 +174,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             double minThroughput = getDoubleValueFromElement(throughputTestElement, "minThroughput");
 
             ThroughputTest throughputTest = new ThroughputTest(name, testType, description, transactionName, minThroughput);
+            checkForRegexpElement(throughputTestElement, throughputTest);
             tests.add(throughputTest);
         }
     }
