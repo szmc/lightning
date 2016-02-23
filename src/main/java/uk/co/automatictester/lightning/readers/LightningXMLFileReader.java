@@ -197,16 +197,16 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             ServerSideTestType subType = getSubType(serverSideTestElement);
             String description = getTestDescription(serverSideTestElement);
             String hostAndMetric = getHostAndMetric(serverSideTestElement);
-            int avgRespTimeA = getIntegerValueFromElement(serverSideTestElement, "avgRespTimeA");
+            int metricValueA = getIntegerValueFromElement(serverSideTestElement, "metricValueA");
 
             int avgRespTimeB;
             ServerSideTest serverSideTest;
 
             if (subType.name().equals(ServerSideTestType.BETWEEN.name())) {
-                avgRespTimeB = getIntegerValueFromElement(serverSideTestElement, "avgRespTimeB");
-                serverSideTest = new ServerSideTest(name, testType, subType, description, hostAndMetric, avgRespTimeA, avgRespTimeB);
+                avgRespTimeB = getIntegerValueFromElement(serverSideTestElement, "metricValueB");
+                serverSideTest = new ServerSideTest(name, testType, subType, description, hostAndMetric, metricValueA, avgRespTimeB);
             } else {
-                serverSideTest = new ServerSideTest(name, testType, subType, description, hostAndMetric, avgRespTimeA);
+                serverSideTest = new ServerSideTest(name, testType, subType, description, hostAndMetric, metricValueA);
             }
 
             serverSideTests.add(serverSideTest);

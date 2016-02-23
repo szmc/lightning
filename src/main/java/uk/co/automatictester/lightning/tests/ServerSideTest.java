@@ -21,20 +21,20 @@ public class ServerSideTest extends LightningTest {
     private final String hostAndMetric;
     private final ServerSideTestType subtype;
     private int dataEntriesCount;
-    private final long avgRespTimeA;
-    private long avgRespTimeB;
+    private final long metricValueA;
+    private long metricValueB;
     private String expectedResultMessage;
 
-    public ServerSideTest(String name, String type, ServerSideTestType subtype, String description, String hostAndMetric, long avgRespTimeA, long avgRespTimeB) {
-        this(name, type, subtype, description, hostAndMetric, avgRespTimeA);
-        this.avgRespTimeB = avgRespTimeB;
+    public ServerSideTest(String name, String type, ServerSideTestType subtype, String description, String hostAndMetric, long metricValueA, long metricValueB) {
+        this(name, type, subtype, description, hostAndMetric, metricValueA);
+        this.metricValueB = metricValueB;
     }
 
-    public ServerSideTest(String name, String type, ServerSideTestType subtype, String description, String hostAndMetric, long avgRespTimeA) {
+    public ServerSideTest(String name, String type, ServerSideTestType subtype, String description, String hostAndMetric, long metricValueA) {
         super(name, type, description);
         this.subtype = subtype;
         this.hostAndMetric = hostAndMetric;
-        this.avgRespTimeA = avgRespTimeA;
+        this.metricValueA = metricValueA;
         this.expectedResultMessage = getExpectedResultMessage();
     }
 
@@ -58,22 +58,22 @@ public class ServerSideTest extends LightningTest {
             actualResult = String.format(ACTUAL_RESULT_MESSAGE, roundedAvgRespTime);
 
             if (subtype.equals(ServerSideTestType.GREATER_THAN)) {
-                expectedResult = String.format(expectedResultMessage, avgRespTimeA);
-                if (roundedAvgRespTime > avgRespTimeA) {
+                expectedResult = String.format(expectedResultMessage, metricValueA);
+                if (roundedAvgRespTime > metricValueA) {
                     result = TestResult.PASS;
                 } else {
                     result = TestResult.FAIL;
                 }
             } else if (subtype.equals(ServerSideTestType.LESS_THAN)) {
-                expectedResult = String.format(expectedResultMessage, avgRespTimeA);
-                if (roundedAvgRespTime < avgRespTimeA) {
+                expectedResult = String.format(expectedResultMessage, metricValueA);
+                if (roundedAvgRespTime < metricValueA) {
                     result = TestResult.PASS;
                 } else {
                     result = TestResult.FAIL;
                 }
             } else if (subtype.equals(ServerSideTestType.BETWEEN)) {
-                expectedResult = String.format(expectedResultMessage, avgRespTimeA, avgRespTimeB);
-                if ((roundedAvgRespTime > avgRespTimeA) && (roundedAvgRespTime < avgRespTimeB)) {
+                expectedResult = String.format(expectedResultMessage, metricValueA, metricValueB);
+                if ((roundedAvgRespTime > metricValueA) && (roundedAvgRespTime < metricValueB)) {
                     result = TestResult.PASS;
                 } else {
                     result = TestResult.FAIL;
@@ -137,8 +137,8 @@ public class ServerSideTest extends LightningTest {
                     actualResult.equals(test.actualResult) &&
                     Objects.equals(result, test.result) &&
                     dataEntriesCount == test.dataEntriesCount &&
-                    avgRespTimeA == test.avgRespTimeA &&
-                    Objects.equals(avgRespTimeB, test.avgRespTimeB);
+                    metricValueA == test.metricValueA &&
+                    Objects.equals(metricValueB, test.metricValueB);
         } else {
             return false;
         }

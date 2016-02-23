@@ -6,7 +6,7 @@
         <subType>GREATER_THAN</subType>
         <description>Verify server-side resource utilisation</description>
         <hostAndMetric>192.168.0.12 CPU</hostAndMetric>
-        <avgRespTimeA>20000</avgRespTimeA>
+        <metricValueA>20000</metricValueA>
     </serverSideTest>
 
 </testSet>

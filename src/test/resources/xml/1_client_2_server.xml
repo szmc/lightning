@@ -13,8 +13,8 @@
          <subType>BETWEEN</subType> 
         <description>Verify server-side resource utilisation</description> 
         <hostAndMetric>192.168.0.12 CPU</hostAndMetric>
-         <avgRespTimeA>10000</avgRespTimeA> 
-        <avgRespTimeB>40000</avgRespTimeB> 
+         <metricValueA>10000</metricValueA> 
+        <metricValueB>40000</metricValueB> 
     </serverSideTest>
 
     <serverSideTest>
@@ -22,7 +22,7 @@
          <subType>LESS_THAN</subType> 
         <description>Verify server-side resource utilisation</description> 
         <hostAndMetric>192.168.0.12 CPU</hostAndMetric>
-         <avgRespTimeA>60000</avgRespTimeA>
+         <metricValueA>60000</metricValueA>
     </serverSideTest>
 
 

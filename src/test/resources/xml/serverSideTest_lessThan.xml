@@ -6,7 +6,7 @@
         <subType>LESS_THAN</subType>
         <description>Verify server-side resource utilisation</description>
         <hostAndMetric>192.168.0.12 CPU</hostAndMetric>
-        <avgRespTimeA>80000</avgRespTimeA>
+        <metricValueA>80000</metricValueA>
     </serverSideTest>
 
 </testSet>

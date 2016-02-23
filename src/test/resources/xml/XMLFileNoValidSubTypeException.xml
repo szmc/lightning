@@ -6,8 +6,8 @@
         <subType>INVALID</subType>
         <description>Verify server-side resource utilisation</description>
         <hostAndMetric>192.168.0.12 CPU</hostAndMetric>
-        <avgRespTimeA>40000</avgRespTimeA>
-        <avgRespTimeB>80000</avgRespTimeB>
+        <metricValueA>40000</metricValueA>
+        <metricValueB>80000</metricValueB>
     </serverSideTest>
 
 </testSet>
