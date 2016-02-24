@@ -19,7 +19,7 @@ All new features and bugfixes are included in [release notes](https://github.com
 
 ### Goals
 
-Lightning's goal is to revolutionise how we do non-functional testing. Lightning integrates JMeter non-functional tests with Continuous Integration infrastructure. It can instantly provide CI server with simple and meaningful information whether to pass or fail the build - with no human involvement needed. Check the [story behind Lightning](https://github.com/automatictester/lightning/wiki/Story-Behind-Lightning) for more information.
+Lightning's goal is to revolutionise the approach to non-functional testing. Lightning integrates JMeter non-functional tests with Continuous Integration infrastructure. It can instantly provide CI server with simple and meaningful information whether to pass or fail the build - with no human involvement needed. Check the [story behind Lightning](https://github.com/automatictester/lightning/wiki/Story-Behind-Lightning) for more information.
 
 ### Philosophy
 
@@ -34,13 +34,13 @@ Lightning's goal is to revolutionise how we do non-functional testing. Lightning
 
 ### Design assumptions
 
-- JMeter result files produced in CI environment should be small enough to be processed by Lightning and stored in memory without hacks
+- JMeter and PerfMon CSV files produced in CI environment should be small enough to be processed by Lightning and stored in memory without hacks
 
 ### Project maturity
 
-Lightning as a standalone JAR has been used in day-to-day delivery for months and can be considered production-ready.
-
-Lightning as a Java dependency is used only by a subset of users.
+* Lightning as a standalone JAR has been used in day-to-day delivery for months and can be considered production-ready.
+* Server-side tests is a new functionality.
+* Lightning as a Java dependency is used only by a subset of users.
 
 ### Future
 
@@ -117,11 +117,9 @@ Test result:      Pass
 
 #### Using server-side tests
 
-To include server-side tests in `verify` mode, Lightning requires 3 sources of input data: XML config file, JMeter and PerfMon CSV output files. XML file contains definition of tests, which will be executed to determine if execution should be marked as passed or failed, based on analysis of CSV files. If you want to run server-side tests, you should also have at least one other test type. This way you not only monitor server load, but also make sure your get right responses.
+To include server-side tests in `verify` mode, Lightning requires 3 sources of input data: XML config file, JMeter and PerfMon CSV output files. XML file contains definition of tests, which will be executed to determine if execution should be marked as passed or failed, based on analysis of CSV files. If you want to run server-side tests, you should also have at least one test analysing client-side metrics (e.g. average response times). This way you not only monitor server load, but also make sure the client gets what expected.
 
 To run server-side tests, you need to configure your JMeter test to collect server-side statistics using [PerfMon Server Agent](http://jmeter-plugins.org/wiki/PerfMonAgent/) and [JMeter PerfMon Metrics Collector](http://jmeter-plugins.org/wiki/PerfMon/).
-
-
 
 Lightning XML config file, e.g.:
 
@@ -135,7 +133,7 @@ Lightning XML config file, e.g.:
         <maxAvgRespTime>4000</maxAvgRespTime>
     </avgRespTimeTest>
     <serverSideTest>
-        <testName>Test #3</testName>
+        <testName>Test #2</testName>
         <subType>LESS_THAN</subType>         
         <description>Verify server-side resource utilisation</description>         
         <hostAndMetric>192.168.0.12 CPU</hostAndMetric>
