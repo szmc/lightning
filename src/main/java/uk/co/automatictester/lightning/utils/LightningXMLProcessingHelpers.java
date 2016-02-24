@@ -6,6 +6,7 @@ import uk.co.automatictester.lightning.exceptions.XMLFileMissingElementException
 import uk.co.automatictester.lightning.exceptions.XMLFileMissingElementValueException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
 import uk.co.automatictester.lightning.exceptions.XMLFilePercentileException;
+import uk.co.automatictester.lightning.tests.LightningTest;
 
 public abstract class LightningXMLProcessingHelpers {
 
@@ -85,5 +86,15 @@ public abstract class LightningXMLProcessingHelpers {
         int elementValue = getIntegerValueFromElement(element, subElement);
         return new Percent(elementValue).getPercent();
     }
+
+    public void checkForRegexpElement(Element element, LightningTest test){
+        if (isSubElementPresent(element, "regexp")) {
+            test.setRegexp(true);
+        }
+        else {
+            test.setRegexp(false);
+        }
+    }
+
 
 }

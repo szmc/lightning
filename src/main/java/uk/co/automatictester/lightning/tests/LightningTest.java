@@ -16,6 +16,7 @@ public abstract class LightningTest {
     protected String actualResult;
     protected TestResult result;
     protected int transactionCount;
+    protected boolean regexp;
 
     protected LightningTest(String name, String type, String description, String transactionName) {
         this.name = name;
@@ -25,13 +26,20 @@ public abstract class LightningTest {
         this.expectedResult = "";
         this.actualResult = "";
         this.result = null;
+        this.regexp = false;
+
     }
 
     public abstract void execute(JMeterTransactions originalJMeterTransactions);
 
     public JMeterTransactions filterTransactions(JMeterTransactions originalJMeterTransactions) {
         if (getTransactionName() != null) {
-            return originalJMeterTransactions.excludeLabelsOtherThan(getTransactionName());
+            if (regexp) {
+                return originalJMeterTransactions.includeRegexpLabels(getTransactionName());
+            }
+            else {
+                return originalJMeterTransactions.excludeLabelsOtherThan(getTransactionName());
+            }
         } else {
             return originalJMeterTransactions;
         }
@@ -67,6 +75,10 @@ public abstract class LightningTest {
 
     public TestResult getResult() {
         return result;
+    }
+
+    public void setRegexp(boolean regexp) {
+        this.regexp = regexp;
     }
 
     public List<Integer> getLongestTransactions() {
