@@ -167,7 +167,7 @@ PerfMon CSV output file, e.g.:
 
 To run Lightning:
 
-`java -jar lightning-<version>.jar verify -xml=path/to/xml/file -jmeter-csv=path/to/jmeter/csv/file -perfmon-csv=path/to/perfmon/csv/file`
+`java -jar lightning-<version>.jar verify -xml=path/to/xml/file --jmeter-csv=path/to/jmeter/csv/file --perfmon-csv=path/to/perfmon/csv/file`
 
 Sample output:
 
