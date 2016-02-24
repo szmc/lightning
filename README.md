@@ -128,20 +128,19 @@ Lightning XML config file, e.g.:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <testSet>
-
     <avgRespTimeTest>
         <testName>Test #1</testName>
         <description>Verify average login times</description>
         <transactionName>Login</transactionName>
         <maxAvgRespTime>4000</maxAvgRespTime>
     </avgRespTimeTest>
-
     <serverSideTest>
         <testName>Test #3</testName>
-        <subType>LESS_THAN</subType>         <description>Verify server-side resource utilisation</description>         <hostAndMetric>192.168.0.12 CPU</hostAndMetric>
+        <subType>LESS_THAN</subType>         
+        <description>Verify server-side resource utilisation</description>         
+        <hostAndMetric>192.168.0.12 CPU</hostAndMetric>
         <metricValueA>60000</metricValueA>
     </serverSideTest>
-
 </testSet>
 ```
 
