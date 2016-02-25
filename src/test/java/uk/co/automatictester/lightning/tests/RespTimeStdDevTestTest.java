@@ -1,8 +1,8 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.testng.annotations.Test;
-import uk.co.automatictester.lightning.JMeterTransactions;
-import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.enums.TestResult;
 
 import java.util.Locale;
 
@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
-import static uk.co.automatictester.lightning.data.TestData.*;
+import static uk.co.automatictester.lightning.shared.TestData.*;
 
 public class RespTimeStdDevTestTest {
 
@@ -93,7 +93,7 @@ public class RespTimeStdDevTestTest {
 
     @Test
     public void verifyIsNotEqualOtherTestType() {
-        assertThat((LightningTest) RESP_TIME_STD_DEV_TEST_A, is(not(equalTo((LightningTest) AVG_RESP_TIME_TEST_A))));
+        assertThat((ClientSideTest) RESP_TIME_STD_DEV_TEST_A, is(not(equalTo((ClientSideTest) AVG_RESP_TIME_TEST_A))));
     }
 
     @Test

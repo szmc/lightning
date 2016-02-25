@@ -7,6 +7,8 @@ import uk.co.automatictester.lightning.exceptions.XMLFileMissingElementValueExce
 import uk.co.automatictester.lightning.exceptions.XMLFileNumberFormatException;
 import uk.co.automatictester.lightning.exceptions.XMLFilePercentileException;
 import uk.co.automatictester.lightning.tests.LightningTest;
+import uk.co.automatictester.lightning.enums.ServerSideTestType;
+import uk.co.automatictester.lightning.exceptions.*;
 
 public abstract class LightningXMLProcessingHelpers {
 
@@ -42,9 +44,33 @@ public abstract class LightningXMLProcessingHelpers {
         return (descriptionElement != null) ? descriptionElement.getTextContent() : "";
     }
 
+    protected ServerSideTestType getSubType(Element element) {
+        Node descriptionElement = element.getElementsByTagName("subType").item(0);
+        String subType = (descriptionElement != null) ? descriptionElement.getTextContent() : "";
+        ServerSideTestType testSubType;
+        if (subType.toUpperCase().equals(ServerSideTestType.LESS_THAN.name())) {
+            testSubType = ServerSideTestType.LESS_THAN;
+        } else if (subType.toUpperCase().equals(ServerSideTestType.GREATER_THAN.name())) {
+            testSubType = ServerSideTestType.GREATER_THAN;
+        } else if (subType.toUpperCase().equals(ServerSideTestType.BETWEEN.name())) {
+            testSubType = ServerSideTestType.BETWEEN;
+        } else {
+            throw new XMLFileNoValidSubTypeException("Value of subType element is not in set (LESS_THAN, BETWEEN, GREATER_THAN)");
+        }
+        return testSubType;
+    }
+
     protected String getTransactionName(Element element) {
         if (element.getElementsByTagName("transactionName").getLength() != 0) {
             return element.getElementsByTagName("transactionName").item(0).getTextContent();
+        } else {
+            return null;
+        }
+    }
+
+    protected String getHostAndMetric(Element element) {
+        if (element.getElementsByTagName("hostAndMetric").getLength() != 0) {
+            return element.getElementsByTagName("hostAndMetric").item(0).getTextContent();
         } else {
             return null;
         }

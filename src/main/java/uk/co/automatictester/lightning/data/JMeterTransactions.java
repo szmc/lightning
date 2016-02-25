@@ -1,4 +1,4 @@
-package uk.co.automatictester.lightning;
+package uk.co.automatictester.lightning.data;
 
 import uk.co.automatictester.lightning.exceptions.CSVFileNonexistentLabelException;
 

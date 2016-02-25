@@ -1,11 +1,12 @@
 package uk.co.automatictester.lightning.tests;
 
-import uk.co.automatictester.lightning.JMeterTransactions;
-import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.enums.TestResult;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class ThroughputTest extends LightningTest {
+public class ThroughputTest extends ClientSideTest {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Throughput >= %s / second";
     private static final String ACTUAL_RESULT_MESSAGE = "Throughput = %s / second";
@@ -18,9 +19,9 @@ public class ThroughputTest extends LightningTest {
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, minThroughput);
     }
 
-    public void execute(JMeterTransactions originalJMeterTransactions) {
+    public void execute(ArrayList<ArrayList<String>> originalJMeterTransactions) {
         try {
-            JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
+            JMeterTransactions transactions = filterTransactions((JMeterTransactions) originalJMeterTransactions);
             transactionCount = transactions.getTransactionCount();
 
             double actualThroughput = transactions.getThroughput();

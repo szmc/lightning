@@ -9,7 +9,7 @@ java \
     -jar target/lightning*.jar \
     verify \
     -xml src/test/resources/xml/regexp.xml \
-    -csv src/test/resources/csv/regexp.csv \
+    --jmeter-csv src/test/resources/csv/regexp.csv \
     | grep -v "Execution time:" > $ACTUAL_RESULT
 
 DIFF_OUTPUT=`diff $EXPECTED_RESULT $ACTUAL_RESULT`

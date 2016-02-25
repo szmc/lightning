@@ -1,18 +1,18 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.testng.annotations.Test;
-import uk.co.automatictester.lightning.JMeterTransactions;
-import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.ConsoleOutputTest;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.enums.TestResult;
 
 import java.util.Locale;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
-import static uk.co.automatictester.lightning.data.TestData.*;
+import static uk.co.automatictester.lightning.shared.TestData.*;
 
-public class RespTimeAvgTestTest {
+public class RespTimeAvgTestTest extends ConsoleOutputTest {
 
     @Test
     public void verifyExecutePass() {
@@ -86,11 +86,34 @@ public class RespTimeAvgTestTest {
 
     @Test
     public void verifyIsNotEqualOtherTestType() {
-        assertThat((LightningTest) AVG_RESP_TIME_TEST_A, is(not(equalTo((LightningTest) RESP_TIME_PERC_TEST_A))));
+        assertThat((ClientSideTest) AVG_RESP_TIME_TEST_A, is(not(equalTo((ClientSideTest) RESP_TIME_PERC_TEST_A))));
     }
 
     @Test
     public void verifyIsNotEqual() {
         assertThat(AVG_RESP_TIME_TEST_A, is(not(equalTo(AVG_RESP_TIME_TEST_B))));
+    }
+
+    @Test
+    public void testPrintTestExecutionReport() {
+        RespTimeAvgTest test = new RespTimeAvgTest("my name", "my type", "my description", "Search", 800);
+        JMeterTransactions jmeterTransactions = new JMeterTransactions();
+        jmeterTransactions.add(SEARCH_800_SUCCESS);
+
+        String expectedOutput = String.format("Test name:            my name%n" +
+                "Test type:            my type%n" +
+                "Test description:     my description%n" +
+                "Transaction name:     Search%n" +
+                "Expected result:      Average response time <= 800%n" +
+                "Actual result:        Average response time = 800.0%n" +
+                "Transaction count:    1%n" +
+                "Longest transactions: [800]%n" +
+                "Test result:          Pass");
+
+        configureStream();
+        test.execute(jmeterTransactions);
+        test.printTestExecutionReport();
+        assertThat(out.toString(), containsString(expectedOutput));
+        revertStream();
     }
 }

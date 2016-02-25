@@ -6,7 +6,7 @@ java \
     -jar target/lightning*.jar \
     verify \
     -xml src/test/resources/xml/regexp.xml \
-    -csv src/test/resources/csv/regexp.csv \
+    --jmeter-csv src/test/resources/csv/regexp.csv \
     > src/test/resources/results/actual/1_1_1.txt
 OUT=$?
 
