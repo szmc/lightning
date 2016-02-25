@@ -1,7 +1,7 @@
 package uk.co.automatictester.lightning.ci;
 
-import uk.co.automatictester.lightning.JMeterTransactions;
 import uk.co.automatictester.lightning.TestSet;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
 
 import java.io.File;
 import java.io.FileOutputStream;

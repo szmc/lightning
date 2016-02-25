@@ -1,4 +1,4 @@
-package uk.co.automatictester.lightning.data;
+package uk.co.automatictester.lightning.shared;
 
 import uk.co.automatictester.lightning.tests.*;
 import uk.co.automatictester.lightning.utils.Percent;
@@ -11,10 +11,12 @@ public class TestData {
     // Resources
     private static final String RESOURCES = "src/test/resources/";
     private static final String XML_RESOURCES = RESOURCES + "xml/";
-    private static final String CSV_RESOURCES = RESOURCES + "csv/";
+    private static final String JMETER_CSV_RESOURCES = RESOURCES + "csv/jmeter/";
+    private static final String PERFMON_CSV_RESOURCES = RESOURCES + "csv/perfmon/";
 
     // XML files
     public static final String TEST_SET_3_0_0 = XML_RESOURCES + "3_0_0.xml";
+    public static final String TEST_SET_1_2 = XML_RESOURCES + "1_client_2_server.xml";
     public static final String TEST_SET_1_1_1 = XML_RESOURCES + "1_1_1.xml";
     public static final String TEST_SET_0_0_0 = XML_RESOURCES + "0_0_0.xml";
     public static final String TEST_SET_AVG_RESP_TIME = XML_RESOURCES + "avgRespTimeTest.xml";
@@ -26,16 +28,34 @@ public class TestData {
     public static final String TEST_SET_THROUGHPUT = XML_RESOURCES + "throughputTest.xml";
     public static final String TEST_SET_MEDIAN = XML_RESOURCES + "medianRespTimeTest.xml";
     public static final String TEST_SET_NOT_WELL_FORMED = XML_RESOURCES + "not_well_formed.xml";
+    public static final String TEST_SET_SERVER_LESS = XML_RESOURCES + "serverSideTest_lessThan.xml";
+    public static final String TEST_SET_SERVER_BETWEEN = XML_RESOURCES + "serverSideTest_between.xml";
+    public static final String TEST_SET_SERVER_GREATER = XML_RESOURCES + "serverSideTest_greaterThan.xml";
+    public static final String TEST_SET_XML_FILE_NO_VALID_SUB_TYPE_EXCAPTION = XML_RESOURCES + "XMLFileNoValidSubTypeException.xml";
     public static final String TEST_SET_XML_FILE_NUMBER_FORMAT_EXCEPTION = XML_RESOURCES + "XMLFileNumberFormatException.xml";
     public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_VALUE_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementValueException.xml";
     public static final String TEST_SET_XML_FILE_MISSING_ELEMENT_EXCEPTION = XML_RESOURCES + "XMLFileMissingElementException.xml";
     public static final String TEST_SET_XML_FILE_PERCENTILE_EXCEPTION = XML_RESOURCES + "XMLFilePercentileException.xml";
 
-    // CSV files
-    public static final String CSV_MISSING_LABEL_COLUMN = CSV_RESOURCES + "missing_label_column.csv";
-    public static final String CSV_2_TRANSACTIONS = CSV_RESOURCES + "2_transactions.csv";
-    public static final String CSV_10_TRANSACTIONS = CSV_RESOURCES + "10_transactions.csv";
-    public static final String CSV_NONEXISTENT = CSV_RESOURCES + "nonexistent.csv";
+    // JMeter CSV files
+    public static final String CSV_MISSING_LABEL_COLUMN = JMETER_CSV_RESOURCES + "missing_label_column.csv";
+    public static final String CSV_NOT_ENOUGH_COLUMNS_IN_DATA_PART = JMETER_CSV_RESOURCES + "not_enough_columns_in_data_part.csv";
+    public static final String CSV_2_TRANSACTIONS = JMETER_CSV_RESOURCES + "2_transactions.csv";
+    public static final String CSV_0_TRANSACTIONS = JMETER_CSV_RESOURCES + "0_transactions.csv";
+    public static final String CSV_NONEXISTENT = JMETER_CSV_RESOURCES + "nonexistent.csv";
+
+    // PerfMon CSV files
+    public static final String CSV_2_ENTRIES = PERFMON_CSV_RESOURCES + "2_entries.csv";
+    public static final String CSV_0_ENTRIES = PERFMON_CSV_RESOURCES + "0_entries.csv";
+
+    // PerfMon data entries
+    public static final ArrayList<String> CPU_ENTRY_9128 = new ArrayList<>(Arrays.asList("1455366135623", "9128", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_21250 = new ArrayList<>(Arrays.asList("1455366136635", "21250", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_10000 = new ArrayList<>(Arrays.asList("1455366136635", "10000", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_10001 = new ArrayList<>(Arrays.asList("1455366136635", "10001", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_15000 = new ArrayList<>(Arrays.asList("1455366136635", "15000", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_25000 = new ArrayList<>(Arrays.asList("1455366136635", "25000", "192.168.0.12 CPU"));
+    public static final ArrayList<String> CPU_ENTRY_30000 = new ArrayList<>(Arrays.asList("1455366136635", "30000", "192.168.0.12 CPU"));
 
     // Transactions
     public static final ArrayList<String> LOGIN_3514_SUCCESS = new ArrayList<>(Arrays.asList("Login", "3514", "true", "1434291247743"));

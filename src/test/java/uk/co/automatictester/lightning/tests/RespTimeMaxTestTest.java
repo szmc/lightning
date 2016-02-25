@@ -1,14 +1,14 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.testng.annotations.Test;
-import uk.co.automatictester.lightning.JMeterTransactions;
-import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.enums.TestResult;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
-import static uk.co.automatictester.lightning.data.TestData.*;
+import static uk.co.automatictester.lightning.shared.TestData.*;
 
 public class RespTimeMaxTestTest {
 
@@ -71,7 +71,7 @@ public class RespTimeMaxTestTest {
 
     @Test
     public void verifyIsNotEqualOtherTestType() {
-        assertThat(MAX_RESP_TIME_TEST_A, is(not(equalTo((LightningTest) RESP_TIME_PERC_TEST_A))));
+        assertThat(MAX_RESP_TIME_TEST_A, is(not(equalTo((ClientSideTest) RESP_TIME_PERC_TEST_A))));
     }
 
     @Test

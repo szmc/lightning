@@ -4,6 +4,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import uk.co.automatictester.lightning.enums.ServerSideTestType;
 import uk.co.automatictester.lightning.exceptions.XMLFileException;
 import uk.co.automatictester.lightning.exceptions.XMLFileNoTestsException;
 import uk.co.automatictester.lightning.tests.*;
@@ -20,9 +21,10 @@ import java.util.List;
 
 public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
 
-    private List<LightningTest> tests = new ArrayList<>();
+    private List<ClientSideTest> clientSideTests = new ArrayList<>();
+    private List<ServerSideTest> serverSideTests = new ArrayList<>();
 
-    public List<LightningTest> getTests(String xmlFile) {
+    public void readTests(String xmlFile) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -36,16 +38,29 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             addThroughputTests(doc);
             addRespTimeMaxTests(doc);
             addRespTimeMedianTests(doc);
+            addServerSideTests(doc);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             throw new XMLFileException(e.getMessage());
         }
 
-        if (tests.size() == 0) {
+        if (getTestCount() == 0) {
             throw new XMLFileNoTestsException("No tests of expected type found in XML file");
         }
+    }
 
-        return tests;
+    public List<ClientSideTest> getClientSideTests() {
+        return clientSideTests;
+    }
+
+    public List<ServerSideTest> getServerSideTests() {
+        return serverSideTests;
+    }
+
+    private int getTestCount() {
+        return
+                ((clientSideTests != null) ? clientSideTests.size() : 0) +
+                ((serverSideTests != null) ? serverSideTests.size() : 0);
     }
 
     private void addPassedTransactionsTestNodes(Document xmlDoc) {
@@ -70,7 +85,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
                 passedTransactionsTest = new PassedTransactionsTest(name, testType, description, transactionName, new Percent(allowedPercentOfFailedTransactions));
             }
 
-            tests.add(passedTransactionsTest);
+            clientSideTests.add(passedTransactionsTest);
         }
 
     }
@@ -87,7 +102,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int maxRespTimeStdDevTime = getIntegerValueFromElement(respTimeStdDevTestElement, "maxRespTimeStdDev");
 
             RespTimeStdDevTest respTimeStdDevTest = new RespTimeStdDevTest(name, testType, description, transactionName, maxRespTimeStdDevTime);
-            tests.add(respTimeStdDevTest);
+            clientSideTests.add(respTimeStdDevTest);
         }
     }
 
@@ -103,7 +118,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int maxAvgRespTime = getIntegerValueFromElement(avgRespTimeTestElement, "maxAvgRespTime");
 
             RespTimeAvgTest avgRespTimeTest = new RespTimeAvgTest(name, testType, description, transactionName, maxAvgRespTime);
-            tests.add(avgRespTimeTest);
+            clientSideTests.add(avgRespTimeTest);
         }
     }
 
@@ -119,7 +134,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int maxRespTime = getIntegerValueFromElement(maxRespTimeTestElement, "maxAllowedRespTime");
 
             RespTimeMaxTest maxRespTimeTest = new RespTimeMaxTest(name, testType, description, transactionName, maxRespTime);
-            tests.add(maxRespTimeTest);
+            clientSideTests.add(maxRespTimeTest);
         }
     }
 
@@ -136,7 +151,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int maxRespTime = getIntegerValueFromElement(respTimeNthPercTestElement, "maxRespTime");
 
             RespTimeNthPercentileTest nthPercRespTimeTest = new RespTimeNthPercentileTest(name, testType, description, transactionName, percentile, maxRespTime);
-            tests.add(nthPercRespTimeTest);
+            clientSideTests.add(nthPercRespTimeTest);
         }
     }
 
@@ -152,7 +167,7 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             int maxRespTime = getIntegerValueFromElement(respTimeMedianTestElement, "maxRespTime");
 
             RespTimeMedianTest respTimeMedianTest = new RespTimeMedianTest(name, testType, description, transactionName, maxRespTime);
-            tests.add(respTimeMedianTest);
+            clientSideTests.add(respTimeMedianTest);
         }
     }
 
@@ -168,7 +183,33 @@ public class LightningXMLFileReader extends LightningXMLProcessingHelpers {
             double minThroughput = getDoubleValueFromElement(throughputTestElement, "minThroughput");
 
             ThroughputTest throughputTest = new ThroughputTest(name, testType, description, transactionName, minThroughput);
-            tests.add(throughputTest);
+            clientSideTests.add(throughputTest);
+        }
+    }
+
+    private void addServerSideTests(Document xmlDoc) {
+        String testType = "serverSideTest";
+        NodeList serverSideTestNodes = xmlDoc.getElementsByTagName(testType);
+        for (int i = 0; i < serverSideTestNodes.getLength(); i++) {
+            Element serverSideTestElement = (Element) serverSideTestNodes.item(i);
+
+            String name = getTestName(serverSideTestElement);
+            ServerSideTestType subType = getSubType(serverSideTestElement);
+            String description = getTestDescription(serverSideTestElement);
+            String hostAndMetric = getHostAndMetric(serverSideTestElement);
+            int metricValueA = getIntegerValueFromElement(serverSideTestElement, "metricValueA");
+
+            int avgRespTimeB;
+            ServerSideTest serverSideTest;
+
+            if (subType.name().equals(ServerSideTestType.BETWEEN.name())) {
+                avgRespTimeB = getIntegerValueFromElement(serverSideTestElement, "metricValueB");
+                serverSideTest = new ServerSideTest(name, testType, subType, description, hostAndMetric, metricValueA, avgRespTimeB);
+            } else {
+                serverSideTest = new ServerSideTest(name, testType, subType, description, hostAndMetric, metricValueA);
+            }
+
+            serverSideTests.add(serverSideTest);
         }
     }
 }

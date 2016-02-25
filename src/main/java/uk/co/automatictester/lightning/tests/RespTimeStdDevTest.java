@@ -1,14 +1,15 @@
 package uk.co.automatictester.lightning.tests;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import uk.co.automatictester.lightning.JMeterTransactions;
-import uk.co.automatictester.lightning.TestResult;
+import uk.co.automatictester.lightning.data.JMeterTransactions;
+import uk.co.automatictester.lightning.enums.TestResult;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class RespTimeStdDevTest extends LightningTest {
+public class RespTimeStdDevTest extends ClientSideTest {
 
     private static final String EXPECTED_RESULT_MESSAGE = "Average standard deviance time <= %s";
     private static final String ACTUAL_RESULT_MESSAGE = "Average standard deviance time = %s";
@@ -21,11 +22,11 @@ public class RespTimeStdDevTest extends LightningTest {
         expectedResult = String.format(EXPECTED_RESULT_MESSAGE, maxRespTimeStdDev);
     }
 
-    public void execute(JMeterTransactions originalJMeterTransactions) {
+    public void execute(ArrayList<ArrayList<String>> originalJMeterTransactions) {
         Locale.setDefault(Locale.ENGLISH);
 
         try {
-            JMeterTransactions transactions = filterTransactions(originalJMeterTransactions);
+            JMeterTransactions transactions = filterTransactions((JMeterTransactions) originalJMeterTransactions);
             transactionCount = transactions.getTransactionCount();
 
             DescriptiveStatistics ds = new DescriptiveStatistics();
